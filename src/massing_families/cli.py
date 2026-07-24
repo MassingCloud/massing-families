@@ -29,6 +29,16 @@ def cmd_build(args) -> int:
     for s in specs:
         by_discipline[s.pack_name].append(s)
 
+    # Clear stale packs first. Pack filenames carry the discipline and version, so renaming a pack or
+    # bumping the version leaves orphans behind — and anything globbing `packs/*.ifc` (a deployment
+    # fetch, a stats script) then picks up content that is no longer in the catalog.
+    args.out.mkdir(parents=True, exist_ok=True)
+    stale = sorted(args.out.glob("*.ifc"))
+    for old in stale:
+        old.unlink()
+    if stale:
+        print(f"  removed {len(stale)} stale pack(s)")
+
     entries = []
     for discipline in sorted(by_discipline):
         entry = write_pack(by_discipline[discipline], args.out, discipline, args.version)
@@ -56,12 +66,14 @@ def cmd_list(args) -> int:
 
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(prog="massing-families")
-    p.add_argument("--version", default=__version__, help="library version stamped into packs")
     sub = p.add_subparsers(dest="cmd", required=True)
 
     b = sub.add_parser("build", help="build IFC packs")
     b.add_argument("-d", "--discipline", default=None)
     b.add_argument("-o", "--out", type=Path, default=PACKS)
+    # on the subcommand, not the parent: `build --version X` is the natural form, and an argparse
+    # parent-level flag would have to precede the subcommand to be accepted.
+    b.add_argument("--version", default=__version__, help="library version stamped into packs")
     b.set_defaults(func=cmd_build)
 
     ls = sub.add_parser("list", help="list catalog contents")

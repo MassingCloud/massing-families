@@ -10,11 +10,11 @@
 
 | | |
 |---|---|
-| **Built** | 40 trade-scoped packs · **270 families** · **2,355 types** · IFC4 · 6.1 MB |
+| **Built** | 40 trade-scoped packs · **270 families** · **2,334 types** · IFC4 · 6.1 MB |
 | **Tests** | 104 passing, 2 xfailed (the upstream defects — patch now written, see `upstream/`) |
 | **IFC coverage** | **65 of 125** type classes (was 15) |
 | **Builders** | all 8 — box, profile, swept_disk, revolve, boolean, taper, assembly, mesh |
-| **Geometry** | **1,811 of 2,355 types (76%) real**, across 12 distinct IFC solid/profile kinds |
+| **Geometry** | **1,797 of 2,334 types (76%) real**, across 12 distinct IFC solid/profile kinds |
 | **Routing** | `IfcDistributionPort`s on 59 families — duct, pipe, conduit, tray, sprinkler, plant |
 | **Data** | 122 verified Uniclass codes, provenance with derived `GeometryStatus`, quantities, materials, layered assemblies |
 | **Catalog index** | per-family metadata published in `manifest.json` — the data a browsable picker needs |
@@ -42,7 +42,7 @@ built without — now 35 core systems (heat source, cooling source, pumps, termi
 and reinforcement were added once the content landed) plus per-typology extras.
 
 It remains a **floor, not v1.0 depth**. The section 8e target is ~800 families / ~7,500 types; this is
-270 / 2,355. The gap is breadth-within-system, not absent systems.
+270 / 2,334. The gap is breadth-within-system, not absent systems.
 
 ### Enforced honesty
 

@@ -5,7 +5,7 @@ IFC4 family/type content library for [massing](https://github.com/ibuilder/massi
 Generates versioned, discipline-scoped `.ifc` packs of data-rich `IfcTypeProduct` content that import
 into any massing project through the existing `/families/import` endpoint — no platform changes needed.
 
-**40 packs · 270 families · 2,355 types · 65 of 125 IFC4 type classes · 76% real geometry across 12 IFC solid kinds.**
+**40 packs · 270 families · 2,334 types · 65 of 125 IFC4 type classes · 76% real geometry across 12 IFC solid kinds.**
 All six target typologies (residential, commercial, hotel, hospital, industrial, airport) pass their
 completeness checklist — see `tests/test_completeness.py` and PLAN.md §0 for what that does and does not
 claim.

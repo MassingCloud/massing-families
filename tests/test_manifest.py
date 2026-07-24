@@ -70,3 +70,25 @@ def test_built_manifest_is_self_consistent():
         assert (PACKS / pack["file"]).exists(), f"{pack['file']} listed but missing"
         assert pack["types"] == sum(f["type_count"] for f in pack["index"])
         assert len(pack["sha256"]) == 64
+
+
+def test_build_removes_stale_packs(tmp_path, catalog_root):
+    """A renamed pack or bumped version must not leave orphans behind.
+
+    Regression: `packs/` accumulated 41 stale files across earlier builds, and anything globbing
+    `packs/*.ifc` — a deployment fetch, a stats script — then counted content no longer in the
+    catalog. The build now clears the output directory first.
+    """
+    from massing_families.cli import cmd_build
+    from argparse import Namespace
+
+    orphan = tmp_path / "massing-families-oldname-v0.0.1.ifc"
+    orphan.write_bytes(b"stale")
+
+    cmd_build(Namespace(discipline="conveying", out=tmp_path, version="test"))
+
+    assert not orphan.exists(), "stale pack survived the build"
+    on_disk = {p.name for p in tmp_path.glob("*.ifc")}
+    listed = {p["file"] for p in
+              json.loads((tmp_path / "manifest.json").read_text(encoding="utf-8"))["packs"]}
+    assert on_disk == listed, "every file on disk must be listed in the manifest"
