@@ -4,8 +4,9 @@ Builds real packs and pushes them through massing's *actual* `import_types_from_
 geometry, property sets, provenance, materials and classification all arrive intact. If this passes,
 content authored here works in a user's project with no platform changes.
 
-It also pins the two upstream defects from PLAN.md §5 as `xfail`. Those flip to `xpass` the moment the
-upstream PRs land, which is the signal that L300 content is safe to ship.
+The last two tests assert the behaviour the PLAN.md §5 geometry fix provides. They were `xfail` while
+massing still had the defects; the fix is now present in the reference checkout, so they are ordinary
+tests. If they fail, the massing checkout predates the fix — see `upstream/`.
 """
 from __future__ import annotations
 
@@ -232,12 +233,14 @@ def test_import_is_idempotent(built, massing_families, target_model):
 
 
 # ---------------------------------------------------------------------------
-# Upstream defects pinned as xfail — PLAN.md §5. These xpass once the PRs land.
+# PLAN.md §5 — behaviour the geometry fix provides. Was xfail; now required.
 # ---------------------------------------------------------------------------
 
-@pytest.mark.xfail(reason="PLAN.md §5.1 — massing's _type_dims only reads IfcRectangleProfileDef, "
-                          "so real profiles report dims: null", strict=False)
-def test_upstream_type_dims_reads_real_profiles(built, massing_families, target_model):
+def test_type_dims_reads_real_profiles(built, massing_families, target_model):
+    """`type_detail` must report dims for a real profile, not null.
+
+    Requires the §5 geometry fix (see `upstream/`). Without it `_type_dims` matches only
+    IfcRectangleProfileDef and every steel section reports `dims: null`."""
     library, _, _ = built
     _imported(massing_families, library, target_model)
     col = next(t for t in target_model.by_type("IfcColumnType")
@@ -245,9 +248,10 @@ def test_upstream_type_dims_reads_real_profiles(built, massing_families, target_
     assert massing_families.type_detail(target_model, col.GlobalId)["dims"] is not None
 
 
-@pytest.mark.xfail(reason="PLAN.md §5.2 — edit_type_params appends a box beside real geometry "
-                          "instead of replacing it", strict=False)
-def test_upstream_edit_does_not_append_second_representation(built, massing_families, target_model):
+def test_edit_does_not_append_second_representation(built, massing_families, target_model):
+    """Resizing a type carrying real geometry must replace it, not draw a box through it.
+
+    Requires the §5 geometry fix (see `upstream/`)."""
     library, _, _ = built
     _imported(massing_families, library, target_model)
     col = next(t for t in target_model.by_type("IfcColumnType")

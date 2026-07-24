@@ -1,12 +1,39 @@
-# Upstream patch for `ibuilder/massing`
+# Upstream integration for `ibuilder/massing`
 
-Fixes the two defects in `services/data/src/aec_data/families.py` documented in
-[PLAN.md §5](../PLAN.md), plus unit-aware type naming from [§7b](../PLAN.md).
+Two things massing needs, both reviewable and neither applied to your checkout:
 
-These are **not applied to your massing checkout** — this directory holds a reviewable patch and a
-verification script. Apply it yourself when you're ready.
+| | |
+|---|---|
+| `0001-family-geometry-fixes.patch` | fixes the two defects in `services/data/src/aec_data/families.py` from [PLAN.md §5](../PLAN.md), plus unit-aware type naming from §7b. Verify with `verify_patch.py`. |
+| `fetch_families.py` | vendor as `scripts/fetch_families.py` — pulls a tagged release of the library into `services/data/families/external/`. |
 
-## The defects
+## Fetching the library
+
+The library lives at **[MassingCloud/massing-families](https://github.com/MassingCloud/massing-families)**
+(private) and publishes each tagged release as ~40 IFC packs plus `manifest.json`.
+
+```bash
+python scripts/fetch_families.py --list
+python scripts/fetch_families.py --packs structural-steel-w mechanical-ductwork
+```
+
+Because the repo is private a token is required — `$GITHUB_TOKEN`, `$GH_TOKEN`, `gh auth login`, or
+`--token`. Private release assets must be fetched from the API asset URL with
+`Accept: application/octet-stream`; `browser_download_url` returns 404 without a session, which is
+easy to misread as a missing asset. Every pack is checked against the sha256 in `manifest.json`
+before it is written.
+
+Verified end to end against release v0.1.1:
+
+```
+massing-families-mechanical-ductwork-v0.1.1.ifc      91 types, 191 ports, IFC4
+massing-families-structural-steel-w-v0.1.1.ifc      403 types,   0 ports, IFC4
+massing-families-typology-healthcare-v0.1.1.ifc      34 types,  13 ports, IFC4
+```
+
+## The geometry patch
+
+### The defects
 
 Both come from the same assumption: that a type's geometry is always the box
 `_assign_box_representation` builds. That was true when every family was a box. It stopped being true
@@ -31,7 +58,7 @@ AFTER  edit: RepresentationMaps = 2  -> IfcIShapeProfileDef
 `Single door 0.9144×0.0508×2.1336 m`. Naming is the only place massing is genuinely metric-bound —
 geometry already converts correctly via `IfcUnitAssignment`.
 
-## What the patch does
+### What the patch does
 
 | | |
 |---|---|
@@ -43,7 +70,7 @@ geometry already converts correctly via `IfcUnitAssignment`.
 
 The in-place box resize path — the GUID-stable propagation that makes type edits work — is untouched.
 
-## Verify
+### Verify
 
 ```bash
 python upstream/verify_patch.py
@@ -63,7 +90,7 @@ Runs both defect scenarios plus a regression check against the unpatched and pat
   box resize still works      : [1.6, 0.8, 0.75]   -> OK
 ```
 
-## Apply
+### Apply
 
 ```bash
 git -C /path/to/massing apply /path/to/massing_families/upstream/0001-family-geometry-fixes.patch
@@ -71,7 +98,22 @@ git -C /path/to/massing apply /path/to/massing_families/upstream/0001-family-geo
 
 `families.patched.py` is the full patched file if you'd rather diff or copy it directly.
 
-## After it lands
+### Status: a fix is already present in the reference checkout
 
-The two `xfail` markers in `tests/test_roundtrip_golden.py` flip to `xpass` — that is the signal that
-L300 content is safe to ship broadly. Remove the markers at that point.
+As of 2026-07-24 the massing working copy at `C:\Server\modelmaker` carries an **uncommitted** fix for
+both defects — 147 insertions in `families.py`. It is *not* this patch: 85 of its added lines differ,
+and it goes further, adding a bounding-box reader for `IfcArbitraryClosedProfileDef` that this patch
+does not cover.
+
+So before applying anything here, check what is already in your tree:
+
+```bash
+git -C /path/to/massing diff --stat services/data/src/aec_data/families.py
+```
+
+If that fix is the one you want, **discard this patch** and keep yours — it is the broader
+implementation. This patch remains useful only as a reference for what the minimum fix needs to cover,
+and `verify_patch.py` remains useful as an independent check of *any* candidate fix.
+
+The two tests in `tests/test_roundtrip_golden.py` that assert this behaviour are no longer `xfail`;
+they pass against the current checkout and will fail against a massing that predates the fix.
