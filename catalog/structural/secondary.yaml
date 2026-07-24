@@ -1,0 +1,217 @@
+# Secondary structure — precast concrete, steel joists, metal deck, plates and fasteners.
+#
+# Double-tees use the `assembly` builder (flange + two stems as positioned solids) because a
+# double-tee modelled as a box is unusable for coordination — the space between the stems is where
+# the MEP goes.
+
+- key: precast_double_tee
+  label: Precast Double Tee
+  ifc_class: IfcSlabType
+  predefined: FLOOR
+  category: Precast
+  discipline: structural
+  pack: structural-precast
+  builder: assembly
+  tier: L350
+  classification: {uniclass: Pr_20_85_14}         # Concrete flooring and decking products
+  material: {name: 5000 psi Precast Concrete, category: concrete}
+  psets:
+    Pset_SlabCommon: {LoadBearing: true, IsExternal: false}
+    MF_Structural: {Product: Precast prestressed double tee}
+  types:
+    - name: 8DT24 (8'-0" x 24")
+      dims: ["8'-0\"", '24"', "60'-0\""]
+      assembly:
+        parts:
+          - {kind: Rectangle, params: {XDim: "8'-0\"", YDim: '4"'}, depth: "60'-0\"",
+             at: [0, 0, 0], name: Flange}
+          - {kind: Rectangle, params: {XDim: '6"', YDim: '20"'}, depth: "60'-0\"",
+             at: ['-24"', '12"', 0], name: Stem 1}
+          - {kind: Rectangle, params: {XDim: '6"', YDim: '20"'}, depth: "60'-0\"",
+             at: ['24"', '12"', 0], name: Stem 2}
+    - name: 10DT32 (10'-0" x 32")
+      dims: ["10'-0\"", '32"', "70'-0\""]
+      assembly:
+        parts:
+          - {kind: Rectangle, params: {XDim: "10'-0\"", YDim: '4"'}, depth: "70'-0\"",
+             at: [0, 0, 0], name: Flange}
+          - {kind: Rectangle, params: {XDim: '7"', YDim: '28"'}, depth: "70'-0\"",
+             at: ['-30"', '16"', 0], name: Stem 1}
+          - {kind: Rectangle, params: {XDim: '7"', YDim: '28"'}, depth: "70'-0\"",
+             at: ['30"', '16"', 0], name: Stem 2}
+
+- key: precast_hollowcore
+  label: Precast Hollowcore Plank
+  ifc_class: IfcSlabType
+  predefined: FLOOR
+  category: Precast
+  discipline: structural
+  pack: structural-precast
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_20_85_14}         # Concrete flooring and decking products
+  material: {name: 5000 psi Precast Concrete, category: concrete}
+  psets:
+    MF_Structural: {Product: Precast prestressed hollowcore}
+  profile: {kind: Rectangle}
+  types:                                           # 4'-0" wide planks, US standard depths
+    - {name: 8" x 4'-0", dims: ["4'-0\"", '8"', "30'-0\""],
+       profile: {params: {XDim: "4'-0\"", YDim: '8"'}}}
+    - {name: 10" x 4'-0", dims: ["4'-0\"", '10"', "36'-0\""],
+       profile: {params: {XDim: "4'-0\"", YDim: '10"'}}}
+    - {name: 12" x 4'-0", dims: ["4'-0\"", '12"', "42'-0\""],
+       profile: {params: {XDim: "4'-0\"", YDim: '12"'}}}
+
+- key: precast_column
+  label: Precast Column
+  ifc_class: IfcColumnType
+  predefined: COLUMN
+  category: Precast
+  discipline: structural
+  pack: structural-precast
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_20_93_85}         # Structural units
+  material: {name: 6000 psi Precast Concrete, category: concrete}
+  profile: {kind: Rectangle}
+  types:
+    - {name: 16" x 16", dims: ['16"', '16"', "30'-0\""],
+       profile: {params: {XDim: '16"', YDim: '16"'}}}
+    - {name: 20" x 20", dims: ['20"', '20"', "40'-0\""],
+       profile: {params: {XDim: '20"', YDim: '20"'}}}
+
+- key: precast_wall_panel
+  label: Precast Wall Panel
+  ifc_class: IfcWallType
+  predefined: SOLIDWALL
+  category: Precast
+  discipline: structural
+  pack: structural-precast
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_20_93_85}         # Structural units
+  psets:
+    Pset_WallCommon: {IsExternal: true, LoadBearing: true}
+  material:
+    name: Insulated Precast Sandwich Panel
+    layers:
+      - {material: Precast Concrete Wythe, thickness: '3"', category: concrete}
+      - {material: Rigid Insulation, thickness: '3"', category: insulation}
+      - {material: Precast Concrete Wythe, thickness: '4"', category: concrete}
+  types:
+    - {name: Sandwich 10" x 10'-0", dims: ["10'-0\"", '10"', "30'-0\""]}
+    - {name: Solid 8" x 10'-0", dims: ["10'-0\"", '8"', "30'-0\""]}
+
+- key: steel_joist
+  label: Open Web Steel Joist
+  ifc_class: IfcBeamType
+  predefined: JOIST
+  category: Joists
+  discipline: structural
+  pack: structural-secondary
+  builder: assembly
+  tier: L350
+  classification: {uniclass: Pr_20_85_90_11}      # Carbon steel lattice floor joists and purlins
+  material: {name: ASTM A36 / A992 Steel, category: steel}
+  psets:
+    MF_Structural: {Product: Open web steel joist, Specification: SJI K-series}
+  types:                                           # chords modelled; web members are schematic
+    - name: 18K4 (18" depth)
+      dims: ['2.5"', '18"', "30'-0\""]
+      assembly:
+        parts:
+          - {kind: Rectangle, params: {XDim: '2.5"', YDim: '1.5"'}, depth: "30'-0\"",
+             at: [0, 0, 0], name: Bottom chord}
+          - {kind: Rectangle, params: {XDim: '2.5"', YDim: '1.5"'}, depth: "30'-0\"",
+             at: [0, '16.5"', 0], name: Top chord}
+    - name: 24K9 (24" depth)
+      dims: ['3"', '24"', "40'-0\""]
+      assembly:
+        parts:
+          - {kind: Rectangle, params: {XDim: '3"', YDim: '2"'}, depth: "40'-0\"",
+             at: [0, 0, 0], name: Bottom chord}
+          - {kind: Rectangle, params: {XDim: '3"', YDim: '2"'}, depth: "40'-0\"",
+             at: [0, '22"', 0], name: Top chord}
+
+- key: metal_deck
+  label: Metal Deck
+  ifc_class: IfcPlateType
+  category: Deck
+  discipline: structural
+  pack: structural-secondary
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_20_76_51_21}      # Cold-formed galvanized steel sections
+  material: {name: Galvanized Steel Deck, category: steel}
+  psets:
+    MF_Structural: {Product: Profiled steel deck}
+  types:                                           # 3'-0" cover width sheets
+    - {name: 1 1/2" B-deck 20 ga, dims: ["3'-0\"", "20'-0\"", '1.5"']}
+    - {name: 2" composite deck 18 ga, dims: ["3'-0\"", "20'-0\"", '2"']}
+    - {name: 3" composite deck 16 ga, dims: ["3'-0\"", "24'-0\"", '3"']}
+    - {name: 1 1/2" roof deck 22 ga, dims: ["3'-0\"", "20'-0\"", '1.5"']}
+
+- key: steel_plate
+  label: Steel Plate
+  ifc_class: IfcPlateType
+  category: Connections
+  discipline: structural
+  pack: structural-secondary
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_20_76_51}         # Metal sections
+  material: {name: ASTM A36 Steel, category: steel}
+  profile: {kind: Rectangle}
+  types:
+    - {name: Base plate 12" x 12" x 3/4", dims: ['12"', '12"', '0.75"'],
+       profile: {params: {XDim: '12"', YDim: '12"'}}}
+    - {name: Base plate 18" x 18" x 1", dims: ['18"', '18"', '1"'],
+       profile: {params: {XDim: '18"', YDim: '18"'}}}
+    - {name: Shear tab 4" x 9" x 3/8", dims: ['4"', '9"', '0.375"'],
+       profile: {params: {XDim: '4"', YDim: '9"'}}}
+    - {name: Gusset 18" x 18" x 1/2", dims: ['18"', '18"', '0.5"'],
+       profile: {params: {XDim: '18"', YDim: '18"'}}}
+
+- key: anchor_rod
+  label: Anchor Rod
+  ifc_class: IfcMechanicalFastenerType
+  predefined: ANCHORBOLT
+  category: Connections
+  discipline: structural
+  pack: structural-secondary
+  builder: swept_disk
+  tier: L300
+  classification: {uniclass: Pr_20_29_03}         # Anchors and components
+  material: {name: ASTM F1554 Grade 36, category: steel}
+  types:                                           # real round rods with a hooked embedment
+    - name: 3/4" dia x 18"
+      dims: ['0.75"', '0.75"', '18"']
+      swept_disk: {diameter: '0.75"', path: [[0, 0, 0], [0, 0, 18], [3, 0, 18]]}
+    - name: 1" dia x 24"
+      dims: ['1"', '1"', '24"']
+      swept_disk: {diameter: '1"', path: [[0, 0, 0], [0, 0, 24], [4, 0, 24]]}
+    - name: 1 1/4" dia x 30"
+      dims: ['1.25"', '1.25"', '30"']
+      swept_disk: {diameter: '1.25"', path: [[0, 0, 0], [0, 0, 30], [5, 0, 30]]}
+
+- key: structural_bolt
+  label: Structural Bolt
+  ifc_class: IfcMechanicalFastenerType
+  predefined: BOLT
+  category: Connections
+  discipline: structural
+  pack: structural-secondary
+  builder: swept_disk
+  tier: L300
+  classification: {uniclass: Pr_20_29_08}         # Bolts and accessories
+  material: {name: ASTM F3125 Grade A325, category: steel}
+  types:
+    - name: 3/4" dia x 2 1/2"
+      dims: ['0.75"', '0.75"', '2.5"']
+      swept_disk: {diameter: '0.75"', path: [[0, 0, 0], [0, 0, 2.5]]}
+    - name: 7/8" dia x 3"
+      dims: ['0.875"', '0.875"', '3"']
+      swept_disk: {diameter: '0.875"', path: [[0, 0, 0], [0, 0, 3]]}
+    - name: 1" dia x 3 1/2"
+      dims: ['1"', '1"', '3.5"']
+      swept_disk: {diameter: '1"', path: [[0, 0, 0], [0, 0, 3.5]]}

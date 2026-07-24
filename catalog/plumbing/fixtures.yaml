@@ -1,0 +1,127 @@
+# Plumbing fixtures — US imperial nominal sizes.
+# Uniclass codes verified against the published Pr table.
+
+- key: toilet
+  label: Water Closet
+  massing_key: toilet
+  ifc_class: IfcSanitaryTerminalType
+  predefined: TOILETPAN
+  category: Sanitary
+  discipline: plumbing
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_20_93_94}      # WC pans
+  material: {name: Vitreous China, category: ceramic}
+  psets:
+    Pset_SanitaryTerminalTypeToiletPan: {}
+  types:
+    - {name: Floor-mounted elongated, dims: ['20"', '28"', '30"']}
+    - {name: Wall-hung elongated, dims: ['20"', '26"', '30"']}
+    - {name: ADA comfort height, dims: ['20"', '30"', '32"']}
+
+- key: lavatory
+  label: Lavatory
+  massing_key: washbasin
+  ifc_class: IfcSanitaryTerminalType
+  predefined: WASHHANDBASIN
+  category: Sanitary
+  discipline: plumbing
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_20_96}         # Washbasins
+  material: {name: Vitreous China, category: ceramic}
+  types:
+    - {name: Wall-hung 20" x 18", dims: ['20"', '18"', '34"']}
+    - {name: Vanity 24" x 20", dims: ['24"', '20"', '34"']}
+    - {name: ADA wall-hung 24", dims: ['24"', '20"', '34"']}
+
+- key: sink
+  label: Sink
+  massing_key: sink
+  ifc_class: IfcSanitaryTerminalType
+  predefined: SINK
+  category: Sanitary
+  discipline: plumbing
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_20_96}         # Washbasins
+  material: {name: Stainless Steel, category: steel}
+  types:
+    - {name: Single bowl 24", dims: ['24"', '21"', '36"']}
+    - {name: Double bowl 33", dims: ['33"', '22"', '36"']}
+    - {name: Mop basin 24", dims: ['24"', '24"', '12"']}
+
+- key: bathtub
+  label: Bathtub
+  massing_key: bathtub
+  ifc_class: IfcSanitaryTerminalType
+  predefined: BATH
+  category: Sanitary
+  discipline: plumbing
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_20_06_08}      # Baths
+  material: {name: Acrylic, category: plastic}
+  types:                                           # 60" alcove tub is the US standard
+    - {name: Alcove 60" x 30", dims: ["5'-0\"", '30"', '20"']}
+    - {name: Alcove 60" x 32", dims: ["5'-0\"", '32"', '20"']}
+    - {name: Soaking 66" x 36", dims: ["5'-6\"", "3'-0\"", '24"']}
+
+- key: urinal
+  label: Urinal
+  massing_key: urinal
+  ifc_class: IfcSanitaryTerminalType
+  predefined: URINAL
+  category: Sanitary
+  discipline: plumbing
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_20_93_30}      # Floor-standing urinals
+  material: {name: Vitreous China, category: ceramic}
+  types:
+    - {name: Wall-hung washout, dims: ['16"', '14"', '24"']}
+    - {name: ADA wall-hung, dims: ['18"', '14"', '24"']}
+
+- key: shower
+  label: Shower
+  massing_key: shower
+  ifc_class: IfcSanitaryTerminalType
+  predefined: SHOWER
+  category: Sanitary
+  discipline: plumbing
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_20_06_79}      # Shower enclosures
+  material: {name: Acrylic / Glass, category: composite}
+  types:
+    - {name: '36" square', dims: ["3'-0\"", "3'-0\"", "7'-0\""]}
+    - {name: '48" x 36"', dims: ["4'-0\"", "3'-0\"", "7'-0\""]}
+    - {name: ADA roll-in 60" x 36", dims: ["5'-0\"", "3'-0\"", "7'-0\""]}
+
+- key: water_heater
+  label: Water Heater
+  massing_key: water_heater
+  ifc_class: IfcSanitaryTerminalType
+  category: Equipment
+  discipline: plumbing
+  pack: plumbing-fixtures
+  builder: revolve
+  tier: L300
+  classification: {uniclass: Pr_60_60_96}         # Water heaters
+  material: {name: Glass-lined Steel, category: steel}
+  ports: {system: PIPE, names: [ColdIn, HotOut], flows: [SINK, SOURCE]}
+  psets:
+    MF_Equipment: {FuelType: Electric}
+  types:                                           # revolved tank body — genuinely round
+    - name: 40 gal (20" dia)
+      dims: ['20"', '20"', "5'-0\""]
+      revolve: {profile: {kind: Rectangle, params: {XDim: '10"', YDim: "5'-0\""}},
+                angle: 360, axis_offset: '10"'}
+    - name: 50 gal (22" dia)
+      dims: ['22"', '22"', "5'-0\""]
+      revolve: {profile: {kind: Rectangle, params: {XDim: '11"', YDim: "5'-0\""}},
+                angle: 360, axis_offset: '11"'}
+    - name: 80 gal (26" dia)
+      dims: ['26"', '26"', "5'-10\""]
+      revolve: {profile: {kind: Rectangle, params: {XDim: '13"', YDim: "5'-10\""}},
+                angle: 360, axis_offset: '13"'}

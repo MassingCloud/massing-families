@@ -1,0 +1,161 @@
+# Residential — the content specific to dwellings.
+#
+# Appliances, casework, garage doors, furnaces and split systems live in the shared discipline packs;
+# this file covers what only residential needs.
+# Uniclass codes verified against the published Pr/Ss tables.
+
+- key: closet_system
+  label: Closet System
+  ifc_class: IfcFurnitureType
+  category: Storage
+  discipline: residential
+  pack: typology-residential
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_30_87}         # Storage units and cupboards
+  material: {name: Melamine Shelving, category: wood}
+  types:
+    - {name: Reach-in 6'-0", dims: ["6'-0\"", '24"', "7'-0\""]}
+    - {name: Walk-in 8'-0", dims: ["8'-0\"", '24"', "7'-0\""]}
+    - {name: Linen 30", dims: ['30"', '18"', "7'-0\""]}
+
+- key: window_egress
+  label: Egress Window
+  ifc_class: IfcWindowType
+  predefined: WINDOW
+  category: Windows
+  discipline: residential
+  pack: typology-residential
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_30_59_98}         # Window units
+  material: {name: Vinyl Frame / IGU, category: plastic}
+  psets:
+    Pset_WindowCommon: {IsExternal: true}
+    MF_Residential: {Code: IRC R310 emergency escape and rescue}
+  types:                                           # IRC R310: 5.7 sq ft net clear, 24" h, 20" w min
+    - {name: Casement 36" x 48", dims: ["3'-0\"", '3"', "4'-0\""]}
+    - {name: Slider 48" x 36", dims: ["4'-0\"", '3"', "3'-0\""]}
+    - {name: Double hung 36" x 60", dims: ["3'-0\"", '3"', "5'-0\""]}
+
+- key: window_casement
+  label: Casement Window
+  ifc_class: IfcWindowType
+  predefined: WINDOW
+  category: Windows
+  discipline: residential
+  pack: typology-residential
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_30_59_98}         # Window units
+  material: {name: Clad Wood Frame / IGU, category: wood}
+  psets:
+    Pset_WindowCommon: {IsExternal: true, ThermalTransmittance: 1.4}
+  types:
+    - {name: 24" x 48" single, dims: ["2'-0\"", '3"', "4'-0\""]}
+    - {name: 30" x 60" single, dims: ["2'-6\"", '3"', "5'-0\""]}
+    - {name: 60" x 48" twin, dims: ["5'-0\"", '3"', "4'-0\""]}
+
+- key: window_awning
+  label: Awning Window
+  ifc_class: IfcWindowType
+  predefined: WINDOW
+  category: Windows
+  discipline: residential
+  pack: typology-residential
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_30_59_98}         # Window units
+  material: {name: Clad Wood Frame / IGU, category: wood}
+  types:
+    - {name: 36" x 24", dims: ["3'-0\"", '3"', "2'-0\""]}
+    - {name: 48" x 24", dims: ["4'-0\"", '3"', "2'-0\""]}
+
+- key: door_sliding_patio
+  label: Sliding Patio Door
+  ifc_class: IfcDoorType
+  predefined: DOOR
+  category: Doors
+  discipline: residential
+  pack: typology-residential
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_30_59_24}         # Doorsets
+  material: {name: Vinyl Frame with Tempered Glass, category: plastic}
+  psets:
+    Pset_DoorCommon: {IsExternal: true, ThermalTransmittance: 1.6}
+  types:
+    - {name: 6'-0" x 6'-8" two panel, dims: ["6'-0\"", '3"', "6'-8\""]}
+    - {name: 8'-0" x 6'-8" three panel, dims: ["8'-0\"", '3"', "6'-8\""]}
+
+- key: deck_framing
+  label: Deck
+  ifc_class: IfcSlabType
+  predefined: FLOOR
+  category: Exterior
+  discipline: residential
+  pack: typology-residential
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_30_12}            # Floor and deck structure systems
+  psets:
+    Pset_SlabCommon: {IsExternal: true, LoadBearing: true}
+  material:
+    name: Composite Decking on Treated Framing
+    layers:
+      - {material: Composite Deck Board, thickness: '1"', category: composite}
+      - {material: Pressure-Treated Joist, thickness: '9 1/4"', category: wood}
+  types:
+    - {name: 12'-0" x 16'-0", dims: ["12'-0\"", "16'-0\"", '10 1/4"']}
+    - {name: 16'-0" x 20'-0", dims: ["16'-0\"", "20'-0\"", '10 1/4"']}
+
+- key: balcony
+  label: Balcony
+  ifc_class: IfcSlabType
+  predefined: FLOOR
+  category: Exterior
+  discipline: residential
+  pack: typology-residential
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_30_12}            # Floor and deck structure systems
+  psets:
+    Pset_SlabCommon: {IsExternal: true, LoadBearing: true}
+  material:
+    name: Concrete Balcony Slab
+    layers:
+      - {material: 4000 psi Concrete, thickness: '6"', category: concrete}
+  types:
+    - {name: 6'-0" x 10'-0", dims: ["10'-0\"", "6'-0\"", '6"']}
+    - {name: 8'-0" x 12'-0", dims: ["12'-0\"", "8'-0\"", '6"']}
+
+- key: fireplace
+  label: Fireplace
+  ifc_class: IfcSpaceHeaterType
+  predefined: RADIATOR
+  category: Appliance
+  discipline: residential
+  pack: typology-residential
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_70_60_36}         # Heat emitters
+  material: {name: Steel Firebox with Surround, category: steel}
+  types:
+    - {name: Direct vent 36", dims: ["3'-0\"", '20"', "3'-6\""]}
+    - {name: Direct vent 42", dims: ["3'-6\"", '22"', "3'-8\""]}
+    - {name: Wood-burning insert 36", dims: ["3'-0\"", '24"', "3'-6\""]}
+
+- key: attic_access
+  label: Attic Access
+  ifc_class: IfcDoorType
+  predefined: TRAPDOOR
+  category: Doors
+  discipline: residential
+  pack: typology-residential
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_30_59_36_74}      # Roof hatches
+  material: {name: Insulated Panel with Wood Frame, category: wood}
+  types:
+    - {name: 22" x 30" scuttle, dims: ['22"', '30"', '4"']}
+    - {name: 25" x 54" pull-down stair, dims: ['25"', "4'-6\"", '12"']}

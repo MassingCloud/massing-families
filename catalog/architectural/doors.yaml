@@ -1,0 +1,93 @@
+# Doors — US imperial nominal sizes (PLAN.md §7b).
+# Classification verified against uniclass.thenbs.com: Pr_30_59_24 = Doorsets.
+# OmniClass 23-17 11 00 = Door (Table 23 Products).
+#
+# Widths follow US door schedule convention (2'-0" through 3'-0" in 4" increments); heights are the
+# two standard leaf heights 6'-8" and 7'-0". Leaf thickness 1 3/4" solid core / 1 3/8" hollow core.
+
+- key: door_single_flush
+  label: Single Flush Door
+  massing_key: single_door
+  ifc_class: IfcDoorType
+  predefined: DOOR
+  category: Doors
+  discipline: architectural
+  builder: box
+  tier: L200
+  classification:
+    uniclass: Pr_30_59_24
+    omniclass: 23-17 11 00
+  material:
+    name: Solid Core Wood
+    category: wood
+  psets:
+    Pset_DoorCommon:
+      IsExternal: false
+      Reference: Single flush leaf
+  types:
+    - name: 2'-0" x 6'-8"
+      dims: ["2'-0\"", '1 3/8"', "6'-8\""]
+    - name: 2'-4" x 6'-8"
+      dims: ["2'-4\"", '1 3/8"', "6'-8\""]
+    - name: 2'-6" x 6'-8"
+      dims: ["2'-6\"", '1 3/8"', "6'-8\""]
+    - name: 2'-8" x 6'-8"
+      dims: ["2'-8\"", '1 3/8"', "6'-8\""]
+    - name: 3'-0" x 6'-8"
+      dims: ["3'-0\"", '1 3/4"', "6'-8\""]
+    - name: 2'-8" x 7'-0"
+      dims: ["2'-8\"", '1 3/4"', "7'-0\""]
+    - name: 3'-0" x 7'-0"
+      dims: ["3'-0\"", '1 3/4"', "7'-0\""]
+
+- key: door_double_flush
+  label: Double Flush Door
+  massing_key: double_door
+  ifc_class: IfcDoorType
+  predefined: DOOR
+  category: Doors
+  discipline: architectural
+  builder: box
+  tier: L200
+  classification:
+    uniclass: Pr_30_59_24
+    omniclass: 23-17 11 00
+  material:
+    name: Solid Core Wood
+    category: wood
+  psets:
+    Pset_DoorCommon:
+      IsExternal: false
+      Reference: Double flush pair
+  types:
+    - name: 5'-0" x 6'-8"
+      dims: ["5'-0\"", '1 3/4"', "6'-8\""]
+    - name: 5'-4" x 7'-0"
+      dims: ["5'-4\"", '1 3/4"', "7'-0\""]
+    - name: 6'-0" x 7'-0"
+      dims: ["6'-0\"", '1 3/4"', "7'-0\""]
+
+- key: door_exterior_hm
+  label: Hollow Metal Exterior Door
+  ifc_class: IfcDoorType
+  predefined: DOOR
+  category: Doors
+  discipline: architectural
+  builder: box
+  tier: L200
+  classification:
+    uniclass: Pr_30_59_24
+    omniclass: 23-17 11 00
+  material:
+    name: Hollow Metal (16 ga)
+    category: steel
+  psets:
+    Pset_DoorCommon:
+      IsExternal: true
+      FireRating: 90 min
+      ThermalTransmittance: 2.5
+  types:
+    - name: 3'-0" x 7'-0"
+      dims: ["3'-0\"", '1 3/4"', "7'-0\""]
+    - name: 6'-0" x 7'-0"
+      dims: ["6'-0\"", '1 3/4"', "7'-0\""]

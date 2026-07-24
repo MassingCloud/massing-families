@@ -1,0 +1,123 @@
+code,title
+Pr_20_29_03,Anchors and components
+Pr_20_29_08,Bolts and accessories
+Pr_20_76_08,Bollards and impact protectors
+Pr_20_76_51,Metal sections
+Pr_20_76_51_21,Cold-formed galvanized steel sections
+Pr_20_76_51_90,Universal beam sections
+Pr_20_76_51_92,Universal column sections
+Pr_20_76_52,Metal tubes and hollow sections
+Pr_20_76_52_16,Carbon steel hot-finished hollow sections
+Pr_20_76_88,Timber sections
+Pr_20_85,Support and restraint products
+Pr_20_85_14,Concrete flooring and decking products
+Pr_20_85_90_11,Carbon steel lattice floor joists and purlins
+Pr_20_93_85,Structural units
+Pr_20_96_71,Reinforcement
+Pr_25_30_30,"Floor plates, gratings and edgings"
+Pr_25_30_36,Handrails
+Pr_25_30_85,Stair and ladder units
+Pr_25_71_35_99,X-ray-resistant gypsum plasterboards
+Pr_30_59_24,Doorsets
+Pr_30_59_36_74,Roof hatches
+Pr_30_59_72,Rooflights
+Pr_30_59_98,Window units
+Pr_35_31,Formless covering and finish products
+Pr_35_57,"Non-rigid sheet, mat and strip covering and finish products"
+Pr_35_90,Trim products
+Pr_35_90_27,Expansion joints
+Pr_35_93,Unit covering and finish products
+Pr_40_20_06_08,Baths
+Pr_40_20_06_79,Shower enclosures
+Pr_40_20_93_30,Floor-standing urinals
+Pr_40_20_93_94,WC pans
+Pr_40_20_96,"Washbasins, sinks and troughs"
+Pr_40_30_29_84,Street and site benches
+Pr_40_30_30_47,Laboratory work benches
+Pr_40_30_30_96,Worktops
+Pr_40_30_78,"Shelves, hangers and racks"
+Pr_40_30_78_78,Shelves
+Pr_40_30_87,Storage units and cupboards
+Pr_40_30_87_29,Filing cabinets
+Pr_40_30_87_46,Laboratory storage units
+Pr_40_30_87_48,Lockers
+Pr_40_30_87_96,Wardrobes
+Pr_40_50_06,Beds
+Pr_40_50_06_38,Hospital bedheads
+Pr_40_50_06_39,Hospital beds
+Pr_40_50_12,"Chairs, seats and benches"
+Pr_40_50_12_81,Sofas
+Pr_40_50_21,Desks and tables
+Pr_40_50_21_21,Desks
+Pr_40_50_28,Extinguishers and fire blankets
+Pr_40_50_51,Medical chairs and couches
+Pr_40_70_17,Commercial cooking equipment
+Pr_40_70_21,Dishwashers
+Pr_40_70_24,Domestic cooking equipment
+Pr_40_70_24_51,Microwave ovens
+Pr_40_70_25_47,Laundry washing machines
+Pr_40_70_26_72,Refrigerators
+Pr_40_70_31,Commercial food refrigerators and freezers
+Pr_40_70_47,Laundry washers and dryers
+Pr_45_30_80,Shrubs and woody climbers
+Pr_45_30_90,Trees
+Pr_45_63_63,Plant containers
+Pr_60_60_08,Boilers
+Pr_60_60_13,Chillers and cooling towers
+Pr_60_60_36,Heat recovery distribution equipment
+Pr_60_60_38,Calorifiers and plate heat exchangers
+Pr_60_60_96,Water heaters
+Pr_60_70_22_22,Distribution boards
+Pr_60_70_36,High-voltage switchgear and transformers
+Pr_60_70_65,"Power generators, engines and packaged combined heat and power (CHP) units"
+Pr_65_52_03,Above-ground drainage pipes and fittings
+Pr_65_52_24,Drainage gullies and channels
+Pr_65_52_63,Pipes and fittings
+Pr_65_53_24,Drainage pumps
+Pr_65_53_86,Supply and exhaust pumps
+Pr_65_54_30,Firefighting valves and devices
+Pr_65_54_95,Water services valves
+Pr_65_65_24,Duct dampers
+Pr_65_65_25,Ductwork and fittings
+Pr_65_70_11,Cable management and accessories
+Pr_65_70_11_17,Cable trays
+Pr_65_80_06,Baggage handling conveyors
+Pr_65_80_15,Cranes and lifting products
+Pr_65_80_23,Dock levellers
+Pr_65_80_28,Escalator and moving walk products
+Pr_65_80_28_21,Escalators
+Pr_65_80_42,"Transport cars, platforms and chairs"
+Pr_70_55_97_84,Sprinkler heads
+Pr_70_60_36,Heat emitters
+Pr_70_60_36_73,Radiators
+Pr_70_60_37,Heat pumps
+Pr_70_65_03,Air conditioning units
+Pr_70_65_03_29,Fan coil units
+Pr_70_65_04,Air terminals and diffusers
+Pr_70_65_04_02,Air diffusers
+Pr_70_70_48,"Luminaires, lighting track and lighting accessories"
+Pr_70_70_48_62,Pendant luminaires
+Pr_70_70_48_71,Recessed luminaires
+Pr_75_80_30,Fire detection and alarm devices and control equipment
+Pr_80_77_48,"Lighting columns, brackets and bollards"
+Ss_15_95,Temporary works systems
+Ss_15_95_17,Temporary protection systems
+Ss_15_95_20,Temporary whole entity structural works systems
+Ss_15_95_25,Temporary wall and barrier works systems
+Ss_15_95_35,"Temporary fixed access, tunnel, shaft, vessel and tower works systems"
+Ss_20_20_75_70,Reinforced concrete beam systems
+Ss_20_30_75,Structural column systems
+Ss_25_10_20,Curtain walling systems
+Ss_25_10_30,Framed partition systems
+Ss_25_12_60_60,Panel cubicle systems
+Ss_25_13_50,Masonry wall systems
+Ss_25_14,Fence systems
+Ss_25_30_95,Window and window walling systems
+Ss_30_10,Roof structure systems
+Ss_30_12,Floor and deck structure systems
+Ss_30_14,Paving systems
+Ss_30_25_10,Board and sheet ceiling systems
+Ss_30_25_22,Demountable suspended ceiling systems
+Ss_35_10,Stair and ramp structure systems
+Ss_40,"Signage, fittings, furnishings and equipment (FF&E) and general finishing systems"
+Ss_55_20_51,Medical gas and vacuum systems

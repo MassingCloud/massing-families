@@ -1,0 +1,165 @@
+# Conveying — escalators, moving walks, cranes, hoists, dock equipment, baggage handling.
+# Uniclass codes verified against the published Pr table.
+
+- key: escalator
+  label: Escalator
+  ifc_class: IfcTransportElementType
+  predefined: ESCALATOR
+  category: Conveying
+  discipline: conveying
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_65_80_28_21}      # Escalators
+  material: {name: Stainless Steel / Glass Balustrade, category: steel}
+  psets:
+    MF_Conveying: {NominalSpeed: 100 fpm, Incline: 30 deg}
+  types:                                           # 32"/40"/48" nominal step widths
+    - {name: 32" step / 12'-0" rise, dims: ["4'-0\"", "35'-0\"", "12'-0\""]}
+    - {name: 40" step / 12'-0" rise, dims: ["4'-8\"", "35'-0\"", "12'-0\""]}
+    - {name: 40" step / 18'-0" rise, dims: ["4'-8\"", "48'-0\"", "18'-0\""]}
+
+- key: moving_walk
+  label: Moving Walk
+  ifc_class: IfcTransportElementType
+  predefined: MOVINGWALKWAY
+  category: Conveying
+  discipline: conveying
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_65_80_28}         # Escalator and moving walk products
+  material: {name: Stainless Steel / Glass Balustrade, category: steel}
+  psets:
+    MF_Conveying: {NominalSpeed: 120 fpm, Application: Airport terminal}
+  types:
+    - {name: 40" wide / 100'-0" run, dims: ["4'-8\"", "100'-0\"", "3'-6\""]}
+    - {name: 55" wide / 150'-0" run, dims: ["6'-0\"", "150'-0\"", "3'-6\""]}
+
+- key: dumbwaiter
+  label: Dumbwaiter
+  ifc_class: IfcTransportElementType
+  predefined: ELEVATOR
+  category: Conveying
+  discipline: conveying
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_65_80_42}         # Transport cars
+  material: {name: Stainless Steel, category: steel}
+  types:
+    - {name: 100 lb, dims: ['24"', '24"', '30"']}
+    - {name: 500 lb, dims: ["3'-0\"", "3'-0\"", "4'-0\""]}
+
+- key: wheelchair_lift
+  label: Wheelchair Lift
+  ifc_class: IfcTransportElementType
+  predefined: ELEVATOR
+  category: Conveying
+  discipline: conveying
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_65_80_42}         # Transport cars
+  material: {name: Painted Steel, category: steel}
+  psets:
+    MF_Conveying: {ADACompliant: true}
+  types:
+    - {name: Vertical platform 750 lb, dims: ["3'-0\"", "4'-0\"", "6'-0\""]}
+
+- key: crane_overhead
+  label: Overhead Bridge Crane
+  ifc_class: IfcTransportElementType
+  predefined: CRANEWAY
+  category: Cranes
+  discipline: conveying
+  pack: conveying-industrial
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_65_80_15}         # Cranes and lifting products
+  material: {name: Structural Steel, category: steel}
+  psets:
+    MF_Conveying: {Application: Industrial}
+  types:
+    - {name: 5 ton / 40'-0" span, dims: ["40'-0\"", "3'-0\"", "4'-0\""]}
+    - {name: 10 ton / 60'-0" span, dims: ["60'-0\"", "4'-0\"", "5'-0\""]}
+    - {name: 25 ton / 80'-0" span, dims: ["80'-0\"", "5'-0\"", "6'-6\""]}
+
+- key: monorail_hoist
+  label: Monorail Hoist
+  ifc_class: IfcTransportElementType
+  predefined: LIFTINGGEAR
+  category: Cranes
+  discipline: conveying
+  pack: conveying-industrial
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_65_80_15}         # Cranes and lifting products
+  material: {name: Structural Steel, category: steel}
+  types:
+    - {name: 1 ton, dims: ['12"', "2'-0\"", "3'-0\""]}
+    - {name: 2 ton, dims: ['16"', "2'-6\"", "3'-6\""]}
+    - {name: 5 ton, dims: ["2'-0\"", "3'-0\"", "4'-0\""]}
+
+- key: dock_leveler
+  label: Dock Leveler
+  ifc_class: IfcTransportElementType
+  predefined: LIFTINGGEAR
+  category: Dock Equipment
+  discipline: conveying
+  pack: conveying-industrial
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_65_80_23}         # Dock levellers
+  material: {name: Steel Deck, category: steel}
+  psets:
+    MF_Conveying: {Capacity: 30000 lb}
+  types:
+    - {name: 6'-0" x 8'-0" pit-mounted, dims: ["6'-0\"", "8'-0\"", '24"']}
+    - {name: 7'-0" x 8'-0" pit-mounted, dims: ["7'-0\"", "8'-0\"", '24"']}
+    - {name: 6'-6" edge-of-dock, dims: ["6'-6\"", "2'-0\"", '18"']}
+
+- key: baggage_conveyor
+  label: Baggage Conveyor
+  ifc_class: IfcTransportElementType
+  predefined: LIFTINGGEAR
+  category: Baggage Handling
+  discipline: conveying
+  pack: conveying-airport
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_65_80_06}         # Baggage handling conveyors
+  material: {name: Steel Frame with Belt, category: steel}
+  psets:
+    MF_Conveying: {Application: Airport baggage handling}
+  types:
+    - {name: 36" belt / 20'-0" run, dims: ["3'-0\"", "20'-0\"", "3'-0\""]}
+    - {name: 42" belt / 40'-0" run, dims: ["3'-6\"", "40'-0\"", "3'-0\""]}
+
+- key: baggage_carousel
+  label: Baggage Carousel
+  ifc_class: IfcTransportElementType
+  predefined: LIFTINGGEAR
+  category: Baggage Handling
+  discipline: conveying
+  pack: conveying-airport
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_65_80_06}         # Baggage handling conveyors
+  material: {name: Stainless Steel Cladding, category: steel}
+  types:
+    - {name: Flat plate 80'-0" perimeter, dims: ["30'-0\"", "12'-0\"", "3'-0\""]}
+    - {name: Sloped 120'-0" perimeter, dims: ["45'-0\"", "14'-0\"", "3'-6\""]}
+
+- key: jet_bridge
+  label: Passenger Boarding Bridge
+  ifc_class: IfcTransportElementType
+  predefined: MOVINGWALKWAY
+  category: Airside
+  discipline: conveying
+  pack: conveying-airport
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_65_80_28}         # Escalator and moving walk products
+  material: {name: Steel Frame with Glazing, category: steel}
+  psets:
+    MF_Conveying: {Application: Airport gate}
+  types:
+    - {name: Apron drive 60'-0" reach, dims: ["10'-0\"", "60'-0\"", "10'-0\""]}
+    - {name: Apron drive 100'-0" reach, dims: ["10'-0\"", "100'-0\"", "10'-0\""]}

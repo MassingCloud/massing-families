@@ -1,0 +1,136 @@
+# Industrial / warehouse — mezzanines, dock equipment, high-bay lighting, process services.
+# Cranes, monorails and dock levelers live in catalog/conveying/conveying.yaml.
+# Uniclass codes verified against the published Pr/Ss tables.
+
+- key: highbay_light
+  label: High-Bay Light
+  ifc_class: IfcLightFixtureType
+  predefined: DIRECTIONSOURCE
+  category: Lighting
+  discipline: industrial
+  pack: typology-industrial
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_70_70_48}         # Luminaires
+  material: {name: Aluminium Housing, category: aluminium}
+  psets:
+    MF_Industrial: {MountingHeight: 25 ft}
+  types:
+    - {name: LED linear 4'-0", dims: ["4'-0\"", '12"', '6"']}
+    - {name: LED round 24", dims: ['24"', '24"', '10"']}
+
+- key: mezzanine
+  label: Mezzanine Platform
+  ifc_class: IfcSlabType
+  predefined: FLOOR
+  category: Platforms
+  discipline: industrial
+  pack: typology-industrial
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_30_12}            # Floor and deck structure systems
+  psets:
+    Pset_SlabCommon: {LoadBearing: true, IsExternal: false}
+  material:
+    name: Steel Mezzanine Deck
+    layers:
+      - {material: Steel Bar Grating, thickness: '1 1/2"', category: steel}
+  types:
+    - {name: 20'-0" x 20'-0" bay, dims: ["20'-0\"", "20'-0\"", '1 1/2"']}
+    - {name: 30'-0" x 30'-0" bay, dims: ["30'-0\"", "30'-0\"", '1 1/2"']}
+
+- key: dock_seal
+  label: Dock Seal / Shelter
+  ifc_class: IfcBuildingElementProxyType
+  predefined: USERDEFINED
+  category: Dock Equipment
+  discipline: industrial
+  pack: typology-industrial
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_65_80_23}         # Dock levellers
+  material: {name: Vinyl-Coated Fabric over Foam, category: composite}
+  types:
+    - {name: Compression seal 8'-0" x 9'-0", dims: ["8'-0\"", '12"', "9'-0\""]}
+    - {name: Inflatable shelter 10'-0" x 10'-0", dims: ["10'-0\"", '18"', "10'-0\""]}
+
+- key: dock_bumper
+  label: Dock Bumper
+  ifc_class: IfcBuildingElementProxyType
+  predefined: USERDEFINED
+  category: Dock Equipment
+  discipline: industrial
+  pack: typology-industrial
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_20_76_08}         # Bollards and impact protectors
+  material: {name: Laminated Rubber, category: rubber}
+  types:
+    - {name: 10" x 14" x 4", dims: ['14"', '4"', '10"']}
+    - {name: 12" x 24" x 6", dims: ['24"', '6"', '12"']}
+
+- key: guard_rail_industrial
+  label: Industrial Guard Rail
+  ifc_class: IfcRailingType
+  predefined: GUARDRAIL
+  category: Site Protection
+  discipline: industrial
+  pack: typology-industrial
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_25_30_36}         # Handrails
+  material: {name: Powder-Coated Steel, category: steel}
+  psets:
+    MF_Industrial: {ImpactRated: true}
+  types:
+    - {name: Single rail 8'-0" bay, dims: ["8'-0\"", '6"', '18"']}
+    - {name: Double rail 8'-0" bay, dims: ["8'-0\"", '6"', '42"']}
+
+- key: pallet_rack
+  label: Pallet Racking
+  ifc_class: IfcBuildingElementProxyType
+  predefined: USERDEFINED
+  category: Storage
+  discipline: industrial
+  pack: typology-industrial
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_30_78}         # Shelves
+  material: {name: Roll-Formed Steel, category: steel}
+  psets:
+    MF_Industrial: {Application: Warehouse storage}
+  types:
+    - {name: 8'-0" bay x 42" deep x 16'-0", dims: ["8'-0\"", "3'-6\"", "16'-0\""]}
+    - {name: 12'-0" bay x 48" deep x 24'-0", dims: ["12'-0\"", "4'-0\"", "24'-0\""]}
+
+- key: air_compressor
+  label: Air Compressor
+  ifc_class: IfcCompressorType
+  predefined: ROTARY
+  category: Process
+  discipline: industrial
+  pack: typology-industrial
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_70_65_03}         # Air conditioning units
+  material: {name: Steel Enclosure, category: steel}
+  ports: {system: PIPE, names: [Out], flows: [SOURCE]}
+  types:
+    - {name: 25 HP rotary screw, dims: ["6'-0\"", "3'-0\"", "5'-0\""]}
+    - {name: 75 HP rotary screw, dims: ["8'-0\"", "4'-0\"", "6'-0\""]}
+
+- key: dust_collector
+  label: Dust Collector
+  ifc_class: IfcFilterType
+  predefined: AIRPARTICLEFILTER
+  category: Process
+  discipline: industrial
+  pack: typology-industrial
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_70_65_03}         # Air conditioning units
+  material: {name: Steel Housing, category: steel}
+  ports: {system: DUCT, names: [In, Out], flows: [SINK, SOURCE]}
+  types:
+    - {name: 4000 CFM cartridge, dims: ["6'-0\"", "4'-0\"", "12'-0\""]}
+    - {name: 12000 CFM baghouse, dims: ["10'-0\"", "8'-0\"", "20'-0\""]}

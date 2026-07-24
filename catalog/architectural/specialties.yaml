@@ -1,0 +1,239 @@
+# Architectural specialties — toilet partitions, lockers, signage, casework, shading.
+# Uniclass codes verified against the published Pr/Ss tables.
+
+- key: toilet_partition
+  label: Toilet Partition
+  ifc_class: IfcBuildingElementProxyType
+  predefined: USERDEFINED
+  category: Specialties
+  discipline: architectural
+  pack: architectural-specialties
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_25_12_60_60}      # Panel cubicle systems
+  material: {name: Solid Phenolic Core, category: composite}
+  psets:
+    MF_Specialty: {MountingType: Floor-mounted overhead-braced}
+  types:                                           # ADA stall is 60" x 60" clear
+    - {name: Standard 36" x 60", dims: ["3'-0\"", "5'-0\"", "6'-0\""]}
+    - {name: ADA 60" x 60", dims: ["5'-0\"", "5'-0\"", "6'-0\""]}
+    - {name: Urinal screen 24", dims: ['24"', '2"', "4'-0\""]}
+
+- key: locker
+  label: Locker
+  ifc_class: IfcFurnitureType
+  category: Specialties
+  discipline: architectural
+  pack: architectural-specialties
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_30_87_48}      # Lockers
+  material: {name: Painted Steel, category: steel}
+  types:
+    - {name: Single tier 12" x 18" x 72", dims: ['12"', '18"', "6'-0\""]}
+    - {name: Double tier 12" x 18" x 72", dims: ['12"', '18"', "6'-0\""]}
+    - {name: Box locker 12" x 18" x 12", dims: ['12"', '18"', '12"']}
+
+- key: signage
+  label: Signage
+  ifc_class: IfcBuildingElementProxyType
+  predefined: USERDEFINED
+  category: Specialties
+  discipline: architectural
+  pack: architectural-specialties
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_40}               # Signage systems
+  material: {name: Acrylic with Braille, category: plastic}
+  psets:
+    MF_Specialty: {ADACompliant: true}
+  types:
+    - {name: Room ID 6" x 8", dims: ['8"', '1/4"', '6"']}
+    - {name: Exit sign, dims: ['12"', '2"', '8"']}
+    - {name: Directory 24" x 36", dims: ["2'-0\"", '1"', "3'-0\""]}
+
+- key: casework_base
+  label: Base Cabinet
+  ifc_class: IfcFurnitureType
+  category: Casework
+  discipline: architectural
+  pack: architectural-specialties
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_30_87}         # Storage units and cupboards
+  material: {name: Plastic Laminate on Plywood, category: composite}
+  types:                                           # 24" deep, 34 1/2" high before counter
+    - {name: 18" wide, dims: ['18"', '24"', '34 1/2"']}
+    - {name: 24" wide, dims: ['24"', '24"', '34 1/2"']}
+    - {name: 30" wide, dims: ['30"', '24"', '34 1/2"']}
+    - {name: 36" wide, dims: ["3'-0\"", '24"', '34 1/2"']}
+
+- key: casework_wall
+  label: Wall Cabinet
+  ifc_class: IfcFurnitureType
+  category: Casework
+  discipline: architectural
+  pack: architectural-specialties
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_30_87}         # Storage units and cupboards
+  material: {name: Plastic Laminate on Plywood, category: composite}
+  types:                                           # 12" deep, 30"/36" high
+    - {name: 24" x 30", dims: ['24"', '12"', '30"']}
+    - {name: 30" x 30", dims: ['30"', '12"', '30"']}
+    - {name: 36" x 36", dims: ["3'-0\"", '12"', "3'-0\""]}
+
+- key: casework_tall
+  label: Tall Storage Cabinet
+  ifc_class: IfcFurnitureType
+  category: Casework
+  discipline: architectural
+  pack: architectural-specialties
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_30_87}         # Storage units and cupboards
+  material: {name: Plastic Laminate on Plywood, category: composite}
+  types:
+    - {name: 24" x 84", dims: ['24"', '24"', "7'-0\""]}
+    - {name: 36" x 84", dims: ["3'-0\"", '24"', "7'-0\""]}
+
+- key: shading_device
+  label: Sun Shade
+  ifc_class: IfcShadingDeviceType
+  predefined: USERDEFINED
+  category: Envelope
+  discipline: architectural
+  pack: architectural-specialties
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_25_30_95}         # Window and window walling systems
+  material: {name: Extruded Aluminium, category: aluminium}
+  types:
+    - {name: Horizontal fin 24" projection, dims: ["5'-0\"", '24"', '4"']}
+    - {name: Horizontal fin 36" projection, dims: ["5'-0\"", "3'-0\"", '4"']}
+    - {name: Vertical fin 18" projection, dims: ['4"', '18"', "10'-0\""]}
+
+- key: louvre
+  label: Wall Louvre
+  ifc_class: IfcShadingDeviceType
+  predefined: USERDEFINED
+  category: Envelope
+  discipline: architectural
+  pack: architectural-specialties
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_25_30_95}         # Window and window walling systems
+  material: {name: Extruded Aluminium, category: aluminium}
+  psets:
+    MF_Specialty: {FreeArea: 50 pct}
+  types:
+    - {name: 24" x 24" storm-proof, dims: ["2'-0\"", '6"', "2'-0\""]}
+    - {name: 48" x 48" storm-proof, dims: ["4'-0\"", '6"', "4'-0\""]}
+    - {name: 72" x 48" storm-proof, dims: ["6'-0\"", '6"', "4'-0\""]}
+
+- key: door_overhead_coiling
+  label: Overhead Coiling Door
+  ifc_class: IfcDoorType
+  predefined: DOOR
+  category: Doors
+  discipline: architectural
+  pack: architectural-specialties
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_30_59_24}         # Doorsets
+  material: {name: Galvanized Steel Slats, category: steel}
+  psets:
+    Pset_DoorCommon: {IsExternal: true, Reference: Overhead coiling}
+  types:
+    - {name: 8'-0" x 8'-0", dims: ["8'-0\"", '6"', "8'-0\""]}
+    - {name: 10'-0" x 10'-0", dims: ["10'-0\"", '6"', "10'-0\""]}
+    - {name: 12'-0" x 14'-0" dock, dims: ["12'-0\"", '6"', "14'-0\""]}
+
+- key: door_sectional_overhead
+  label: Sectional Overhead Door
+  ifc_class: IfcDoorType
+  predefined: DOOR
+  category: Doors
+  discipline: architectural
+  pack: architectural-specialties
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_30_59_24}         # Doorsets
+  material: {name: Insulated Steel Panel, category: steel}
+  psets:
+    Pset_DoorCommon: {IsExternal: true, ThermalTransmittance: 1.1}
+  types:
+    - {name: 9'-0" x 7'-0" residential, dims: ["9'-0\"", '2"', "7'-0\""]}
+    - {name: 16'-0" x 7'-0" residential, dims: ["16'-0\"", '2"', "7'-0\""]}
+    - {name: 12'-0" x 14'-0" commercial, dims: ["12'-0\"", '3"', "14'-0\""]}
+
+- key: door_fire_rated
+  label: Fire-Rated Door
+  ifc_class: IfcDoorType
+  predefined: DOOR
+  category: Doors
+  discipline: architectural
+  pack: architectural-specialties
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_30_59_24}         # Doorsets
+  material: {name: Mineral Core with HM Frame, category: composite}
+  psets:
+    Pset_DoorCommon: {IsExternal: false, FireRating: 90 min, SelfClosing: true}
+  types:
+    - {name: 3'-0" x 7'-0" 90 min, dims: ["3'-0\"", '1 3/4"', "7'-0\""]}
+    - {name: 6'-0" x 7'-0" 90 min pair, dims: ["6'-0\"", '1 3/4"', "7'-0\""]}
+    - {name: 3'-0" x 7'-0" 20 min, dims: ["3'-0\"", '1 3/4"', "7'-0\""]}
+
+- key: door_storefront
+  label: Storefront Door
+  ifc_class: IfcDoorType
+  predefined: DOOR
+  category: Doors
+  discipline: architectural
+  pack: architectural-specialties
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_30_59_24}         # Doorsets
+  material: {name: Aluminium with Tempered Glass, category: aluminium}
+  psets:
+    Pset_DoorCommon: {IsExternal: true, Reference: Narrow stile storefront}
+  types:
+    - {name: 3'-0" x 7'-0" single, dims: ["3'-0\"", '1 3/4"', "7'-0\""]}
+    - {name: 6'-0" x 7'-0" pair, dims: ["6'-0\"", '1 3/4"', "7'-0\""]}
+
+- key: door_vision_panel
+  label: Door with Vision Panel
+  ifc_class: IfcDoorType
+  predefined: DOOR
+  category: Doors
+  discipline: architectural
+  pack: architectural-specialties
+  builder: boolean
+  tier: L300
+  classification: {uniclass: Pr_30_59_24}         # Doorsets
+  material: {name: Solid Core with Tempered Glazing, category: composite}
+  psets:
+    Pset_DoorCommon: {IsExternal: false, Reference: Flush leaf with vision lite}
+  types:                                          # the leaf is actually cut, not just labelled
+    - name: 3'-0" x 7'-0" narrow lite
+      dims: ["3'-0\"", '1 3/4"', "7'-0\""]
+      boolean:
+        base: {kind: Rectangle, params: {XDim: "3'-0\"", YDim: '1 3/4"'}, depth: "7'-0\""}
+        voids:
+          - {kind: Rectangle, params: {XDim: '5"', YDim: '6"'}, depth: '24"',
+             at: ['8"', 0, "4'-6\""], name: Vision lite}
+    - name: 3'-0" x 7'-0" half lite
+      dims: ["3'-0\"", '1 3/4"', "7'-0\""]
+      boolean:
+        base: {kind: Rectangle, params: {XDim: "3'-0\"", YDim: '1 3/4"'}, depth: "7'-0\""}
+        voids:
+          - {kind: Rectangle, params: {XDim: '20"', YDim: '6"'}, depth: '30"',
+             at: [0, 0, "4'-0\""], name: Vision lite}
+    - name: 3'-6" x 7'-0" wide lite
+      dims: ["3'-6\"", '1 3/4"', "7'-0\""]
+      boolean:
+        base: {kind: Rectangle, params: {XDim: "3'-6\"", YDim: '1 3/4"'}, depth: "7'-0\""}
+        voids:
+          - {kind: Rectangle, params: {XDim: '24"', YDim: '6"'}, depth: '36"',
+             at: [0, 0, "3'-9\""], name: Vision lite}

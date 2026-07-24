@@ -1,0 +1,14 @@
+# Build output. Packs are generated from catalog/ — never source.
+# They ship as GitHub Release assets (see .github/workflows/build.yml), which keeps ~6 MB of IFC
+# churn out of git history and mirrors massing's own policy (its .gitignore line 36 is `*.ifc`,
+# "data / artifacts (do NOT commit models or tiles)").
+packs/
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+build/
+dist/

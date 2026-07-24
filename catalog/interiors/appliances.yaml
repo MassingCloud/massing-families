@@ -1,0 +1,93 @@
+# Domestic appliances — US imperial nominal sizes (standard 24"/30"/36" cabinet widths).
+# Uniclass codes verified against the published Pr table.
+
+- key: refrigerator
+  label: Refrigerator
+  massing_key: fridge
+  ifc_class: IfcElectricApplianceType
+  predefined: REFRIGERATOR
+  category: Appliance
+  discipline: interiors
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_70_26_72}      # Refrigerators
+  material: {name: Stainless Steel, category: steel}
+  types:
+    - {name: '30" top-freezer', dims: ['30"', '32"', '66"']}
+    - {name: '36" french door', dims: ["3'-0\"", '34"', '70"']}
+    - {name: '48" built-in', dims: ["4'-0\"", '25"', '84"']}
+
+- key: range
+  label: Range
+  massing_key: range
+  ifc_class: IfcElectricApplianceType
+  predefined: ELECTRICCOOKER
+  category: Appliance
+  discipline: interiors
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_70_24}         # Domestic cooking equipment
+  material: {name: Stainless Steel, category: steel}
+  types:
+    - {name: '30" freestanding', dims: ['30"', '26"', '36"']}
+    - {name: '36" slide-in', dims: ["3'-0\"", '26"', '36"']}
+
+- key: wall_oven
+  label: Wall Oven
+  massing_key: oven
+  ifc_class: IfcElectricApplianceType
+  predefined: ELECTRICCOOKER
+  category: Appliance
+  discipline: interiors
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_70_24}         # Domestic cooking equipment
+  material: {name: Stainless Steel, category: steel}
+  types:
+    - {name: '30" single', dims: ['30"', '24"', '29"']}
+    - {name: '30" double', dims: ['30"', '24"', '51"']}
+
+- key: microwave
+  label: Microwave
+  massing_key: microwave
+  ifc_class: IfcElectricApplianceType
+  predefined: MICROWAVE
+  category: Appliance
+  discipline: interiors
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_70_24_51}      # Microwave ovens
+  material: {name: Stainless Steel, category: steel}
+  types:
+    - {name: Countertop 22", dims: ['22"', '18"', '13"']}
+    - {name: Over-range 30", dims: ['30"', '17"', '17"']}
+
+- key: dishwasher
+  label: Dishwasher
+  massing_key: dishwasher
+  ifc_class: IfcElectricApplianceType
+  predefined: DISHWASHER
+  category: Appliance
+  discipline: interiors
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_70_21}         # Dishwashers
+  material: {name: Stainless Steel, category: steel}
+  types:
+    - {name: '24" built-in', dims: ['24"', '24"', '34"']}
+    - {name: '18" compact', dims: ['18"', '24"', '34"']}
+
+- key: washing_machine
+  label: Washing Machine
+  massing_key: washer
+  ifc_class: IfcElectricApplianceType
+  predefined: WASHINGMACHINE
+  category: Appliance
+  discipline: interiors
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_70_25_47}      # Laundry washing machines
+  material: {name: Painted Steel, category: steel}
+  types:
+    - {name: '27" front-load', dims: ['27"', '30"', '38"']}
+    - {name: '27" top-load', dims: ['27"', '28"', '42"']}

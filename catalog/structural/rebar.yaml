@@ -1,0 +1,128 @@
+# Reinforcing steel — real round bars via the swept_disk builder.
+#
+# Diameters are the published ASTM A615 nominal values. A #8 bar is a 1" round solid following a path,
+# which is what the swept_disk builder produces — a box proxy here would be useless for congestion
+# checking or bend schedules.
+
+- key: rebar_straight
+  label: Rebar (Straight)
+  ifc_class: IfcReinforcingBarType
+  predefined: MAIN
+  category: Reinforcement
+  discipline: structural
+  pack: structural-rebar
+  builder: swept_disk
+  tier: L300
+  classification: {uniclass: Pr_20_96_71}      # Reinforcement
+  material: {name: ASTM A615 Grade 60 Steel, category: steel}
+  generator: rebar
+  generator_args: {sizes: [3, 4, 5, 6, 7, 8, 9, 10, 11, 14, 18], length: "20'-0\"", shape: straight}
+
+- key: rebar_stirrup
+  label: Rebar (Stirrup)
+  ifc_class: IfcReinforcingBarType
+  predefined: SHEAR
+  category: Reinforcement
+  discipline: structural
+  pack: structural-rebar
+  builder: swept_disk
+  tier: L300
+  classification: {uniclass: Pr_20_96_71}      # Reinforcement
+  material: {name: ASTM A615 Grade 60 Steel, category: steel}
+  generator: rebar
+  generator_args: {sizes: [3, 4, 5], shape: stirrup, width: '12"', height: '20"'}
+
+- key: rebar_stirrup_column
+  label: Rebar (Column Tie)
+  ifc_class: IfcReinforcingBarType
+  predefined: SHEAR
+  category: Reinforcement
+  discipline: structural
+  pack: structural-rebar
+  builder: swept_disk
+  tier: L300
+  classification: {uniclass: Pr_20_96_71}      # Reinforcement
+  material: {name: ASTM A615 Grade 60 Steel, category: steel}
+  generator: rebar
+  generator_args: {sizes: [3, 4, 5], shape: stirrup, width: '16"', height: '16"'}
+
+- key: rebar_hooked
+  label: Rebar (Hooked)
+  ifc_class: IfcReinforcingBarType
+  predefined: MAIN
+  category: Reinforcement
+  discipline: structural
+  pack: structural-rebar
+  builder: swept_disk
+  tier: L300
+  classification: {uniclass: Pr_20_96_71}      # Reinforcement
+  material: {name: ASTM A615 Grade 60 Steel, category: steel}
+  generator: rebar
+  generator_args: {sizes: [4, 5, 6, 7, 8], shape: hook, length: "10'-0\"", hook: '9"'}
+
+- key: rebar_dowel
+  label: Rebar (Dowel)
+  ifc_class: IfcReinforcingBarType
+  predefined: MAIN
+  category: Reinforcement
+  discipline: structural
+  pack: structural-rebar
+  builder: swept_disk
+  tier: L300
+  classification: {uniclass: Pr_20_96_71}      # Reinforcement
+  material: {name: ASTM A615 Grade 60 Steel, category: steel}
+  generator: rebar
+  generator_args: {sizes: [4, 5, 6, 8], length: "3'-0\"", shape: straight}
+
+- key: wwf_mesh
+  label: Welded Wire Reinforcement
+  ifc_class: IfcReinforcingMeshType
+  category: Reinforcement
+  discipline: structural
+  pack: structural-rebar
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_20_96_71}      # Reinforcement
+  material: {name: ASTM A1064 Steel, category: steel}
+  psets:
+    MF_Structural: {Specification: ASTM A1064}
+  types:                                           # sheet size 5'-0" x 10'-0" typical
+    - {name: 6x6-W1.4xW1.4, dims: ["5'-0\"", "10'-0\"", '1/8"']}
+    - {name: 6x6-W2.9xW2.9, dims: ["5'-0\"", "10'-0\"", '3/16"']}
+    - {name: 6x6-W4.0xW4.0, dims: ["5'-0\"", "10'-0\"", '1/4"']}
+    - {name: 4x4-W4.0xW4.0, dims: ["5'-0\"", "10'-0\"", '1/4"']}
+
+- key: pt_tendon
+  label: Post-Tensioning Tendon
+  ifc_class: IfcTendonType
+  predefined: STRAND
+  category: Reinforcement
+  discipline: structural
+  pack: structural-rebar
+  builder: swept_disk
+  tier: L300
+  classification: {uniclass: Pr_20_96_71}      # Reinforcement
+  material: {name: ASTM A416 Grade 270 Strand, category: steel}
+  psets:
+    MF_Structural: {Specification: ASTM A416 Grade 270}
+  types:                                           # 0.5" and 0.6" strand are the US standards
+    - name: 0.5" strand 30'-0"
+      dims: ['0.5"', '0.5"', "30'-0\""]
+      swept_disk: {diameter: '0.5"', path: [[0, 0, 0], [0, 0, "30'-0\""]]}
+    - name: 0.6" strand 30'-0"
+      dims: ['0.6"', '0.6"', "30'-0\""]
+      swept_disk: {diameter: '0.6"', path: [[0, 0, 0], [0, 0, "30'-0\""]]}
+
+- key: pt_anchor
+  label: Post-Tensioning Anchor
+  ifc_class: IfcTendonAnchorType
+  category: Reinforcement
+  discipline: structural
+  pack: structural-rebar
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_20_96_71}      # Reinforcement
+  material: {name: Ductile Iron Casting, category: iron}
+  types:
+    - {name: Monostrand 0.5", dims: ['4"', '2 1/2"', '5"']}
+    - {name: Multistrand 4-0.6", dims: ['8"', '8"', '10"']}

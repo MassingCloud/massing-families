@@ -1,0 +1,83 @@
+# Lighting and electrical distribution — US imperial nominal sizes.
+# The 2'x4' and 2'x2' lay-in troffer are the US ceiling-grid standards.
+# Uniclass codes verified against the published Pr table.
+
+- key: troffer
+  label: Recessed Troffer
+  massing_key: recessed_light
+  ifc_class: IfcLightFixtureType
+  predefined: DIRECTIONSOURCE
+  category: Lighting
+  discipline: electrical
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_70_70_48_71}      # Recessed luminaires
+  material: {name: Painted Steel / Acrylic Lens, category: composite}
+  psets:
+    Pset_LightFixtureTypeCommon: {MaintenanceFactor: 0.8}
+  types:
+    - {name: 2' x 4' lay-in, dims: ["4'-0\"", "2'-0\"", '4"']}
+    - {name: 2' x 2' lay-in, dims: ["2'-0\"", "2'-0\"", '4"']}
+    - {name: 1' x 4' lay-in, dims: ["4'-0\"", "1'-0\"", '4"']}
+
+- key: downlight
+  label: Recessed Downlight
+  ifc_class: IfcLightFixtureType
+  predefined: DIRECTIONSOURCE
+  category: Lighting
+  discipline: electrical
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_70_70_48_71}      # Recessed luminaires
+  material: {name: Aluminium Trim, category: aluminium}
+  profile: {kind: Circle}
+  types:                                           # round cans — a real cylinder, not a box
+    - {name: '4" aperture', dims: ['4"', '4"', '6"'], profile: {params: {Radius: '2"'}}}
+    - {name: '6" aperture', dims: ['6"', '6"', '7"'], profile: {params: {Radius: '3"'}}}
+
+- key: pendant_light
+  label: Pendant Light
+  massing_key: pendant_light
+  ifc_class: IfcLightFixtureType
+  predefined: POINTSOURCE
+  category: Lighting
+  discipline: electrical
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_70_70_48_62}      # Pendant luminaires
+  material: {name: Powder-coated Aluminium, category: aluminium}
+  profile: {kind: Circle}
+  types:
+    - {name: '12" dome', dims: ['12"', '12"', '16"'], profile: {params: {Radius: '6"'}}}
+    - {name: '18" dome', dims: ['18"', '18"', '20"'], profile: {params: {Radius: '9"'}}}
+
+- key: floor_lamp
+  label: Floor Lamp
+  massing_key: floor_lamp
+  ifc_class: IfcLightFixtureType
+  predefined: POINTSOURCE
+  category: Lighting
+  discipline: electrical
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_70_70_48}         # Luminaires
+  material: {name: Steel / Fabric Shade, category: composite}
+  types:
+    - {name: Torchiere 16" dia, dims: ['16"', '16"', "5'-0\""]}
+
+- key: panelboard
+  label: Electrical Panelboard
+  massing_key: electrical_panel
+  ifc_class: IfcElectricDistributionBoardType
+  predefined: DISTRIBUTIONBOARD
+  category: Electrical
+  discipline: electrical
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_60_70_22_22}      # Distribution boards
+  material: {name: Painted Steel Enclosure, category: steel}
+  psets:
+    MF_Electrical: {Voltage: 208Y/120V, Phase: 3}
+  types:
+    - {name: 42-circuit 20" x 42", dims: ['20"', '6"', '42"']}
+    - {name: 84-circuit 20" x 62", dims: ['20"', '6"', '62"']}

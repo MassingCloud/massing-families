@@ -1,0 +1,274 @@
+# Fire protection and fire sprinkler — NFPA 13 / 14 / 72 content.
+#
+# Sprinkler pipe uses Schedule 40 IPS outside diameters (ASME B36.10), the same series as the AISC
+# PIPE table already derived for structural. ESFR heads are included because industrial and warehouse
+# typologies cannot be sprinklered without them (PLAN.md §8d).
+
+- key: sprinkler_pendent
+  label: Sprinkler Head (Pendent)
+  ifc_class: IfcFireSuppressionTerminalType
+  predefined: SPRINKLER
+  category: Sprinkler
+  discipline: fire
+  pack: fire-sprinkler
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_70_55_97_84}
+  material: {name: Bronze / Glass Bulb, category: bronze}
+  ports: {system: PIPE, names: [In], flows: [SOURCE]}
+  psets:
+    MF_FireProtection: {ResponseType: Quick, Orientation: Pendent}
+  generator: sizes
+  generator_args:
+    kind: Circle
+    length: '3"'
+    name: '{nominal} K-factor Pendent'
+    entries:
+      - {nominal: 'K5.6', od: 2.0}
+      - {nominal: 'K8.0', od: 2.25}
+      - {nominal: 'K11.2', od: 2.5}
+
+- key: sprinkler_upright
+  label: Sprinkler Head (Upright)
+  ifc_class: IfcFireSuppressionTerminalType
+  predefined: SPRINKLER
+  category: Sprinkler
+  discipline: fire
+  pack: fire-sprinkler
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_70_55_97_84}
+  material: {name: Bronze / Glass Bulb, category: bronze}
+  ports: {system: PIPE, names: [In], flows: [SOURCE]}
+  psets:
+    MF_FireProtection: {Orientation: Upright}
+  generator: sizes
+  generator_args:
+    kind: Circle
+    length: '3"'
+    name: '{nominal} K-factor Upright'
+    entries:
+      - {nominal: 'K5.6', od: 2.0}
+      - {nominal: 'K8.0', od: 2.25}
+
+- key: sprinkler_sidewall
+  label: Sprinkler Head (Sidewall)
+  ifc_class: IfcFireSuppressionTerminalType
+  predefined: SPRINKLER
+  category: Sprinkler
+  discipline: fire
+  pack: fire-sprinkler
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_70_55_97_84}
+  material: {name: Bronze / Glass Bulb, category: bronze}
+  ports: {system: PIPE, names: [In], flows: [SOURCE]}
+  types:
+    - {name: K5.6 horizontal, dims: ['2"', '3"', '2"']}
+    - {name: K8.0 horizontal, dims: ['2 1/4"', '3"', '2 1/4"']}
+
+- key: sprinkler_concealed
+  label: Sprinkler Head (Concealed)
+  ifc_class: IfcFireSuppressionTerminalType
+  predefined: SPRINKLER
+  category: Sprinkler
+  discipline: fire
+  pack: fire-sprinkler
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_70_55_97_84}
+  material: {name: Bronze with Cover Plate, category: bronze}
+  ports: {system: PIPE, names: [In], flows: [SOURCE]}
+  generator: sizes
+  generator_args:
+    kind: Circle
+    length: '3 1/2"'
+    name: '{nominal} Concealed'
+    entries:
+      - {nominal: 'K5.6', od: 3.25}
+      - {nominal: 'K8.0', od: 3.25}
+
+- key: sprinkler_esfr
+  label: Sprinkler Head (ESFR)
+  ifc_class: IfcFireSuppressionTerminalType
+  predefined: SPRINKLER
+  category: Sprinkler
+  discipline: fire
+  pack: fire-sprinkler
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_70_55_97_84}
+  material: {name: Bronze / Glass Bulb, category: bronze}
+  ports: {system: PIPE, names: [In], flows: [SOURCE]}
+  psets:
+    MF_FireProtection: {Application: Early Suppression Fast Response, Occupancy: Storage}
+  generator: sizes
+  generator_args:
+    kind: Circle
+    length: '4"'
+    name: '{nominal} ESFR Pendent'
+    entries:
+      - {nominal: 'K14.0', od: 2.75}
+      - {nominal: 'K16.8', od: 3.0}
+      - {nominal: 'K22.4', od: 3.25}
+      - {nominal: 'K25.2', od: 3.5}
+
+- key: sprinkler_pipe
+  label: Sprinkler Pipe
+  ifc_class: IfcPipeSegmentType
+  predefined: RIGIDSEGMENT
+  category: Sprinkler Piping
+  discipline: fire
+  pack: fire-sprinkler
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_65_52_63}
+  material: {name: Black Steel Schedule 40, category: steel}
+  ports: {system: PIPE}
+  generator: sizes
+  generator_args:
+    kind: CircleHollow
+    length: "10'-0\""
+    name: '{nominal}" Sprinkler Pipe'
+    entries:
+      - {nominal: '1', od: 1.315, wall: 0.133}
+      - {nominal: '1-1/4', od: 1.660, wall: 0.140}
+      - {nominal: '1-1/2', od: 1.900, wall: 0.145}
+      - {nominal: '2', od: 2.375, wall: 0.154}
+      - {nominal: '2-1/2', od: 2.875, wall: 0.203}
+      - {nominal: '3', od: 3.500, wall: 0.216}
+      - {nominal: '4', od: 4.500, wall: 0.237}
+      - {nominal: '6', od: 6.625, wall: 0.280}
+      - {nominal: '8', od: 8.625, wall: 0.322}
+
+- key: standpipe
+  label: Standpipe
+  ifc_class: IfcPipeSegmentType
+  predefined: RIGIDSEGMENT
+  category: Standpipe
+  discipline: fire
+  pack: fire-sprinkler
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_65_52_63}
+  material: {name: Black Steel Schedule 40, category: steel}
+  ports: {system: PIPE}
+  generator: sizes
+  generator_args:
+    kind: CircleHollow
+    length: "12'-0\""
+    name: '{nominal}" Standpipe'
+    entries:
+      - {nominal: '4', od: 4.500, wall: 0.237}
+      - {nominal: '6', od: 6.625, wall: 0.280}
+      - {nominal: '8', od: 8.625, wall: 0.322}
+
+- key: fire_pump
+  label: Fire Pump
+  ifc_class: IfcPumpType
+  predefined: ENDSUCTION
+  category: Fire Pump
+  discipline: fire
+  pack: fire-equipment
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_65_54_30}
+  material: {name: Cast Iron Body, category: iron}
+  ports: {system: PIPE}
+  psets:
+    MF_FireProtection: {Listing: UL/FM}
+  types:
+    - {name: 500 GPM electric, dims: ["6'-0\"", "3'-0\"", "4'-0\""]}
+    - {name: 1000 GPM electric, dims: ["8'-0\"", "3'-6\"", "4'-6\""]}
+    - {name: 1500 GPM diesel, dims: ["10'-0\"", "4'-0\"", "5'-0\""]}
+
+- key: fdc
+  label: Fire Department Connection
+  ifc_class: IfcFireSuppressionTerminalType
+  predefined: BREECHINGINLET
+  category: Fire Equipment
+  discipline: fire
+  pack: fire-equipment
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_65_54_30}
+  material: {name: Polished Brass, category: bronze}
+  ports: {system: PIPE, names: [In], flows: [SINK]}
+  types:
+    - {name: 2-way flush, dims: ['12"', '6"', '10"']}
+    - {name: 2-way freestanding, dims: ['12"', '12"', "3'-0\""]}
+    - {name: 4-way freestanding, dims: ['18"', '18"', "3'-0\""]}
+
+- key: fire_extinguisher_cabinet
+  label: Fire Extinguisher Cabinet
+  ifc_class: IfcFireSuppressionTerminalType
+  category: Fire Equipment
+  discipline: fire
+  pack: fire-equipment
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_50_28}
+  material: {name: Painted Steel, category: steel}
+  types:
+    - {name: Semi-recessed 10 lb, dims: ['12"', '6"', '27"']}
+    - {name: Recessed 20 lb, dims: ['14"', '8"', '32"']}
+
+- key: fire_alarm_device
+  label: Fire Alarm Device
+  ifc_class: IfcAlarmType
+  predefined: SIREN
+  category: Fire Alarm
+  discipline: fire
+  pack: fire-alarm
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_75_80_30}
+  material: {name: Polycarbonate, category: plastic}
+  types:
+    - {name: Horn/strobe wall, dims: ['5"', '2 1/2"', '5"']}
+    - {name: Strobe only wall, dims: ['5"', '2 1/2"', '5"']}
+    - {name: Speaker/strobe ceiling, dims: ['7"', '7"', '2 1/2"']}
+    - {name: Manual pull station, dims: ['3 1/2"', '1 1/2"', '5"']}
+
+- key: fire_detector
+  label: Fire Detector
+  ifc_class: IfcSensorType
+  predefined: FIRESENSOR
+  category: Fire Alarm
+  discipline: fire
+  pack: fire-alarm
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_75_80_30}
+  material: {name: Polycarbonate, category: plastic}
+  generator: sizes
+  generator_args:
+    kind: Circle
+    length: '2"'
+    name: '{nominal}'
+    entries:
+      - {nominal: 'Smoke detector (photoelectric)', od: 6}
+      - {nominal: 'Heat detector', od: 5}
+      - {nominal: 'Duct smoke detector', od: 6}
+
+- key: fire_damper
+  label: Fire Damper
+  ifc_class: IfcDamperType
+  predefined: FIREDAMPER
+  category: Fire Damper
+  discipline: fire
+  pack: fire-equipment
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_65_65_24}
+  material: {name: Galvanized Steel, category: steel}
+  ports: {system: DUCT}
+  psets:
+    MF_FireProtection: {FireRating: 1.5 hr}
+  generator: sizes
+  generator_args:
+    kind: RectangleHollow
+    length: '8"'
+    wall: 0.052
+    name: '{w}" x {h}" Fire Damper'
+    sections: [[12,8],[16,10],[20,12],[24,16],[30,20],[36,24]]

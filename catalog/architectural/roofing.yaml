@@ -1,0 +1,167 @@
+# Roof accessories — drains, hatches, skylights, curbs, gutters, expansion joints.
+#
+# Roof assemblies themselves are in assemblies.yaml; these are the penetrations and accessories that
+# a roof plan cannot be drawn without.
+# Uniclass codes verified against the published Pr table.
+
+- key: roof_drain
+  label: Roof Drain
+  ifc_class: IfcWasteTerminalType
+  predefined: ROOFDRAIN
+  category: Roof Drainage
+  discipline: architectural
+  pack: architectural-roofing
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_65_52_24}         # Drainage gullies and channels
+  material: {name: Cast Iron with Cast Dome, category: iron}
+  ports: {system: PIPE, names: [Out], flows: [SOURCE]}
+  profile: {kind: Circle}
+  types:
+    - {name: 3" outlet, dims: ['12"', '12"', '8"'], profile: {params: {Radius: '6"'}}}
+    - {name: 4" outlet, dims: ['15"', '15"', '9"'], profile: {params: {Radius: '7.5"'}}}
+    - {name: 6" outlet, dims: ['18"', '18"', '10"'], profile: {params: {Radius: '9"'}}}
+
+- key: overflow_drain
+  label: Overflow Roof Drain
+  ifc_class: IfcWasteTerminalType
+  predefined: ROOFDRAIN
+  category: Roof Drainage
+  discipline: architectural
+  pack: architectural-roofing
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_65_52_24}         # Drainage gullies and channels
+  material: {name: Cast Iron with Standpipe, category: iron}
+  ports: {system: PIPE, names: [Out], flows: [SOURCE]}
+  profile: {kind: Circle}
+  types:
+    - {name: 4" outlet w/ 2" dam, dims: ['15"', '15"', '11"'], profile: {params: {Radius: '7.5"'}}}
+
+- key: downspout
+  label: Downspout
+  ifc_class: IfcPipeSegmentType
+  predefined: RIGIDSEGMENT
+  category: Roof Drainage
+  discipline: architectural
+  pack: architectural-roofing
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_65_52_03}         # Above-ground drainage pipes and fittings
+  material: {name: Prefinished Aluminium, category: aluminium}
+  ports: {system: PIPE}
+  profile: {kind: RectangleHollow}
+  types:
+    - {name: 3" x 4" rectangular, dims: ['3"', '4"', "10'-0\""],
+       profile: {params: {XDim: '3"', YDim: '4"', WallThickness: '0.032"'}}}
+    - {name: 4" x 5" rectangular, dims: ['4"', '5"', "10'-0\""],
+       profile: {params: {XDim: '4"', YDim: '5"', WallThickness: '0.032"'}}}
+
+- key: roof_hatch
+  label: Roof Hatch
+  ifc_class: IfcDoorType
+  predefined: TRAPDOOR
+  category: Roof Accessories
+  discipline: architectural
+  pack: architectural-roofing
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_30_59_36_74}      # Roof hatches
+  material: {name: Galvanized Steel with Insulated Cover, category: steel}
+  psets:
+    Pset_DoorCommon: {IsExternal: true}
+  types:
+    - {name: 30" x 36" single leaf, dims: ['30"', "3'-0\"", '12"']}
+    - {name: 36" x 30" single leaf, dims: ["3'-0\"", '30"', '12"']}
+    - {name: 48" x 48" equipment, dims: ["4'-0\"", "4'-0\"", '12"']}
+    - {name: 96" x 48" ladder access, dims: ["8'-0\"", "4'-0\"", '12"']}
+
+- key: skylight
+  label: Skylight
+  ifc_class: IfcWindowType
+  predefined: SKYLIGHT
+  category: Roof Accessories
+  discipline: architectural
+  pack: architectural-roofing
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_30_59_72}         # Rooflights
+  material: {name: Aluminium Frame with Polycarbonate, category: aluminium}
+  psets:
+    Pset_WindowCommon: {IsExternal: true, ThermalTransmittance: 2.6}
+  types:
+    - {name: 2'-0" x 4'-0" fixed, dims: ["2'-0\"", "4'-0\"", '10"']}
+    - {name: 4'-0" x 4'-0" fixed, dims: ["4'-0\"", "4'-0\"", '12"']}
+    - {name: 4'-0" x 8'-0" ridge, dims: ["4'-0\"", "8'-0\"", '18"']}
+    - {name: 8'-0" x 8'-0" pyramid, dims: ["8'-0\"", "8'-0\"", "3'-0\""]}
+
+- key: roof_curb
+  label: Equipment Roof Curb
+  ifc_class: IfcBuildingElementProxyType
+  predefined: USERDEFINED
+  category: Roof Accessories
+  discipline: architectural
+  pack: architectural-roofing
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_20_85}            # Support and restraint products
+  material: {name: Galvanized Steel with Wood Nailer, category: steel}
+  psets:
+    MF_Specialty: {Application: Rooftop equipment support}
+  types:                                           # sized to the RTU footprints in plant.yaml
+    - {name: 7'-0" x 4'-0" x 14", dims: ["7'-0\"", "4'-0\"", '14"']}
+    - {name: 9'-0" x 5'-0" x 14", dims: ["9'-0\"", "5'-0\"", '14"']}
+    - {name: 14'-0" x 7'-0" x 18", dims: ["14'-0\"", "7'-0\"", '18"']}
+
+- key: roof_expansion_joint
+  label: Roof Expansion Joint
+  ifc_class: IfcCoveringType
+  predefined: MEMBRANE
+  category: Roof Accessories
+  discipline: architectural
+  pack: architectural-roofing
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_35_90_27}         # Expansion joints
+  material: {name: EPDM Bellows with Metal Flanges, category: rubber}
+  types:
+    - {name: 4" joint, dims: ["10'-0\"", '12"', '8"']}
+    - {name: 8" joint, dims: ["10'-0\"", '18"', '10"']}
+
+- key: roof_screen
+  label: Rooftop Equipment Screen
+  ifc_class: IfcShadingDeviceType
+  predefined: USERDEFINED
+  category: Roof Accessories
+  discipline: architectural
+  pack: architectural-roofing
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_20_85}            # Support and restraint products
+  material: {name: Prefinished Aluminium Louvre, category: aluminium}
+  types:
+    - {name: 6'-0" high panel, dims: ["8'-0\"", '6"', "6'-0\""]}
+    - {name: 8'-0" high panel, dims: ["8'-0\"", '6"', "8'-0\""]}
+
+- key: gutter
+  label: Gutter
+  ifc_class: IfcPipeSegmentType
+  predefined: RIGIDSEGMENT
+  category: Roof Drainage
+  discipline: architectural
+  pack: architectural-roofing
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_65_52_03}         # Above-ground drainage pipes and fittings
+  material: {name: Prefinished Aluminium, category: aluminium}
+  ports: {system: PIPE}
+  profile: {kind: UShape}
+  types:                                           # real U-section, open on top
+    - name: 5" K-style
+      dims: ['5"', '5"', "10'-0\""]
+      profile: {params: {Depth: '5"', FlangeWidth: '5"', WebThickness: '0.032"',
+                         FlangeThickness: '0.032"'}}
+    - name: 6" K-style
+      dims: ['6"', '6"', "10'-0\""]
+      profile: {params: {Depth: '6"', FlangeWidth: '6"', WebThickness: '0.032"',
+                         FlangeThickness: '0.032"'}}

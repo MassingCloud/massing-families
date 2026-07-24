@@ -1,0 +1,53 @@
+# Landscape and site planting — US imperial nominal sizes (nursery caliper/height conventions).
+# Uniclass codes verified against the published Pr table.
+#
+# Note: IFC4's IfcGeographicElementTypeEnum has no VEGETATION member (it arrives in IFC4.3), so no
+# PredefinedType is set here. massing's own catalog asks for VEGETATION and silently swallows the
+# rejection in `_set_predefined`; our spec validator would have failed the build instead.
+
+- key: tree
+  label: Tree
+  massing_key: tree
+  ifc_class: IfcGeographicElementType
+  category: Planting
+  discipline: site
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_45_30_90}         # Trees
+  material: {name: Vegetation, category: organic}
+  profile: {kind: Circle}
+  psets:
+    MF_Planting: {Deciduous: true}
+  types:                                           # canopy radius x overall height
+    - {name: Small 12' (2" cal.), dims: ["8'-0\"", "8'-0\"", "12'-0\""], profile: {params: {Radius: "4'-0\""}}}
+    - {name: Medium 20' (3" cal.), dims: ["14'-0\"", "14'-0\"", "20'-0\""], profile: {params: {Radius: "7'-0\""}}}
+    - {name: Large 35' (5" cal.), dims: ["25'-0\"", "25'-0\"", "35'-0\""], profile: {params: {Radius: "12'-6\""}}}
+
+- key: shrub
+  label: Shrub
+  massing_key: shrub
+  ifc_class: IfcGeographicElementType
+  category: Planting
+  discipline: site
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_45_30_80}         # Shrubs and woody climbers
+  material: {name: Vegetation, category: organic}
+  profile: {kind: Circle}
+  types:
+    - {name: 24" spread, dims: ['24"', '24"', '30"'], profile: {params: {Radius: '12"'}}}
+    - {name: 48" spread, dims: ["4'-0\"", "4'-0\"", "5'-0\""], profile: {params: {Radius: "2'-0\""}}}
+
+- key: planter
+  label: Planter
+  massing_key: planter
+  ifc_class: IfcFurnitureType
+  category: Site Furnishing
+  discipline: site
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_45_63_63}         # Plant containers
+  material: {name: Precast Concrete, category: concrete}
+  types:
+    - {name: Square 24", dims: ['24"', '24"', '24"']}
+    - {name: Square 36", dims: ["3'-0\"", "3'-0\"", '30"']}

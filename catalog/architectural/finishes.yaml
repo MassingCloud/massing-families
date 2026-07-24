@@ -1,0 +1,207 @@
+# Interior finishes — floor, wall and specialty coverings.
+# Uniclass Pr codes verified against the published Pr table.
+
+- key: flooring_carpet_tile
+  label: Carpet Tile
+  ifc_class: IfcCoveringType
+  predefined: FLOORING
+  category: Floor Finishes
+  discipline: architectural
+  pack: architectural-finishes
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_35_93}            # Unit covering and finish products
+  material:
+    name: Nylon Carpet Tile
+    layers:
+      - {material: Nylon Carpet Tile, thickness: '3/8"', category: textile}
+  types:
+    - {name: 24" x 24", dims: ["2'-0\"", "2'-0\"", '3/8"']}
+    - {name: 18" x 36", dims: ["3'-0\"", '18"', '3/8"']}
+
+- key: flooring_lvt
+  label: Luxury Vinyl Tile
+  ifc_class: IfcCoveringType
+  predefined: FLOORING
+  category: Floor Finishes
+  discipline: architectural
+  pack: architectural-finishes
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_35_93}            # Unit covering and finish products
+  material:
+    name: Luxury Vinyl Tile
+    layers:
+      - {material: LVT Plank, thickness: '3/16"', category: plastic}
+  types:
+    - {name: 6" x 48" plank, dims: ["4'-0\"", '6"', '3/16"']}
+    - {name: 12" x 24" tile, dims: ["2'-0\"", '12"', '3/16"']}
+
+- key: flooring_sheet_vinyl
+  label: Sheet Vinyl Flooring
+  ifc_class: IfcCoveringType
+  predefined: FLOORING
+  category: Floor Finishes
+  discipline: architectural
+  pack: architectural-finishes
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_35_57}            # Non-rigid sheet products
+  material:
+    name: Homogeneous Sheet Vinyl
+    layers:
+      - {material: Sheet Vinyl, thickness: '1/8"', category: plastic}
+  types:
+    - {name: 6'-0" roll goods, dims: ["6'-0\"", "6'-0\"", '1/8"']}
+    - {name: Sheet vinyl w/ integral base, dims: ["6'-0\"", "6'-0\"", '1/8"']}
+
+- key: flooring_porcelain_tile
+  label: Porcelain Tile
+  ifc_class: IfcCoveringType
+  predefined: FLOORING
+  category: Floor Finishes
+  discipline: architectural
+  pack: architectural-finishes
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_35_93}            # Unit covering and finish products
+  material:
+    name: Porcelain Tile on Thinset
+    layers:
+      - {material: Porcelain Tile, thickness: '3/8"', category: ceramic}
+      - {material: Thinset Mortar, thickness: '1/4"', category: mortar}
+  types:
+    - {name: 12" x 24", dims: ["2'-0\"", '12"', '5/8"']}
+    - {name: 24" x 24", dims: ["2'-0\"", "2'-0\"", '5/8"']}
+
+- key: flooring_epoxy
+  label: Epoxy Floor Coating
+  ifc_class: IfcCoveringType
+  predefined: FLOORING
+  category: Floor Finishes
+  discipline: architectural
+  pack: architectural-finishes
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_35_31}            # Formless covering and finish products
+  psets:
+    MF_Finish: {Application: Industrial / laboratory / kitchen}
+  material:
+    name: Epoxy Resin Coating
+    layers:
+      - {material: Epoxy Resin, thickness: '1/8"', category: resin}
+  types:
+    - {name: Broadcast quartz 1/8", dims: ["10'-0\"", "10'-0\"", '1/8"']}
+    - {name: Self-levelling 1/4", dims: ["10'-0\"", "10'-0\"", '1/4"']}
+
+- key: flooring_raised_access
+  label: Raised Access Floor
+  ifc_class: IfcCoveringType
+  predefined: FLOORING
+  category: Floor Finishes
+  discipline: architectural
+  pack: architectural-finishes
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_35_93}            # Unit covering and finish products
+  material:
+    name: Steel Access Floor Panel
+    layers:
+      - {material: Cement-filled Steel Panel, thickness: '1 1/4"', category: steel}
+  types:                                           # 24" panel on adjustable pedestals
+    - {name: 24" panel / 6" plenum, dims: ["2'-0\"", "2'-0\"", '6"']}
+    - {name: 24" panel / 12" plenum, dims: ["2'-0\"", "2'-0\"", '12"']}
+    - {name: 24" panel / 18" plenum, dims: ["2'-0\"", "2'-0\"", '18"']}
+
+- key: wall_finish_paint
+  label: Paint Finish
+  ifc_class: IfcCoveringType
+  predefined: CLADDING
+  category: Wall Finishes
+  discipline: architectural
+  pack: architectural-finishes
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_35_31}            # Formless covering and finish products
+  material:
+    name: Latex Paint System
+    layers:
+      - {material: Latex Paint, thickness: '1/32"', category: coating}
+  types:
+    - {name: Primer + 2 coats eggshell, dims: ["10'-0\"", "10'-0\"", '1/32"']}
+    - {name: Epoxy 2 coats (wet area), dims: ["10'-0\"", "10'-0\"", '1/32"']}
+
+- key: wall_finish_tile
+  label: Ceramic Wall Tile
+  ifc_class: IfcCoveringType
+  predefined: CLADDING
+  category: Wall Finishes
+  discipline: architectural
+  pack: architectural-finishes
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_35_93}            # Unit covering and finish products
+  material:
+    name: Ceramic Wall Tile
+    layers:
+      - {material: Ceramic Tile, thickness: '5/16"', category: ceramic}
+      - {material: Thinset Mortar, thickness: '1/4"', category: mortar}
+  types:
+    - {name: 4" x 4", dims: ['4"', '4"', '9/16"']}
+    - {name: 3" x 6" subway, dims: ['6"', '3"', '9/16"']}
+    - {name: 12" x 24", dims: ["2'-0\"", '12"', '9/16"']}
+
+- key: wall_finish_frp
+  label: FRP Wall Panel
+  ifc_class: IfcCoveringType
+  predefined: CLADDING
+  category: Wall Finishes
+  discipline: architectural
+  pack: architectural-finishes
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_35_57}            # Non-rigid sheet products
+  psets:
+    MF_Finish: {Application: Commercial kitchen / clinical}
+  material:
+    name: Fibreglass Reinforced Panel
+    layers:
+      - {material: FRP Panel, thickness: '3/32"', category: composite}
+  types:
+    - {name: 4' x 8' panel, dims: ["4'-0\"", "8'-0\"", '3/32"']}
+
+- key: wall_finish_acoustic
+  label: Acoustic Wall Panel
+  ifc_class: IfcCoveringType
+  predefined: CLADDING
+  category: Wall Finishes
+  discipline: architectural
+  pack: architectural-finishes
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_35_93}            # Unit covering and finish products
+  material:
+    name: Fabric-Wrapped Acoustic Panel
+    layers:
+      - {material: Fibreglass Core with Fabric, thickness: '1"', category: mineral}
+  types:
+    - {name: 2' x 4' x 1", dims: ["4'-0\"", "2'-0\"", '1"']}
+    - {name: 4' x 8' x 2", dims: ["8'-0\"", "4'-0\"", '2"']}
+
+- key: base_rubber
+  label: Rubber Base
+  ifc_class: IfcCoveringType
+  predefined: SKIRTINGBOARD
+  category: Trim
+  discipline: architectural
+  pack: architectural-finishes
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_35_90}            # Trim products
+  material:
+    name: Rubber Wall Base
+    layers:
+      - {material: Rubber, thickness: '1/8"', category: rubber}
+  types:
+    - {name: 4" coved, dims: ["4'-0\"", '1/8"', '4"']}
+    - {name: 6" coved, dims: ["4'-0\"", '1/8"', '6"']}

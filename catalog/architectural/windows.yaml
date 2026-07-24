@@ -1,0 +1,59 @@
+# Windows — US imperial nominal sizes.
+# Classification verified against uniclass.thenbs.com: Pr_30_59_98 = Window units.
+# OmniClass Table 23 Products, door/window product branch.
+
+- key: window_fixed
+  label: Fixed Window
+  massing_key: fixed_window
+  ifc_class: IfcWindowType
+  predefined: WINDOW
+  category: Windows
+  discipline: architectural
+  builder: box
+  tier: L200
+  classification:
+    uniclass: Pr_30_59_98           # Window units
+  material:
+    name: Aluminium Frame / IGU
+    category: aluminium
+  psets:
+    Pset_WindowCommon:
+      IsExternal: true
+      ThermalTransmittance: 1.6
+      Reference: Fixed sash
+  types:
+    - name: 2'-0" x 3'-0"
+      dims: ["2'-0\"", '3"', "3'-0\""]
+    - name: 3'-0" x 4'-0"
+      dims: ["3'-0\"", '3"', "4'-0\""]
+    - name: 4'-0" x 5'-0"
+      dims: ["4'-0\"", '3"', "5'-0\""]
+    - name: 6'-0" x 5'-0"
+      dims: ["6'-0\"", '3"', "5'-0\""]
+
+- key: window_double_hung
+  label: Double Hung Window
+  massing_key: sliding_window
+  ifc_class: IfcWindowType
+  predefined: WINDOW
+  category: Windows
+  discipline: architectural
+  builder: box
+  tier: L200
+  classification:
+    uniclass: Pr_30_59_98           # Window units
+  material:
+    name: Vinyl Frame / IGU
+    category: plastic
+  psets:
+    Pset_WindowCommon:
+      IsExternal: true
+      ThermalTransmittance: 1.8
+      Reference: Double hung
+  types:
+    - name: 2'-8" x 4'-6"
+      dims: ["2'-8\"", '3"', "4'-6\""]
+    - name: 3'-0" x 5'-0"
+      dims: ["3'-0\"", '3"', "5'-0\""]
+    - name: 3'-4" x 5'-6"
+      dims: ["3'-4\"", '3"', "5'-6\""]

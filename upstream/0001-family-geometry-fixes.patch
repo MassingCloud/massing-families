@@ -1,0 +1,173 @@
+--- a/services/data/src/aec_data/families.py
++++ b/services/data/src/aec_data/families.py
+@@ -144,10 +144,43 @@
+         pass
+ 
+ 
+-def _variant_name(label: str, dims) -> str:
++def _variant_name(label: str, dims, model=None) -> str:
+     """A Revit-style type name: the base label, plus the size for a parametric variant so distinct
+-    sizes are distinct types (e.g. "Desk 1.8×0.8×0.75 m")."""
++    sizes are distinct types.
++
++    Naming follows the *model's* unit system, because the type name is what appears in schedules and
++    the picker. In an imperial project a 3'-0" x 7'-0" door should read as such, not as
++    "0.9144×0.0508×2.1336 m". Geometry is unaffected — only the label.
++    """
+     w, d, h = (float(x) for x in dims)
++    if model is not None:
++        try:
++            import ifcopenshell.util.unit as uunit
++            if not uunit.is_scalable(uunit.get_project_unit(model, "LENGTHUNIT")):
++                pass
++            unit = uunit.get_project_unit(model, "LENGTHUNIT")
++            name = (getattr(unit, "Name", "") or "").upper()
++            prefix = (getattr(unit, "Prefix", "") or "").upper()
++            if name == "INCH" or (name == "FOOT"):         # imperial project
++                def ft_in(m):
++                    total = round(m / 0.0254 * 16) / 16
++                    feet, rem = divmod(total, 12)
++                    whole = int(rem)
++                    frac = rem - whole
++                    out = f"{int(feet)}'-{whole}"
++                    if frac:
++                        num = int(round(frac * 16))
++                        den = 16
++                        while num % 2 == 0 and den > 1:
++                            num //= 2
++                            den //= 2
++                        out += f" {num}/{den}"
++                    return out + '"'
++                return f"{label} {ft_in(w)} x {ft_in(d)} x {ft_in(h)}"
++            if prefix == "MILLI":
++                return f"{label} {w * 1000:g}×{d * 1000:g}×{h * 1000:g} mm"
++        except Exception:                                  # noqa: BLE001 — fall back to metres
++            pass
+     return f"{label} {w:g}×{d:g}×{h:g} m"
+ 
+ 
+@@ -162,7 +195,7 @@
+     use_dims = [float(x) for x in dims] if dims else [float(x) for x in spec["dims"]]
+     if len(use_dims) != 3 or any(v <= 0 for v in use_dims):
+         raise ValueError(f"dims must be three positive [w, d, h] metres, got {dims!r}")
+-    name = spec["label"] if not dims else _variant_name(spec["label"], use_dims)
++    name = spec["label"] if not dims else _variant_name(spec["label"], use_dims, model)
+ 
+     existing = next((t for t in model.by_type(spec["ifc_class"])
+                      if (getattr(t, "Name", None) or "") == name), None)
+@@ -207,29 +240,86 @@
+     ifcopenshell.api.run("geometry.assign_representation", model, product=typ, representation=rep)
+ 
+ 
+-def _rep_solid(typ):
+-    """The rectangular IfcExtrudedAreaSolid inside a type's mapped body representation (or None).
++def _clear_representation_maps(model: ifcopenshell.file, typ) -> None:
++    """Drop a type's existing RepresentationMaps so a new representation replaces rather than adds.
++
++    `geometry.assign_representation` appends. Without this, resizing a type that carries non-box
++    geometry leaves the original solid in place and draws the new box through it.
++    """
++    for rm in list(getattr(typ, "RepresentationMaps", None) or []):
++        try:
++            model.remove(rm)
++        except Exception:                                  # noqa: BLE001 — already detached
++            pass
++    if hasattr(typ, "RepresentationMaps"):
++        typ.RepresentationMaps = None
++
++
++def _rep_solid(typ, box_only: bool = True):
++    """The IfcExtrudedAreaSolid inside a type's mapped body representation (or None).
++
+     Mutating THIS in place changes every occurrence at once — occurrences share the RepresentationMap
+-    via IfcMappedItem, which is exactly how parametric type edits propagate GUID-stably."""
++    via IfcMappedItem, which is exactly how parametric type edits propagate GUID-stably.
++
++    `box_only` (default) restricts the match to our editable rectangle-profile box, because that is the
++    only solid `edit_type_params` knows how to resize in place. Pass ``box_only=False`` to find any
++    extruded solid — used by `_type_dims`, which can *read* bounding dimensions from richer profiles
++    (I-shapes, hollow sections) even though it cannot resize them.
++    """
+     for rm in (getattr(typ, "RepresentationMaps", None) or []):
+         rep = getattr(rm, "MappedRepresentation", None)
+         for it in (getattr(rep, "Items", None) or []):
+-            if it.is_a("IfcExtrudedAreaSolid") and it.SweptArea and \
+-                    it.SweptArea.is_a("IfcRectangleProfileDef"):
++            if not it.is_a("IfcExtrudedAreaSolid") or not it.SweptArea:
++                continue
++            if it.SweptArea.is_a("IfcRectangleProfileDef") or not box_only:
+                 return it
+     return None
++
++
++# Bounding width/depth for the parameterized profiles a type may legitimately carry. Without this,
++# imported manufacturer / library content (real steel sections, pipe, channels) reports dims: null.
++_PROFILE_BOUNDS = {
++    "IfcRectangleProfileDef": lambda p: (p.XDim, p.YDim),
++    "IfcRectangleHollowProfileDef": lambda p: (p.XDim, p.YDim),
++    "IfcRoundedRectangleProfileDef": lambda p: (p.XDim, p.YDim),
++    "IfcIShapeProfileDef": lambda p: (p.OverallWidth, p.OverallDepth),
++    "IfcAsymmetricIShapeProfileDef": lambda p: (p.BottomFlangeWidth, p.OverallDepth),
++    "IfcTShapeProfileDef": lambda p: (p.FlangeWidth, p.Depth),
++    "IfcUShapeProfileDef": lambda p: (p.FlangeWidth, p.Depth),
++    "IfcCShapeProfileDef": lambda p: (p.Width, p.Depth),
++    "IfcZShapeProfileDef": lambda p: (p.FlangeWidth, p.Depth),
++    "IfcLShapeProfileDef": lambda p: (p.Width or p.Depth, p.Depth),
++    "IfcCircleProfileDef": lambda p: (p.Radius * 2, p.Radius * 2),
++    "IfcCircleHollowProfileDef": lambda p: (p.Radius * 2, p.Radius * 2),
++    "IfcEllipseProfileDef": lambda p: (p.SemiAxis1 * 2, p.SemiAxis2 * 2),
++}
++
++
++def _profile_bounds(profile):
++    """(width, depth) in file units for any profile we understand, else None."""
++    fn = _PROFILE_BOUNDS.get(profile.is_a())
++    if fn is None:
++        return None
++    try:
++        w, d = fn(profile)
++        return (float(w), float(d)) if w and d else None
++    except Exception:                                      # noqa: BLE001 — incomplete profile
++        return None
+ 
+ 
+ def _type_dims(typ):
+     """Read back a box type's [w, d, h] in metres from its extruded-solid rep, or None."""
+     import ifcopenshell.util.unit as uunit
+ 
+-    solid = _rep_solid(typ)
++    solid = _rep_solid(typ, box_only=False)                # read dims from ANY extruded profile
+     if solid is None:
+         return None
++    bounds = _profile_bounds(solid.SweptArea)
++    if bounds is None:
++        return None
+     scale = uunit.calculate_unit_scale(typ.file)           # metres per file unit, from the owning file
+-    return [round(float(solid.SweptArea.XDim) * scale, 4),
+-            round(float(solid.SweptArea.YDim) * scale, 4),
++    return [round(bounds[0] * scale, 4),
++            round(bounds[1] * scale, 4),
+             round(float(solid.Depth) * scale, 4)]
+ 
+ 
+@@ -301,14 +391,18 @@
+         d = [float(x) for x in dims]
+         if len(d) != 3 or any(v <= 0 for v in d):
+             raise ValueError(f"dims must be three positive [w, d, h] metres, got {dims!r}")
+-        solid = _rep_solid(typ)
++        solid = _rep_solid(typ)                            # editable box only
+         scale = uunit.calculate_unit_scale(model)
+         if solid is not None:                              # mutate in place → propagates to occurrences
+             w, dd, h = d
+             solid.SweptArea.XDim = w / scale
+             solid.SweptArea.YDim = dd / scale
+             solid.Depth = h / scale
+-        else:                                              # no box solid yet — build one
++        else:
++            # No editable box. The type may already carry richer geometry (a real steel section, a
++            # swept disk, a boolean result) — assigning a box *alongside* it would render both solids
++            # on top of each other, so drop the existing maps first and replace.
++            _clear_representation_maps(model, typ)
+             _assign_box_representation(model, typ, d)
+         changed["dims"] = d
+         changed["occurrences_updated"] = _occurrence_count(typ)

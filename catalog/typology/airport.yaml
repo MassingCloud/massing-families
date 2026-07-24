@@ -1,0 +1,104 @@
+# Airport terminal — check-in, security, gate, FIDS and terminal seating.
+# Jet bridges, baggage conveyors, carousels and moving walks live in catalog/conveying/conveying.yaml.
+# Uniclass codes verified against the published Pr/Ss tables.
+
+- key: checkin_counter
+  label: Check-In Counter
+  ifc_class: IfcFurnitureType
+  category: Terminal
+  discipline: airport
+  pack: typology-airport
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_50_21}         # Desks and tables
+  material: {name: Solid Surface on Steel Frame, category: composite}
+  psets:
+    MF_Airport: {Zone: Landside departures}
+  types:
+    - {name: Single position 6'-0", dims: ["6'-0\"", "4'-0\"", '42"']}
+    - {name: Island 4-position, dims: ["24'-0\"", "8'-0\"", '42"']}
+    - {name: Self-service kiosk, dims: ['24"', '24"', "4'-6\""]}
+
+- key: gate_counter
+  label: Gate Podium
+  ifc_class: IfcFurnitureType
+  category: Terminal
+  discipline: airport
+  pack: typology-airport
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_50_21}         # Desks and tables
+  material: {name: Solid Surface on Steel Frame, category: composite}
+  psets:
+    MF_Airport: {Zone: Airside gate hold}
+  types:
+    - {name: Single podium, dims: ["6'-0\"", "3'-0\"", '42"']}
+    - {name: Dual podium, dims: ["10'-0\"", "3'-0\"", '42"']}
+
+- key: security_screening
+  label: Security Screening Equipment
+  ifc_class: IfcBuildingElementProxyType
+  predefined: USERDEFINED
+  category: Security
+  discipline: airport
+  pack: typology-airport
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_75_80_30}         # Fire detection and alarm devices and control equipment
+  material: {name: Manufacturer Enclosure, category: composite}
+  psets:
+    MF_Airport: {Zone: Security checkpoint, GeometryStatus: proxy}
+  types:                                           # planning envelopes; see MF_Library GeometryStatus
+    - {name: Walk-through metal detector, dims: ["3'-0\"", "2'-0\"", "7'-6\""]}
+    - {name: Advanced imaging (AIT), dims: ["6'-0\"", "6'-0\"", "8'-0\""]}
+    - {name: X-ray baggage scanner, dims: ["10'-0\"", "3'-0\"", "5'-0\""]}
+    - {name: Divest table 10'-0", dims: ["10'-0\"", "2'-6\"", '34"']}
+
+- key: terminal_seating
+  label: Terminal Seating
+  ifc_class: IfcSystemFurnitureElementType
+  category: Terminal
+  discipline: airport
+  pack: typology-airport
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_50_12}         # Chairs
+  material: {name: Upholstered Beam Seating, category: composite}
+  psets:
+    MF_Airport: {Zone: Gate hold room}
+  types:
+    - {name: 3-seat beam, dims: ["6'-0\"", '30"', '32"']}
+    - {name: 4-seat beam, dims: ["8'-0\"", '30"', '32"']}
+    - {name: 4-seat beam with power, dims: ["8'-0\"", '30"', '32"']}
+
+- key: fids_display
+  label: FIDS Display
+  ifc_class: IfcAudioVisualApplianceType
+  predefined: DISPLAY
+  category: Terminal
+  discipline: airport
+  pack: typology-airport
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_40}               # Signage systems
+  material: {name: LCD Panel in Enclosure, category: composite}
+  psets:
+    MF_Airport: {Purpose: Flight information display}
+  types:
+    - {name: 55" single, dims: ["4'-1\"", '4"', "2'-4\""]}
+    - {name: 2 x 2 video wall, dims: ["8'-2\"", '6"', "4'-8\""]}
+
+- key: queue_barrier
+  label: Queue Barrier
+  ifc_class: IfcBuildingElementProxyType
+  predefined: USERDEFINED
+  category: Terminal
+  discipline: airport
+  pack: typology-airport
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_15_95_25}         # Temporary wall and barrier works systems
+  material: {name: Stainless Steel with Retractable Belt, category: steel}
+  types:
+    - {name: Retractable post, dims: ['14"', '14"', '38"']}
+    - {name: Fixed rail 6'-0", dims: ["6'-0\"", '2"', '38"']}

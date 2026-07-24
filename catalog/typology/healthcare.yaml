@@ -1,0 +1,222 @@
+# Hospital / healthcare — the content no other typology needs (PLAN.md §8d).
+# Uniclass codes verified against the published Pr/Ss tables.
+
+- key: headwall
+  label: Patient Headwall
+  ifc_class: IfcMedicalDeviceType
+  category: Patient Care
+  discipline: healthcare
+  pack: typology-healthcare
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_50_06_38}      # Hospital bedheads
+  material: {name: Solid Surface with Aluminium Raceway, category: composite}
+  ports: {system: PIPE, names: [Oxygen, Vacuum, MedicalAir], flows: [SINK, SOURCE, SINK]}
+  psets:
+    MF_Healthcare: {Services: Oxygen / vacuum / medical air / power / nurse call}
+  types:
+    - {name: Single patient 60", dims: ["5'-0\"", '8"', "4'-0\""]}
+    - {name: ICU 84", dims: ["7'-0\"", '10"', "5'-0\""]}
+
+- key: medical_gas_outlet
+  label: Medical Gas Outlet
+  ifc_class: IfcMedicalDeviceType
+  category: Medical Gas
+  discipline: healthcare
+  pack: typology-healthcare
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_55_20_51}         # Medical gas and vacuum systems
+  material: {name: Brass with Chrome Finish, category: bronze}
+  ports: {system: PIPE, names: [In], flows: [SINK]}
+  psets:
+    MF_Healthcare: {Standard: NFPA 99}
+  types:
+    - {name: Oxygen, dims: ['3"', '3"', '5"']}
+    - {name: Medical vacuum, dims: ['3"', '3"', '5"']}
+    - {name: Medical air, dims: ['3"', '3"', '5"']}
+    - {name: Nitrous oxide, dims: ['3"', '3"', '5"']}
+
+- key: hospital_bed
+  label: Hospital Bed
+  ifc_class: IfcMedicalDeviceType
+  category: Patient Care
+  discipline: healthcare
+  pack: typology-healthcare
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_50_06_39}      # Hospital beds
+  material: {name: Steel Frame with Mattress, category: steel}
+  types:
+    - {name: Medical/surgical, dims: ["3'-0\"", "7'-0\"", "3'-0\""]}
+    - {name: ICU/critical care, dims: ["3'-6\"", "7'-6\"", "3'-0\""]}
+    - {name: Bariatric, dims: ["4'-0\"", "8'-0\"", "3'-0\""]}
+
+- key: exam_table
+  label: Exam Table
+  ifc_class: IfcMedicalDeviceType
+  category: Patient Care
+  discipline: healthcare
+  pack: typology-healthcare
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_50_51}         # Medical chairs and couches
+  material: {name: Upholstered Steel Frame, category: composite}
+  types:
+    - {name: Standard exam, dims: ["2'-3\"", "6'-0\"", '32"']}
+    - {name: Power exam ADA, dims: ["2'-6\"", "6'-6\"", '32"']}
+
+- key: operating_table
+  label: Operating Table
+  ifc_class: IfcMedicalDeviceType
+  category: Surgery
+  discipline: healthcare
+  pack: typology-healthcare
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_50_51}         # Medical chairs and couches
+  material: {name: Stainless Steel, category: steel}
+  types:
+    - {name: General surgery, dims: ["2'-0\"", "7'-0\"", '40"']}
+    - {name: Imaging-compatible, dims: ["2'-0\"", "8'-0\"", '40"']}
+
+- key: surgical_light
+  label: Surgical Light
+  ifc_class: IfcMedicalDeviceType
+  category: Surgery
+  discipline: healthcare
+  pack: typology-healthcare
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_40_50_51}         # Medical chairs and couches
+  material: {name: Aluminium Housing, category: aluminium}
+  profile: {kind: Circle}
+  types:
+    - {name: Single dome 28", dims: ['28"', '28"', '10"'], profile: {params: {Radius: '14"'}}}
+    - {name: Dual dome 32", dims: ['32"', '32"', '12"'], profile: {params: {Radius: '16"'}}}
+
+- key: imaging_equipment
+  label: Imaging Equipment
+  ifc_class: IfcMedicalDeviceType
+  category: Imaging
+  discipline: healthcare
+  pack: typology-healthcare
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_50_51}         # Medical chairs and couches
+  material: {name: Manufacturer Enclosure, category: composite}
+  psets:
+    MF_Healthcare: {ShieldingRequired: true, GeometryStatus: proxy}
+  types:                                           # envelopes for planning; see MF_Library note
+    - {name: MRI 1.5T, dims: ["8'-0\"", "10'-0\"", "7'-0\""]}
+    - {name: MRI 3.0T, dims: ["8'-6\"", "11'-0\"", "7'-6\""]}
+    - {name: CT scanner, dims: ["7'-0\"", "9'-0\"", "6'-6\""]}
+    - {name: X-ray room, dims: ["6'-0\"", "8'-0\"", "7'-0\""]}
+
+- key: partition_lead_lined
+  label: Lead-Lined Partition
+  ifc_class: IfcWallType
+  predefined: PARTITIONING
+  category: Walls
+  discipline: healthcare
+  pack: typology-healthcare
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_25_71_35_99}      # X-ray-resistant gypsum plasterboards
+  psets:
+    Pset_WallCommon: {IsExternal: false, LoadBearing: false}
+    MF_Healthcare: {LeadEquivalent: 1/16 in}
+  material:
+    name: Lead-Lined Partition
+    layers:
+      - {material: Lead-Lined Gypsum Board, thickness: '5/8"', category: gypsum}
+      - {material: Steel Stud Cavity, thickness: '3 5/8"', category: steel}
+      - {material: Lead-Lined Gypsum Board, thickness: '5/8"', category: gypsum}
+  types:
+    - {name: 1/16" lead 4 7/8", dims: ["8'-0\"", '4 7/8"', "10'-0\""]}
+    - {name: 1/8" lead 4 7/8", dims: ["8'-0\"", '4 7/8"', "10'-0\""]}
+
+- key: door_lead_lined
+  label: Lead-Lined Door
+  ifc_class: IfcDoorType
+  predefined: DOOR
+  category: Doors
+  discipline: healthcare
+  pack: typology-healthcare
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_30_59_24}         # Doorsets
+  material: {name: Lead-Lined Core with HM Frame, category: composite}
+  psets:
+    Pset_DoorCommon: {IsExternal: false}
+    MF_Healthcare: {LeadEquivalent: 1/16 in}
+  types:
+    - {name: 3'-6" x 7'-0", dims: ["3'-6\"", '1 3/4"', "7'-0\""]}
+    - {name: 4'-0" x 7'-0", dims: ["4'-0\"", '1 3/4"', "7'-0\""]}
+
+- key: door_icu_sliding
+  label: ICU Sliding Door
+  ifc_class: IfcDoorType
+  predefined: DOOR
+  category: Doors
+  discipline: healthcare
+  pack: typology-healthcare
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_30_59_24}         # Doorsets
+  material: {name: Aluminium with Glazing, category: aluminium}
+  psets:
+    Pset_DoorCommon: {IsExternal: false, Reference: ICU breakaway sliding}
+  types:
+    - {name: 4'-0" x 7'-0" single slide, dims: ["4'-0\"", '2"', "7'-0\""]}
+    - {name: 6'-0" x 7'-0" breakaway, dims: ["6'-0\"", '2"', "7'-0\""]}
+
+- key: lab_casework
+  label: Laboratory Casework
+  ifc_class: IfcFurnitureType
+  category: Laboratory
+  discipline: healthcare
+  pack: typology-healthcare
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_30_30_47}      # Laboratory work benches
+  material: {name: Epoxy Resin Top on Steel Base, category: composite}
+  types:
+    - {name: Base bench 4'-0", dims: ["4'-0\"", '30"', '36"']}
+    - {name: Base bench 8'-0", dims: ["8'-0\"", '30"', '36"']}
+    - {name: Island bench 10'-0", dims: ["10'-0\"", "5'-0\"", '36"']}
+
+- key: fume_hood
+  label: Fume Hood
+  ifc_class: IfcMedicalDeviceType
+  category: Laboratory
+  discipline: healthcare
+  pack: typology-healthcare
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_30_87_46}      # Laboratory storage units
+  material: {name: Epoxy Liner with Steel Superstructure, category: composite}
+  ports: {system: DUCT, names: [Exhaust], flows: [SOURCE]}
+  psets:
+    MF_Healthcare: {FaceVelocity: 100 fpm}
+  types:
+    - {name: 4'-0" bench-top, dims: ["4'-0\"", "2'-6\"", "8'-0\""]}
+    - {name: 6'-0" bench-top, dims: ["6'-0\"", "2'-6\"", "8'-0\""]}
+    - {name: 6'-0" walk-in, dims: ["6'-0\"", "3'-0\"", "8'-6\""]}
+
+- key: nurse_call_device
+  label: Nurse Call Device
+  ifc_class: IfcCommunicationsApplianceType
+  category: Nurse Call
+  discipline: healthcare
+  pack: typology-healthcare
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_75_80_30}         # Fire detection and alarm devices and control equipment
+  material: {name: Thermoplastic, category: plastic}
+  psets:
+    MF_Healthcare: {Standard: UL 1069}
+  types:
+    - {name: Patient station, dims: ['5"', '2"', '5"']}
+    - {name: Bath emergency pull, dims: ['3"', '2"', '5"']}
+    - {name: Corridor dome light, dims: ['5"', '4"', '4"']}

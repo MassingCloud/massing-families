@@ -1,0 +1,288 @@
+# Central plant and terminal units — the equipment a building cannot run without.
+#
+# This closes a real gap: the catalog had air handlers and fan coils but no heat source, no cooling
+# source, no pumps and no VAV boxes, so no complete HVAC system could be modelled.
+# Uniclass codes verified against the published Pr table.
+
+- key: chiller
+  label: Chiller
+  ifc_class: IfcChillerType
+  predefined: WATERCOOLED
+  category: Central Plant
+  discipline: mechanical
+  pack: mechanical-plant
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_60_60_13}         # Chillers and cooling towers
+  material: {name: Painted Steel Frame, category: steel}
+  ports: {system: PIPE, names: [ChilledWaterSupply, ChilledWaterReturn, CondenserSupply, CondenserReturn],
+          flows: [SOURCE, SINK, SINK, SOURCE]}
+  psets:
+    MF_Equipment: {ServiceAccessClearance: "3'-0\""}
+  types:
+    - {name: 100 ton water-cooled, dims: ["12'-0\"", "4'-0\"", "6'-0\""]}
+    - {name: 300 ton water-cooled, dims: ["16'-0\"", "5'-0\"", "7'-0\""]}
+    - {name: 600 ton centrifugal, dims: ["22'-0\"", "7'-0\"", "8'-0\""]}
+    - {name: 60 ton air-cooled, dims: ["14'-0\"", "7'-0\"", "7'-0\""]}
+
+- key: cooling_tower
+  label: Cooling Tower
+  ifc_class: IfcCoolingTowerType
+  predefined: MECHANICALINDUCEDDRAFT
+  category: Central Plant
+  discipline: mechanical
+  pack: mechanical-plant
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_60_60_13}         # Chillers and cooling towers
+  material: {name: Galvanized Steel / FRP, category: composite}
+  ports: {system: PIPE, names: [In, Out], flows: [SINK, SOURCE]}
+  types:
+    - {name: 200 ton induced draft, dims: ["12'-0\"", "8'-0\"", "12'-0\""]}
+    - {name: 500 ton induced draft, dims: ["24'-0\"", "12'-0\"", "14'-0\""]}
+    - {name: 1000 ton dual cell, dims: ["36'-0\"", "12'-0\"", "16'-0\""]}
+
+- key: boiler
+  label: Boiler
+  ifc_class: IfcBoilerType
+  predefined: WATER
+  category: Central Plant
+  discipline: mechanical
+  pack: mechanical-plant
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_60_60_08}         # Boilers
+  material: {name: Steel Pressure Vessel, category: steel}
+  ports: {system: PIPE, names: [Supply, Return], flows: [SOURCE, SINK]}
+  psets:
+    MF_Equipment: {FuelType: Natural gas}
+  types:
+    - {name: 500 MBH condensing, dims: ["3'-0\"", "2'-6\"", "5'-0\""]}
+    - {name: 2000 MBH condensing, dims: ["6'-0\"", "3'-6\"", "6'-6\""]}
+    - {name: 5000 MBH firetube, dims: ["12'-0\"", "5'-0\"", "7'-0\""]}
+
+- key: pump_hydronic
+  label: Hydronic Pump
+  ifc_class: IfcPumpType
+  predefined: VERTICALINLINE
+  category: Central Plant
+  discipline: mechanical
+  pack: mechanical-plant
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_65_53_86}         # Supply and exhaust pumps
+  material: {name: Cast Iron Body, category: iron}
+  ports: {system: PIPE, names: [Suction, Discharge], flows: [SINK, SOURCE]}
+  types:
+    - {name: 100 GPM inline, dims: ['24"', '18"', "3'-0\""]}
+    - {name: 500 GPM base-mounted, dims: ["5'-0\"", "2'-6\"", "3'-6\""]}
+    - {name: 1500 GPM base-mounted, dims: ["7'-0\"", "3'-0\"", "4'-6\""]}
+
+- key: pump_sump
+  label: Sump Pump
+  ifc_class: IfcPumpType
+  predefined: SUBMERSIBLEPUMP
+  category: Plumbing Equipment
+  discipline: mechanical
+  pack: mechanical-plant
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_65_53_24}         # Drainage pumps
+  material: {name: Cast Iron Body, category: iron}
+  ports: {system: PIPE, names: [Discharge], flows: [SOURCE]}
+  profile: {kind: Circle}
+  types:
+    - {name: 1/2 HP submersible, dims: ['10"', '10"', '14"'], profile: {params: {Radius: '5"'}}}
+    - {name: 2 HP duplex, dims: ['14"', '14"', '20"'], profile: {params: {Radius: '7"'}}}
+
+- key: heat_exchanger
+  label: Plate Heat Exchanger
+  ifc_class: IfcHeatExchangerType
+  predefined: PLATE
+  category: Central Plant
+  discipline: mechanical
+  pack: mechanical-plant
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_60_60_38}         # Calorifiers and plate heat exchangers
+  material: {name: Stainless Steel Plates, category: steel}
+  ports: {system: PIPE, names: [PrimaryIn, PrimaryOut, SecondaryIn, SecondaryOut],
+          flows: [SINK, SOURCE, SINK, SOURCE]}
+  types:
+    - {name: 500 MBH, dims: ['24"', '18"', "4'-0\""]}
+    - {name: 2000 MBH, dims: ["3'-6\"", '24"', "5'-6\""]}
+
+- key: vav_box
+  label: VAV Terminal Box
+  ifc_class: IfcAirTerminalBoxType
+  predefined: VARIABLEFLOWPRESSUREINDEPENDANT
+  category: Terminal Units
+  discipline: mechanical
+  pack: mechanical-plant
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_70_65_04}         # Air terminals and diffusers
+  material: {name: Galvanized Steel Casing, category: steel}
+  ports: {system: DUCT, names: [In, Out], flows: [SINK, SOURCE]}
+  psets:
+    MF_Equipment: {Control: Pressure independent}
+  types:                                           # inlet size drives the box
+    - {name: 6" inlet, dims: ['24"', '14"', '10"']}
+    - {name: 8" inlet, dims: ['30"', '14"', '12"']}
+    - {name: 10" inlet, dims: ['36"', '16"', '14"']}
+    - {name: 12" inlet, dims: ["3'-6\"", '18"', '16"']}
+    - {name: 14" inlet w/ reheat, dims: ["4'-6\"", '20"', '18"']}
+
+- key: fan_powered_box
+  label: Fan-Powered Box
+  ifc_class: IfcAirTerminalBoxType
+  predefined: VARIABLEFLOWPRESSUREINDEPENDANT
+  category: Terminal Units
+  discipline: mechanical
+  pack: mechanical-plant
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_70_65_04}         # Air terminals and diffusers
+  material: {name: Galvanized Steel Casing, category: steel}
+  ports: {system: DUCT, names: [Primary, Induced, Out], flows: [SINK, SINK, SOURCE]}
+  types:
+    - {name: Series 8" inlet, dims: ["4'-0\"", '24"', '16"']}
+    - {name: Parallel 10" inlet, dims: ["4'-6\"", '26"', '18"']}
+
+- key: rooftop_unit
+  label: Rooftop Unit
+  ifc_class: IfcUnitaryEquipmentType
+  predefined: ROOFTOPUNIT
+  category: Packaged Equipment
+  discipline: mechanical
+  pack: mechanical-plant
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_70_65_03}         # Air conditioning units
+  material: {name: Galvanized Steel Cabinet, category: steel}
+  ports: {system: DUCT, names: [Supply, Return], flows: [SOURCE, SINK]}
+  psets:
+    MF_Equipment: {CurbRequired: true}
+  types:
+    - {name: 5 ton, dims: ["7'-0\"", "4'-0\"", "3'-6\""]}
+    - {name: 10 ton, dims: ["9'-0\"", "5'-0\"", "4'-0\""]}
+    - {name: 25 ton, dims: ["14'-0\"", "7'-0\"", "5'-0\""]}
+    - {name: 50 ton, dims: ["20'-0\"", "8'-0\"", "6'-0\""]}
+
+- key: energy_recovery_unit
+  label: Energy Recovery Ventilator
+  ifc_class: IfcAirToAirHeatRecoveryType
+  predefined: FIXEDPLATECROSSFLOWEXCHANGER
+  category: Packaged Equipment
+  discipline: mechanical
+  pack: mechanical-plant
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_60_60_36}         # Heat recovery distribution equipment
+  material: {name: Galvanized Steel Cabinet, category: steel}
+  ports: {system: DUCT, names: [OutdoorAir, SupplyAir, ReturnAir, ExhaustAir],
+          flows: [SINK, SOURCE, SINK, SOURCE]}
+  types:
+    - {name: 1000 CFM, dims: ["6'-0\"", "3'-0\"", "3'-0\""]}
+    - {name: 3000 CFM, dims: ["9'-0\"", "4'-0\"", "4'-0\""]}
+
+- key: split_system
+  label: Split System
+  ifc_class: IfcUnitaryEquipmentType
+  predefined: SPLITSYSTEM
+  category: Packaged Equipment
+  discipline: mechanical
+  pack: mechanical-plant
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_70_65_03}         # Air conditioning units
+  material: {name: Painted Steel Cabinet, category: steel}
+  ports: {system: PIPE, names: [LiquidLine, SuctionLine], flows: [SINK, SOURCE]}
+  types:
+    - {name: 2 ton condenser, dims: ['30"', '30"', '32"']}
+    - {name: 3 ton condenser, dims: ['34"', '34"', '36"']}
+    - {name: 5 ton condenser, dims: ['38"', '38"', '40"']}
+
+- key: furnace
+  label: Furnace
+  ifc_class: IfcUnitaryEquipmentType
+  predefined: AIRHANDLER
+  category: Packaged Equipment
+  discipline: mechanical
+  pack: mechanical-plant
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_60_60_08}         # Boilers
+  material: {name: Painted Steel Cabinet, category: steel}
+  ports: {system: DUCT, names: [Return, Supply], flows: [SINK, SOURCE]}
+  psets:
+    MF_Equipment: {FuelType: Natural gas, Application: Residential}
+  types:
+    - {name: 60 MBH upflow, dims: ['17 1/2"', '28"', '40"']}
+    - {name: 80 MBH upflow, dims: ['21"', '28"', '40"']}
+    - {name: 100 MBH upflow, dims: ['24 1/2"', '28"', '40"']}
+
+- key: heat_pump
+  label: Heat Pump
+  ifc_class: IfcUnitaryEquipmentType
+  predefined: SPLITSYSTEM
+  category: Packaged Equipment
+  discipline: mechanical
+  pack: mechanical-plant
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_70_60_37}         # Heat pumps
+  material: {name: Painted Steel Cabinet, category: steel}
+  ports: {system: PIPE, names: [In, Out], flows: [SINK, SOURCE]}
+  types:
+    - {name: 3 ton air source, dims: ['34"', '34"', '38"']}
+    - {name: 5 ton water source, dims: ["4'-0\"", "2'-0\"", "2'-0\""]}
+
+- key: unit_heater
+  label: Unit Heater
+  ifc_class: IfcSpaceHeaterType
+  predefined: CONVECTOR
+  category: Terminal Units
+  discipline: mechanical
+  pack: mechanical-plant
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_70_60_36}         # Heat emitters
+  material: {name: Painted Steel Cabinet, category: steel}
+  ports: {system: PIPE, names: [Supply, Return], flows: [SINK, SOURCE]}
+  types:
+    - {name: 30 MBH horizontal, dims: ['20"', '16"', '18"']}
+    - {name: 100 MBH horizontal, dims: ["3'-0\"", '24"', '24"']}
+
+- key: radiant_panel
+  label: Radiant Panel
+  ifc_class: IfcSpaceHeaterType
+  predefined: RADIATOR
+  category: Terminal Units
+  discipline: mechanical
+  pack: mechanical-plant
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_70_60_36_73}      # Radiators
+  material: {name: Extruded Aluminium, category: aluminium}
+  ports: {system: PIPE, names: [Supply, Return], flows: [SINK, SOURCE]}
+  types:
+    - {name: 2' x 4' ceiling panel, dims: ["4'-0\"", "2'-0\"", '2"']}
+    - {name: 2' x 8' ceiling panel, dims: ["8'-0\"", "2'-0\"", '2"']}
+
+- key: exhaust_fan
+  label: Exhaust Fan
+  ifc_class: IfcFanType
+  predefined: CENTRIFUGALBACKWARDINCLINEDCURVED
+  category: Fans
+  discipline: mechanical
+  pack: mechanical-plant
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_70_65_03}         # Air conditioning units
+  material: {name: Aluminium Housing, category: aluminium}
+  ports: {system: DUCT, names: [In, Out], flows: [SINK, SOURCE]}
+  types:
+    - {name: 300 CFM ceiling, dims: ['14"', '14"', '10"']}
+    - {name: 1500 CFM roof-mounted, dims: ["2'-6\"", "2'-6\"", "2'-0\""]}
+    - {name: 5000 CFM utility set, dims: ["4'-0\"", "3'-0\"", "3'-6\""]}

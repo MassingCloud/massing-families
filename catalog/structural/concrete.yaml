@@ -1,0 +1,64 @@
+# Cast-in-place reinforced concrete framing — US imperial nominal sizes.
+# Uniclass Ss (Systems) codes verified against the published Ss table: cast-in-place concrete framing
+# is a system, not a catalogue product, so Ss is the correct table here.
+
+- key: concrete_column
+  label: Concrete Column
+  massing_key: concrete_column
+  ifc_class: IfcColumnType
+  predefined: COLUMN
+  category: Columns
+  discipline: structural
+  pack: structural-concrete
+  builder: profile
+  tier: L300
+  classification: {uniclass: Ss_20_30_75}         # Structural column systems
+  material: {name: 4000 psi Normal Weight Concrete, category: concrete}
+  psets:
+    Pset_ColumnCommon: {LoadBearing: true, IsExternal: false}
+    MF_Structural: {CompressiveStrength: 4000 psi, ReinforcementGrade: ASTM A615 Gr 60}
+  profile: {kind: Rectangle}
+  types:
+    - {name: 12" x 12", dims: ['12"', '12"', "12'-0\""], profile: {params: {XDim: '12"', YDim: '12"'}}}
+    - {name: 16" x 16", dims: ['16"', '16"', "12'-0\""], profile: {params: {XDim: '16"', YDim: '16"'}}}
+    - {name: 18" x 18", dims: ['18"', '18"', "12'-0\""], profile: {params: {XDim: '18"', YDim: '18"'}}}
+    - {name: 24" x 24", dims: ['24"', '24"', "12'-0\""], profile: {params: {XDim: '24"', YDim: '24"'}}}
+
+- key: concrete_column_round
+  label: Round Concrete Column
+  ifc_class: IfcColumnType
+  predefined: COLUMN
+  category: Columns
+  discipline: structural
+  pack: structural-concrete
+  builder: profile
+  tier: L300
+  classification: {uniclass: Ss_20_30_75}         # Structural column systems
+  material: {name: 4000 psi Normal Weight Concrete, category: concrete}
+  psets:
+    Pset_ColumnCommon: {LoadBearing: true, IsExternal: false}
+  profile: {kind: Circle}
+  types:
+    - {name: 16" dia, dims: ['16"', '16"', "12'-0\""], profile: {params: {Radius: '8"'}}}
+    - {name: 24" dia, dims: ['24"', '24"', "12'-0\""], profile: {params: {Radius: '12"'}}}
+
+- key: concrete_beam
+  label: Concrete Beam
+  massing_key: concrete_beam
+  ifc_class: IfcBeamType
+  predefined: BEAM
+  category: Beams
+  discipline: structural
+  pack: structural-concrete
+  builder: profile
+  tier: L300
+  classification: {uniclass: Ss_20_20_75_70}      # Reinforced concrete beam systems
+  material: {name: 4000 psi Normal Weight Concrete, category: concrete}
+  psets:
+    Pset_BeamCommon: {LoadBearing: true, IsExternal: false}
+    MF_Structural: {CompressiveStrength: 4000 psi, ReinforcementGrade: ASTM A615 Gr 60}
+  profile: {kind: Rectangle}
+  types:
+    - {name: 12" x 24", dims: ['12"', '24"', "24'-0\""], profile: {params: {XDim: '12"', YDim: '24"'}}}
+    - {name: 16" x 32", dims: ['16"', '32"', "30'-0\""], profile: {params: {XDim: '16"', YDim: '32"'}}}
+    - {name: 18" x 36", dims: ['18"', '36"', "32'-0\""], profile: {params: {XDim: '18"', YDim: '36"'}}}

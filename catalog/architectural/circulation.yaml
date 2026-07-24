@@ -1,0 +1,158 @@
+# Stairs, ramps, railings and guards — IBC / ADA compliant dimensions.
+#
+# Riser/tread and ramp slopes follow IBC 1011 (stairways), 1012 (ramps) and ADA 405: max 7" riser,
+# min 11" tread, ramps max 1:12 with 5'-0" landings.
+# Uniclass codes verified against the published Pr/Ss tables.
+
+- key: stair_steel_pan
+  label: Steel Pan Stair
+  ifc_class: IfcStairType
+  predefined: STRAIGHT_RUN_STAIR
+  category: Stairs
+  discipline: architectural
+  pack: architectural-circulation
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_35_10}            # Stair and ramp structure systems
+  material: {name: Steel Pan with Concrete Fill, category: steel}
+  psets:
+    Pset_StairCommon: {NumberOfRiser: 18, NumberOfTreads: 17, RiserHeight: 7, TreadLength: 11,
+                       RequiredHeadroom: 80, FireExit: true}
+  types:
+    - {name: 3'-8" wide egress, dims: ["3'-8\"", "16'-0\"", "10'-6\""]}
+    - {name: 4'-0" wide egress, dims: ["4'-0\"", "16'-0\"", "10'-6\""]}
+    - {name: 5'-0" wide egress, dims: ["5'-0\"", "16'-0\"", "10'-6\""]}
+
+- key: stair_concrete
+  label: Concrete Stair
+  ifc_class: IfcStairType
+  predefined: STRAIGHT_RUN_STAIR
+  category: Stairs
+  discipline: architectural
+  pack: architectural-circulation
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_35_10}            # Stair and ramp structure systems
+  material: {name: Cast-in-Place Concrete, category: concrete}
+  psets:
+    Pset_StairCommon: {RiserHeight: 7, TreadLength: 11, FireExit: true}
+  types:
+    - {name: 4'-0" wide, dims: ["4'-0\"", "16'-0\"", "10'-6\""]}
+    - {name: 5'-0" wide, dims: ["5'-0\"", "16'-0\"", "10'-6\""]}
+
+- key: stair_flight
+  label: Stair Flight
+  ifc_class: IfcStairFlightType
+  predefined: STRAIGHT
+  category: Stairs
+  discipline: architectural
+  pack: architectural-circulation
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_25_30_85}         # Stair and ladder units
+  material: {name: Steel Pan with Concrete Fill, category: steel}
+  types:
+    - {name: 9 risers @ 7", dims: ["4'-0\"", "8'-3\"", "5'-3\""]}
+    - {name: 11 risers @ 7", dims: ["4'-0\"", "10'-1\"", "6'-5\""]}
+
+- key: ladder_ship
+  label: Ships Ladder
+  ifc_class: IfcStairType
+  predefined: USERDEFINED
+  category: Stairs
+  discipline: architectural
+  pack: architectural-circulation
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_25_30_85}         # Stair and ladder units
+  material: {name: Galvanized Steel, category: steel}
+  types:
+    - {name: 24" wide, dims: ['24"', "6'-0\"", "10'-0\""]}
+    - {name: 30" wide, dims: ['30"', "6'-0\"", "10'-0\""]}
+
+- key: ramp_accessible
+  label: Accessible Ramp
+  ifc_class: IfcRampType
+  predefined: STRAIGHT_RUN_RAMP
+  category: Ramps
+  discipline: architectural
+  pack: architectural-circulation
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_35_10}            # Stair and ramp structure systems
+  material: {name: Cast-in-Place Concrete, category: concrete}
+  psets:
+    Pset_RampCommon: {RequiredSlope: 4.76, HandicapAccessible: true}
+  types:                                           # 1:12 max slope per ADA 405
+    - {name: 1:12 rise 12" (run 12'-0"), dims: ["4'-0\"", "12'-0\"", '12"']}
+    - {name: 1:12 rise 24" (run 24'-0"), dims: ["4'-0\"", "24'-0\"", '24"']}
+    - {name: 1:20 rise 12" (run 20'-0"), dims: ["4'-0\"", "20'-0\"", '12"']}
+
+- key: railing_guard
+  label: Guardrail
+  ifc_class: IfcRailingType
+  predefined: GUARDRAIL
+  category: Railings
+  discipline: architectural
+  pack: architectural-circulation
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_25_30_36}         # Handrails
+  material: {name: Painted Steel, category: steel}
+  psets:
+    Pset_RailingCommon: {Height: 42}
+  types:                                           # 42" guard per IBC 1015
+    - {name: 42" picket guard, dims: ["6'-0\"", '2"', '42"']}
+    - {name: 42" glass guard, dims: ["6'-0\"", '2"', '42"']}
+    - {name: 42" cable rail, dims: ["6'-0\"", '2"', '42"']}
+
+- key: railing_handrail
+  label: Handrail
+  ifc_class: IfcRailingType
+  predefined: HANDRAIL
+  category: Railings
+  discipline: architectural
+  pack: architectural-circulation
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_25_30_36}         # Handrails
+  material: {name: Stainless Steel, category: steel}
+  psets:
+    Pset_RailingCommon: {Height: 34}
+  profile: {kind: CircleHollow}
+  types:                                           # 34"-38" above nosing per IBC 1014
+    - name: 1 1/2" round wall-mounted
+      dims: ['1 1/2"', '1 1/2"', "8'-0\""]
+      profile: {params: {Radius: 0.75, WallThickness: 0.065}}
+    - name: 1 1/4" round wall-mounted
+      dims: ['1 1/4"', '1 1/4"', "8'-0\""]
+      profile: {params: {Radius: 0.625, WallThickness: 0.065}}
+
+- key: railing_balustrade
+  label: Balustrade
+  ifc_class: IfcRailingType
+  predefined: BALUSTRADE
+  category: Railings
+  discipline: architectural
+  pack: architectural-circulation
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_25_30_36}         # Handrails
+  material: {name: Aluminium with Glass Infill, category: aluminium}
+  types:
+    - {name: 42" glass balustrade, dims: ["8'-0\"", '2 1/2"', '42"']}
+
+- key: floor_grating
+  label: Floor Grating
+  ifc_class: IfcPlateType
+  category: Floors
+  discipline: architectural
+  pack: architectural-circulation
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_25_30_30}         # Floor plates
+  material: {name: Galvanized Steel Bar Grating, category: steel}
+  types:
+    - {name: 1" bar grating, dims: ["3'-0\"", "2'-0\"", '1"']}
+    - {name: 1 1/4" bar grating, dims: ["3'-0\"", "2'-0\"", '1 1/4"']}
+    - {name: Aluminium plank grating, dims: ["3'-0\"", "2'-0\"", '1 1/2"']}

@@ -1,0 +1,211 @@
+# Sitework — paving, curbs, fencing, bollards, site drainage, lighting, site furnishings.
+# Uniclass codes verified against the published Pr/Ss tables.
+
+- key: paving_asphalt
+  label: Asphalt Paving
+  ifc_class: IfcSlabType
+  predefined: BASESLAB
+  category: Paving
+  discipline: site
+  pack: site-civil
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_30_14}            # Paving systems
+  material:
+    name: Asphalt Paving Section
+    layers:
+      - {material: Asphalt Wearing Course, thickness: '1 1/2"', category: bitumen}
+      - {material: Asphalt Binder Course, thickness: '2 1/2"', category: bitumen}
+      - {material: Aggregate Base, thickness: '8"', category: aggregate}
+  types:
+    - {name: Light duty (parking), dims: ["20'-0\"", "20'-0\"", '10"']}
+    - {name: Heavy duty (drive aisle), dims: ["20'-0\"", "20'-0\"", '14"']}
+
+- key: paving_concrete
+  label: Concrete Paving
+  ifc_class: IfcSlabType
+  predefined: BASESLAB
+  category: Paving
+  discipline: site
+  pack: site-civil
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_30_14}            # Paving systems
+  material:
+    name: Concrete Paving Section
+    layers:
+      - {material: 4000 psi Concrete, thickness: '6"', category: concrete}
+      - {material: Aggregate Base, thickness: '6"', category: aggregate}
+  types:
+    - {name: 4" sidewalk, dims: ["5'-0\"", "20'-0\"", '4"']}
+    - {name: 6" drive, dims: ["20'-0\"", "20'-0\"", '6"']}
+    - {name: 8" heavy duty, dims: ["20'-0\"", "20'-0\"", '8"']}
+
+- key: curb
+  label: Curb and Gutter
+  ifc_class: IfcCivilElementType
+  category: Paving
+  discipline: site
+  pack: site-civil
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_30_14}            # Paving systems
+  material: {name: Cast-in-Place Concrete, category: concrete}
+  types:
+    - {name: 6" vertical curb, dims: ["10'-0\"", '6"', '18"']}
+    - {name: 6" curb and 24" gutter, dims: ["10'-0\"", '30"', '18"']}
+    - {name: Mountable curb, dims: ["10'-0\"", '12"', '8"']}
+
+- key: bollard
+  label: Bollard
+  ifc_class: IfcCivilElementType
+  category: Site Protection
+  discipline: site
+  pack: site-civil
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_20_76_08}         # Bollards and impact protectors
+  material: {name: Concrete-Filled Steel Pipe, category: steel}
+  profile: {kind: CircleHollow}
+  types:
+    - name: 6" dia fixed
+      dims: ['6.625"', '6.625"', "3'-6\""]
+      profile: {params: {Radius: 3.3125, WallThickness: 0.28}}
+    - name: 8" dia fixed
+      dims: ['8.625"', '8.625"', "4'-0\""]
+      profile: {params: {Radius: 4.3125, WallThickness: 0.322}}
+
+- key: fence_chain_link
+  label: Chain Link Fence
+  ifc_class: IfcCivilElementType
+  category: Fencing
+  discipline: site
+  pack: site-civil
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_25_14}            # Fence systems
+  material: {name: Galvanized Chain Link, category: steel}
+  types:
+    - {name: 6'-0" high, dims: ["10'-0\"", '2"', "6'-0\""]}
+    - {name: 8'-0" high, dims: ["10'-0\"", '2"', "8'-0\""]}
+    - {name: 8'-0" high with barbed arms, dims: ["10'-0\"", '2"', "9'-0\""]}
+
+- key: fence_ornamental
+  label: Ornamental Fence
+  ifc_class: IfcCivilElementType
+  category: Fencing
+  discipline: site
+  pack: site-civil
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_25_14}            # Fence systems
+  material: {name: Powder-Coated Aluminium, category: aluminium}
+  types:
+    - {name: 4'-0" high picket, dims: ["8'-0\"", '2"', "4'-0\""]}
+    - {name: 6'-0" high picket, dims: ["8'-0\"", '2"', "6'-0\""]}
+
+- key: catch_basin
+  label: Catch Basin
+  ifc_class: IfcDistributionChamberElementType
+  predefined: SUMP
+  category: Site Drainage
+  discipline: site
+  pack: site-civil
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_65_52_24}         # Drainage gullies and channels
+  material: {name: Precast Concrete, category: concrete}
+  ports: {system: PIPE, names: [In, Out], flows: [SINK, SOURCE]}
+  types:
+    - {name: 24" x 24", dims: ["2'-0\"", "2'-0\"", "4'-0\""]}
+    - {name: 30" x 30", dims: ["2'-6\"", "2'-6\"", "5'-0\""]}
+    - {name: 48" x 48", dims: ["4'-0\"", "4'-0\"", "6'-0\""]}
+
+- key: manhole
+  label: Manhole
+  ifc_class: IfcDistributionChamberElementType
+  predefined: MANHOLE
+  category: Site Drainage
+  discipline: site
+  pack: site-civil
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_65_52_24}         # Drainage gullies and channels
+  material: {name: Precast Concrete, category: concrete}
+  ports: {system: PIPE, names: [In, Out], flows: [SINK, SOURCE]}
+  profile: {kind: Circle}
+  types:
+    - {name: 48" dia, dims: ["4'-0\"", "4'-0\"", "8'-0\""], profile: {params: {Radius: '24"'}}}
+    - {name: 60" dia, dims: ["5'-0\"", "5'-0\"", "10'-0\""], profile: {params: {Radius: '30"'}}}
+    - {name: 72" dia, dims: ["6'-0\"", "6'-0\"", "12'-0\""], profile: {params: {Radius: '36"'}}}
+
+- key: trench_drain
+  label: Trench Drain
+  ifc_class: IfcDistributionChamberElementType
+  predefined: SUMP
+  category: Site Drainage
+  discipline: site
+  pack: site-civil
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_65_52_24}         # Drainage gullies and channels
+  material: {name: Polymer Concrete with Grate, category: composite}
+  ports: {system: PIPE, names: [Out], flows: [SOURCE]}
+  types:
+    - {name: 8" wide, dims: ["10'-0\"", '8"', '12"']}
+    - {name: 12" wide, dims: ["10'-0\"", '12"', '16"']}
+
+- key: light_pole
+  label: Site Light Pole
+  ifc_class: IfcLightFixtureType
+  predefined: DIRECTIONSOURCE
+  category: Site Lighting
+  discipline: site
+  pack: site-civil
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_80_77_48}         # Lighting columns
+  material: {name: Galvanized Steel Pole, category: steel}
+  profile: {kind: CircleHollow}
+  types:
+    - name: 20'-0" pole, single head
+      dims: ['5"', '5"', "20'-0\""]
+      profile: {params: {Radius: 2.5, WallThickness: 0.179}}
+    - name: 25'-0" pole, double head
+      dims: ['6"', '6"', "25'-0\""]
+      profile: {params: {Radius: 3.0, WallThickness: 0.188}}
+    - name: 30'-0" pole, area lighting
+      dims: ['8"', '8"', "30'-0\""]
+      profile: {params: {Radius: 4.0, WallThickness: 0.239}}
+
+- key: site_bench
+  label: Site Bench
+  ifc_class: IfcFurnitureType
+  category: Site Furnishing
+  discipline: site
+  pack: site-civil
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_30_29_84}      # Street and site benches
+  material: {name: Recycled Plastic Slats on Steel, category: composite}
+  types:
+    - {name: 6'-0" with back, dims: ["6'-0\"", '24"', '34"']}
+    - {name: 8'-0" backless, dims: ["8'-0\"", '20"', '18"']}
+
+- key: retaining_wall
+  label: Retaining Wall
+  ifc_class: IfcWallType
+  predefined: SHEAR
+  category: Site Walls
+  discipline: site
+  pack: site-civil
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_25_13_50}         # Masonry wall systems
+  material: {name: Cast-in-Place Concrete, category: concrete}
+  psets:
+    Pset_WallCommon: {IsExternal: true, LoadBearing: true}
+  types:
+    - {name: 4'-0" high cantilever, dims: ["10'-0\"", '12"', "4'-0\""]}
+    - {name: 8'-0" high cantilever, dims: ["10'-0\"", '16"', "8'-0\""]}
+    - {name: 12'-0" high cantilever, dims: ["10'-0\"", '24"', "12'-0\""]}

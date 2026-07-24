@@ -1,0 +1,198 @@
+# Floor, roof and ceiling assemblies — the "assembly types for authored elements" gap (PLAN.md §8b.2).
+#
+# The user draws the geometry in massing; the library supplies the *assembly definition*. The value is
+# the material layer set — it drives schedules, thermal calcs and takeoff. massing's built-ins carry a
+# single unnamed slab with no layers at all.
+#
+# Uniclass Ss (systems) codes, verified against the published Ss table.
+
+- key: floor_slab_concrete
+  label: Concrete Floor Slab
+  ifc_class: IfcSlabType
+  predefined: FLOOR
+  category: Floors
+  discipline: architectural
+  pack: architectural-assemblies
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_30_12}            # Floor and deck structure systems
+  psets:
+    Pset_SlabCommon: {IsExternal: false, LoadBearing: true, FireRating: 2 hr}
+  material:
+    name: Cast-in-Place Concrete Slab
+    layers:
+      - {material: 4000 psi Normal Weight Concrete, thickness: '6"', category: concrete}
+  types:
+    - {name: 4" slab on grade, dims: ["10'-0\"", "10'-0\"", '4"']}
+    - {name: 5" slab on grade, dims: ["10'-0\"", "10'-0\"", '5"']}
+    - {name: 6" suspended slab, dims: ["10'-0\"", "10'-0\"", '6"']}
+    - {name: 8" suspended slab, dims: ["10'-0\"", "10'-0\"", '8"']}
+    - {name: 10" post-tensioned, dims: ["10'-0\"", "10'-0\"", '10"']}
+
+- key: floor_composite_deck
+  label: Composite Metal Deck Floor
+  ifc_class: IfcSlabType
+  predefined: FLOOR
+  category: Floors
+  discipline: architectural
+  pack: architectural-assemblies
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_30_12}            # Floor and deck structure systems
+  psets:
+    Pset_SlabCommon: {IsExternal: false, LoadBearing: true, FireRating: 2 hr}
+  material:
+    name: Composite Deck on Steel Framing
+    layers:
+      - {material: Normal Weight Concrete Topping, thickness: '3 1/4"', category: concrete}
+      - {material: Galvanized Composite Deck, thickness: '3"', category: steel}
+  types:
+    - {name: 2" deck + 3 1/4" topping, dims: ["10'-0\"", "10'-0\"", '5 1/4"']}
+    - {name: 3" deck + 3 1/4" topping, dims: ["10'-0\"", "10'-0\"", '6 1/4"']}
+
+- key: roof_low_slope
+  label: Low-Slope Roof Assembly
+  ifc_class: IfcRoofType
+  predefined: FLAT_ROOF
+  category: Roofs
+  discipline: architectural
+  pack: architectural-assemblies
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_30_10}            # Roof structure systems
+  psets:
+    Pset_RoofCommon: {IsExternal: true, ThermalTransmittance: 0.032}
+  material:
+    name: TPO Roof over Rigid Insulation
+    layers:
+      - {material: TPO Membrane, thickness: '1/16"', category: plastic}
+      - {material: Cover Board, thickness: '1/2"', category: gypsum}
+      - {material: Polyisocyanurate Insulation, thickness: '5"', category: insulation}
+      - {material: Vapour Retarder, thickness: '1/16"', category: membrane}
+      - {material: Galvanized Roof Deck, thickness: '1 1/2"', category: steel}
+  types:
+    - {name: TPO / R-30 / steel deck, dims: ["20'-0\"", "20'-0\"", '8"']}
+
+- key: roof_steep_slope
+  label: Steep-Slope Roof Assembly
+  ifc_class: IfcRoofType
+  predefined: GABLE_ROOF
+  category: Roofs
+  discipline: architectural
+  pack: architectural-assemblies
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_30_10}            # Roof structure systems
+  psets:
+    Pset_RoofCommon: {IsExternal: true}
+  material:
+    name: Asphalt Shingle on Wood Deck
+    layers:
+      - {material: Asphalt Shingles, thickness: '1/4"', category: bitumen}
+      - {material: Underlayment, thickness: '1/16"', category: membrane}
+      - {material: Plywood Sheathing, thickness: '5/8"', category: wood}
+  types:
+    - {name: Asphalt shingle / plywood, dims: ["20'-0\"", "20'-0\"", '1"']}
+    - {name: Standing seam metal, dims: ["20'-0\"", "20'-0\"", '1 1/2"']}
+
+- key: ceiling_act
+  label: Acoustical Ceiling
+  ifc_class: IfcCoveringType
+  predefined: CEILING
+  category: Ceilings
+  discipline: architectural
+  pack: architectural-assemblies
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_30_25_22}         # Demountable suspended ceiling systems
+  psets:
+    Pset_CoveringCommon: {FragilityRating: Standard}
+  material:
+    name: Mineral Fibre Lay-in Tile
+    layers:
+      - {material: Mineral Fibre Tile, thickness: '5/8"', category: mineral}
+  types:                                           # US grid modules
+    - {name: 2' x 2' grid, dims: ["2'-0\"", "2'-0\"", '5/8"']}
+    - {name: 2' x 4' grid, dims: ["4'-0\"", "2'-0\"", '5/8"']}
+
+- key: ceiling_gypsum
+  label: Gypsum Board Ceiling
+  ifc_class: IfcCoveringType
+  predefined: CEILING
+  category: Ceilings
+  discipline: architectural
+  pack: architectural-assemblies
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_30_25_10}         # Board and sheet ceiling systems
+  material:
+    name: Suspended Gypsum Board
+    layers:
+      - {material: Gypsum Board, thickness: '5/8"', category: gypsum}
+  types:
+    - {name: 5/8" on suspended grid, dims: ["10'-0\"", "10'-0\"", '5/8"']}
+    - {name: 2-layer 1 1/4" rated, dims: ["10'-0\"", "10'-0\"", '1 1/4"']}
+
+- key: wall_cmu
+  label: CMU Wall
+  ifc_class: IfcWallType
+  predefined: SOLIDWALL
+  category: Walls
+  discipline: architectural
+  pack: architectural-assemblies
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_25_13_50}         # Masonry wall systems
+  psets:
+    Pset_WallCommon: {IsExternal: false, LoadBearing: true, FireRating: 2 hr}
+  material:
+    name: Concrete Masonry Unit
+    layers:
+      - {material: Concrete Masonry Unit, thickness: '7 5/8"', category: masonry}
+  types:                                           # nominal 8" CMU is 7 5/8" actual
+    - {name: 6" CMU, dims: ["8'-0\"", '5 5/8"', "12'-0\""]}
+    - {name: 8" CMU, dims: ["8'-0\"", '7 5/8"', "12'-0\""]}
+    - {name: 12" CMU, dims: ["8'-0\"", '11 5/8"', "12'-0\""]}
+
+- key: wall_shaft
+  label: Shaft Wall
+  ifc_class: IfcWallType
+  predefined: SHEAR
+  category: Walls
+  discipline: architectural
+  pack: architectural-assemblies
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_25_10_30}         # Framed partition systems
+  psets:
+    Pset_WallCommon: {IsExternal: false, LoadBearing: false, FireRating: 2 hr}
+  material:
+    name: Shaft Wall Assembly
+    layers:
+      - {material: Shaftliner Panel, thickness: '1"', category: gypsum}
+      - {material: C-H Stud Cavity, thickness: '2 1/2"', category: steel}
+      - {material: Type X Gypsum Board, thickness: '5/8"', category: gypsum}
+      - {material: Type X Gypsum Board, thickness: '5/8"', category: gypsum}
+  types:
+    - {name: 2-hour 4 3/4", dims: ["8'-0\"", '4 3/4"', "12'-0\""]}
+
+- key: wall_concrete
+  label: Concrete Wall
+  ifc_class: IfcWallType
+  predefined: SHEAR
+  category: Walls
+  discipline: architectural
+  pack: architectural-assemblies
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_25_13_50}         # Masonry wall systems
+  psets:
+    Pset_WallCommon: {IsExternal: true, LoadBearing: true, FireRating: 3 hr}
+  material:
+    name: Cast-in-Place Concrete
+    layers:
+      - {material: 4000 psi Normal Weight Concrete, thickness: '12"', category: concrete}
+  types:
+    - {name: 8" cast-in-place, dims: ["10'-0\"", '8"', "12'-0\""]}
+    - {name: 12" cast-in-place, dims: ["10'-0\"", '12"', "12'-0\""]}
+    - {name: 16" basement wall, dims: ["10'-0\"", '16"', "12'-0\""]}

@@ -1,0 +1,72 @@
+# Wall and curtain wall assemblies — real US layered construction.
+#
+# The value here is the material layer set, not the geometry: a 4 7/8" partition is 5/8" gypsum +
+# 3 5/8" steel stud + 5/8" gypsum, and the layers are what drive schedules, thermal calcs and takeoff.
+# massing's built-in equivalents carry a single unnamed 0.12 m slab with no layers at all.
+#
+# Uniclass Ss (Systems) codes are correct here rather than Pr (Products) — a wall is a system
+# assembled from products. Verified against the published Ss table.
+
+- key: partition_interior
+  label: Interior Partition
+  massing_key: partition_wall
+  ifc_class: IfcWallType
+  predefined: PARTITIONING
+  category: Walls
+  discipline: architectural
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_25_10_30}         # Framed partition systems
+  psets:
+    Pset_WallCommon: {IsExternal: false, LoadBearing: false, FireRating: 1 hr}
+  material:
+    name: 3 5/8" Steel Stud Partition
+    layers:
+      - {material: Gypsum Board, thickness: '5/8"', category: gypsum}
+      - {material: Steel Stud Cavity, thickness: '3 5/8"', category: steel}
+      - {material: Gypsum Board, thickness: '5/8"', category: gypsum}
+  types:
+    - {name: 4 7/8" one-hour, dims: ["4'-0\"", '4 7/8"', "9'-0\""]}
+    - {name: 6 1/8" (6" stud), dims: ["4'-0\"", '7 1/4"', "9'-0\""]}
+
+- key: wall_exterior
+  label: Exterior Wall
+  massing_key: exterior_wall
+  ifc_class: IfcWallType
+  predefined: SOLIDWALL
+  category: Walls
+  discipline: architectural
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_25_13_50}         # Masonry wall systems
+  psets:
+    Pset_WallCommon: {IsExternal: true, LoadBearing: true, ThermalTransmittance: 0.35}
+  material:
+    name: Brick Veneer on Steel Stud
+    layers:
+      - {material: Face Brick, thickness: '3 5/8"', category: masonry}
+      - {material: Air Cavity, thickness: '1"', category: air}
+      - {material: Exterior Sheathing, thickness: '1/2"', category: gypsum}
+      - {material: Steel Stud / Batt Insulation, thickness: '6"', category: steel}
+      - {material: Gypsum Board, thickness: '5/8"', category: gypsum}
+  types:
+    - {name: Brick veneer 11 3/4", dims: ["10'-0\"", '11 3/4"', "12'-0\""]}
+
+- key: curtain_wall
+  label: Curtain Wall
+  massing_key: curtain_wall
+  ifc_class: IfcCurtainWallType
+  category: Enclosure
+  discipline: architectural
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_25_10_20}         # Curtain walling systems
+  psets:
+    Pset_CurtainWallCommon: {IsExternal: true, ThermalTransmittance: 1.8}
+  material:
+    name: Aluminium Framed IGU
+    layers:
+      - {material: Insulated Glazing Unit, thickness: '1"', category: glass}
+  types:                                           # 5'-0" module is the common US curtain-wall bay
+    - {name: 5'-0" x 10'-0" module, dims: ["5'-0\"", '8"', "10'-0\""]}
+    - {name: 5'-0" x 13'-0" module, dims: ["5'-0\"", '8"', "13'-0\""]}

@@ -1,0 +1,172 @@
+# Furniture — US imperial nominal sizes.
+# Uniclass codes verified against the published Pr table (Uniclass2015_Pr.csv).
+# `massing_key` maps each family to massing's built-in CATALOG entry so a pack can eventually
+# replace that entry upstream (PLAN.md §10 Phase 1).
+
+- key: desk
+  label: Desk
+  massing_key: desk
+  ifc_class: IfcFurnitureType
+  predefined: DESK
+  category: Furniture
+  discipline: interiors
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_50_21_21}      # Desks
+  material: {name: Laminate / Steel, category: composite}
+  types:
+    - {name: '48" x 24"', dims: ["4'-0\"", "2'-0\"", '29"']}
+    - {name: '60" x 30"', dims: ["5'-0\"", "2'-6\"", '29"']}
+    - {name: '72" x 36"', dims: ["6'-0\"", "3'-0\"", '29"']}
+
+- key: chair
+  label: Task Chair
+  massing_key: chair
+  ifc_class: IfcFurnitureType
+  predefined: CHAIR
+  category: Furniture
+  discipline: interiors
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_50_12}         # Chairs
+  material: {name: Upholstery / Polymer, category: composite}
+  types:
+    - {name: Task, dims: ['24"', '24"', '36"']}
+    - {name: Side, dims: ['20"', '20"', '32"']}
+
+- key: table
+  label: Table
+  massing_key: table
+  ifc_class: IfcFurnitureType
+  predefined: TABLE
+  category: Furniture
+  discipline: interiors
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_50_21}         # Desks and tables
+  material: {name: Wood Veneer, category: wood}
+  types:
+    - {name: Dining 6'-0" (6 seat), dims: ["6'-0\"", "3'-0\"", '30"']}
+    - {name: Conference 8'-0" (8 seat), dims: ["8'-0\"", "4'-0\"", '30"']}
+    - {name: Conference 12'-0" (12 seat), dims: ["12'-0\"", "4'-0\"", '30"']}
+
+- key: sofa
+  label: Sofa
+  massing_key: sofa
+  ifc_class: IfcFurnitureType
+  predefined: SOFA
+  category: Furniture
+  discipline: interiors
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_50_12_81}      # Sofas
+  material: {name: Upholstery, category: textile}
+  types:
+    - {name: Loveseat 60", dims: ["5'-0\"", '36"', '34"']}
+    - {name: Sofa 84", dims: ["7'-0\"", '36"', '34"']}
+
+- key: bed
+  label: Bed
+  massing_key: bed
+  ifc_class: IfcFurnitureType
+  predefined: BED
+  category: Furniture
+  discipline: interiors
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_50_06}         # Beds
+  material: {name: Wood / Textile, category: composite}
+  types:                                           # US mattress sizes
+    - {name: Twin 39" x 75", dims: ['39"', '75"', '24"']}
+    - {name: Full 54" x 75", dims: ['54"', '75"', '24"']}
+    - {name: Queen 60" x 80", dims: ['60"', '80"', '24"']}
+    - {name: King 76" x 80", dims: ['76"', '80"', '24"']}
+
+- key: shelf
+  label: Bookshelf
+  massing_key: shelf
+  ifc_class: IfcFurnitureType
+  predefined: SHELF
+  category: Furniture
+  discipline: interiors
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_30_78_78}      # Shelves
+  material: {name: Melamine Particleboard, category: wood}
+  types:
+    - {name: '36" x 72"', dims: ["3'-0\"", '12"', "6'-0\""]}
+    - {name: '36" x 84"', dims: ["3'-0\"", '12"', "7'-0\""]}
+
+- key: wardrobe
+  label: Wardrobe
+  massing_key: wardrobe
+  ifc_class: IfcFurnitureType
+  category: Furniture
+  discipline: interiors
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_30_87_96}      # Wardrobes
+  material: {name: Melamine Particleboard, category: wood}
+  types:
+    - {name: 2-door 48", dims: ["4'-0\"", '24"', "7'-0\""]}
+    - {name: 3-door 72", dims: ["6'-0\"", '24"', "7'-0\""]}
+
+- key: nightstand
+  label: Nightstand
+  massing_key: nightstand
+  ifc_class: IfcFurnitureType
+  category: Furniture
+  discipline: interiors
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_30_87}         # Storage units and cupboards
+  material: {name: Wood Veneer, category: wood}
+  types:
+    - {name: '24" x 18"', dims: ['24"', '18"', '26"']}
+
+- key: filing_cabinet
+  label: Filing Cabinet
+  massing_key: filing_cabinet
+  ifc_class: IfcFurnitureType
+  predefined: FILECABINET
+  category: Furniture
+  discipline: interiors
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_30_87_29}      # Filing cabinets
+  material: {name: Painted Steel, category: steel}
+  types:
+    - {name: Vertical 4-drawer, dims: ['15"', '28"', '52"']}
+    - {name: Lateral 36" 4-drawer, dims: ["3'-0\"", '20"', '52"']}
+
+- key: workstation
+  label: Office Workstation
+  massing_key: workstation
+  ifc_class: IfcFurnitureType
+  predefined: DESK
+  category: Furniture
+  discipline: interiors
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_50_21_21}      # Desks
+  material: {name: Panel System, category: composite}
+  types:                                           # US systems-furniture cubicle footprints
+    - {name: 6' x 6' cubicle, dims: ["6'-0\"", "6'-0\"", "5'-0\""]}
+    - {name: 8' x 8' cubicle, dims: ["8'-0\"", "8'-0\"", "5'-0\""]}
+
+- key: kitchen_counter
+  label: Kitchen Counter
+  massing_key: kitchen_counter
+  ifc_class: IfcFurnitureType
+  category: Casework
+  discipline: interiors
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_30_30_96}      # Worktops
+  material: {name: Quartz on Plywood Base, category: composite}
+  psets:
+    MF_Casework: {BaseCabinetDepth: '24"', CounterHeight: '36"'}
+  types:                                           # 24" deep base cabinet, 36" counter height
+    - {name: Run 6'-0", dims: ["6'-0\"", '24"', '36"']}
+    - {name: Run 8'-0", dims: ["8'-0\"", '24"', '36"']}
+    - {name: Run 10'-0", dims: ["10'-0\"", '24"', '36"']}

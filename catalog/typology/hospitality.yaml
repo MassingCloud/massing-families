@@ -1,0 +1,148 @@
+# Hotel / hospitality — guestroom FF&E, PTAC, commercial kitchen and laundry (PLAN.md §8d).
+# Uniclass codes verified against the published Pr table.
+
+- key: ptac_unit
+  label: PTAC Unit
+  ifc_class: IfcUnitaryEquipmentType
+  predefined: AIRCONDITIONINGUNIT
+  category: HVAC
+  discipline: hospitality
+  pack: typology-hospitality
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_70_65_03}         # Air conditioning units
+  material: {name: Steel Cabinet, category: steel}
+  psets:
+    MF_Hospitality: {Application: Guestroom}
+  types:                                           # 42" x 16" wall sleeve is the industry standard
+    - {name: 7000 BTU, dims: ['42"', '16"', '16"']}
+    - {name: 9000 BTU, dims: ['42"', '16"', '16"']}
+    - {name: 12000 BTU, dims: ['42"', '16"', '16"']}
+
+- key: vertical_fan_coil
+  label: Vertical Stack Fan Coil
+  ifc_class: IfcUnitaryEquipmentType
+  predefined: AIRCONDITIONINGUNIT
+  category: HVAC
+  discipline: hospitality
+  pack: typology-hospitality
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_70_65_03_29}      # Fan coil units
+  material: {name: Galvanized Steel Cabinet, category: steel}
+  ports: {system: PIPE, names: [Supply, Return], flows: [SINK, SOURCE]}
+  types:
+    - {name: 400 CFM riser, dims: ['24"', '12"', "8'-0\""]}
+    - {name: 600 CFM riser, dims: ['30"', '14"', "8'-0\""]}
+
+- key: guestroom_casegood
+  label: Guestroom Casegood
+  ifc_class: IfcFurnitureType
+  category: Guestroom FF&E
+  discipline: hospitality
+  pack: typology-hospitality
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_30_87}         # Storage units and cupboards
+  material: {name: Wood Veneer, category: wood}
+  types:
+    - {name: Dresser/media 60", dims: ["5'-0\"", '20"', '30"']}
+    - {name: Desk 48", dims: ["4'-0\"", '24"', '30"']}
+    - {name: Nightstand 22", dims: ['22"', '18"', '26"']}
+    - {name: Luggage bench 42", dims: ["3'-6\"", '18"', '20"']}
+
+- key: guestroom_wardrobe
+  label: Guestroom Wardrobe
+  ifc_class: IfcFurnitureType
+  category: Guestroom FF&E
+  discipline: hospitality
+  pack: typology-hospitality
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_30_87_96}      # Wardrobes
+  material: {name: Wood Veneer, category: wood}
+  types:
+    - {name: Open 42", dims: ["3'-6\"", '24"', "7'-0\""]}
+    - {name: Closed 48", dims: ["4'-0\"", '24"', "7'-0\""]}
+
+- key: banquet_furniture
+  label: Banquet Furniture
+  ifc_class: IfcFurnitureType
+  category: Meeting
+  discipline: hospitality
+  pack: typology-hospitality
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_50_21}         # Desks and tables
+  material: {name: Laminate on Steel Frame, category: composite}
+  types:
+    - {name: Round 60" (8 seat), dims: ["5'-0\"", "5'-0\"", '30"']}
+    - {name: Round 72" (10 seat), dims: ["6'-0\"", "6'-0\"", '30"']}
+    - {name: Banquet 6'-0" x 30", dims: ["6'-0\"", '30"', '30"']}
+    - {name: Stacking chair, dims: ['20"', '22"', '34"']}
+
+- key: commercial_range
+  label: Commercial Range
+  ifc_class: IfcElectricApplianceType
+  predefined: ELECTRICCOOKER
+  category: Commercial Kitchen
+  discipline: hospitality
+  pack: typology-hospitality
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_70_17}         # Commercial cooking equipment
+  material: {name: Stainless Steel, category: steel}
+  types:
+    - {name: 6-burner 36", dims: ["3'-0\"", '32"', '36"']}
+    - {name: 10-burner 60", dims: ["5'-0\"", '32"', '36"']}
+    - {name: Convection oven double, dims: ['38"', '38"', "6'-0\""]}
+
+- key: kitchen_hood
+  label: Commercial Kitchen Hood
+  ifc_class: IfcAirTerminalType
+  predefined: GRILLE
+  category: Commercial Kitchen
+  discipline: hospitality
+  pack: typology-hospitality
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_70_17}         # Commercial cooking equipment
+  material: {name: Stainless Steel, category: steel}
+  ports: {system: DUCT, names: [Exhaust, MakeupAir], flows: [SOURCE, SINK]}
+  psets:
+    MF_Hospitality: {SuppressionSystem: Wet chemical}
+  types:
+    - {name: Wall canopy 8'-0", dims: ["8'-0\"", "4'-0\"", "2'-0\""]}
+    - {name: Wall canopy 12'-0", dims: ["12'-0\"", "4'-0\"", "2'-0\""]}
+    - {name: Island canopy 12'-0", dims: ["12'-0\"", "6'-0\"", "2'-0\""]}
+
+- key: walk_in_cooler
+  label: Walk-In Cooler / Freezer
+  ifc_class: IfcElectricApplianceType
+  predefined: FREEZER
+  category: Commercial Kitchen
+  discipline: hospitality
+  pack: typology-hospitality
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_70_31}         # Commercial food refrigerators and freezers
+  material: {name: Insulated Metal Panel, category: composite}
+  types:
+    - {name: 8'-0" x 10'-0" cooler, dims: ["8'-0\"", "10'-0\"", "8'-0\""]}
+    - {name: 10'-0" x 12'-0" freezer, dims: ["10'-0\"", "12'-0\"", "8'-0\""]}
+
+- key: commercial_laundry
+  label: Commercial Laundry Equipment
+  ifc_class: IfcElectricApplianceType
+  predefined: WASHINGMACHINE
+  category: Laundry
+  discipline: hospitality
+  pack: typology-hospitality
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_40_70_47}         # Laundry washers and dryers
+  material: {name: Stainless Steel, category: steel}
+  types:
+    - {name: 60 lb washer-extractor, dims: ["3'-6\"", "4'-0\"", "5'-0\""]}
+    - {name: 125 lb washer-extractor, dims: ["4'-6\"", "5'-0\"", "6'-0\""]}
+    - {name: 75 lb tumble dryer, dims: ["3'-6\"", "4'-6\"", "6'-6\""]}

@@ -1,0 +1,185 @@
+# Structural steel — every standard AISC mill shape, generated as a real parametric profile.
+#
+# Section dimensions are DERIVED from the AISC Shapes Database v15.0 (US customary) via
+# `tools/derive_aisc.py` into `data/aisc_shapes.csv`. We ship derived dimensional values, never the
+# source spreadsheet (PLAN.md §8g tier 2) — dimensions of standard mill shapes are facts, not creative
+# work. This replaces the hand-transcribed literals that were previously flagged here; all eight of
+# them were verified correct against the database before removal.
+#
+# Packs are split by trade rather than lumped into one "structural" file, because massing's import
+# pulls in *every* type in a file (PLAN.md §3) — a single 1,400-type steel pack would flood a project.
+
+# ── Wide flange and bearing pile ──────────────────────────────────────────────
+- key: steel_column_w
+  label: W-Shape Column
+  massing_key: steel_column
+  ifc_class: IfcColumnType
+  predefined: COLUMN
+  category: Columns
+  discipline: structural
+  pack: structural-steel-w
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_20_76_51_92}      # Universal column sections
+  material: {name: ASTM A992 Steel, category: steel}
+  psets:
+    Pset_ColumnCommon: {LoadBearing: true, IsExternal: false}
+  generator: aisc
+  generator_args: {family: W, series: [W8, W10, W12, W14], length: "12'-0\""}
+
+- key: steel_beam_w
+  label: W-Shape Beam
+  massing_key: steel_beam
+  ifc_class: IfcBeamType
+  predefined: BEAM
+  category: Beams
+  discipline: structural
+  pack: structural-steel-w
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_20_76_51_90}      # Universal beam sections
+  material: {name: ASTM A992 Steel, category: steel}
+  psets:
+    Pset_BeamCommon: {LoadBearing: true, IsExternal: false}
+  generator: aisc
+  generator_args: {family: W, length: "30'-0\""}
+
+- key: steel_pile_hp
+  label: HP Bearing Pile
+  ifc_class: IfcPileType
+  category: Foundations
+  discipline: structural
+  pack: structural-steel-w
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_20_76_51}         # Metal sections
+  material: {name: ASTM A572 Grade 50 Steel, category: steel}
+  generator: aisc
+  generator_args: {family: HP, length: "40'-0\""}
+
+# ── Hollow structural sections ────────────────────────────────────────────────
+- key: steel_hss_rect
+  label: HSS Rectangular
+  ifc_class: IfcColumnType
+  predefined: COLUMN
+  category: Columns
+  discipline: structural
+  pack: structural-steel-hss
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_20_76_52_16}      # Carbon steel hot-finished hollow sections
+  material: {name: ASTM A500 Grade C Steel, category: steel}
+  psets:
+    Pset_ColumnCommon: {LoadBearing: true, IsExternal: false}
+  generator: aisc
+  generator_args: {family: HSS, shape: rect, length: "12'-0\""}
+
+- key: steel_hss_round
+  label: HSS Round
+  ifc_class: IfcColumnType
+  predefined: COLUMN
+  category: Columns
+  discipline: structural
+  pack: structural-steel-hss
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_20_76_52_16}      # Carbon steel hot-finished hollow sections
+  material: {name: ASTM A500 Grade C Steel, category: steel}
+  generator: aisc
+  generator_args: {family: HSS, shape: round, length: "12'-0\""}
+
+- key: steel_pipe
+  label: Pipe Column
+  ifc_class: IfcColumnType
+  predefined: COLUMN
+  category: Columns
+  discipline: structural
+  pack: structural-steel-hss
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_20_76_52}         # Metal tubes and hollow sections
+  material: {name: ASTM A53 Grade B Steel, category: steel}
+  generator: aisc
+  generator_args: {family: PIPE, length: "12'-0\""}
+
+# ── Channels and angles ───────────────────────────────────────────────────────
+- key: steel_channel_c
+  label: Channel
+  ifc_class: IfcMemberType
+  category: Members
+  discipline: structural
+  pack: structural-steel-channel-angle
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_20_76_51}         # Metal sections
+  material: {name: ASTM A36 Steel, category: steel}
+  generator: aisc
+  generator_args: {family: C, length: "20'-0\""}
+
+- key: steel_channel_mc
+  label: Miscellaneous Channel
+  ifc_class: IfcMemberType
+  category: Members
+  discipline: structural
+  pack: structural-steel-channel-angle
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_20_76_51}         # Metal sections
+  material: {name: ASTM A36 Steel, category: steel}
+  generator: aisc
+  generator_args: {family: MC, length: "20'-0\""}
+
+- key: steel_angle
+  label: Angle
+  ifc_class: IfcMemberType
+  category: Members
+  discipline: structural
+  pack: structural-steel-channel-angle
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_20_76_51}         # Metal sections
+  material: {name: ASTM A36 Steel, category: steel}
+  generator: aisc
+  generator_args: {family: L, length: "10'-0\""}
+
+# ── Tees and light beams ──────────────────────────────────────────────────────
+- key: steel_tee_wt
+  label: WT Structural Tee
+  ifc_class: IfcMemberType
+  category: Members
+  discipline: structural
+  pack: structural-steel-tee
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_20_76_51}         # Metal sections
+  material: {name: ASTM A992 Steel, category: steel}
+  generator: aisc
+  generator_args: {family: WT, length: "10'-0\""}
+
+- key: steel_beam_s
+  label: S-Shape Beam
+  ifc_class: IfcBeamType
+  predefined: BEAM
+  category: Beams
+  discipline: structural
+  pack: structural-steel-tee
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_20_76_51_90}      # Universal beam sections
+  material: {name: ASTM A36 Steel, category: steel}
+  generator: aisc
+  generator_args: {family: S, length: "20'-0\""}
+
+- key: steel_beam_m
+  label: M-Shape Beam
+  ifc_class: IfcBeamType
+  predefined: BEAM
+  category: Beams
+  discipline: structural
+  pack: structural-steel-tee
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_20_76_51_90}      # Universal beam sections
+  material: {name: ASTM A36 Steel, category: steel}
+  generator: aisc
+  generator_args: {family: M, length: "20'-0\""}

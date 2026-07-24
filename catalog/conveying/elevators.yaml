@@ -1,0 +1,20 @@
+# Conveying — elevator cabs at US capacity conventions (ASME A17.1 / ADA cab sizes).
+# Uniclass code verified against the published Pr table.
+
+- key: elevator_cab
+  label: Elevator Cab
+  massing_key: elevator_cab
+  ifc_class: IfcTransportElementType
+  predefined: ELEVATOR
+  category: Conveying
+  discipline: conveying
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_65_80_42}         # Transport cars
+  material: {name: Stainless Steel Cab, category: steel}
+  psets:
+    MF_Conveying: {DoorType: Center-opening}
+  types:                                           # nominal inside cab clear dimensions
+    - {name: 2100 lb passenger, dims: ["5'-8\"", "4'-3\"", "8'-0\""]}
+    - {name: 3500 lb passenger, dims: ["6'-8\"", "5'-5\"", "8'-0\""]}
+    - {name: 4500 lb service, dims: ["7'-0\"", "5'-9\"", "9'-0\""]}

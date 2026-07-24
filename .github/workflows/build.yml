@@ -1,0 +1,71 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -e ".[dev]"
+
+      # The golden round-trip test needs a massing checkout; it skips cleanly without one.
+      # Cloning it here means every PR verifies content still imports into the real platform.
+      - name: Check out massing for the round-trip test
+        uses: actions/checkout@v4
+        with:
+          repository: ibuilder/massing
+          path: .massing
+      - run: pip install ifcopenshell
+      - name: Test
+        env:
+          MASSING_ROOT: ${{ github.workspace }}/.massing
+        run: pytest -q
+
+      - name: Build packs
+        run: python -m massing_families.cli build
+
+      - name: Summarise
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          m = json.loads(pathlib.Path("packs/manifest.json").read_text())
+          t = m["totals"]
+          print(f"{t['packs']} packs · {t['families']} families · {t['types']} types "
+                f"· {t['size_bytes']/1e6:.1f} MB")
+          PY
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: packs
+          path: packs/
+
+  release:
+    needs: test
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -e .
+      - name: Build packs at the tagged version
+        run: python -m massing_families.cli build --version "${GITHUB_REF_NAME#v}"
+
+      # manifest.json carries a sha256 per pack, so consumers can verify what they fetched.
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            packs/*.ifc
+            packs/manifest.json
+          generate_release_notes: true

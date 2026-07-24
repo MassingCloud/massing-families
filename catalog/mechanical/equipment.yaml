@@ -1,0 +1,65 @@
+# HVAC equipment and air terminals — US imperial nominal sizes.
+# 24" x 24" lay-in diffuser matches the US ceiling grid.
+# Uniclass codes verified against the published Pr table.
+
+- key: air_handling_unit
+  label: Air Handling Unit
+  massing_key: ahu
+  ifc_class: IfcUnitaryEquipmentType
+  predefined: AIRHANDLER
+  category: HVAC
+  discipline: mechanical
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_70_65_03}         # Air conditioning units
+  material: {name: Galvanized Steel Casing, category: steel}
+  psets:
+    MF_Equipment: {ServiceAccessClearance: "3'-0\""}
+  types:
+    - {name: 2000 CFM, dims: ["6'-0\"", "3'-0\"", "4'-0\""]}
+    - {name: 5000 CFM, dims: ["8'-0\"", "4'-0\"", "6'-0\""]}
+    - {name: 10000 CFM, dims: ["12'-0\"", "5'-0\"", "7'-0\""]}
+
+- key: fan_coil_unit
+  label: Fan Coil Unit
+  massing_key: fan_coil
+  ifc_class: IfcUnitaryEquipmentType
+  predefined: AIRCONDITIONINGUNIT
+  category: HVAC
+  discipline: mechanical
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_70_65_03_29}      # Fan coil units
+  material: {name: Galvanized Steel Casing, category: steel}
+  types:
+    - {name: 400 CFM horizontal, dims: ["4'-0\"", '24"', '12"']}
+    - {name: 800 CFM horizontal, dims: ["5'-0\"", '24"', '14"']}
+
+- key: air_diffuser
+  label: Air Diffuser
+  massing_key: diffuser
+  ifc_class: IfcAirTerminalType
+  predefined: DIFFUSER
+  category: HVAC
+  discipline: mechanical
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_70_65_04_02}      # Air diffusers
+  material: {name: Extruded Aluminium, category: aluminium}
+  types:
+    - {name: 24" x 24" lay-in, dims: ["2'-0\"", "2'-0\"", '8"']}
+    - {name: 12" x 12" lay-in, dims: ['12"', '12"', '8"']}
+
+- key: air_grille
+  label: Return Air Grille
+  ifc_class: IfcAirTerminalType
+  predefined: GRILLE
+  category: HVAC
+  discipline: mechanical
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_70_65_04}         # Air terminals and diffusers
+  material: {name: Extruded Aluminium, category: aluminium}
+  types:
+    - {name: 24" x 24", dims: ["2'-0\"", "2'-0\"", '2"']}
+    - {name: 24" x 12", dims: ["2'-0\"", '12"', '2"']}

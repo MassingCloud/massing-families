@@ -1,0 +1,237 @@
+# Plumbing piping — nominal trade sizes with distribution ports.
+#
+# Outside diameters and wall thicknesses are published nominal values:
+#   Copper  — ASTM B88 Type L (OD = nominal + 1/8")
+#   PVC/CPVC— Schedule 40, IPS outside diameters (ASME B36.10 series)
+#   Steel   — see catalog/structural/steel.yaml; AISC PIPE data is ASME B36.10 and is reused for
+#             fire-protection piping rather than re-keyed here
+#
+# Cast iron below is CISPI 301 no-hub nominal and is the least-verified table in this file; treat as
+# L300-nominal rather than fabrication-accurate until checked against a current CISPI table.
+
+- key: pipe_copper_l
+  label: Copper Pipe Type L
+  ifc_class: IfcPipeSegmentType
+  predefined: RIGIDSEGMENT
+  category: Domestic Water
+  discipline: plumbing
+  pack: plumbing-piping
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_65_52_63}
+  material: {name: Copper ASTM B88 Type L, category: copper}
+  ports: {system: PIPE}
+  generator: sizes
+  generator_args:
+    kind: CircleHollow
+    length: "10'-0\""
+    name: '{nominal}" Copper L'
+    entries:
+      - {nominal: '1/2', od: 0.625, wall: 0.040}
+      - {nominal: '3/4', od: 0.875, wall: 0.045}
+      - {nominal: '1', od: 1.125, wall: 0.050}
+      - {nominal: '1-1/4', od: 1.375, wall: 0.055}
+      - {nominal: '1-1/2', od: 1.625, wall: 0.060}
+      - {nominal: '2', od: 2.125, wall: 0.070}
+      - {nominal: '2-1/2', od: 2.625, wall: 0.080}
+      - {nominal: '3', od: 3.125, wall: 0.090}
+      - {nominal: '4', od: 4.125, wall: 0.110}
+
+- key: pipe_pvc_sch40
+  label: PVC Pipe Schedule 40
+  ifc_class: IfcPipeSegmentType
+  predefined: RIGIDSEGMENT
+  category: Drainage
+  discipline: plumbing
+  pack: plumbing-piping
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_65_52_03}
+  material: {name: PVC Schedule 40, category: plastic}
+  ports: {system: PIPE}
+  generator: sizes
+  generator_args:
+    kind: CircleHollow
+    length: "10'-0\""
+    name: '{nominal}" PVC Sch 40'
+    entries:
+      - {nominal: '1/2', od: 0.840, wall: 0.109}
+      - {nominal: '3/4', od: 1.050, wall: 0.113}
+      - {nominal: '1', od: 1.315, wall: 0.133}
+      - {nominal: '1-1/2', od: 1.900, wall: 0.145}
+      - {nominal: '2', od: 2.375, wall: 0.154}
+      - {nominal: '3', od: 3.500, wall: 0.216}
+      - {nominal: '4', od: 4.500, wall: 0.237}
+      - {nominal: '6', od: 6.625, wall: 0.280}
+
+- key: pipe_cast_iron
+  label: Cast Iron Pipe (No-Hub)
+  ifc_class: IfcPipeSegmentType
+  predefined: RIGIDSEGMENT
+  category: Drainage
+  discipline: plumbing
+  pack: plumbing-piping
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_65_52_03}
+  material: {name: Cast Iron CISPI 301, category: iron}
+  ports: {system: PIPE}
+  psets:
+    MF_Routing: {DimensionSource: CISPI 301 no-hub nominal — pending verification}
+  generator: sizes
+  generator_args:
+    kind: CircleHollow
+    length: "10'-0\""
+    wall: 0.16
+    name: '{nominal}" Cast Iron'
+    entries:
+      - {nominal: 2, od: 2.35}
+      - {nominal: 3, od: 3.35}
+      - {nominal: 4, od: 4.38}
+      - {nominal: 6, od: 6.38}
+      - {nominal: 8, od: 8.38}
+
+- key: pipe_pex
+  label: PEX Tubing
+  ifc_class: IfcPipeSegmentType
+  predefined: FLEXIBLESEGMENT
+  category: Domestic Water
+  discipline: plumbing
+  pack: plumbing-piping
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_65_52_63}
+  material: {name: PEX-A Tubing, category: plastic}
+  ports: {system: PIPE}
+  generator: sizes
+  generator_args:
+    kind: CircleHollow
+    length: "20'-0\""
+    name: '{nominal}" PEX'
+    entries:
+      - {nominal: '3/8', od: 0.500, wall: 0.070}
+      - {nominal: '1/2', od: 0.625, wall: 0.070}
+      - {nominal: '3/4', od: 0.875, wall: 0.097}
+      - {nominal: '1', od: 1.125, wall: 0.125}
+
+- key: pipe_elbow
+  label: Pipe Elbow
+  ifc_class: IfcPipeFittingType
+  predefined: BEND
+  category: Pipe Fittings
+  discipline: plumbing
+  pack: plumbing-piping
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_65_52_63}
+  material: {name: Copper / PVC, category: composite}
+  ports: {system: PIPE}
+  generator: sizes
+  generator_args:
+    kind: CircleHollow
+    length: '6"'
+    name: '{nominal}" 90 deg Elbow'
+    entries:
+      - {nominal: '1/2', od: 0.625, wall: 0.040}
+      - {nominal: '3/4', od: 0.875, wall: 0.045}
+      - {nominal: '1', od: 1.125, wall: 0.050}
+      - {nominal: '1-1/2', od: 1.900, wall: 0.145}
+      - {nominal: '2', od: 2.375, wall: 0.154}
+      - {nominal: '3', od: 3.500, wall: 0.216}
+      - {nominal: '4', od: 4.500, wall: 0.237}
+
+- key: pipe_tee
+  label: Pipe Tee
+  ifc_class: IfcPipeFittingType
+  predefined: JUNCTION
+  category: Pipe Fittings
+  discipline: plumbing
+  pack: plumbing-piping
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_65_52_63}
+  material: {name: Copper / PVC, category: composite}
+  ports: {system: PIPE, names: [In, Out, Branch], flows: [SOURCE, SINK, SINK]}
+  generator: sizes
+  generator_args:
+    kind: CircleHollow
+    length: '8"'
+    name: '{nominal}" Tee'
+    entries:
+      - {nominal: '1/2', od: 0.625, wall: 0.040}
+      - {nominal: '3/4', od: 0.875, wall: 0.045}
+      - {nominal: '1', od: 1.125, wall: 0.050}
+      - {nominal: '1-1/2', od: 1.900, wall: 0.145}
+      - {nominal: '2', od: 2.375, wall: 0.154}
+      - {nominal: '3', od: 3.500, wall: 0.216}
+      - {nominal: '4', od: 4.500, wall: 0.237}
+
+- key: valve_gate
+  label: Gate Valve
+  ifc_class: IfcValveType
+  predefined: ISOLATING
+  category: Valves
+  discipline: plumbing
+  pack: plumbing-piping
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_65_54_95}
+  material: {name: Bronze Body, category: bronze}
+  ports: {system: PIPE}
+  generator: sizes
+  generator_args:
+    kind: Circle
+    length: '6"'
+    name: '{nominal}" Gate Valve'
+    entries:
+      - {nominal: '1/2', od: 2.0}
+      - {nominal: '3/4', od: 2.5}
+      - {nominal: '1', od: 3.0}
+      - {nominal: '1-1/2', od: 4.0}
+      - {nominal: '2', od: 5.0}
+      - {nominal: '3', od: 7.0}
+      - {nominal: '4', od: 9.0}
+
+- key: floor_drain
+  label: Floor Drain
+  ifc_class: IfcWasteTerminalType
+  predefined: FLOORTRAP
+  category: Drainage
+  discipline: plumbing
+  pack: plumbing-fixtures
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_65_52_24}
+  material: {name: Cast Iron / Nickel Bronze Strainer, category: iron}
+  ports: {system: PIPE, names: [Out], flows: [SINK]}
+  generator: sizes
+  generator_args:
+    kind: Circle
+    length: '8"'
+    name: '{nominal}" Floor Drain'
+    entries:
+      - {nominal: 2, od: 5}
+      - {nominal: 3, od: 7}
+      - {nominal: 4, od: 9}
+      - {nominal: 6, od: 12}
+
+- key: cleanout
+  label: Cleanout
+  ifc_class: IfcWasteTerminalType
+  predefined: NOTDEFINED
+  category: Drainage
+  discipline: plumbing
+  pack: plumbing-fixtures
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_65_52_24}
+  material: {name: Cast Iron, category: iron}
+  generator: sizes
+  generator_args:
+    kind: Circle
+    length: '6"'
+    name: '{nominal}" Cleanout'
+    entries:
+      - {nominal: 2, od: 5}
+      - {nominal: 3, od: 6}
+      - {nominal: 4, od: 8}

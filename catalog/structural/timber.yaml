@@ -1,0 +1,164 @@
+# Timber framing — dimensional lumber, engineered lumber, glulam, CLT.
+#
+# ⚠ NOMINAL IS NOT ACTUAL. A "2x4" is 1 1/2" x 3 1/2" dressed (S4S). The catalog *names* the nominal
+# size, because that is what a framing plan calls out, and the *geometry* uses the actual dressed
+# dimension — otherwise every wall is 1/2" too thick. This is exactly the nominal-vs-actual trap
+# described in PLAN.md §8c.
+
+- key: lumber_dimensional
+  label: Dimensional Lumber
+  ifc_class: IfcMemberType
+  category: Framing
+  discipline: structural
+  pack: structural-timber
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_20_76_88}         # Timber sections
+  material: {name: Douglas Fir-Larch No. 2, category: wood}
+  psets:
+    MF_Structural: {Species: Douglas Fir-Larch, Grade: No. 2, Surfacing: S4S}
+  profile: {kind: Rectangle}
+  types:                                           # name = nominal, geometry = actual dressed
+    - {name: 2x4, dims: ['1.5"', '3.5"', "10'-0\""], profile: {params: {XDim: '1.5"', YDim: '3.5"'}}}
+    - {name: 2x6, dims: ['1.5"', '5.5"', "10'-0\""], profile: {params: {XDim: '1.5"', YDim: '5.5"'}}}
+    - {name: 2x8, dims: ['1.5"', '7.25"', "12'-0\""], profile: {params: {XDim: '1.5"', YDim: '7.25"'}}}
+    - {name: 2x10, dims: ['1.5"', '9.25"', "14'-0\""], profile: {params: {XDim: '1.5"', YDim: '9.25"'}}}
+    - {name: 2x12, dims: ['1.5"', '11.25"', "16'-0\""], profile: {params: {XDim: '1.5"', YDim: '11.25"'}}}
+    - {name: 4x4, dims: ['3.5"', '3.5"', "10'-0\""], profile: {params: {XDim: '3.5"', YDim: '3.5"'}}}
+    - {name: 4x6, dims: ['3.5"', '5.5"', "10'-0\""], profile: {params: {XDim: '3.5"', YDim: '5.5"'}}}
+    - {name: 6x6, dims: ['5.5"', '5.5"', "10'-0\""], profile: {params: {XDim: '5.5"', YDim: '5.5"'}}}
+    - {name: 6x8, dims: ['5.5"', '7.25"', "12'-0\""], profile: {params: {XDim: '5.5"', YDim: '7.25"'}}}
+
+- key: lumber_stud
+  label: Wall Stud
+  ifc_class: IfcMemberType
+  predefined: STUD
+  category: Framing
+  discipline: structural
+  pack: structural-timber
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_20_76_88}         # Timber sections
+  material: {name: Spruce-Pine-Fir Stud Grade, category: wood}
+  profile: {kind: Rectangle}
+  types:                                           # 92 5/8" precut gives an 8'-1 1/8" wall
+    - {name: 2x4 92 5/8" precut, dims: ['1.5"', '3.5"', '92 5/8"'],
+       profile: {params: {XDim: '1.5"', YDim: '3.5"'}}}
+    - {name: 2x6 92 5/8" precut, dims: ['1.5"', '5.5"', '92 5/8"'],
+       profile: {params: {XDim: '1.5"', YDim: '5.5"'}}}
+    - {name: 2x4 104 5/8" precut, dims: ['1.5"', '3.5"', '104 5/8"'],
+       profile: {params: {XDim: '1.5"', YDim: '3.5"'}}}
+
+- key: lumber_lvl
+  label: Laminated Veneer Lumber
+  ifc_class: IfcBeamType
+  predefined: BEAM
+  category: Engineered Lumber
+  discipline: structural
+  pack: structural-timber
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_20_76_88}         # Timber sections
+  material: {name: LVL 2.0E, category: wood}
+  psets:
+    MF_Structural: {Product: Laminated veneer lumber, ModulusOfElasticity: 2.0E}
+  profile: {kind: Rectangle}
+  types:
+    - {name: 1 3/4" x 9 1/2", dims: ['1.75"', '9.5"', "16'-0\""],
+       profile: {params: {XDim: '1.75"', YDim: '9.5"'}}}
+    - {name: 1 3/4" x 11 7/8", dims: ['1.75"', '11.875"', "18'-0\""],
+       profile: {params: {XDim: '1.75"', YDim: '11.875"'}}}
+    - {name: 1 3/4" x 14", dims: ['1.75"', '14"', "20'-0\""],
+       profile: {params: {XDim: '1.75"', YDim: '14"'}}}
+    - {name: 3 1/2" x 11 7/8", dims: ['3.5"', '11.875"', "18'-0\""],
+       profile: {params: {XDim: '3.5"', YDim: '11.875"'}}}
+
+- key: lumber_glulam
+  label: Glulam Beam
+  ifc_class: IfcBeamType
+  predefined: BEAM
+  category: Engineered Lumber
+  discipline: structural
+  pack: structural-timber
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_20_76_88}         # Timber sections
+  material: {name: Glulam 24F-V4 Douglas Fir, category: wood}
+  psets:
+    MF_Structural: {Product: Glued laminated timber, Grade: 24F-V4}
+  profile: {kind: Rectangle}
+  types:                                           # standard widths; depths in 1 1/2" lamination steps
+    - {name: 3 1/8" x 12", dims: ['3.125"', '12"', "20'-0\""],
+       profile: {params: {XDim: '3.125"', YDim: '12"'}}}
+    - {name: 5 1/8" x 18", dims: ['5.125"', '18"', "30'-0\""],
+       profile: {params: {XDim: '5.125"', YDim: '18"'}}}
+    - {name: 6 3/4" x 24", dims: ['6.75"', '24"', "40'-0\""],
+       profile: {params: {XDim: '6.75"', YDim: '24"'}}}
+    - {name: 8 3/4" x 30", dims: ['8.75"', '30"', "50'-0\""],
+       profile: {params: {XDim: '8.75"', YDim: '30"'}}}
+
+- key: lumber_ijoist
+  label: Wood I-Joist
+  ifc_class: IfcBeamType
+  predefined: JOIST
+  category: Engineered Lumber
+  discipline: structural
+  pack: structural-timber
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_20_76_88}         # Timber sections
+  material: {name: OSB Web with LVL Flanges, category: wood}
+  profile: {kind: IShape}
+  types:                                           # real I-section, not a rectangle
+    - name: 9 1/2" depth
+      dims: ['2.5"', '9.5"', "16'-0\""]
+      profile: {params: {OverallWidth: '2.5"', OverallDepth: '9.5"', WebThickness: '3/8"',
+                         FlangeThickness: '1.375"'}}
+    - name: 11 7/8" depth
+      dims: ['2.5"', '11.875"', "18'-0\""]
+      profile: {params: {OverallWidth: '2.5"', OverallDepth: '11.875"', WebThickness: '3/8"',
+                         FlangeThickness: '1.375"'}}
+    - name: 14" depth
+      dims: ['2.5"', '14"', "20'-0\""]
+      profile: {params: {OverallWidth: '2.5"', OverallDepth: '14"', WebThickness: '3/8"',
+                         FlangeThickness: '1.375"'}}
+    - name: 16" depth
+      dims: ['3.5"', '16"', "24'-0\""]
+      profile: {params: {OverallWidth: '3.5"', OverallDepth: '16"', WebThickness: '7/16"',
+                         FlangeThickness: '1.5"'}}
+
+- key: clt_panel
+  label: Cross-Laminated Timber Panel
+  ifc_class: IfcPlateType
+  category: Mass Timber
+  discipline: structural
+  pack: structural-timber
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_20_76_88}         # Timber sections
+  material: {name: CLT Spruce-Pine-Fir, category: wood}
+  psets:
+    MF_Structural: {Product: Cross-laminated timber}
+  profile: {kind: Rectangle}
+  types:                                           # 3/5/7-ply at 1 3/8" lamination thickness
+    - {name: 3-ply 4 1/8", dims: ["8'-0\"", '4.125"', "20'-0\""],
+       profile: {params: {XDim: "8'-0\"", YDim: '4.125"'}}}
+    - {name: 5-ply 6 7/8", dims: ["8'-0\"", '6.875"', "30'-0\""],
+       profile: {params: {XDim: "8'-0\"", YDim: '6.875"'}}}
+    - {name: 7-ply 9 5/8", dims: ["8'-0\"", '9.625"', "40'-0\""],
+       profile: {params: {XDim: "8'-0\"", YDim: '9.625"'}}}
+
+- key: timber_sheathing
+  label: Wood Sheathing
+  ifc_class: IfcPlateType
+  category: Sheathing
+  discipline: structural
+  pack: structural-timber
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_20_76_88}         # Timber sections
+  material: {name: OSB / Plywood, category: wood}
+  types:                                           # 4'-0" x 8'-0" sheet
+    - {name: 7/16" OSB, dims: ["4'-0\"", "8'-0\"", '7/16"']}
+    - {name: 15/32" plywood, dims: ["4'-0\"", "8'-0\"", '15/32"']}
+    - {name: 23/32" T&G subfloor, dims: ["4'-0\"", "8'-0\"", '23/32"']}

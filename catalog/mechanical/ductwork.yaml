@@ -1,0 +1,190 @@
+# Ductwork — SMACNA standard round and rectangular sizes, with distribution ports.
+#
+# Ports verified to survive massing's import (PLAN.md §8f spike): they attach to the type via
+# IfcRelNests and arrive with FlowDirection intact, so port-to-port routing works on imported content.
+#
+# Round duct is modelled as CircleHollow at sheet-metal gauge; rectangular as RectangleHollow.
+# Gauges follow SMACNA duct construction standards for the pressure class.
+
+- key: duct_round
+  label: Round Duct
+  ifc_class: IfcDuctSegmentType
+  predefined: RIGIDSEGMENT
+  category: Ductwork
+  discipline: mechanical
+  pack: mechanical-ductwork
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_65_65_25}
+  material: {name: Galvanized Steel, category: steel}
+  ports: {system: DUCT}
+  generator: sizes
+  generator_args:
+    kind: CircleHollow
+    length: "10'-0\""
+    wall: 0.028                                  # 24 ga
+    name: '{nominal}" Round'
+    entries:
+      - {nominal: 4, od: 4}
+      - {nominal: 5, od: 5}
+      - {nominal: 6, od: 6}
+      - {nominal: 7, od: 7}
+      - {nominal: 8, od: 8}
+      - {nominal: 9, od: 9}
+      - {nominal: 10, od: 10}
+      - {nominal: 12, od: 12}
+      - {nominal: 14, od: 14}
+      - {nominal: 16, od: 16}
+      - {nominal: 18, od: 18}
+      - {nominal: 20, od: 20}
+      - {nominal: 22, od: 22}
+      - {nominal: 24, od: 24}
+      - {nominal: 26, od: 26}
+      - {nominal: 28, od: 28}
+      - {nominal: 30, od: 30}
+      - {nominal: 32, od: 32}
+      - {nominal: 36, od: 36}
+      - {nominal: 42, od: 42}
+      - {nominal: 48, od: 48}
+
+- key: duct_rect
+  label: Rectangular Duct
+  ifc_class: IfcDuctSegmentType
+  predefined: RIGIDSEGMENT
+  category: Ductwork
+  discipline: mechanical
+  pack: mechanical-ductwork
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_65_65_25}
+  material: {name: Galvanized Steel, category: steel}
+  ports: {system: DUCT}
+  generator: sizes
+  generator_args:
+    kind: RectangleHollow
+    length: "8'-0\""
+    wall: 0.028
+    name: '{w}" x {h}"'
+    sections:
+      [[8,6],[10,6],[10,8],[12,6],[12,8],[12,10],[14,8],[14,10],[14,12],
+       [16,8],[16,10],[16,12],[18,10],[18,12],[18,14],[20,10],[20,12],[20,16],
+       [24,10],[24,12],[24,16],[24,20],[30,12],[30,16],[30,20],[30,24],
+       [36,12],[36,16],[36,20],[36,24],[42,16],[42,24],[48,16],[48,24],[48,30],
+       [60,24],[60,30],[72,24],[72,36]]
+
+- key: duct_flex
+  label: Flexible Duct
+  ifc_class: IfcDuctSegmentType
+  predefined: FLEXIBLESEGMENT
+  category: Ductwork
+  discipline: mechanical
+  pack: mechanical-ductwork
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_65_65_25}
+  material: {name: Insulated Flexible Duct, category: composite}
+  ports: {system: DUCT}
+  generator: sizes
+  generator_args:
+    kind: CircleHollow
+    length: "6'-0\""
+    wall: 1.5                                    # R-6 insulation jacket
+    name: '{nominal}" Flex'
+    entries:
+      - {nominal: 4, od: 7}
+      - {nominal: 5, od: 8}
+      - {nominal: 6, od: 9}
+      - {nominal: 7, od: 10}
+      - {nominal: 8, od: 11}
+      - {nominal: 10, od: 13}
+      - {nominal: 12, od: 15}
+
+- key: duct_elbow_round
+  label: Round Duct Elbow
+  ifc_class: IfcDuctFittingType
+  predefined: BEND
+  category: Duct Fittings
+  discipline: mechanical
+  pack: mechanical-ductwork
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_65_65_25}
+  material: {name: Galvanized Steel, category: steel}
+  ports: {system: DUCT}
+  generator: sizes
+  generator_args:
+    kind: CircleHollow
+    length: '18"'
+    wall: 0.028
+    name: '{nominal}" 90 deg Elbow'
+    entries:
+      - {nominal: 6, od: 6}
+      - {nominal: 8, od: 8}
+      - {nominal: 10, od: 10}
+      - {nominal: 12, od: 12}
+      - {nominal: 14, od: 14}
+      - {nominal: 16, od: 16}
+      - {nominal: 18, od: 18}
+      - {nominal: 20, od: 20}
+      - {nominal: 24, od: 24}
+
+- key: duct_tee_round
+  label: Round Duct Tee
+  ifc_class: IfcDuctFittingType
+  predefined: JUNCTION
+  category: Duct Fittings
+  discipline: mechanical
+  pack: mechanical-ductwork
+  builder: profile
+  tier: L300
+  classification: {uniclass: Pr_65_65_25}
+  material: {name: Galvanized Steel, category: steel}
+  ports: {system: DUCT, names: [In, Out, Branch], flows: [SOURCE, SINK, SINK]}
+  generator: sizes
+  generator_args:
+    kind: CircleHollow
+    length: '24"'
+    wall: 0.028
+    name: '{nominal}" Tee'
+    entries:
+      - {nominal: 6, od: 6}
+      - {nominal: 8, od: 8}
+      - {nominal: 10, od: 10}
+      - {nominal: 12, od: 12}
+      - {nominal: 14, od: 14}
+      - {nominal: 16, od: 16}
+      - {nominal: 18, od: 18}
+      - {nominal: 20, od: 20}
+      - {nominal: 24, od: 24}
+
+- key: duct_reducer
+  label: Round Duct Reducer
+  ifc_class: IfcDuctFittingType
+  predefined: TRANSITION
+  category: Duct Fittings
+  discipline: mechanical
+  pack: mechanical-ductwork
+  builder: taper
+  tier: L300
+  classification: {uniclass: Pr_65_65_25}
+  material: {name: Galvanized Steel, category: steel}
+  ports: {system: DUCT}
+  types:                                           # real tapered transition, not a straight tube
+    - {name: 10" to 8", dims: ['10"', '10"', '12"'],
+       taper: {start: {kind: Circle, params: {Radius: '5"'}},
+               end: {kind: Circle, params: {Radius: '4"'}}, depth: '12"'}}
+    - {name: 12" to 10", dims: ['12"', '12"', '12"'],
+       taper: {start: {kind: Circle, params: {Radius: '6"'}},
+               end: {kind: Circle, params: {Radius: '5"'}}, depth: '12"'}}
+    - {name: 14" to 12", dims: ['14"', '14"', '12"'],
+       taper: {start: {kind: Circle, params: {Radius: '7"'}},
+               end: {kind: Circle, params: {Radius: '6"'}}, depth: '12"'}}
+    - {name: 16" to 12", dims: ['16"', '16"', '18"'],
+       taper: {start: {kind: Circle, params: {Radius: '8"'}},
+               end: {kind: Circle, params: {Radius: '6"'}}, depth: '18"'}}
+    - {name: 20" to 16", dims: ['20"', '20"', '18"'],
+       taper: {start: {kind: Circle, params: {Radius: '10"'}},
+               end: {kind: Circle, params: {Radius: '8"'}}, depth: '18"'}}
+    - {name: 24" to 20", dims: ['24"', '24"', '24"'],
+       taper: {start: {kind: Circle, params: {Radius: '12"'}},
+               end: {kind: Circle, params: {Radius: '10"'}}, depth: '24"'}}

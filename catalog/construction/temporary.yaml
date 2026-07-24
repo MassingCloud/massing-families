@@ -1,0 +1,253 @@
+# Construction operations / temporary works — the strategic differentiator (PLAN.md §8c).
+#
+# Revit and SketchUp handle temporary works poorly, and massing already has a GC portal with site
+# logistics modules for this content to plug into. Nothing here is a permanent building element, so
+# most map to IfcBuildingElementProxyType with a clear MF_Temporary pset.
+#
+# Uniclass Ss_15_95 (temporary works systems) codes verified against the published Ss table.
+
+- key: scaffold_frame
+  label: Frame Scaffold
+  ifc_class: IfcBuildingElementProxyType
+  predefined: USERDEFINED
+  category: Access
+  discipline: construction
+  pack: construction-temporary
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_15_95_35}         # Temporary fixed access systems
+  material: {name: Galvanized Steel Frame, category: steel}
+  psets:
+    MF_Temporary: {Reusable: true, Discipline: Temporary works}
+  types:                                           # 5'-0" x 7'-0" frame bay is the US standard
+    - {name: 5'-0" x 7'-0" bay / 1 lift, dims: ["7'-0\"", "5'-0\"", "6'-6\""]}
+    - {name: 5'-0" x 7'-0" bay / 3 lifts, dims: ["7'-0\"", "5'-0\"", "19'-6\""]}
+    - {name: 5'-0" x 7'-0" bay / 6 lifts, dims: ["7'-0\"", "5'-0\"", "39'-0\""]}
+
+- key: scaffold_system
+  label: System Scaffold
+  ifc_class: IfcBuildingElementProxyType
+  predefined: USERDEFINED
+  category: Access
+  discipline: construction
+  pack: construction-temporary
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_15_95_35}         # Temporary fixed access systems
+  material: {name: Galvanized Steel Ringlock, category: steel}
+  psets:
+    MF_Temporary: {Reusable: true}
+  types:
+    - {name: 8'-0" bay / 1 lift, dims: ["8'-0\"", "5'-0\"", "6'-6\""]}
+    - {name: 8'-0" bay / 4 lifts, dims: ["8'-0\"", "5'-0\"", "26'-0\""]}
+
+- key: shoring_post
+  label: Shoring Post
+  ifc_class: IfcBuildingElementProxyType
+  predefined: USERDEFINED
+  category: Shoring
+  discipline: construction
+  pack: construction-temporary
+  builder: profile
+  tier: L300
+  classification: {uniclass: Ss_15_95_20}         # Temporary whole entity structural works systems
+  material: {name: Steel Adjustable Post Shore, category: steel}
+  psets:
+    MF_Temporary: {Reusable: true}
+  profile: {kind: CircleHollow}
+  types:
+    - name: 6'-0" to 10'-0" adjustable
+      dims: ['4"', '4"', "10'-0\""]
+      profile: {params: {Radius: 2.0, WallThickness: 0.12}}
+    - name: 10'-0" to 16'-0" adjustable
+      dims: ['4"', '4"', "16'-0\""]
+      profile: {params: {Radius: 2.0, WallThickness: 0.15}}
+
+- key: formwork_wall
+  label: Wall Formwork Panel
+  ifc_class: IfcBuildingElementProxyType
+  predefined: USERDEFINED
+  category: Formwork
+  discipline: construction
+  pack: construction-temporary
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_15_95_25}         # Temporary wall and barrier works systems
+  material: {name: Steel-Framed Plywood Panel, category: composite}
+  psets:
+    MF_Temporary: {Reusable: true, Cycles: 100}
+  types:
+    - {name: 2'-0" x 8'-0" panel, dims: ["2'-0\"", '6"', "8'-0\""]}
+    - {name: 4'-0" x 8'-0" panel, dims: ["4'-0\"", '6"', "8'-0\""]}
+    - {name: 8'-0" x 8'-0" gang, dims: ["8'-0\"", '8"', "8'-0\""]}
+
+- key: formwork_slab
+  label: Slab Formwork Table
+  ifc_class: IfcBuildingElementProxyType
+  predefined: USERDEFINED
+  category: Formwork
+  discipline: construction
+  pack: construction-temporary
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_15_95_20}         # Temporary whole entity structural works systems
+  material: {name: Aluminium Frame with Plywood Deck, category: composite}
+  psets:
+    MF_Temporary: {Reusable: true}
+  types:
+    - {name: 10'-0" x 20'-0" flying table, dims: ["20'-0\"", "10'-0\"", "9'-0\""]}
+    - {name: 16'-0" x 24'-0" flying table, dims: ["24'-0\"", "16'-0\"", "9'-0\""]}
+
+- key: crane_tower
+  label: Tower Crane
+  ifc_class: IfcTransportElementType
+  predefined: CRANEWAY
+  category: Lifting
+  discipline: construction
+  pack: construction-temporary
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_65_80_15}         # Cranes and lifting products
+  material: {name: Structural Steel, category: steel}
+  psets:
+    MF_Temporary: {Reusable: true, Discipline: Site logistics}
+  types:
+    - {name: 150'-0" jib / 100'-0" hook, dims: ["150'-0\"", "20'-0\"", "100'-0\""]}
+    - {name: 200'-0" jib / 200'-0" hook, dims: ["200'-0\"", "20'-0\"", "200'-0\""]}
+
+- key: crane_mobile
+  label: Mobile Crane
+  ifc_class: IfcTransportElementType
+  predefined: CRANEWAY
+  category: Lifting
+  discipline: construction
+  pack: construction-temporary
+  builder: box
+  tier: L200
+  classification: {uniclass: Pr_65_80_15}         # Cranes and lifting products
+  material: {name: Steel, category: steel}
+  psets:
+    MF_Temporary: {Discipline: Site logistics}
+  types:
+    - {name: 90 ton rough terrain, dims: ["45'-0\"", "12'-0\"", "12'-0\""]}
+    - {name: 300 ton crawler, dims: ["80'-0\"", "20'-0\"", "20'-0\""]}
+
+- key: material_hoist
+  label: Material / Personnel Hoist
+  ifc_class: IfcTransportElementType
+  predefined: LIFTINGGEAR
+  category: Lifting
+  discipline: construction
+  pack: construction-temporary
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_15_95_35}         # Temporary fixed access systems
+  material: {name: Steel Mast and Cage, category: steel}
+  psets:
+    MF_Temporary: {Reusable: true}
+  types:
+    - {name: Single cage / 100'-0" mast, dims: ["5'-0\"", "10'-0\"", "100'-0\""]}
+    - {name: Twin cage / 200'-0" mast, dims: ["10'-0\"", "10'-0\"", "200'-0\""]}
+
+- key: temp_fence
+  label: Temporary Fence
+  ifc_class: IfcBuildingElementProxyType
+  predefined: USERDEFINED
+  category: Site Protection
+  discipline: construction
+  pack: construction-temporary
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_15_95_25}         # Temporary wall and barrier works systems
+  material: {name: Galvanized Panel on Feet, category: steel}
+  psets:
+    MF_Temporary: {Reusable: true}
+  types:
+    - {name: 6'-0" x 12'-0" panel, dims: ["12'-0\"", '2"', "6'-0\""]}
+    - {name: 8'-0" x 12'-0" panel, dims: ["12'-0\"", '2"', "8'-0\""]}
+
+- key: jersey_barrier
+  label: Jersey Barrier
+  ifc_class: IfcBuildingElementProxyType
+  predefined: USERDEFINED
+  category: Site Protection
+  discipline: construction
+  pack: construction-temporary
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_15_95_25}         # Temporary wall and barrier works systems
+  material: {name: Precast Concrete, category: concrete}
+  psets:
+    MF_Temporary: {Reusable: true}
+  types:
+    - {name: 10'-0" precast, dims: ["10'-0\"", '24"', '32"']}
+    - {name: 12'-0" precast, dims: ["12'-0\"", '24"', '32"']}
+
+- key: jobsite_trailer
+  label: Jobsite Trailer
+  ifc_class: IfcBuildingElementProxyType
+  predefined: USERDEFINED
+  category: Site Facilities
+  discipline: construction
+  pack: construction-temporary
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_15_95}            # Temporary works systems
+  material: {name: Modular Steel Frame, category: steel}
+  psets:
+    MF_Temporary: {Reusable: true, Discipline: Site logistics}
+  types:
+    - {name: 8'-0" x 20'-0" office, dims: ["20'-0\"", "8'-0\"", "9'-0\""]}
+    - {name: 12'-0" x 60'-0" office, dims: ["60'-0\"", "12'-0\"", "9'-0\""]}
+    - {name: 12'-0" x 40'-0" storage, dims: ["40'-0\"", "12'-0\"", "9'-0\""]}
+
+- key: dumpster
+  label: Dumpster
+  ifc_class: IfcBuildingElementProxyType
+  predefined: USERDEFINED
+  category: Site Facilities
+  discipline: construction
+  pack: construction-temporary
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_15_95}            # Temporary works systems
+  material: {name: Painted Steel, category: steel}
+  psets:
+    MF_Temporary: {Reusable: true}
+  types:
+    - {name: 20 cubic yard, dims: ["22'-0\"", "8'-0\"", "4'-0\""]}
+    - {name: 30 cubic yard, dims: ["22'-0\"", "8'-0\"", "6'-0\""]}
+    - {name: 40 cubic yard, dims: ["22'-0\"", "8'-0\"", "8'-0\""]}
+
+- key: portable_toilet
+  label: Portable Toilet
+  ifc_class: IfcBuildingElementProxyType
+  predefined: USERDEFINED
+  category: Site Facilities
+  discipline: construction
+  pack: construction-temporary
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_15_95}            # Temporary works systems
+  material: {name: Polyethylene, category: plastic}
+  psets:
+    MF_Temporary: {Reusable: true}
+  types:
+    - {name: Standard, dims: ["4'-0\"", "4'-0\"", "7'-6\""]}
+    - {name: ADA accessible, dims: ["5'-0\"", "5'-0\"", "7'-6\""]}
+
+- key: safety_rail_temp
+  label: Temporary Guardrail
+  ifc_class: IfcBuildingElementProxyType
+  predefined: USERDEFINED
+  category: Site Protection
+  discipline: construction
+  pack: construction-temporary
+  builder: box
+  tier: L200
+  classification: {uniclass: Ss_15_95_17}         # Temporary protection systems
+  material: {name: Steel Post with Cable, category: steel}
+  psets:
+    MF_Temporary: {Reusable: true, Standard: OSHA 1926.502}
+  types:
+    - {name: 42" high / 8'-0" bay, dims: ["8'-0\"", '2"', '42"']}
