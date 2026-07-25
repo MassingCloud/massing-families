@@ -47,22 +47,6 @@
     - {name: 'Boardroom 20'' — 16 Seats', dims: ['20''-0"', '5''-0"', '2''-6"']}
     - {name: 'Round 4''-0" — 4 Seats', dims: ['4''-0"', '4''-0"', '2''-6"']}
 
-- key: task_chair
-  label: Task / Conference Chair
-  ifc_class: IfcFurnitureType
-  predefined: CHAIR
-  category: Furniture
-  discipline: interiors
-  classification: {uniclass: Pr_40_50_12}           # Chairs, seats and benches
-  pack: interiors-furniture
-  builder: box
-  tier: L200
-  material: {name: Mesh / Polymer, category: plastic}
-  types:
-    - {name: 'Task Chair (Casters)', dims: ['2''-2"', '2''-2"', '3''-6"']}
-    - {name: 'Conference Chair', dims: ['2''-0"', '2''-2"', '3''-0"']}
-    - {name: 'Stool 30" Seat', dims: ['1''-6"', '1''-6"', '3''-6"']}
-
 - key: lounge_seating
   label: Lounge Seating
   ifc_class: IfcFurnitureType
@@ -182,4 +166,3 @@
     - {name: 'Workbench 6''-0"', dims: ['6''-0"', '2''-6"', '3''-0"']}
     - {name: 'Workbench 8''-0" with Riser', dims: ['8''-0"', '2''-6"', '5''-0"']}
     - {name: 'Wire Shelving 4'' x 18" x 6''', dims: ['4''-0"', '1''-6"', '6''-0"']}
-

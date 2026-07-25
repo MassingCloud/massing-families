@@ -76,3 +76,40 @@ def test_systems_codes_not_used_on_discrete_products(catalog_root):
         if code.startswith("Ss_") and spec.ifc_class in PRODUCT_CLASSES:
             bad.append((spec.key, spec.ifc_class, code))
     assert not bad, f"systems (Ss) codes used on discrete product classes: {bad}"
+
+
+def test_no_duplicate_families(catalog_root):
+    """Two families with the same label, class and discipline are the same product twice.
+
+    They do not break import — massing dedupes on (ifc_class, type name), and those stay distinct —
+    but they make the catalog confusing to browse: a user sees "Copper Pipe Type L" twice with
+    different type names and cannot tell which to place.
+
+    Seven such pairs accumulated when depth content was authored alongside existing families
+    (pipe_copper_type_l/pipe_copper_l, wc_flush_valve/toilet, task_chair/chair and others). Merged in
+    favour of the richer definition, keeping the canonical key and its massing_key mapping.
+    """
+    import re
+    from collections import defaultdict
+
+    groups = defaultdict(list)
+    for spec in load_catalog(catalog_root):
+        label = re.sub(r"[^a-z0-9]", "", spec.label.lower())
+        groups[(spec.ifc_class, spec.discipline, label)].append(spec.key)
+    dupes = {k: sorted(v) for k, v in groups.items() if len(v) > 1}
+    assert not dupes, f"duplicate families (same label, class and discipline): {dupes}"
+
+
+def test_no_type_name_collisions(catalog_root):
+    """massing dedupes types by (ifc_class, Name), so two families emitting the same type name would
+    silently collapse into one on import — the second would be skipped."""
+    from collections import defaultdict
+
+    from massing_families.generators import expand
+
+    seen = defaultdict(set)
+    for spec in load_catalog(catalog_root):
+        for variant in expand(spec):
+            seen[(spec.ifc_class, spec.type_name(variant))].add(spec.key)
+    clashes = {k: sorted(v) for k, v in seen.items() if len(v) > 1}
+    assert not clashes, f"type name collisions across families: {list(clashes.items())[:5]}"

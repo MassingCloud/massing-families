@@ -26,13 +26,15 @@
   predefined: CHAIR
   category: Furniture
   discipline: interiors
+  classification: {uniclass: Pr_40_50_12}           # Chairs, seats and benches
+  pack: interiors-furniture
   builder: box
   tier: L200
-  classification: {uniclass: Pr_40_50_12}         # Chairs
-  material: {name: Upholstery / Polymer, category: composite}
+  material: {name: Mesh / Polymer, category: plastic}
   types:
-    - {name: Task, dims: ['24"', '24"', '36"']}
-    - {name: Side, dims: ['20"', '20"', '32"']}
+    - {name: 'Task Chair (Casters)', dims: ['2''-2"', '2''-2"', '3''-6"']}
+    - {name: 'Conference Chair', dims: ['2''-0"', '2''-2"', '3''-0"']}
+    - {name: 'Stool 30" Seat', dims: ['1''-6"', '1''-6"', '3''-6"']}
 
 - key: table
   label: Table
