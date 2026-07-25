@@ -19,6 +19,7 @@
   predefined: DIRECTIONSOURCE
   category: Lighting
   discipline: electrical
+  classification: {uniclass: Pr_70_70_48_62}        # Pendant luminaires
   pack: electrical-lighting
   builder: box
   tier: L200
@@ -36,6 +37,7 @@
   predefined: DIRECTIONSOURCE
   category: Lighting
   discipline: electrical
+  classification: {uniclass: Pr_70_70_48}           # Luminaires, lighting track and lighting accessories
   pack: electrical-lighting
   builder: box
   tier: L200
@@ -52,6 +54,7 @@
   predefined: DIRECTIONSOURCE
   category: Lighting
   discipline: electrical
+  classification: {uniclass: Pr_70_70_48}           # Luminaires, lighting track and lighting accessories
   pack: electrical-lighting
   builder: box
   tier: L200
@@ -69,6 +72,7 @@
   predefined: SECURITYLIGHTING
   category: Lighting
   discipline: electrical
+  classification: {uniclass: Pr_70_70_48}           # Luminaires, lighting track and lighting accessories
   pack: electrical-lighting
   builder: box
   tier: L200
@@ -86,6 +90,7 @@
   predefined: SECURITYLIGHTING
   category: Lighting
   discipline: electrical
+  classification: {uniclass: Pr_70_70_48}           # Luminaires, lighting track and lighting accessories
   pack: electrical-lighting
   builder: box
   tier: L200
@@ -102,6 +107,7 @@
   predefined: DIRECTIONSOURCE
   category: Lighting
   discipline: electrical
+  classification: {uniclass: Pr_70_70_48}           # Luminaires, lighting track and lighting accessories
   pack: electrical-lighting
   builder: box
   tier: L200
@@ -119,6 +125,7 @@
   predefined: MOTORCONTROLCENTRE
   category: Distribution
   discipline: electrical
+  classification: {uniclass: Pr_60_70_22}           # Distribution boxes and switchboards
   pack: electrical-distribution
   builder: box
   tier: L200
@@ -135,6 +142,7 @@
   predefined: SWITCHDISCONNECTOR
   category: Distribution
   discipline: electrical
+  classification: {uniclass: Pr_60_70_48}           # Low-voltage switchgear
   pack: electrical-distribution
   builder: box
   tier: L200
@@ -152,6 +160,7 @@
   predefined: CONTACTOR
   category: Distribution
   discipline: electrical
+  classification: {uniclass: Pr_60_70_48}           # Low-voltage switchgear
   pack: electrical-distribution
   builder: box
   tier: L200
@@ -169,6 +178,7 @@
   predefined: DISTRIBUTIONBOARD
   category: Distribution
   discipline: electrical
+  classification: {uniclass: Pr_60_70_22}           # Distribution boxes and switchboards
   pack: electrical-distribution
   builder: box
   tier: L200
@@ -185,6 +195,7 @@
   predefined: UPS
   category: Distribution
   discipline: electrical
+  classification: {uniclass: Pr_60_70_64}           # Power conditioning supply equipment
   pack: electrical-distribution
   builder: box
   tier: L200
@@ -201,6 +212,7 @@
   predefined: CONDUITSEGMENT
   category: Raceway
   discipline: electrical
+  classification: {uniclass: Pr_65_70_11}           # Cable management and accessories
   pack: electrical-raceway
   builder: profile
   tier: L300
@@ -228,6 +240,7 @@
   predefined: DATAOUTLET
   category: Devices
   discipline: electrical
+  classification: {uniclass: Pr_65_70_15}           # Communications cables and accessories
   pack: electrical-devices
   builder: box
   tier: L200
@@ -244,6 +257,7 @@
   predefined: POWEROUTLET
   category: Devices
   discipline: electrical
+  classification: {uniclass: Pr_65_70_11}           # Cable management and accessories
   pack: electrical-devices
   builder: box
   tier: L200
@@ -260,6 +274,7 @@
   predefined: DIMMERSWITCH
   category: Devices
   discipline: electrical
+  classification: {uniclass: Pr_70_70_47}           # Lighting controls and lighting distribution products
   pack: electrical-devices
   builder: box
   tier: L200
@@ -274,6 +289,7 @@
   predefined: MOVEMENTSENSOR
   category: Devices
   discipline: electrical
+  classification: {uniclass: Pr_70_70_47}           # Lighting controls and lighting distribution products
   pack: electrical-devices
   builder: box
   tier: L200
@@ -291,6 +307,7 @@
   predefined: DISTRIBUTIONBOARD
   category: Distribution
   discipline: electrical
+  classification: {uniclass: Pr_65_70_46}           # Lightning protection and earthing components
   pack: electrical-distribution
   builder: box
   tier: L200

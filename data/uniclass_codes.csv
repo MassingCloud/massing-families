@@ -1,6 +1,7 @@
 code,title
 Pr_20_29_03,Anchors and components
 Pr_20_29_08,Bolts and accessories
+Pr_20_65,Prefabricated buildings and structures
 Pr_20_76_08,Bollards and impact protectors
 Pr_20_76_51,Metal sections
 Pr_20_76_51_21,Cold-formed galvanized steel sections
@@ -18,21 +19,29 @@ Pr_25_30_30,"Floor plates, gratings and edgings"
 Pr_25_30_36,Handrails
 Pr_25_30_85,Stair and ladder units
 Pr_25_71_35_99,X-ray-resistant gypsum plasterboards
+Pr_30_36,Hardware products
+Pr_30_59_23,Door frames and leaves
 Pr_30_59_24,Doorsets
+Pr_30_59_36,Hatches and access panels
 Pr_30_59_36_74,Roof hatches
+Pr_30_59_59,Vehicular barriers
 Pr_30_59_72,Rooflights
 Pr_30_59_98,Window units
+Pr_30_59_99,Window walls
 Pr_35_31,Formless covering and finish products
 Pr_35_57,"Non-rigid sheet, mat and strip covering and finish products"
 Pr_35_90,Trim products
 Pr_35_90_27,Expansion joints
 Pr_35_93,Unit covering and finish products
+Pr_40_10,Signage products
+Pr_40_20,Sanitary fittings and accessories
 Pr_40_20_06_08,Baths
 Pr_40_20_06_79,Shower enclosures
 Pr_40_20_93,Urinal and WC fittings
 Pr_40_20_93_30,Floor-standing urinals
 Pr_40_20_93_94,WC pans
 Pr_40_20_96,"Washbasins, sinks and troughs"
+Pr_40_30,Fittings
 Pr_40_30_29_84,Street and site benches
 Pr_40_30_30_47,Laboratory work benches
 Pr_40_30_30_96,Worktops
@@ -43,6 +52,7 @@ Pr_40_30_87_29,Filing cabinets
 Pr_40_30_87_46,Laboratory storage units
 Pr_40_30_87_48,Lockers
 Pr_40_30_87_96,Wardrobes
+Pr_40_50,Furnishings
 Pr_40_50_06,Beds
 Pr_40_50_06_38,Hospital bedheads
 Pr_40_50_06_39,Hospital beds
@@ -52,6 +62,7 @@ Pr_40_50_21,Desks and tables
 Pr_40_50_21_21,Desks
 Pr_40_50_28,Extinguishers and fire blankets
 Pr_40_50_51,Medical chairs and couches
+Pr_40_70,Equipment
 Pr_40_70_15_24,Drinking fountains
 Pr_40_70_17,Commercial cooking equipment
 Pr_40_70_21,Dishwashers
@@ -64,31 +75,54 @@ Pr_40_70_47,Laundry washers and dryers
 Pr_45_30_80,Shrubs and woody climbers
 Pr_45_30_90,Trees
 Pr_45_63_63,Plant containers
+Pr_60_50,"Tank, cylinder and vessel products"
 Pr_60_60_08,Boilers
 Pr_60_60_13,Chillers and cooling towers
 Pr_60_60_36,Heat recovery distribution equipment
 Pr_60_60_38,Calorifiers and plate heat exchangers
 Pr_60_60_96,Water heaters
+Pr_60_65_03,Air-handling units
+Pr_60_70_10,Charging stations
+Pr_60_70_15,Control and protection devices
+Pr_60_70_22,Distribution boxes and switchboards
 Pr_60_70_22_22,Distribution boards
 Pr_60_70_36,High-voltage switchgear and transformers
+Pr_60_70_48,Low-voltage switchgear
+Pr_60_70_64,Power conditioning supply equipment
 Pr_60_70_65,"Power generators, engines and packaged combined heat and power (CHP) units"
+Pr_65_52_01,Access and inspection chambers and gullies
 Pr_65_52_03,Above-ground drainage pipes and fittings
+Pr_65_52_07,Below-ground and pressure drainage pipes and fittings
 Pr_65_52_24,Drainage gullies and channels
+Pr_65_52_38,"Hoses, hose reels and ancillaries"
+Pr_65_52_61,Pipe accessories
 Pr_65_52_63,Pipes and fittings
 Pr_65_53_24,Drainage pumps
 Pr_65_53_86,Supply and exhaust pumps
 Pr_65_54_30,Firefighting valves and devices
 Pr_65_54_95,Water services valves
+Pr_65_55_76,Separators
+Pr_65_65_23,Ductwork accessories
 Pr_65_65_24,Duct dampers
 Pr_65_65_25,Ductwork and fittings
+Pr_65_67_29,Fans
+Pr_65_67_39,Humidifiers and dehumidifiers
+Pr_65_67_78,Sound attenuators
 Pr_65_70_11,Cable management and accessories
 Pr_65_70_11_17,Cable trays
+Pr_65_70_15,Communications cables and accessories
+Pr_65_70_46,Lightning protection and earthing components
 Pr_65_80_06,Baggage handling conveyors
 Pr_65_80_15,Cranes and lifting products
 Pr_65_80_23,Dock levellers
 Pr_65_80_28,Escalator and moving walk products
 Pr_65_80_28_21,Escalators
 Pr_65_80_42,"Transport cars, platforms and chairs"
+Pr_65_80_47,Lifting gear
+Pr_65_80_49,Lift products and components
+Pr_65_80_65,Pneumatic conveying products
+Pr_70_55_33,Gas and foam nozzles and sprinklers
+Pr_70_55_42,Irrigation and aeration outlets
 Pr_70_55_97_84,Sprinkler heads
 Pr_70_60_36,Heat emitters
 Pr_70_60_36_73,Radiators
@@ -97,6 +131,7 @@ Pr_70_65_03,Air conditioning units
 Pr_70_65_03_29,Fan coil units
 Pr_70_65_04,Air terminals and diffusers
 Pr_70_65_04_02,Air diffusers
+Pr_70_70_47,Lighting controls and lighting distribution products
 Pr_70_70_48,"Luminaires, lighting track and lighting accessories"
 Pr_70_70_48_62,Pendant luminaires
 Pr_70_70_48_71,Recessed luminaires
@@ -107,8 +142,13 @@ Ss_15_95_17,Temporary protection systems
 Ss_15_95_20,Temporary whole entity structural works systems
 Ss_15_95_25,Temporary wall and barrier works systems
 Ss_15_95_35,"Temporary fixed access, tunnel, shaft, vessel and tower works systems"
+Ss_20_05_15,Concrete foundation systems
+Ss_20_05_50,Minor concrete substructure systems
+Ss_20_05_65,Piling systems
+Ss_20_05_90,Underpinning systems
 Ss_20_20_75_70,Reinforced concrete beam systems
 Ss_20_30_75,Structural column systems
+Ss_20_60,Retaining wall systems
 Ss_25_10_20,Curtain walling systems
 Ss_25_10_30,Framed partition systems
 Ss_25_12_60_60,Panel cubicle systems

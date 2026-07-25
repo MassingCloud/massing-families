@@ -17,6 +17,7 @@
   predefined: BEND
   category: Duct Fittings
   discipline: mechanical
+  classification: {uniclass: Pr_65_65_25}           # Ductwork and fittings
   pack: mechanical-ductwork
   builder: box
   tier: L200
@@ -36,6 +37,7 @@
   predefined: JUNCTION
   category: Duct Fittings
   discipline: mechanical
+  classification: {uniclass: Pr_65_65_25}           # Ductwork and fittings
   pack: mechanical-ductwork
   builder: box
   tier: L200
@@ -54,6 +56,7 @@
   predefined: TRANSITION
   category: Duct Fittings
   discipline: mechanical
+  classification: {uniclass: Pr_65_65_25}           # Ductwork and fittings
   pack: mechanical-ductwork
   builder: box
   tier: L200
@@ -72,6 +75,7 @@
   predefined: OBSTRUCTION
   category: Duct Fittings
   discipline: mechanical
+  classification: {uniclass: Pr_65_65_25}           # Ductwork and fittings
   pack: mechanical-ductwork
   builder: box
   tier: L200
@@ -89,6 +93,7 @@
   predefined: ENTRY
   category: Duct Fittings
   discipline: mechanical
+  classification: {uniclass: Pr_65_65_25}           # Ductwork and fittings
   pack: mechanical-ductwork
   builder: box
   tier: L200
@@ -105,6 +110,7 @@
   predefined: BALANCINGDAMPER
   category: Duct Accessories
   discipline: mechanical
+  classification: {uniclass: Pr_65_65_24}           # Duct dampers
   pack: mechanical-ductwork
   builder: box
   tier: L200
@@ -123,6 +129,7 @@
   predefined: CONTROLDAMPER
   category: Duct Accessories
   discipline: mechanical
+  classification: {uniclass: Pr_65_65_24}           # Duct dampers
   pack: mechanical-ductwork
   builder: box
   tier: L200
@@ -141,6 +148,7 @@
   predefined: BACKDRAFTDAMPER
   category: Duct Accessories
   discipline: mechanical
+  classification: {uniclass: Pr_65_65_24}           # Duct dampers
   pack: mechanical-ductwork
   builder: box
   tier: L200
@@ -156,6 +164,7 @@
   predefined: RECTANGULAR
   category: Duct Accessories
   discipline: mechanical
+  classification: {uniclass: Pr_65_67_78}           # Sound attenuators
   pack: mechanical-ductwork
   builder: box
   tier: L200
@@ -174,6 +183,7 @@
   predefined: AIRPARTICLEFILTER
   category: Air Handling
   discipline: mechanical
+  classification: {uniclass: Pr_65_65_23}           # Ductwork accessories
   pack: mechanical-equipment
   builder: box
   tier: L200
@@ -192,6 +202,7 @@
   predefined: NOTDEFINED
   category: Duct Accessories
   discipline: mechanical
+  classification: {uniclass: Pr_65_65_23}           # Ductwork accessories
   pack: mechanical-ductwork
   builder: box
   tier: L200
@@ -209,6 +220,7 @@
   predefined: EXPANSION
   category: Hydronic
   discipline: mechanical
+  classification: {uniclass: Pr_60_50}              # Tank, cylinder and vessel products
   pack: mechanical-piping
   builder: revolve
   tier: L200
@@ -227,6 +239,7 @@
   predefined: STRAINER
   category: Hydronic
   discipline: mechanical
+  classification: {uniclass: Pr_65_55_76}           # Separators
   pack: mechanical-piping
   builder: revolve
   tier: L200
@@ -244,6 +257,7 @@
   predefined: RIGIDSEGMENT
   category: Hydronic
   discipline: mechanical
+  classification: {uniclass: Pr_65_52_63}           # Pipes and fittings
   pack: mechanical-piping
   builder: profile
   tier: L300
@@ -274,6 +288,7 @@
   predefined: ISOLATING
   category: Hydronic
   discipline: mechanical
+  classification: {uniclass: Pr_65_54_95}           # Water services valves
   pack: mechanical-piping
   builder: box
   tier: L200
@@ -292,6 +307,7 @@
   predefined: INSULATION
   category: Hydronic
   discipline: mechanical
+  classification: {uniclass: Pr_65_52_61}           # Pipe accessories
   pack: mechanical-piping
   builder: profile
   tier: L300
@@ -316,6 +332,7 @@
   predefined: SPLITSYSTEM
   category: Equipment
   discipline: mechanical
+  classification: {uniclass: Pr_70_65_03}           # Air conditioning units
   pack: mechanical-equipment
   builder: box
   tier: L200
@@ -334,6 +351,7 @@
   predefined: SPLITSYSTEM
   category: Equipment
   discipline: mechanical
+  classification: {uniclass: Pr_70_65_03}           # Air conditioning units
   pack: mechanical-equipment
   builder: box
   tier: L200
@@ -350,6 +368,7 @@
   predefined: NOTDEFINED
   category: Equipment
   discipline: mechanical
+  classification: {uniclass: Pr_60_65_03}           # Air-handling units
   pack: mechanical-equipment
   builder: box
   tier: L200
@@ -367,6 +386,7 @@
   predefined: STEAMINJECTION
   category: Equipment
   discipline: mechanical
+  classification: {uniclass: Pr_65_67_39}           # Humidifiers and dehumidifiers
   pack: mechanical-equipment
   builder: box
   tier: L200
@@ -384,6 +404,7 @@
   predefined: DIFFUSER
   category: Terminals
   discipline: mechanical
+  classification: {uniclass: Pr_70_65_04}           # Air terminals and diffusers
   pack: mechanical-equipment
   builder: box
   tier: L200
@@ -402,6 +423,7 @@
   predefined: PROPELLORAXIAL
   category: Equipment
   discipline: mechanical
+  classification: {uniclass: Pr_65_67_29}           # Fans
   pack: mechanical-equipment
   builder: revolve
   tier: L200

@@ -18,6 +18,7 @@
   predefined: DOOR
   category: Doors
   discipline: architectural
+  classification: {uniclass: Pr_30_59_24}           # Doorsets
   pack: architectural-doors
   builder: box
   tier: L200
@@ -35,6 +36,7 @@
   predefined: DOOR
   category: Doors
   discipline: architectural
+  classification: {uniclass: Pr_30_59_24}           # Doorsets
   pack: architectural-doors
   builder: revolve
   tier: L200
@@ -51,6 +53,7 @@
   predefined: DOOR
   category: Doors
   discipline: architectural
+  classification: {uniclass: Pr_30_59_24}           # Doorsets
   pack: architectural-doors
   builder: box
   tier: L200
@@ -68,6 +71,7 @@
   predefined: DOOR
   category: Doors
   discipline: architectural
+  classification: {uniclass: Pr_30_59_24}           # Doorsets
   pack: architectural-doors
   builder: box
   tier: L200
@@ -84,6 +88,7 @@
   predefined: NOTDEFINED
   category: Doors
   discipline: architectural
+  classification: {uniclass: Pr_30_59_23}           # Door frames and leaves
   pack: architectural-doors
   builder: box
   tier: L200
@@ -101,6 +106,7 @@
   predefined: NOTDEFINED
   category: Doors
   discipline: architectural
+  classification: {uniclass: Pr_30_36}              # Hardware products
   pack: architectural-doors
   builder: box
   tier: L200
@@ -119,6 +125,7 @@
   predefined: DOOR
   category: Specialties
   discipline: architectural
+  classification: {uniclass: Pr_30_59_36}           # Hatches and access panels
   pack: architectural-specialties
   builder: box
   tier: L200
@@ -137,6 +144,7 @@
   predefined: WINDOW
   category: Windows
   discipline: architectural
+  classification: {uniclass: Pr_30_59_98}           # Window units
   pack: architectural-windows
   builder: box
   tier: L200
@@ -153,6 +161,7 @@
   predefined: WINDOW
   category: Windows
   discipline: architectural
+  classification: {uniclass: Pr_30_59_98}           # Window units
   pack: architectural-windows
   builder: box
   tier: L200
@@ -170,6 +179,7 @@
   predefined: MULLION
   category: Curtain Wall
   discipline: architectural
+  classification: {uniclass: Pr_20_76_51}           # Metal sections
   pack: architectural-walls
   builder: profile
   tier: L300
@@ -187,6 +197,7 @@
   predefined: NOTDEFINED
   category: Curtain Wall
   discipline: architectural
+  classification: {uniclass: Ss_25_10_20}           # Curtain walling systems
   pack: architectural-walls
   builder: box
   tier: L200
@@ -204,6 +215,7 @@
   predefined: NOTDEFINED
   category: Curtain Wall
   discipline: architectural
+  classification: {uniclass: Pr_30_59_99}           # Window walls
   pack: architectural-walls
   builder: box
   tier: L200
@@ -221,6 +233,7 @@
   predefined: SHEET
   category: Curtain Wall
   discipline: architectural
+  classification: {uniclass: Ss_25_10_20}           # Curtain walling systems
   pack: architectural-walls
   builder: box
   tier: L200
@@ -238,6 +251,7 @@
   predefined: STUD
   category: Wall Assemblies
   discipline: architectural
+  classification: {uniclass: Pr_20_76_51_21}        # Cold-formed galvanized steel sections
   pack: architectural-walls
   builder: profile
   tier: L300
@@ -256,6 +270,7 @@
   predefined: SOLIDWALL
   category: Wall Assemblies
   discipline: architectural
+  classification: {uniclass: Ss_25_13_50}           # Masonry wall systems
   pack: architectural-walls
   builder: box
   tier: L200
@@ -273,6 +288,7 @@
   predefined: SOLIDWALL
   category: Wall Assemblies
   discipline: architectural
+  classification: {uniclass: Ss_25_10_20}           # Curtain walling systems
   pack: architectural-walls
   builder: box
   tier: L200
@@ -291,6 +307,7 @@
   predefined: SOLIDWALL
   category: Wall Assemblies
   discipline: architectural
+  classification: {uniclass: Pr_20_93_85}           # Structural units
   pack: architectural-walls
   builder: box
   tier: L200
@@ -309,6 +326,7 @@
   predefined: INSULATION
   category: Wall Assemblies
   discipline: architectural
+  classification: {uniclass: Pr_35_57}              # Non-rigid sheet, mat and strip covering and finish products
   pack: architectural-walls
   builder: box
   tier: L200
@@ -327,6 +345,7 @@
   predefined: MEMBRANE
   category: Wall Assemblies
   discipline: architectural
+  classification: {uniclass: Pr_35_57}              # Non-rigid sheet, mat and strip covering and finish products
   pack: architectural-walls
   builder: box
   tier: L200
@@ -343,6 +362,7 @@
   predefined: MOVABLE
   category: Wall Assemblies
   discipline: architectural
+  classification: {uniclass: Ss_25_10_30}           # Framed partition systems
   pack: architectural-walls
   builder: box
   tier: L200
@@ -360,6 +380,7 @@
   predefined: PARTITIONING
   category: Wall Assemblies
   discipline: architectural
+  classification: {uniclass: Ss_25_10_30}           # Framed partition systems
   pack: architectural-walls
   builder: box
   tier: L200
@@ -377,6 +398,7 @@
   predefined: CEILING
   category: Finishes
   discipline: architectural
+  classification: {uniclass: Ss_30_25_22}           # Demountable suspended ceiling systems
   pack: architectural-finishes
   builder: box
   tier: L200
@@ -393,6 +415,7 @@
   predefined: CEILING
   category: Finishes
   discipline: architectural
+  classification: {uniclass: Ss_30_25_22}           # Demountable suspended ceiling systems
   pack: architectural-finishes
   builder: box
   tier: L200
@@ -409,6 +432,7 @@
   predefined: CEILING
   category: Finishes
   discipline: architectural
+  classification: {uniclass: Ss_30_25_22}           # Demountable suspended ceiling systems
   pack: architectural-finishes
   builder: box
   tier: L200
@@ -425,6 +449,7 @@
   predefined: CEILING
   category: Finishes
   discipline: architectural
+  classification: {uniclass: Ss_30_25_10}           # Board and sheet ceiling systems
   pack: architectural-finishes
   builder: box
   tier: L200
@@ -441,6 +466,7 @@
   predefined: FLOORING
   category: Finishes
   discipline: architectural
+  classification: {uniclass: Pr_35_31}              # Formless covering and finish products
   pack: architectural-finishes
   builder: box
   tier: L200
@@ -457,6 +483,7 @@
   predefined: FLOORING
   category: Finishes
   discipline: architectural
+  classification: {uniclass: Pr_35_57}              # Non-rigid sheet, mat and strip covering and finish products
   pack: architectural-finishes
   builder: box
   tier: L200
@@ -473,6 +500,7 @@
   predefined: FLOORING
   category: Finishes
   discipline: architectural
+  classification: {uniclass: Pr_35_93}              # Unit covering and finish products
   pack: architectural-finishes
   builder: box
   tier: L200
@@ -489,6 +517,7 @@
   predefined: FLOORING
   category: Finishes
   discipline: architectural
+  classification: {uniclass: Pr_35_31}              # Formless covering and finish products
   pack: architectural-finishes
   builder: box
   tier: L200
@@ -506,6 +535,7 @@
   predefined: NOTDEFINED
   category: Specialties
   discipline: architectural
+  classification: {uniclass: Pr_40_20}              # Sanitary fittings and accessories
   pack: architectural-specialties
   builder: revolve
   tier: L200
@@ -523,6 +553,7 @@
   predefined: NOTDEFINED
   category: Specialties
   discipline: architectural
+  classification: {uniclass: Pr_40_20}              # Sanitary fittings and accessories
   pack: architectural-specialties
   builder: box
   tier: L200
@@ -540,6 +571,7 @@
   predefined: CLADDING
   category: Specialties
   discipline: architectural
+  classification: {uniclass: Pr_35_90}              # Trim products
   pack: architectural-specialties
   builder: box
   tier: L200
@@ -558,6 +590,7 @@
   predefined: NOTDEFINED
   category: Specialties
   discipline: architectural
+  classification: {uniclass: Pr_35_90_27}           # Expansion joints
   pack: architectural-specialties
   builder: box
   tier: L200
@@ -575,6 +608,7 @@
   predefined: NOTDEFINED
   category: Specialties
   discipline: architectural
+  classification: {uniclass: Pr_40_30}              # Fittings
   pack: architectural-specialties
   builder: box
   tier: L200
@@ -590,6 +624,7 @@
   predefined: ELEMENT
   category: Specialties
   discipline: architectural
+  classification: {uniclass: Pr_20_65}              # Prefabricated buildings and structures
   pack: architectural-specialties
   builder: box
   tier: L200
@@ -607,6 +642,7 @@
   predefined: CLADDING
   category: Specialties
   discipline: architectural
+  classification: {uniclass: Pr_35_93}              # Unit covering and finish products
   pack: architectural-specialties
   builder: box
   tier: L200
@@ -624,6 +660,7 @@
   predefined: STRAIGHT
   category: Circulation
   discipline: architectural
+  classification: {uniclass: Ss_35_10}              # Stair and ramp structure systems
   pack: architectural-circulation
   builder: box
   tier: L200
@@ -641,6 +678,7 @@
   predefined: SPIRAL_STAIR
   category: Circulation
   discipline: architectural
+  classification: {uniclass: Ss_35_10}              # Stair and ramp structure systems
   pack: architectural-circulation
   builder: revolve
   tier: L200

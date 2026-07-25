@@ -16,6 +16,7 @@
   predefined: RIGIDSEGMENT
   category: Site Utilities
   discipline: site
+  classification: {uniclass: Pr_65_52_07}           # Below-ground and pressure drainage pipes and fittings
   pack: site-utilities
   builder: profile
   tier: L300
@@ -41,6 +42,7 @@
   predefined: RIGIDSEGMENT
   category: Site Utilities
   discipline: site
+  classification: {uniclass: Pr_65_52_07}           # Below-ground and pressure drainage pipes and fittings
   pack: site-utilities
   builder: profile
   tier: L300
@@ -66,6 +68,7 @@
   predefined: RIGIDSEGMENT
   category: Site Utilities
   discipline: site
+  classification: {uniclass: Pr_65_52_63}           # Pipes and fittings
   pack: site-utilities
   builder: profile
   tier: L300
@@ -91,6 +94,7 @@
   predefined: FIREHYDRANT
   category: Site Utilities
   discipline: site
+  classification: {uniclass: Pr_65_54_30}           # Firefighting valves and devices
   pack: site-utilities
   builder: box
   tier: L200
@@ -109,6 +113,7 @@
   predefined: VALVECHAMBER
   category: Site Utilities
   discipline: site
+  classification: {uniclass: Pr_65_52_01}           # Access and inspection chambers and gullies
   pack: site-utilities
   builder: box
   tier: L200
@@ -126,6 +131,7 @@
   predefined: INSPECTIONCHAMBER
   category: Site Utilities
   discipline: site
+  classification: {uniclass: Pr_65_52_01}           # Access and inspection chambers and gullies
   pack: site-utilities
   builder: revolve
   tier: L200
@@ -140,6 +146,7 @@
   predefined: NOTDEFINED
   category: Site Utilities
   discipline: site
+  classification: {uniclass: Pr_65_52_01}           # Access and inspection chambers and gullies
   pack: site-utilities
   builder: box
   tier: L200
@@ -158,6 +165,7 @@
   predefined: BASESLAB
   category: Site Structures
   discipline: site
+  classification: {uniclass: Ss_20_05_50}           # Minor concrete substructure systems
   pack: site-structures
   builder: box
   tier: L200
@@ -178,6 +186,7 @@
   predefined: ELEMENT
   category: Parking
   discipline: site
+  classification: {uniclass: Pr_35_31}              # Formless covering and finish products
   pack: site-parking
   builder: box
   tier: L200
@@ -197,6 +206,7 @@
   predefined: NOTDEFINED
   category: Parking
   discipline: site
+  classification: {uniclass: Pr_20_76_08}           # Bollards and impact protectors
   pack: site-parking
   builder: box
   tier: L200
@@ -210,6 +220,7 @@
   predefined: NOTDEFINED
   category: Parking
   discipline: site
+  classification: {uniclass: Pr_60_70_10}           # Charging stations
   pack: site-parking
   builder: box
   tier: L200
@@ -226,6 +237,7 @@
   predefined: NOTDEFINED
   category: Site Structures
   discipline: site
+  classification: {uniclass: Pr_40_10}              # Signage products
   pack: site-structures
   builder: box
   tier: L200
@@ -245,6 +257,7 @@
   predefined: GUARDRAIL
   category: Site Structures
   discipline: site
+  classification: {uniclass: Pr_30_59_59}           # Vehicular barriers
   pack: site-structures
   builder: box
   tier: L200
@@ -260,6 +273,7 @@
   predefined: STRAIGHT_RUN_STAIR
   category: Site Structures
   discipline: site
+  classification: {uniclass: Ss_35_10}              # Stair and ramp structure systems
   pack: site-structures
   builder: box
   tier: L200
@@ -277,6 +291,7 @@
   predefined: NOTDEFINED
   category: Site Amenity
   discipline: site
+  classification: {uniclass: Pr_40_30_78}           # Shelves, hangers and racks
   pack: site-structures
   builder: box
   tier: L200
@@ -294,6 +309,7 @@
   predefined: ELEMENT
   category: Site Structures
   discipline: site
+  classification: {uniclass: Pr_20_65}              # Prefabricated buildings and structures
   pack: site-structures
   builder: box
   tier: L200
@@ -311,6 +327,7 @@
   predefined: NOTDEFINED
   category: Site Amenity
   discipline: site
+  classification: {uniclass: Pr_40_30}              # Fittings
   pack: site-structures
   builder: revolve
   tier: L200
@@ -325,6 +342,7 @@
   predefined: ELEMENT
   category: Site Amenity
   discipline: site
+  classification: {uniclass: Pr_20_65}              # Prefabricated buildings and structures
   pack: site-structures
   builder: box
   tier: L200
@@ -340,6 +358,7 @@
   predefined: NOTDEFINED
   category: Site Amenity
   discipline: site
+  classification: {uniclass: Pr_70_55_42}           # Irrigation and aeration outlets
   pack: site-utilities
   builder: box
   tier: L200

@@ -15,6 +15,7 @@
   predefined: ELEVATOR
   category: Elevators
   discipline: conveying
+  classification: {uniclass: Pr_65_80_49}           # Lift products and components
   pack: conveying-elevators
   builder: box
   tier: L200
@@ -33,6 +34,7 @@
   predefined: ELEVATOR
   category: Elevators
   discipline: conveying
+  classification: {uniclass: Pr_65_80_49}           # Lift products and components
   pack: conveying-elevators
   builder: box
   tier: L200
@@ -51,6 +53,7 @@
   predefined: ELEVATOR
   category: Elevators
   discipline: conveying
+  classification: {uniclass: Pr_65_80_49}           # Lift products and components
   pack: conveying-elevators
   builder: box
   tier: L200
@@ -69,6 +72,7 @@
   predefined: DOOR
   category: Elevators
   discipline: conveying
+  classification: {uniclass: Pr_65_80_49}           # Lift products and components
   pack: conveying-elevators
   builder: box
   tier: L200
@@ -89,6 +93,7 @@
   predefined: LIFTINGGEAR
   category: Elevators
   discipline: conveying
+  classification: {uniclass: Pr_65_80_49}           # Lift products and components
   pack: conveying-elevators
   builder: box
   tier: L200
@@ -107,6 +112,7 @@
   predefined: LIFTINGGEAR
   category: Elevators
   discipline: conveying
+  classification: {uniclass: Pr_65_80_49}           # Lift products and components
   pack: conveying-elevators
   builder: box
   tier: L200
@@ -125,6 +131,7 @@
   predefined: NOTDEFINED
   category: Material Handling
   discipline: conveying
+  classification: {uniclass: Pr_65_80_65}           # Pneumatic conveying products
   pack: conveying-material
   builder: box
   tier: L200
@@ -143,6 +150,7 @@
   predefined: LIFTINGGEAR
   category: Material Handling
   discipline: conveying
+  classification: {uniclass: Pr_65_80_47}           # Lifting gear
   pack: conveying-material
   builder: box
   tier: L200
@@ -159,6 +167,7 @@
   predefined: LIFTINGGEAR
   category: Material Handling
   discipline: conveying
+  classification: {uniclass: Pr_65_80_47}           # Lifting gear
   pack: conveying-material
   builder: box
   tier: L200

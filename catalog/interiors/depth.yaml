@@ -16,6 +16,7 @@
   predefined: DESK
   category: Furniture
   discipline: interiors
+  classification: {uniclass: Pr_40_50_21}           # Desks and tables
   pack: interiors-furniture
   builder: box
   tier: L200
@@ -33,6 +34,7 @@
   predefined: TABLE
   category: Furniture
   discipline: interiors
+  classification: {uniclass: Pr_40_50_21}           # Desks and tables
   pack: interiors-furniture
   builder: box
   tier: L200
@@ -51,6 +53,7 @@
   predefined: CHAIR
   category: Furniture
   discipline: interiors
+  classification: {uniclass: Pr_40_50_12}           # Chairs, seats and benches
   pack: interiors-furniture
   builder: box
   tier: L200
@@ -66,6 +69,7 @@
   predefined: CHAIR
   category: Furniture
   discipline: interiors
+  classification: {uniclass: Pr_40_50_12}           # Chairs, seats and benches
   pack: interiors-furniture
   builder: box
   tier: L200
@@ -82,6 +86,7 @@
   predefined: FILECABINET
   category: Furniture
   discipline: interiors
+  classification: {uniclass: Pr_40_30_87}           # Storage units and cupboards
   pack: interiors-furniture
   builder: box
   tier: L200
@@ -97,6 +102,7 @@
   predefined: PANEL
   category: Furniture
   discipline: interiors
+  classification: {uniclass: Pr_40_50}              # Furnishings
   pack: interiors-furniture
   builder: box
   tier: L200
@@ -114,6 +120,7 @@
   predefined: DISPLAY
   category: AV
   discipline: interiors
+  classification: {uniclass: Pr_40_70}              # Equipment
   pack: interiors-furniture
   builder: box
   tier: L200
@@ -130,6 +137,7 @@
   predefined: FILECABINET
   category: Medical
   discipline: interiors
+  classification: {uniclass: Pr_40_30_87}           # Storage units and cupboards
   pack: interiors-medical
   builder: box
   tier: L200
@@ -146,6 +154,7 @@
   predefined: CHAIR
   category: Public Seating
   discipline: interiors
+  classification: {uniclass: Pr_40_50_12}           # Chairs, seats and benches
   pack: interiors-furniture
   builder: box
   tier: L200
@@ -164,6 +173,7 @@
   predefined: TABLE
   category: Industrial
   discipline: interiors
+  classification: {uniclass: Pr_40_30_30_96}        # Worktops
   pack: interiors-industrial
   builder: box
   tier: L200
