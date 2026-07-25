@@ -1,0 +1,413 @@
+# Mechanical depth — the parts between the equipment and the diffuser (FAMILY-COMPLETE batch 4).
+#
+# The base mechanical catalog is the strongest of the MEP three: 26 families covering air handlers,
+# chillers, boilers, towers, fans, terminals and round/rect duct. What it lacks is everything that
+# makes a duct run BUILDABLE — rect fittings (it has round elbows and tees only), transitions,
+# dampers, and the accessories that occupy the plenum a coordinator has to clear. It also has no
+# hydronic specialties, so a chilled-water plant can be placed but not piped.
+#
+# Typology drivers: hospitals need air-side isolation and humidity (isolation damper, humidifier,
+# HEPA terminal); airports and industrial need large-scale makeup air and destratification;
+# hotels/residential need through-wall and VRF equipment the base list has no room for.
+
+# ─────────────────────────── duct fittings (rectangular) ───────────────────────────
+- key: duct_elbow_rect
+  label: Rectangular Duct Elbow
+  ifc_class: IfcDuctFittingType
+  predefined: BEND
+  category: Duct Fittings
+  discipline: mechanical
+  pack: mechanical-ductwork
+  builder: box
+  tier: L200
+  material: {name: Galvanized Steel, category: metal}
+  ports: {system: DUCT, names: [In, Out], flows: [SINK, SOURCE]}
+  psets:
+    MF_Ductwork: {Standard: SMACNA, Turns: Vaned}
+  types:
+    - {name: '12x8 90° Vaned Elbow', dims: ['1''-6"', '1''-2"', '0''-8"']}
+    - {name: '24x12 90° Vaned Elbow', dims: ['2''-6"', '2''-0"', '1''-0"']}
+    - {name: '36x18 90° Vaned Elbow', dims: ['3''-6"', '3''-0"', '1''-6"']}
+    - {name: '48x24 90° Vaned Elbow', dims: ['4''-6"', '4''-0"', '2''-0"']}
+
+- key: duct_tee_rect
+  label: Rectangular Duct Tee / Takeoff
+  ifc_class: IfcDuctFittingType
+  predefined: JUNCTION
+  category: Duct Fittings
+  discipline: mechanical
+  pack: mechanical-ductwork
+  builder: box
+  tier: L200
+  material: {name: Galvanized Steel, category: metal}
+  ports: {system: DUCT, names: [In, Out, Branch], flows: [SINK, SOURCE, SOURCE]}
+  psets:
+    MF_Ductwork: {Standard: SMACNA}
+  types:
+    - {name: '24x12 with 12x8 Branch', dims: ['3''-0"', '2''-0"', '1''-0"']}
+    - {name: '36x18 with 16x10 Branch', dims: ['4''-0"', '3''-0"', '1''-6"']}
+    - {name: 'Conical Spin-In Takeoff 10"', dims: ['1''-4"', '0''-10"', '0''-10"']}
+
+- key: duct_transition
+  label: Duct Transition (Rect ↔ Round)
+  ifc_class: IfcDuctFittingType
+  predefined: TRANSITION
+  category: Duct Fittings
+  discipline: mechanical
+  pack: mechanical-ductwork
+  builder: box
+  tier: L200
+  material: {name: Galvanized Steel, category: metal}
+  ports: {system: DUCT, names: [In, Out], flows: [SINK, SOURCE]}
+  psets:
+    MF_Ductwork: {Standard: SMACNA, Slope: 1:4}
+  types:
+    - {name: '24x12 to 14" Round', dims: ['2''-0"', '2''-0"', '1''-0"']}
+    - {name: '36x18 to 20" Round', dims: ['3''-0"', '3''-0"', '1''-6"']}
+    - {name: '24x12 to 18x10 Reducer', dims: ['2''-0"', '2''-0"', '1''-0"']}
+
+- key: duct_offset
+  label: Duct Offset
+  ifc_class: IfcDuctFittingType
+  predefined: OBSTRUCTION
+  category: Duct Fittings
+  discipline: mechanical
+  pack: mechanical-ductwork
+  builder: box
+  tier: L200
+  material: {name: Galvanized Steel, category: metal}
+  ports: {system: DUCT, names: [In, Out], flows: [SINK, SOURCE]}
+  psets:
+    MF_Ductwork: {Standard: SMACNA, Purpose: Clear structure / conflicting service}
+  types:
+    - {name: '24x12 Offset 12"', dims: ['4''-0"', '2''-0"', '2''-0"']}
+    - {name: '36x18 Offset 18"', dims: ['5''-0"', '3''-0"', '3''-0"']}
+
+- key: duct_cap
+  label: Duct End Cap
+  ifc_class: IfcDuctFittingType
+  predefined: ENTRY
+  category: Duct Fittings
+  discipline: mechanical
+  pack: mechanical-ductwork
+  builder: box
+  tier: L200
+  material: {name: Galvanized Steel, category: metal}
+  ports: {system: DUCT, names: [In], flows: [SINK]}
+  types:
+    - {name: '24x12 Cap', dims: ['2''-0"', '1''-0"', '0''-3"']}
+    - {name: '14" Round Cap', dims: ['1''-2"', '1''-2"', '0''-3"']}
+
+# ─────────────────────────── air-side accessories ───────────────────────────
+- key: volume_damper
+  label: Volume / Balancing Damper
+  ifc_class: IfcDamperType
+  predefined: BALANCINGDAMPER
+  category: Duct Accessories
+  discipline: mechanical
+  pack: mechanical-ductwork
+  builder: box
+  tier: L200
+  material: {name: Galvanized Steel, category: metal}
+  ports: {system: DUCT, names: [In, Out], flows: [SINK, SOURCE]}
+  psets:
+    MF_Ductwork: {Operation: Manual Quadrant}
+  types:
+    - {name: '12x8 Manual Volume Damper', dims: ['1''-0"', '0''-8"', '0''-6"']}
+    - {name: '24x12 Manual Volume Damper', dims: ['2''-0"', '1''-0"', '0''-6"']}
+    - {name: '10" Round Butterfly Damper', dims: ['0''-10"', '0''-10"', '0''-6"']}
+
+- key: control_damper
+  label: Motorized Control Damper
+  ifc_class: IfcDamperType
+  predefined: CONTROLDAMPER
+  category: Duct Accessories
+  discipline: mechanical
+  pack: mechanical-ductwork
+  builder: box
+  tier: L200
+  material: {name: Extruded Aluminum, category: aluminium}
+  ports: {system: DUCT, names: [In, Out], flows: [SINK, SOURCE]}
+  psets:
+    MF_Ductwork: {Actuator: Electric, Blades: Opposed, LeakageClass: "1"}
+  types:
+    - {name: '24x24 Low-Leakage OA Damper', dims: ['2''-0"', '2''-0"', '0''-6"']}
+    - {name: '48x36 Low-Leakage OA Damper', dims: ['4''-0"', '3''-0"', '0''-6"']}
+    - {name: '24x24 Isolation Damper (Bubble-Tight)', dims: ['2''-0"', '2''-0"', '0''-8"']}
+
+- key: backdraft_damper
+  label: Backdraft / Gravity Damper
+  ifc_class: IfcDamperType
+  predefined: BACKDRAFTDAMPER
+  category: Duct Accessories
+  discipline: mechanical
+  pack: mechanical-ductwork
+  builder: box
+  tier: L200
+  material: {name: Aluminium, category: aluminium}
+  ports: {system: DUCT, names: [In, Out], flows: [SINK, SOURCE]}
+  types:
+    - {name: '12x12 Gravity Backdraft', dims: ['1''-0"', '1''-0"', '0''-4"']}
+    - {name: '24x24 Gravity Backdraft', dims: ['2''-0"', '2''-0"', '0''-4"']}
+
+- key: sound_attenuator
+  label: Duct Silencer / Sound Attenuator
+  ifc_class: IfcDuctSilencerType
+  predefined: RECTANGULAR
+  category: Duct Accessories
+  discipline: mechanical
+  pack: mechanical-ductwork
+  builder: box
+  tier: L200
+  material: {name: Galvanized Steel, category: metal}
+  ports: {system: DUCT, names: [In, Out], flows: [SINK, SOURCE]}
+  psets:
+    MF_Ductwork: {Media: Packless Available, Application: AHU discharge / return crosstalk}
+  types:
+    - {name: '24x24 x 5''-0" Rectangular', dims: ['2''-0"', '2''-0"', '5''-0"']}
+    - {name: '36x24 x 7''-0" Rectangular', dims: ['3''-0"', '2''-0"', '7''-0"']}
+    - {name: '20" Round x 5''-0"', dims: ['1''-8"', '1''-8"', '5''-0"']}
+
+- key: filter_housing
+  label: Filter Housing / Bank
+  ifc_class: IfcFilterType
+  predefined: AIRPARTICLEFILTER
+  category: Air Handling
+  discipline: mechanical
+  pack: mechanical-equipment
+  builder: box
+  tier: L200
+  material: {name: Galvanized Steel, category: metal}
+  ports: {system: DUCT, names: [In, Out], flows: [SINK, SOURCE]}
+  psets:
+    MF_HVAC: {Rating: MERV 13, SideAccess: "true"}
+  types:
+    - {name: 'Side-Access MERV 13, 2000 CFM', dims: ['2''-6"', '2''-6"', '2''-6"']}
+    - {name: 'Side-Access MERV 13, 8000 CFM', dims: ['5''-0"', '4''-0"', '3''-0"']}
+    - {name: 'HEPA Terminal Housing 2x4', dims: ['4''-0"', '2''-0"', '1''-2"']}
+
+- key: duct_access_door
+  label: Duct Access Door
+  ifc_class: IfcDiscreteAccessoryType
+  predefined: NOTDEFINED
+  category: Duct Accessories
+  discipline: mechanical
+  pack: mechanical-ductwork
+  builder: box
+  tier: L200
+  material: {name: Galvanized Steel, category: metal}
+  psets:
+    MF_Ductwork: {Purpose: Damper / coil / detector service access}
+  types:
+    - {name: '12" x 12" Hinged', dims: ['1''-0"', '1''-0"', '0''-2"']}
+    - {name: '18" x 18" Hinged', dims: ['1''-6"', '1''-6"', '0''-2"']}
+
+# ─────────────────────────── hydronic specialties ───────────────────────────
+- key: expansion_tank
+  label: Expansion Tank
+  ifc_class: IfcTankType
+  predefined: EXPANSION
+  category: Hydronic
+  discipline: mechanical
+  pack: mechanical-piping
+  builder: revolve
+  tier: L200
+  material: {name: Carbon Steel, category: metal}
+  ports: {system: PIPE, names: [Connection], flows: [SINK]}
+  psets:
+    MF_HVAC: {Type: Bladder, Service: Chilled / Hot Water}
+  types:
+    - {name: 'Bladder 30 gal', dims: ['1''-8"', '1''-8"', '3''-0"']}
+    - {name: 'Bladder 80 gal', dims: ['2''-2"', '2''-2"', '4''-6"']}
+    - {name: 'Bladder 200 gal', dims: ['3''-0"', '3''-0"', '6''-0"']}
+
+- key: air_separator
+  label: Air Separator / Dirt Separator
+  ifc_class: IfcFilterType
+  predefined: STRAINER
+  category: Hydronic
+  discipline: mechanical
+  pack: mechanical-piping
+  builder: revolve
+  tier: L200
+  material: {name: Carbon Steel, category: metal}
+  ports: {system: PIPE, names: [In, Out], flows: [SINK, SOURCE]}
+  psets:
+    MF_HVAC: {Function: Air + Dirt Removal, Location: Pump suction}
+  types:
+    - {name: '4" Coalescing Separator', dims: ['1''-4"', '1''-4"', '3''-0"']}
+    - {name: '8" Coalescing Separator', dims: ['2''-2"', '2''-2"', '4''-6"']}
+
+- key: pipe_hydronic
+  label: Hydronic Pipe (Schedule 40 Steel)
+  ifc_class: IfcPipeSegmentType
+  predefined: RIGIDSEGMENT
+  category: Hydronic
+  discipline: mechanical
+  pack: mechanical-piping
+  builder: profile
+  tier: L300
+  material: {name: Carbon Steel, category: metal}
+  ports: {system: PIPE, names: [In, Out], flows: [SINK, SOURCE]}
+  psets:
+    MF_Piping: {Standard: ASTM A53, Schedule: "40", Service: Chilled / Hot Water}
+  generator: sizes
+  generator_args:
+    kind: CircleHollow
+    length: "21'-0\""
+    name: '{nominal} Sch 40 Steel'
+    entries:
+      - {nominal: '3/4"', od: 1.050, wall: 0.113}
+      - {nominal: '1"', od: 1.315, wall: 0.133}
+      - {nominal: '1-1/2"', od: 1.900, wall: 0.145}
+      - {nominal: '2"', od: 2.375, wall: 0.154}
+      - {nominal: '3"', od: 3.500, wall: 0.216}
+      - {nominal: '4"', od: 4.500, wall: 0.237}
+      - {nominal: '6"', od: 6.625, wall: 0.280}
+      - {nominal: '8"', od: 8.625, wall: 0.322}
+      - {nominal: '10"', od: 10.750, wall: 0.365}
+      - {nominal: '12"', od: 12.750, wall: 0.375}
+
+- key: valve_hydronic
+  label: Hydronic Valve
+  ifc_class: IfcValveType
+  predefined: ISOLATING
+  category: Hydronic
+  discipline: mechanical
+  pack: mechanical-piping
+  builder: box
+  tier: L200
+  material: {name: Ductile Iron, category: metal}
+  ports: {system: PIPE, names: [In, Out], flows: [SINK, SOURCE]}
+  types:
+    - {name: '4" Butterfly Valve', dims: ['0''-10"', '0''-6"', '1''-2"']}
+    - {name: '8" Butterfly Valve', dims: ['1''-4"', '0''-9"', '1''-8"']}
+    - {name: '2" Control Valve (2-Way)', dims: ['0''-8"', '0''-6"', '1''-0"']}
+    - {name: '2" Control Valve (3-Way)', dims: ['0''-10"', '0''-8"', '1''-0"']}
+    - {name: '4" Triple-Duty Valve', dims: ['1''-2"', '0''-8"', '1''-4"']}
+
+- key: pipe_insulation
+  label: Pipe Insulation
+  ifc_class: IfcCoveringType
+  predefined: INSULATION
+  category: Hydronic
+  discipline: mechanical
+  pack: mechanical-piping
+  builder: profile
+  tier: L300
+  material: {name: Mineral Fibre, category: insulation}
+  psets:
+    MF_HVAC: {Jacket: ASJ, Service: Chilled Water / Steam}
+  generator: sizes
+  generator_args:
+    kind: CircleHollow
+    length: "3'-0\""
+    name: '{nominal} Pipe Insulation'
+    entries:
+      - {nominal: '1" pipe, 1" wall', od: 3.315, wall: 1.0}
+      - {nominal: '2" pipe, 1-1/2" wall', od: 5.375, wall: 1.5}
+      - {nominal: '4" pipe, 2" wall', od: 8.500, wall: 2.0}
+      - {nominal: '8" pipe, 2" wall', od: 12.625, wall: 2.0}
+
+# ─────────────────────────── equipment the base list has no room for ───────────────────────────
+- key: vrf_outdoor_unit
+  label: VRF Outdoor Unit
+  ifc_class: IfcUnitaryEquipmentType
+  predefined: SPLITSYSTEM
+  category: Equipment
+  discipline: mechanical
+  pack: mechanical-equipment
+  builder: box
+  tier: L200
+  material: {name: Painted Steel, category: metal}
+  ports: {system: PIPE, names: [Liquid, Suction], flows: [SOURCE, SINK]}
+  psets:
+    MF_HVAC: {Refrigerant: R-32, HeatRecovery: "true"}
+  types:
+    - {name: '6-Ton Heat Recovery', dims: ['3''-0"', '2''-6"', '5''-4"']}
+    - {name: '12-Ton Heat Recovery', dims: ['6''-0"', '2''-6"', '5''-4"']}
+    - {name: '20-Ton Heat Recovery', dims: ['9''-0"', '2''-6"', '5''-4"']}
+
+- key: vrf_indoor_unit
+  label: VRF Indoor Unit
+  ifc_class: IfcUnitaryEquipmentType
+  predefined: SPLITSYSTEM
+  category: Equipment
+  discipline: mechanical
+  pack: mechanical-equipment
+  builder: box
+  tier: L200
+  material: {name: Painted Steel, category: metal}
+  ports: {system: PIPE, names: [Liquid, Suction, Condensate], flows: [SINK, SOURCE, SOURCE]}
+  types:
+    - {name: 'Ceiling Cassette 4-Way 1-Ton', dims: ['2''-10"', '2''-10"', '1''-0"']}
+    - {name: 'Ducted Concealed 1.5-Ton', dims: ['3''-6"', '2''-0"', '0''-10"']}
+    - {name: 'Wall-Mounted 0.75-Ton', dims: ['3''-4"', '0''-9"', '1''-0"']}
+
+- key: makeup_air_unit
+  label: Makeup Air Unit
+  ifc_class: IfcAirToAirHeatRecoveryType
+  predefined: NOTDEFINED
+  category: Equipment
+  discipline: mechanical
+  pack: mechanical-equipment
+  builder: box
+  tier: L200
+  material: {name: Painted Steel, category: metal}
+  ports: {system: DUCT, names: [OutsideAir, Supply], flows: [SINK, SOURCE]}
+  psets:
+    MF_HVAC: {Application: Kitchen / industrial / airport concourse}
+  types:
+    - {name: '4000 CFM Direct-Fired', dims: ['8''-0"', '4''-0"', '4''-6"']}
+    - {name: '12000 CFM Direct-Fired', dims: ['14''-0"', '6''-0"', '6''-0"']}
+
+- key: humidifier
+  label: Humidifier
+  ifc_class: IfcHumidifierType
+  predefined: STEAMINJECTION
+  category: Equipment
+  discipline: mechanical
+  pack: mechanical-equipment
+  builder: box
+  tier: L200
+  material: {name: Stainless Steel, category: metal}
+  ports: {system: DUCT, names: [In, Out], flows: [SINK, SOURCE]}
+  psets:
+    MF_HVAC: {Application: Hospital / archive / clean space}
+  types:
+    - {name: 'Electrode Steam 50 lb/hr', dims: ['2''-0"', '1''-4"', '3''-0"']}
+    - {name: 'Duct Dispersion Manifold 24"', dims: ['2''-0"', '0''-6"', '1''-0"']}
+
+- key: chilled_beam
+  label: Chilled Beam
+  ifc_class: IfcAirTerminalType
+  predefined: DIFFUSER
+  category: Terminals
+  discipline: mechanical
+  pack: mechanical-equipment
+  builder: box
+  tier: L200
+  material: {name: Aluminium, category: aluminium}
+  ports: {system: PIPE, names: [Supply, Return], flows: [SINK, SOURCE]}
+  psets:
+    MF_HVAC: {Type: Active, Application: Office / lab}
+  types:
+    - {name: 'Active 4'' Linear', dims: ['4''-0"', '2''-0"', '0''-10"']}
+    - {name: 'Active 8'' Linear', dims: ['8''-0"', '2''-0"', '0''-10"']}
+    - {name: 'Passive 6'' Linear', dims: ['6''-0"', '1''-8"', '0''-8"']}
+
+- key: destratification_fan
+  label: Destratification / HVLS Fan
+  ifc_class: IfcFanType
+  predefined: PROPELLORAXIAL
+  category: Equipment
+  discipline: mechanical
+  pack: mechanical-equipment
+  builder: revolve
+  tier: L200
+  material: {name: Aluminium, category: aluminium}
+  psets:
+    MF_HVAC: {Application: Warehouse / hangar / concourse}
+  types:
+    - {name: 'HVLS 14'' Diameter', dims: ['14''-0"', '14''-0"', '1''-6"']}
+    - {name: 'HVLS 20'' Diameter', dims: ['20''-0"', '20''-0"', '1''-6"']}

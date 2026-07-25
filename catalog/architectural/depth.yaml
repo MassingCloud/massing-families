@@ -1,0 +1,652 @@
+# Architectural depth — the openings, assemblies and specialties a real building needs
+# (FAMILY-COMPLETE batch 5a).
+#
+# Architectural was already the broadest discipline (59 families), so this is a gap-fill rather than
+# a rebuild. The gaps are typology-shaped: the base catalog can build an office and a warehouse, but
+# not a hospital (no lead-lined or acoustic door, no crash rail, no cleanroom ceiling), a hotel (no
+# sliding/pocket door, no connecting-room pair), or an airport (no automatic sliding entrance, no
+# monumental stair, no interior glazed partition at scale).
+#
+# Wall types are the other structural gap: the base list has CMU, concrete, a generic exterior and a
+# generic partition. A real envelope section needs the veneer, the panel, the furring and the barrier
+# as separate elements, because they are separate trades with separate schedules.
+
+# ─────────────────────────── doors ───────────────────────────
+- key: door_sliding_automatic
+  label: Automatic Sliding Entrance
+  ifc_class: IfcDoorType
+  predefined: DOOR
+  category: Doors
+  discipline: architectural
+  pack: architectural-doors
+  builder: box
+  tier: L200
+  material: {name: Aluminium / Glass, category: aluminium}
+  psets:
+    Pset_DoorCommon: {IsExternal: "true", FireRating: None, ThermalTransmittance: "3.2"}
+  types:
+    - {name: 'Bi-Parting 6''-0" x 7''-0"', dims: ['6''-0"', '0''-6"', '7''-0"']}
+    - {name: 'Bi-Parting 8''-0" x 8''-0"', dims: ['8''-0"', '0''-6"', '8''-0"']}
+    - {name: 'Single Slide 3''-6" x 7''-0"', dims: ['3''-6"', '0''-6"', '7''-0"']}
+
+- key: door_revolving
+  label: Revolving Door
+  ifc_class: IfcDoorType
+  predefined: DOOR
+  category: Doors
+  discipline: architectural
+  pack: architectural-doors
+  builder: revolve
+  tier: L200
+  material: {name: Aluminium / Glass, category: aluminium}
+  psets:
+    Pset_DoorCommon: {IsExternal: "true", Application: Vestibule / high-traffic lobby}
+  types:
+    - {name: '3-Wing 7''-0" Dia', dims: ['7''-0"', '7''-0"', '8''-0"']}
+    - {name: '4-Wing 8''-0" Dia', dims: ['8''-0"', '8''-0"', '8''-0"']}
+
+- key: door_sliding_pocket
+  label: Sliding / Pocket Door
+  ifc_class: IfcDoorType
+  predefined: DOOR
+  category: Doors
+  discipline: architectural
+  pack: architectural-doors
+  builder: box
+  tier: L200
+  material: {name: Wood, category: wood}
+  psets:
+    Pset_DoorCommon: {IsExternal: "false"}
+  types:
+    - {name: 'Pocket 2''-8" x 6''-8"', dims: ['2''-8"', '0''-2"', '6''-8"']}
+    - {name: 'Pocket 3''-0" x 7''-0"', dims: ['3''-0"', '0''-2"', '7''-0"']}
+    - {name: 'Barn Slide 3''-6" x 7''-0"', dims: ['3''-6"', '0''-2"', '7''-0"']}
+
+- key: door_acoustic
+  label: Acoustic-Rated Door
+  ifc_class: IfcDoorType
+  predefined: DOOR
+  category: Doors
+  discipline: architectural
+  pack: architectural-doors
+  builder: box
+  tier: L200
+  material: {name: Wood / Steel Composite, category: composite}
+  psets:
+    Pset_DoorCommon: {IsExternal: "false", AcousticRating: STC 45}
+  types:
+    - {name: 'STC 45 Single 3''-0" x 7''-0"', dims: ['3''-0"', '0''-3"', '7''-0"']}
+    - {name: 'STC 50 Single 3''-0" x 7''-0"', dims: ['3''-0"', '0''-4"', '7''-0"']}
+
+- key: door_frame
+  label: Door Frame
+  ifc_class: IfcMemberType
+  predefined: NOTDEFINED
+  category: Doors
+  discipline: architectural
+  pack: architectural-doors
+  builder: box
+  tier: L200
+  material: {name: Hollow Metal, category: metal}
+  psets:
+    MF_Openings: {Gauge: "16", Anchors: Masonry / Stud}
+  types:
+    - {name: 'HM Frame 4-3/4" Jamb', dims: ['3''-4"', '0''-5"', '7''-2"']}
+    - {name: 'HM Frame 8-3/4" Jamb', dims: ['3''-4"', '0''-9"', '7''-2"']}
+    - {name: 'Wood Frame 4-9/16" Jamb', dims: ['3''-4"', '0''-5"', '7''-2"']}
+
+- key: door_hardware_set
+  label: Door Hardware Set
+  ifc_class: IfcDiscreteAccessoryType
+  predefined: NOTDEFINED
+  category: Doors
+  discipline: architectural
+  pack: architectural-doors
+  builder: box
+  tier: L200
+  material: {name: Satin Stainless, category: metal}
+  psets:
+    MF_Openings: {ScheduleRole: Hardware set referenced by the door schedule}
+  types:
+    - {name: 'Set 1 — Passage Lever', dims: ['0''-8"', '0''-3"', '0''-3"']}
+    - {name: 'Set 2 — Office Lock + Closer', dims: ['1''-2"', '0''-4"', '0''-4"']}
+    - {name: 'Set 3 — Exit Device + Closer', dims: ['3''-0"', '0''-4"', '0''-4"']}
+    - {name: 'Set 4 — Exit Device + Card Reader', dims: ['3''-0"', '0''-5"', '0''-6"']}
+
+- key: access_panel
+  label: Access Panel
+  ifc_class: IfcDoorType
+  predefined: DOOR
+  category: Specialties
+  discipline: architectural
+  pack: architectural-specialties
+  builder: box
+  tier: L200
+  material: {name: Painted Steel, category: metal}
+  psets:
+    MF_Openings: {Purpose: Valve / damper / cleanout access}
+  types:
+    - {name: '12" x 12" Wall', dims: ['1''-0"', '0''-2"', '1''-0"']}
+    - {name: '24" x 24" Wall', dims: ['2''-0"', '0''-2"', '2''-0"']}
+    - {name: '24" x 24" Fire-Rated Ceiling', dims: ['2''-0"', '0''-3"', '2''-0"']}
+
+# ─────────────────────────── windows + glazed assemblies ───────────────────────────
+- key: window_sliding
+  label: Sliding Window
+  ifc_class: IfcWindowType
+  predefined: WINDOW
+  category: Windows
+  discipline: architectural
+  pack: architectural-windows
+  builder: box
+  tier: L200
+  material: {name: Vinyl, category: plastic}
+  psets:
+    Pset_WindowCommon: {IsExternal: "true", Operable: "true"}
+  types:
+    - {name: '4''-0" x 3''-0"', dims: ['4''-0"', '0''-4"', '3''-0"']}
+    - {name: '6''-0" x 4''-0"', dims: ['6''-0"', '0''-4"', '4''-0"']}
+
+- key: window_interior
+  label: Interior Glazed Panel / Borrowed Light
+  ifc_class: IfcWindowType
+  predefined: WINDOW
+  category: Windows
+  discipline: architectural
+  pack: architectural-windows
+  builder: box
+  tier: L200
+  material: {name: Glass, category: glass}
+  psets:
+    Pset_WindowCommon: {IsExternal: "false"}
+  types:
+    - {name: '3''-0" x 3''-0" Borrowed Light', dims: ['3''-0"', '0''-3"', '3''-0"']}
+    - {name: '4''-0" x 7''-0" Sidelight', dims: ['4''-0"', '0''-3"', '7''-0"']}
+    - {name: 'Nurse Station Vision Panel 6''-0"', dims: ['6''-0"', '0''-3"', '4''-0"']}
+
+- key: mullion
+  label: Curtain Wall Mullion
+  ifc_class: IfcMemberType
+  predefined: MULLION
+  category: Curtain Wall
+  discipline: architectural
+  pack: architectural-walls
+  builder: profile
+  tier: L300
+  material: {name: Extruded Aluminium, category: aluminium}
+  psets:
+    MF_CurtainWall: {Finish: Anodized, ThermallyBroken: "true"}
+  types:
+    - {name: '2-1/2" x 6" Vertical', dims: ['0''-2 1/2"', '0''-6"', '12''-0"']}
+    - {name: '2-1/2" x 7-1/2" Vertical', dims: ['0''-2 1/2"', '0''-7 1/2"', '14''-0"']}
+    - {name: '2-1/2" x 4" Horizontal', dims: ['0''-2 1/2"', '0''-4"', '5''-0"']}
+
+- key: storefront
+  label: Storefront System
+  ifc_class: IfcCurtainWallType
+  predefined: NOTDEFINED
+  category: Curtain Wall
+  discipline: architectural
+  pack: architectural-walls
+  builder: box
+  tier: L200
+  material: {name: Aluminium / Glass, category: aluminium}
+  psets:
+    Pset_CurtainWallCommon: {IsExternal: "true"}
+    MF_CurtainWall: {System: Centre-Glazed 1-3/4" x 4-1/2"}
+  types:
+    - {name: 'Bay 5''-0" x 10''-0"', dims: ['5''-0"', '0''-5"', '10''-0"']}
+    - {name: 'Bay 10''-0" x 12''-0"', dims: ['10''-0"', '0''-5"', '12''-0"']}
+
+- key: window_wall
+  label: Window Wall (Slab-to-Slab)
+  ifc_class: IfcCurtainWallType
+  predefined: NOTDEFINED
+  category: Curtain Wall
+  discipline: architectural
+  pack: architectural-walls
+  builder: box
+  tier: L200
+  material: {name: Aluminium / Glass, category: aluminium}
+  psets:
+    Pset_CurtainWallCommon: {IsExternal: "true"}
+    MF_CurtainWall: {System: Unitised slab-edge, Application: Residential / hotel tower}
+  types:
+    - {name: 'Unit 5''-0" x 9''-0"', dims: ['5''-0"', '0''-6"', '9''-0"']}
+    - {name: 'Unit 5''-0" x 10''-6"', dims: ['5''-0"', '0''-6"', '10''-6"']}
+
+- key: spandrel_panel
+  label: Spandrel Panel
+  ifc_class: IfcPlateType
+  predefined: SHEET
+  category: Curtain Wall
+  discipline: architectural
+  pack: architectural-walls
+  builder: box
+  tier: L200
+  material: {name: Opacified Glass, category: glass}
+  psets:
+    MF_CurtainWall: {Backing: Insulated Shadow Box}
+  types:
+    - {name: '5''-0" x 3''-6"', dims: ['5''-0"', '0''-3"', '3''-6"']}
+    - {name: '5''-0" x 4''-6"', dims: ['5''-0"', '0''-3"', '4''-6"']}
+
+# ─────────────────────────── envelope layers ───────────────────────────
+- key: wall_metal_stud
+  label: Metal Stud Framing
+  ifc_class: IfcMemberType
+  predefined: STUD
+  category: Wall Assemblies
+  discipline: architectural
+  pack: architectural-walls
+  builder: profile
+  tier: L300
+  material: {name: Galvanized Steel, category: metal}
+  psets:
+    MF_Framing: {Standard: ASTM C645, Spacing: 16 in o.c.}
+  types:
+    - {name: '3-5/8" 20 GA Stud', dims: ['0''-3 5/8"', '0''-1 1/4"', '10''-0"']}
+    - {name: '6" 20 GA Stud', dims: ['0''-6"', '0''-1 5/8"', '12''-0"']}
+    - {name: '6" 16 GA Structural Stud', dims: ['0''-6"', '0''-2"', '14''-0"']}
+    - {name: '8" 16 GA Structural Stud', dims: ['0''-8"', '0''-2 1/2"', '16''-0"']}
+
+- key: wall_masonry_veneer
+  label: Masonry Veneer
+  ifc_class: IfcWallType
+  predefined: SOLIDWALL
+  category: Wall Assemblies
+  discipline: architectural
+  pack: architectural-walls
+  builder: box
+  tier: L200
+  material: {name: Face Brick, category: masonry}
+  psets:
+    Pset_WallCommon: {IsExternal: "true", LoadBearing: "false"}
+    MF_Envelope: {Cavity: 2 in drained, Ties: Adjustable}
+  types:
+    - {name: 'Brick Veneer 3-5/8"', dims: ['8''-0"', '0''-3 5/8"', '10''-0"']}
+    - {name: 'Stone Veneer 4"', dims: ['8''-0"', '0''-4"', '10''-0"']}
+
+- key: wall_metal_panel
+  label: Metal Wall Panel
+  ifc_class: IfcWallType
+  predefined: SOLIDWALL
+  category: Wall Assemblies
+  discipline: architectural
+  pack: architectural-walls
+  builder: box
+  tier: L200
+  material: {name: Aluminium Composite, category: aluminium}
+  psets:
+    Pset_WallCommon: {IsExternal: "true", LoadBearing: "false"}
+    MF_Envelope: {System: Rainscreen, Attachment: Concealed clip}
+  types:
+    - {name: 'ACM Rainscreen 4mm', dims: ['4''-0"', '0''-3"', '10''-0"']}
+    - {name: 'Insulated Metal Panel 3"', dims: ['3''-0"', '0''-3"', '20''-0"']}
+    - {name: 'Insulated Metal Panel 6"', dims: ['3''-0"', '0''-6"', '30''-0"']}
+
+- key: wall_precast_panel
+  label: Precast Concrete Panel
+  ifc_class: IfcWallType
+  predefined: SOLIDWALL
+  category: Wall Assemblies
+  discipline: architectural
+  pack: architectural-walls
+  builder: box
+  tier: L200
+  material: {name: Precast Concrete, category: concrete}
+  psets:
+    Pset_WallCommon: {IsExternal: "true", LoadBearing: "false"}
+    MF_Envelope: {Type: Architectural Precast, Connection: Welded plate}
+  types:
+    - {name: 'Architectural Panel 8" x 10''', dims: ['10''-0"', '0''-8"', '12''-0"']}
+    - {name: 'Insulated Sandwich Panel 10"', dims: ['10''-0"', '0''-10"', '12''-0"']}
+    - {name: 'Tilt-Up Panel 8"', dims: ['24''-0"', '0''-8"', '30''-0"']}
+
+- key: wall_insulation
+  label: Wall Insulation
+  ifc_class: IfcCoveringType
+  predefined: INSULATION
+  category: Wall Assemblies
+  discipline: architectural
+  pack: architectural-walls
+  builder: box
+  tier: L200
+  material: {name: Mineral Wool, category: insulation}
+  psets:
+    MF_Envelope: {Location: Continuous exterior}
+  types:
+    - {name: 'Mineral Wool 2" (R-8)', dims: ['4''-0"', '0''-2"', '8''-0"']}
+    - {name: 'Mineral Wool 3" (R-12)', dims: ['4''-0"', '0''-3"', '8''-0"']}
+    - {name: 'Polyiso 2" (R-12)', dims: ['4''-0"', '0''-2"', '8''-0"']}
+    - {name: 'Batt R-21 in 6" Cavity', dims: ['4''-0"', '0''-6"', '8''-0"']}
+
+- key: air_barrier
+  label: Air / Weather Barrier
+  ifc_class: IfcCoveringType
+  predefined: MEMBRANE
+  category: Wall Assemblies
+  discipline: architectural
+  pack: architectural-walls
+  builder: box
+  tier: L200
+  material: {name: Fluid-Applied Membrane, category: membrane}
+  psets:
+    MF_Envelope: {Type: Vapour-Permeable, Continuity: Wall-to-roof-to-slab}
+  types:
+    - {name: 'Fluid-Applied Air Barrier', dims: ['4''-0"', '0''-0 1/8"', '8''-0"']}
+    - {name: 'Self-Adhered Sheet Membrane', dims: ['4''-0"', '0''-0 1/8"', '8''-0"']}
+
+- key: wall_operable_partition
+  label: Operable Partition
+  ifc_class: IfcWallType
+  predefined: MOVABLE
+  category: Wall Assemblies
+  discipline: architectural
+  pack: architectural-walls
+  builder: box
+  tier: L200
+  material: {name: Fabric-Wrapped Panel, category: composite}
+  psets:
+    Pset_WallCommon: {IsExternal: "false", LoadBearing: "false", AcousticRating: STC 50}
+    MF_Envelope: {Application: Ballroom / conference / classroom divide}
+  types:
+    - {name: 'Paired Panel STC 50, 12'' High', dims: ['20''-0"', '0''-4"', '12''-0"']}
+    - {name: 'Paired Panel STC 52, 20'' High', dims: ['40''-0"', '0''-5"', '20''-0"']}
+
+- key: wall_demountable
+  label: Demountable Glass Partition
+  ifc_class: IfcWallType
+  predefined: PARTITIONING
+  category: Wall Assemblies
+  discipline: architectural
+  pack: architectural-walls
+  builder: box
+  tier: L200
+  material: {name: Glass / Aluminium, category: glass}
+  psets:
+    Pset_WallCommon: {IsExternal: "false", LoadBearing: "false", AcousticRating: STC 38}
+  types:
+    - {name: 'Single-Glazed Full-Height', dims: ['4''-0"', '0''-3"', '9''-0"']}
+    - {name: 'Double-Glazed Full-Height STC 45', dims: ['4''-0"', '0''-6"', '9''-0"']}
+
+# ─────────────────────────── ceilings + finishes ───────────────────────────
+- key: ceiling_linear_metal
+  label: Linear Metal Ceiling
+  ifc_class: IfcCoveringType
+  predefined: CEILING
+  category: Finishes
+  discipline: architectural
+  pack: architectural-finishes
+  builder: box
+  tier: L200
+  material: {name: Anodized Aluminium, category: aluminium}
+  psets:
+    MF_Finishes: {Application: Lobby / concourse / canopy soffit}
+  types:
+    - {name: 'Linear Plank 4" Wide', dims: ['12''-0"', '0''-4"', '0''-1"']}
+    - {name: 'Baffle 6" Deep', dims: ['12''-0"', '0''-1"', '0''-6"']}
+
+- key: ceiling_wood
+  label: Wood Ceiling
+  ifc_class: IfcCoveringType
+  predefined: CEILING
+  category: Finishes
+  discipline: architectural
+  pack: architectural-finishes
+  builder: box
+  tier: L200
+  material: {name: Wood Veneer, category: wood}
+  psets:
+    MF_Finishes: {FlameSpread: Class A}
+  types:
+    - {name: 'Linear Slat 2" x 2"', dims: ['8''-0"', '0''-2"', '0''-2"']}
+    - {name: 'Acoustic Perforated Panel 2x8', dims: ['8''-0"', '2''-0"', '0''-1"']}
+
+- key: ceiling_cloud
+  label: Acoustic Ceiling Cloud
+  ifc_class: IfcCoveringType
+  predefined: CEILING
+  category: Finishes
+  discipline: architectural
+  pack: architectural-finishes
+  builder: box
+  tier: L200
+  material: {name: Acoustic Panel, category: acoustic}
+  psets:
+    MF_Finishes: {NRC: "0.85", Application: Open plan / atrium}
+  types:
+    - {name: 'Cloud 4'' x 8'' Rectangular', dims: ['8''-0"', '4''-0"', '0''-2"']}
+    - {name: 'Cloud 6'' Round', dims: ['6''-0"', '6''-0"', '0''-2"']}
+
+- key: ceiling_cleanroom
+  label: Cleanroom / Washable Ceiling
+  ifc_class: IfcCoveringType
+  predefined: CEILING
+  category: Finishes
+  discipline: architectural
+  pack: architectural-finishes
+  builder: box
+  tier: L200
+  material: {name: Vinyl-Faced Gypsum, category: gypsum}
+  psets:
+    MF_Finishes: {Gasketed: "true", Application: OR / pharmacy / lab / food processing}
+  types:
+    - {name: 'Gasketed Grid 2x2', dims: ['2''-0"', '2''-0"', '0''-1"']}
+    - {name: 'Gasketed Grid 2x4', dims: ['4''-0"', '2''-0"', '0''-1"']}
+
+- key: flooring_terrazzo
+  label: Terrazzo Flooring
+  ifc_class: IfcCoveringType
+  predefined: FLOORING
+  category: Finishes
+  discipline: architectural
+  pack: architectural-finishes
+  builder: box
+  tier: L200
+  material: {name: Epoxy Terrazzo, category: composite}
+  psets:
+    MF_Finishes: {Application: Lobby / concourse, ServiceLife: 40 yr}
+  types:
+    - {name: 'Epoxy Terrazzo 3/8"', dims: ['10''-0"', '10''-0"', '0''-0 3/8"']}
+    - {name: 'Cementitious Terrazzo 1/2"', dims: ['10''-0"', '10''-0"', '0''-0 1/2"']}
+
+- key: flooring_rubber
+  label: Rubber Sheet Flooring
+  ifc_class: IfcCoveringType
+  predefined: FLOORING
+  category: Finishes
+  discipline: architectural
+  pack: architectural-finishes
+  builder: box
+  tier: L200
+  material: {name: Rubber, category: rubber}
+  psets:
+    MF_Finishes: {Application: Patient room / corridor / fitness, Seams: Heat-welded}
+  types:
+    - {name: 'Sheet Rubber 1/8"', dims: ['10''-0"', '6''-0"', '0''-0 1/8"']}
+    - {name: 'Studded Rubber Tile', dims: ['3''-0"', '3''-0"', '0''-0 1/8"']}
+
+- key: flooring_wood
+  label: Wood Flooring
+  ifc_class: IfcCoveringType
+  predefined: FLOORING
+  category: Finishes
+  discipline: architectural
+  pack: architectural-finishes
+  builder: box
+  tier: L200
+  material: {name: Hardwood, category: wood}
+  psets:
+    MF_Finishes: {Application: Residential / hotel / gymnasium}
+  types:
+    - {name: 'Engineered Plank 5/8"', dims: ['4''-0"', '0''-5"', '0''-0 5/8"']}
+    - {name: 'Maple Gym Floor 25/32"', dims: ['8''-0"', '0''-2 1/4"', '0''-0 3/4"']}
+
+- key: flooring_sealed_concrete
+  label: Sealed / Polished Concrete
+  ifc_class: IfcCoveringType
+  predefined: FLOORING
+  category: Finishes
+  discipline: architectural
+  pack: architectural-finishes
+  builder: box
+  tier: L200
+  material: {name: Polished Concrete, category: concrete}
+  psets:
+    MF_Finishes: {Application: Warehouse / industrial / retail, Gloss: "800 grit"}
+  types:
+    - {name: 'Polished + Densified', dims: ['20''-0"', '20''-0"', '0''-0 1/8"']}
+    - {name: 'Sealed Concrete', dims: ['20''-0"', '20''-0"', '0''-0 1/16"']}
+
+# ─────────────────────────── specialties ───────────────────────────
+- key: grab_bar
+  label: Grab Bar
+  ifc_class: IfcDiscreteAccessoryType
+  predefined: NOTDEFINED
+  category: Specialties
+  discipline: architectural
+  pack: architectural-specialties
+  builder: revolve
+  tier: L200
+  material: {name: Stainless Steel, category: metal}
+  psets:
+    MF_Accessibility: {Standard: ICC A117.1, Load: 250 lbf}
+  types:
+    - {name: '36" Straight', dims: ['3''-0"', '0''-1 1/2"', '0''-3"']}
+    - {name: '42" Straight', dims: ['3''-6"', '0''-1 1/2"', '0''-3"']}
+    - {name: '18" Vertical', dims: ['0''-1 1/2"', '0''-3"', '1''-6"']}
+
+- key: toilet_accessory
+  label: Toilet Accessory
+  ifc_class: IfcDiscreteAccessoryType
+  predefined: NOTDEFINED
+  category: Specialties
+  discipline: architectural
+  pack: architectural-specialties
+  builder: box
+  tier: L200
+  material: {name: Stainless Steel, category: metal}
+  types:
+    - {name: 'Paper Towel Dispenser / Waste', dims: ['1''-2"', '0''-4"', '2''-0"']}
+    - {name: 'Soap Dispenser', dims: ['0''-4"', '0''-4"', '0''-8"']}
+    - {name: 'Hand Dryer', dims: ['1''-0"', '0''-5"', '1''-0"']}
+    - {name: 'Mirror 24" x 36"', dims: ['2''-0"', '0''-1"', '3''-0"']}
+    - {name: 'Baby Changing Station', dims: ['2''-10"', '0''-4"', '1''-10"']}
+
+- key: crash_rail
+  label: Crash Rail / Wall Protection
+  ifc_class: IfcCoveringType
+  predefined: CLADDING
+  category: Specialties
+  discipline: architectural
+  pack: architectural-specialties
+  builder: box
+  tier: L200
+  material: {name: Rigid Vinyl, category: plastic}
+  psets:
+    MF_Finishes: {Application: Hospital / hotel corridor, MountingHeight: 34 in AFF}
+  types:
+    - {name: 'Crash Rail 6" High', dims: ['12''-0"', '0''-2"', '0''-6"']}
+    - {name: 'Handrail / Crash Rail Combined', dims: ['12''-0"', '0''-3"', '0''-6"']}
+    - {name: 'Corner Guard 3" x 3"', dims: ['0''-3"', '0''-3"', '4''-0"']}
+    - {name: 'Wall Protection Sheet 4''x8''', dims: ['8''-0"', '0''-0 1/16"', '4''-0"']}
+
+- key: expansion_joint_cover
+  label: Expansion Joint Cover
+  ifc_class: IfcDiscreteAccessoryType
+  predefined: NOTDEFINED
+  category: Specialties
+  discipline: architectural
+  pack: architectural-specialties
+  builder: box
+  tier: L200
+  material: {name: Aluminium / Elastomer, category: aluminium}
+  psets:
+    MF_Envelope: {Movement: 2 in nominal}
+  types:
+    - {name: 'Floor Cover 4" Joint', dims: ['12''-0"', '0''-10"', '0''-1"']}
+    - {name: 'Wall Cover 4" Joint', dims: ['0''-10"', '0''-2"', '10''-0"']}
+    - {name: 'Ceiling Cover 4" Joint', dims: ['12''-0"', '0''-10"', '0''-2"']}
+
+- key: marker_board
+  label: Marker / Tack Board
+  ifc_class: IfcDiscreteAccessoryType
+  predefined: NOTDEFINED
+  category: Specialties
+  discipline: architectural
+  pack: architectural-specialties
+  builder: box
+  tier: L200
+  material: {name: Porcelain Enamel Steel, category: metal}
+  types:
+    - {name: 'Marker Board 4'' x 8''', dims: ['8''-0"', '0''-2"', '4''-0"']}
+    - {name: 'Marker Board 4'' x 12''', dims: ['12''-0"', '0''-2"', '4''-0"']}
+    - {name: 'Tack Board 4'' x 6''', dims: ['6''-0"', '0''-2"', '4''-0"']}
+
+- key: canopy
+  label: Entrance Canopy
+  ifc_class: IfcBuildingElementProxyType
+  predefined: ELEMENT
+  category: Specialties
+  discipline: architectural
+  pack: architectural-specialties
+  builder: box
+  tier: L200
+  material: {name: Aluminium / Glass, category: aluminium}
+  psets:
+    MF_Envelope: {Drainage: Integral gutter, SnowLoad: Per site}
+  types:
+    - {name: 'Glass Canopy 8'' x 4''', dims: ['8''-0"', '4''-0"', '0''-8"']}
+    - {name: 'Metal Canopy 20'' x 8''', dims: ['20''-0"', '8''-0"', '1''-2"']}
+    - {name: 'Drive-Under Canopy 40'' x 20''', dims: ['40''-0"', '20''-0"', '2''-0"']}
+
+- key: column_cover
+  label: Column Cover / Enclosure
+  ifc_class: IfcCoveringType
+  predefined: CLADDING
+  category: Specialties
+  discipline: architectural
+  pack: architectural-specialties
+  builder: box
+  tier: L200
+  material: {name: Stainless Steel, category: metal}
+  psets:
+    MF_Finishes: {Application: Lobby / concourse exposed column}
+  types:
+    - {name: 'Round Cover 24" Dia', dims: ['2''-0"', '2''-0"', '12''-0"']}
+    - {name: 'Square Cover 24" x 24"', dims: ['2''-0"', '2''-0"', '12''-0"']}
+    - {name: 'Gypsum Furred Enclosure 30"', dims: ['2''-6"', '2''-6"', '12''-0"']}
+
+- key: stair_monumental
+  label: Monumental / Feature Stair
+  ifc_class: IfcStairFlightType
+  predefined: STRAIGHT
+  category: Circulation
+  discipline: architectural
+  pack: architectural-circulation
+  builder: box
+  tier: L200
+  material: {name: Steel / Glass, category: metal}
+  psets:
+    # standard Pset reals are project units (metres) — an imperial string will not cast
+    Pset_StairFlightCommon: {NumberOfRiser: 18, RiserHeight: 0.165, TreadLength: 0.305}
+  types:
+    - {name: 'Feature Flight 8'' Wide', dims: ['8''-0"', '18''-0"', '10''-0"']}
+    - {name: 'Feature Flight 12'' Wide', dims: ['12''-0"', '18''-0"', '10''-0"']}
+
+- key: stair_spiral
+  label: Spiral Stair
+  ifc_class: IfcStairType
+  predefined: SPIRAL_STAIR
+  category: Circulation
+  discipline: architectural
+  pack: architectural-circulation
+  builder: revolve
+  tier: L200
+  material: {name: Steel, category: metal}
+  psets:
+    Pset_StairCommon: {RequiredHeadroom: 2.03}
+  types:
+    - {name: '5''-0" Diameter', dims: ['5''-0"', '5''-0"', '10''-0"']}
+    - {name: '6''-0" Diameter', dims: ['6''-0"', '6''-0"', '10''-0"']}

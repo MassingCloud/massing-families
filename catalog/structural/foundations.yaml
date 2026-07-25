@@ -1,0 +1,268 @@
+# Foundations — the gap the typology-coverage check found (FAMILY-COMPLETE batch 6c).
+#
+# The structural catalog carried 39 families of superstructure — W-shapes, HSS, tees, channels,
+# concrete frames, precast, timber, rebar, PT — and not one foundation. `steel_pile_hp` is an HP
+# *section*, not a foundation element. So every one of the six target typologies was unbuildable for
+# the same reason, and it took a mechanical coverage check to notice: the catalog looked enormous,
+# and it could not hold a building up.
+#
+# That is the value of asserting on IFC classes rather than on family counts. 413 families across 56
+# packs still reported zero `IfcFootingType`, and no amount of breadth elsewhere substitutes.
+#
+# Sizes are massing-grade and generic on purpose — a real footing comes from a geotechnical report
+# and a reaction, neither of which a content library has. What matters here is that the ELEMENT can
+# be placed, scheduled and taken off; the engineer resizes it.
+
+- key: footing_spread
+  label: Spread / Pad Footing
+  ifc_class: IfcFootingType
+  predefined: PAD_FOOTING
+  category: Foundations
+  discipline: structural
+  pack: structural-foundations
+  builder: box
+  tier: L200
+  material: {name: Cast-in-Place Concrete, category: concrete}
+  psets:
+    Pset_FootingCommon: {LoadBearing: "true"}
+    MF_Structural: {Concrete: 4000 psi, Reinforcement: Bottom mat each way,
+                    Note: Size comes from the bearing capacity in the geotechnical report}
+  types:
+    - {name: '3''-0" x 3''-0" x 12"', dims: ['3''-0"', '3''-0"', '1''-0"']}
+    - {name: '4''-0" x 4''-0" x 12"', dims: ['4''-0"', '4''-0"', '1''-0"']}
+    - {name: '5''-0" x 5''-0" x 15"', dims: ['5''-0"', '5''-0"', '1''-3"']}
+    - {name: '6''-0" x 6''-0" x 18"', dims: ['6''-0"', '6''-0"', '1''-6"']}
+    - {name: '8''-0" x 8''-0" x 24"', dims: ['8''-0"', '8''-0"', '2''-0"']}
+    - {name: '10''-0" x 10''-0" x 30"', dims: ['10''-0"', '10''-0"', '2''-6"']}
+    - {name: '12''-0" x 12''-0" x 36"', dims: ['12''-0"', '12''-0"', '3''-0"']}
+
+- key: footing_combined
+  label: Combined / Eccentric Footing
+  ifc_class: IfcFootingType
+  predefined: PAD_FOOTING
+  category: Foundations
+  discipline: structural
+  pack: structural-foundations
+  builder: box
+  tier: L200
+  material: {name: Cast-in-Place Concrete, category: concrete}
+  psets:
+    Pset_FootingCommon: {LoadBearing: "true"}
+    MF_Structural: {Application: Property-line column / paired columns too close to pad separately}
+  types:
+    - {name: '6''-0" x 12''-0" x 24"', dims: ['6''-0"', '12''-0"', '2''-0"']}
+    - {name: '8''-0" x 16''-0" x 30"', dims: ['8''-0"', '16''-0"', '2''-6"']}
+    - {name: 'Strap Footing 6''-0" x 20''-0"', dims: ['6''-0"', '20''-0"', '2''-0"']}
+
+- key: footing_strip
+  label: Strip / Continuous Wall Footing
+  ifc_class: IfcFootingType
+  predefined: STRIP_FOOTING
+  category: Foundations
+  discipline: structural
+  pack: structural-foundations
+  builder: box
+  tier: L200
+  material: {name: Cast-in-Place Concrete, category: concrete}
+  psets:
+    Pset_FootingCommon: {LoadBearing: "true"}
+    MF_Structural: {Concrete: 3000 psi, Note: Runs continuous under bearing and foundation walls}
+  types:
+    - {name: '16" Wide x 8" Deep', dims: ['1''-4"', '10''-0"', '0''-8"']}
+    - {name: '24" Wide x 10" Deep', dims: ['2''-0"', '10''-0"', '0''-10"']}
+    - {name: '30" Wide x 12" Deep', dims: ['2''-6"', '10''-0"', '1''-0"']}
+    - {name: '36" Wide x 12" Deep', dims: ['3''-0"', '10''-0"', '1''-0"']}
+    - {name: '48" Wide x 18" Deep', dims: ['4''-0"', '10''-0"', '1''-6"']}
+
+- key: grade_beam
+  label: Grade Beam
+  ifc_class: IfcFootingType
+  predefined: FOOTING_BEAM
+  category: Foundations
+  discipline: structural
+  pack: structural-foundations
+  builder: box
+  tier: L200
+  material: {name: Cast-in-Place Concrete, category: concrete}
+  psets:
+    Pset_FootingCommon: {LoadBearing: "true"}
+    MF_Structural: {Function: Ties pile caps / spans between piers; resists lateral thrust}
+  types:
+    - {name: '12" x 24"', dims: ['1''-0"', '20''-0"', '2''-0"']}
+    - {name: '16" x 30"', dims: ['1''-4"', '20''-0"', '2''-6"']}
+    - {name: '18" x 36"', dims: ['1''-6"', '20''-0"', '3''-0"']}
+    - {name: '24" x 48"', dims: ['2''-0"', '20''-0"', '4''-0"']}
+
+- key: pile_cap
+  label: Pile Cap
+  ifc_class: IfcFootingType
+  predefined: PILE_CAP
+  category: Foundations
+  discipline: structural
+  pack: structural-foundations
+  builder: box
+  tier: L200
+  material: {name: Cast-in-Place Concrete, category: concrete}
+  psets:
+    Pset_FootingCommon: {LoadBearing: "true"}
+    MF_Structural: {Note: Cap depth is set by the pile embedment and the strut-and-tie model}
+  types:
+    - {name: '2-Pile Cap 3''x6''x30"', dims: ['3''-0"', '6''-0"', '2''-6"']}
+    - {name: '3-Pile Cap 7''x6''x36"', dims: ['7''-0"', '6''-0"', '3''-0"']}
+    - {name: '4-Pile Cap 7''x7''x36"', dims: ['7''-0"', '7''-0"', '3''-0"']}
+    - {name: '6-Pile Cap 10''x7''x42"', dims: ['10''-0"', '7''-0"', '3''-6"']}
+    - {name: '9-Pile Cap 10''x10''x48"', dims: ['10''-0"', '10''-0"', '4''-0"']}
+
+- key: mat_foundation
+  label: Mat / Raft Foundation
+  ifc_class: IfcFootingType
+  predefined: PAD_FOOTING
+  category: Foundations
+  discipline: structural
+  pack: structural-foundations
+  builder: box
+  tier: L200
+  material: {name: Cast-in-Place Concrete, category: concrete}
+  psets:
+    Pset_FootingCommon: {LoadBearing: "true"}
+    MF_Structural: {Application: Tower core / high water table / poor bearing,
+                    Note: Placed as a mass pour — thermal control is a schedule item, not a detail}
+  types:
+    - {name: 'Mat 36" Thick', dims: ['40''-0"', '40''-0"', '3''-0"']}
+    - {name: 'Mat 48" Thick', dims: ['40''-0"', '40''-0"', '4''-0"']}
+    - {name: 'Mat 72" Thick', dims: ['60''-0"', '60''-0"', '6''-0"']}
+    - {name: 'Core Mat 96" Thick', dims: ['40''-0"', '40''-0"', '8''-0"']}
+
+- key: pile_concrete
+  label: Concrete Pile
+  ifc_class: IfcPileType
+  predefined: BORED
+  category: Foundations
+  discipline: structural
+  pack: structural-foundations
+  builder: revolve
+  tier: L200
+  material: {name: Cast-in-Place Concrete, category: concrete}
+  psets:
+    Pset_PileCommon: {LoadBearing: "true"}
+    MF_Structural: {Installation: Drilled / augered, Note: Capacity comes from the geotechnical report}
+  types:
+    - {name: '18" Auger-Cast x 40''', dims: ['1''-6"', '1''-6"', '40''-0"']}
+    - {name: '24" Auger-Cast x 50''', dims: ['2''-0"', '2''-0"', '50''-0"']}
+    - {name: '30" Drilled Shaft x 60''', dims: ['2''-6"', '2''-6"', '60''-0"']}
+    - {name: '48" Drilled Shaft x 80''', dims: ['4''-0"', '4''-0"', '80''-0"']}
+    - {name: '72" Drilled Shaft x 100''', dims: ['6''-0"', '6''-0"', '100''-0"']}
+
+- key: pile_driven
+  label: Driven Pile
+  ifc_class: IfcPileType
+  predefined: DRIVEN
+  category: Foundations
+  discipline: structural
+  pack: structural-foundations
+  builder: box
+  tier: L200
+  material: {name: Precast Concrete / Steel, category: concrete}
+  psets:
+    Pset_PileCommon: {LoadBearing: "true"}
+    MF_Structural: {Installation: Impact-driven, Note: Driving noise and vibration are site constraints}
+  types:
+    - {name: '14" Precast Square x 50''', dims: ['1''-2"', '1''-2"', '50''-0"']}
+    - {name: '16" Precast Square x 60''', dims: ['1''-4"', '1''-4"', '60''-0"']}
+    - {name: 'HP12x53 Steel x 50''', dims: ['1''-0"', '1''-0"', '50''-0"']}
+    - {name: 'HP14x89 Steel x 70''', dims: ['1''-2"', '1''-2"', '70''-0"']}
+    - {name: '12-3/4" Pipe Pile x 60''', dims: ['1''-1"', '1''-1"', '60''-0"']}
+
+- key: pile_helical
+  label: Helical / Micropile
+  ifc_class: IfcPileType
+  predefined: FRICTION
+  category: Foundations
+  discipline: structural
+  pack: structural-foundations
+  builder: revolve
+  tier: L200
+  material: {name: Galvanized Steel, category: metal}
+  psets:
+    Pset_PileCommon: {LoadBearing: "true"}
+    MF_Structural: {Application: Underpinning / low-headroom / retrofit}
+  types:
+    - {name: 'Helical 2-7/8" Shaft x 30''', dims: ['0''-3"', '0''-3"', '30''-0"']}
+    - {name: 'Micropile 7" Cased x 50''', dims: ['0''-7"', '0''-7"', '50''-0"']}
+
+- key: pier_concrete
+  label: Concrete Pier / Pedestal
+  ifc_class: IfcColumnType
+  predefined: COLUMN
+  category: Foundations
+  discipline: structural
+  pack: structural-foundations
+  builder: box
+  tier: L200
+  material: {name: Cast-in-Place Concrete, category: concrete}
+  psets:
+    Pset_ColumnCommon: {LoadBearing: "true"}
+    MF_Structural: {Function: Carries the column base plate from footing up to finish floor}
+  types:
+    - {name: '18" x 18" Pedestal', dims: ['1''-6"', '1''-6"', '3''-0"']}
+    - {name: '24" x 24" Pedestal', dims: ['2''-0"', '2''-0"', '4''-0"']}
+    - {name: '30" x 30" Pier', dims: ['2''-6"', '2''-6"', '6''-0"']}
+    - {name: '36" Round Pier', dims: ['3''-0"', '3''-0"', '8''-0"']}
+
+- key: slab_on_grade
+  label: Slab on Grade
+  ifc_class: IfcSlabType
+  predefined: BASESLAB
+  category: Foundations
+  discipline: structural
+  pack: structural-foundations
+  builder: box
+  tier: L200
+  material: {name: Cast-in-Place Concrete, category: concrete}
+  psets:
+    Pset_SlabCommon: {LoadBearing: "true", IsExternal: "false"}
+    MF_Structural: {VapourBarrier: 15-mil under slab,
+                    Note: Joint layout drives the pour sequence and the finish schedule}
+  types:
+    - {name: '4" SOG (Residential)', dims: ['20''-0"', '20''-0"', '0''-4"']}
+    - {name: '5" SOG (Commercial)', dims: ['20''-0"', '20''-0"', '0''-5"']}
+    - {name: '6" SOG (Light Industrial)', dims: ['20''-0"', '20''-0"', '0''-6"']}
+    - {name: '8" SOG (Heavy Industrial / Rack)', dims: ['20''-0"', '20''-0"', '0''-8"']}
+    - {name: '12" SOG (Airport Apron / Dock)', dims: ['20''-0"', '20''-0"', '1''-0"']}
+
+- key: foundation_wall
+  label: Foundation / Basement Wall
+  ifc_class: IfcWallType
+  predefined: SOLIDWALL
+  category: Foundations
+  discipline: structural
+  pack: structural-foundations
+  builder: box
+  tier: L200
+  material: {name: Cast-in-Place Concrete, category: concrete}
+  psets:
+    Pset_WallCommon: {LoadBearing: "true", IsExternal: "true"}
+    MF_Structural: {Waterproofing: Required below grade,
+                    Note: Retains soil — the lateral design case, not the gravity one}
+  types:
+    - {name: '8" Frost Wall', dims: ['20''-0"', '0''-8"', '4''-0"']}
+    - {name: '10" Basement Wall', dims: ['20''-0"', '0''-10"', '10''-0"']}
+    - {name: '12" Basement Wall', dims: ['20''-0"', '1''-0"', '12''-0"']}
+    - {name: '16" Basement Wall (Deep)', dims: ['20''-0"', '1''-4"', '16''-0"']}
+
+- key: underslab_drainage
+  label: Under-Slab Drainage / Waterproofing
+  ifc_class: IfcCoveringType
+  predefined: MEMBRANE
+  category: Foundations
+  discipline: structural
+  pack: structural-foundations
+  builder: box
+  tier: L200
+  material: {name: HDPE Membrane, category: membrane}
+  psets:
+    MF_Structural: {Note: Below-grade waterproofing is a warranty item — model it, do not assume it}
+  types:
+    - {name: 'Blindside Waterproofing Sheet', dims: ['10''-0"', '10''-0"', '0''-0 1/8"']}
+    - {name: 'Drainage Composite Board', dims: ['4''-0"', '8''-0"', '0''-0 3/8"']}
+    - {name: 'Perimeter Drain 4" Perforated', dims: ['0''-5"', '10''-0"', '0''-5"']}

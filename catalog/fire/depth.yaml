@@ -1,0 +1,296 @@
+# Fire protection depth — a code-complete fire system (FAMILY-COMPLETE batch 3).
+#
+# The base fire catalog carried 13 families / 14 types: sprinkler heads, pipe, a pump, an FDC, a
+# damper and a detector. That is the skeleton of NFPA 13/14/72 with none of the parts that make a
+# system inspectable — no riser valve trim, no hose stations, no alarm panel, no notification.
+#
+# Everything here is code-driven rather than decorative: an FACP and notification appliances are
+# required wherever detection is, a dry system is the only way to sprinkler an unheated space
+# (parking, loading dock — industrial and airport cannot be modelled without one), and smoke dampers
+# are distinct from fire dampers because they are a different listing on a different system.
+
+# ─────────────────────────── riser + valve trim ───────────────────────────
+- key: sprinkler_control_valve
+  label: Sprinkler Control Valve (OS&Y)
+  ifc_class: IfcValveType
+  predefined: ISOLATING
+  category: Sprinkler Piping
+  discipline: fire
+  pack: fire-sprinkler
+  builder: box
+  tier: L200
+  material: {name: Cast Iron / Bronze, category: metal}
+  ports: {system: PIPE, names: [In, Out], flows: [SINK, SOURCE]}
+  psets:
+    MF_FireProtection: {Supervised: "true", Standard: NFPA 13}
+  types:
+    - {name: '4" OS&Y Gate', dims: ['1''-6"', '0''-10"', '2''-0"']}
+    - {name: '6" OS&Y Gate', dims: ['1''-10"', '1''-0"', '2''-6"']}
+    - {name: '8" OS&Y Gate', dims: ['2''-2"', '1''-2"', '3''-0"']}
+
+- key: sprinkler_alarm_valve
+  label: Alarm Check / Riser Valve
+  ifc_class: IfcValveType
+  predefined: CHECK
+  category: Sprinkler Piping
+  discipline: fire
+  pack: fire-sprinkler
+  builder: box
+  tier: L200
+  material: {name: Cast Iron, category: metal}
+  ports: {system: PIPE, names: [In, Out], flows: [SINK, SOURCE]}
+  psets:
+    MF_FireProtection: {Standard: NFPA 13, WaterMotorGong: "true"}
+  types:
+    - {name: '4" Alarm Check Valve', dims: ['1''-2"', '1''-0"', '2''-0"']}
+    - {name: '6" Alarm Check Valve', dims: ['1''-6"', '1''-2"', '2''-4"']}
+
+- key: sprinkler_dry_valve
+  label: Dry Pipe Valve Assembly
+  ifc_class: IfcValveType
+  predefined: CHECK
+  category: Sprinkler Piping
+  discipline: fire
+  pack: fire-sprinkler
+  builder: box
+  tier: L200
+  material: {name: Cast Iron, category: metal}
+  ports: {system: PIPE, names: [In, Out], flows: [SINK, SOURCE]}
+  psets:
+    MF_FireProtection: {SystemType: Dry, Standard: NFPA 13,
+                        Application: Unheated — parking / loading / canopy}
+  types:
+    - {name: '4" Dry Valve with Trim', dims: ['3''-0"', '2''-0"', '5''-0"']}
+    - {name: '6" Dry Valve with Trim', dims: ['3''-6"', '2''-4"', '5''-6"']}
+
+- key: preaction_valve
+  label: Pre-Action Valve Assembly
+  ifc_class: IfcValveType
+  predefined: CHECK
+  category: Sprinkler Piping
+  discipline: fire
+  pack: fire-sprinkler
+  builder: box
+  tier: L200
+  material: {name: Cast Iron, category: metal}
+  ports: {system: PIPE, names: [In, Out], flows: [SINK, SOURCE]}
+  psets:
+    MF_FireProtection: {SystemType: Pre-Action, Standard: NFPA 13,
+                        Application: Data centre / imaging / archive}
+  types:
+    - {name: '4" Double-Interlock Pre-Action', dims: ['3''-6"', '2''-2"', '5''-6"']}
+
+- key: jockey_pump
+  label: Jockey / Pressure-Maintenance Pump
+  ifc_class: IfcPumpType
+  predefined: CIRCULATOR
+  category: Fire Pump
+  discipline: fire
+  pack: fire-protection
+  builder: box
+  tier: L200
+  material: {name: Cast Iron, category: metal}
+  ports: {system: PIPE, names: [Suction, Discharge], flows: [SINK, SOURCE]}
+  psets:
+    MF_FireProtection: {Standard: NFPA 20, Function: Pressure Maintenance}
+  types:
+    - {name: 'Jockey Pump 10 GPM 3 HP', dims: ['2''-6"', '1''-4"', '2''-6"']}
+
+- key: sprinkler_hanger
+  label: Sprinkler Pipe Hanger
+  ifc_class: IfcDiscreteAccessoryType
+  predefined: NOTDEFINED
+  category: Sprinkler Piping
+  discipline: fire
+  pack: fire-sprinkler
+  builder: box
+  tier: L200
+  material: {name: Galvanized Steel, category: metal}
+  psets:
+    MF_FireProtection: {Standard: NFPA 13, Listed: "true"}
+  types:
+    - {name: '1" Adjustable Swivel Ring', dims: ['0''-4"', '0''-2"', '0''-6"']}
+    - {name: '2" Adjustable Swivel Ring', dims: ['0''-6"', '0''-3"', '0''-8"']}
+    - {name: 'Seismic Sway Brace', dims: ['0''-6"', '0''-6"', '3''-0"']}
+
+# ─────────────────────────── standpipe + suppression ───────────────────────────
+- key: hose_valve
+  label: Fire Hose Valve
+  ifc_class: IfcValveType
+  predefined: ISOLATING
+  category: Standpipe
+  discipline: fire
+  pack: fire-protection
+  builder: box
+  tier: L200
+  material: {name: Brass, category: bronze}
+  ports: {system: PIPE, names: [In, Out], flows: [SINK, SOURCE]}
+  psets:
+    MF_FireProtection: {Standard: NFPA 14, Class: I}
+  types:
+    - {name: '2-1/2" Angle Hose Valve', dims: ['0''-10"', '0''-6"', '0''-8"']}
+    - {name: '2-1/2" Pressure-Reducing Hose Valve', dims: ['1''-0"', '0''-7"', '0''-10"']}
+
+- key: hose_cabinet
+  label: Fire Hose / Valve Cabinet
+  ifc_class: IfcDiscreteAccessoryType
+  predefined: NOTDEFINED
+  category: Standpipe
+  discipline: fire
+  pack: fire-protection
+  builder: box
+  tier: L200
+  material: {name: Painted Steel, category: metal}
+  psets:
+    MF_FireProtection: {Standard: NFPA 14, Recessed: "true"}
+  types:
+    - {name: 'Recessed Valve Cabinet', dims: ['2''-0"', '0''-8"', '2''-6"']}
+    - {name: 'Surface Hose Cabinet', dims: ['2''-6"', '0''-10"', '3''-0"']}
+
+- key: fire_extinguisher
+  label: Fire Extinguisher
+  ifc_class: IfcFireSuppressionTerminalType
+  predefined: NOTDEFINED
+  category: Fire Equipment
+  discipline: fire
+  pack: fire-protection
+  builder: revolve
+  tier: L200
+  material: {name: Steel, category: metal}
+  psets:
+    MF_FireProtection: {Standard: NFPA 10}
+  types:
+    - {name: '10 lb ABC Dry Chemical', dims: ['0''-6"', '0''-6"', '1''-8"']}
+    - {name: '20 lb ABC Dry Chemical', dims: ['0''-8"', '0''-8"', '2''-0"']}
+    - {name: '10 lb CO2', dims: ['0''-7"', '0''-7"', '2''-0"']}
+
+- key: kitchen_suppression
+  label: Kitchen Hood Suppression System
+  ifc_class: IfcFireSuppressionTerminalType
+  predefined: NOTDEFINED
+  category: Fire Equipment
+  discipline: fire
+  pack: fire-protection
+  builder: box
+  tier: L200
+  material: {name: Stainless Steel, category: metal}
+  psets:
+    MF_FireProtection: {Standard: NFPA 96, Agent: Wet Chemical}
+  types:
+    - {name: 'Wet-Chemical Tank + Nozzles', dims: ['1''-4"', '0''-10"', '2''-6"']}
+
+- key: clean_agent_system
+  label: Clean Agent Suppression
+  ifc_class: IfcFireSuppressionTerminalType
+  predefined: NOTDEFINED
+  category: Fire Equipment
+  discipline: fire
+  pack: fire-protection
+  builder: revolve
+  tier: L200
+  material: {name: Steel, category: metal}
+  psets:
+    MF_FireProtection: {Standard: NFPA 2001, Application: Data / Imaging / Archive}
+  types:
+    - {name: 'Agent Cylinder 200 lb', dims: ['1''-2"', '1''-2"', '5''-0"']}
+    - {name: 'Discharge Nozzle', dims: ['0''-4"', '0''-4"', '0''-4"']}
+
+# ─────────────────────────── detection + notification (NFPA 72) ───────────────────────────
+- key: fire_alarm_panel
+  label: Fire Alarm Control Panel
+  ifc_class: IfcAlarmType
+  predefined: NOTDEFINED
+  category: Fire Alarm
+  discipline: fire
+  pack: fire-alarm
+  builder: box
+  tier: L200
+  material: {name: Painted Steel, category: metal}
+  psets:
+    MF_FireAlarm: {Standard: NFPA 72, Addressable: "true"}
+  types:
+    - {name: 'FACP Addressable 2-Loop', dims: ['2''-0"', '0''-6"', '2''-8"']}
+    - {name: 'FACP Addressable 8-Loop', dims: ['2''-6"', '0''-8"', '4''-0"']}
+    - {name: 'Remote Annunciator', dims: ['1''-2"', '0''-3"', '0''-10"']}
+
+- key: notification_appliance
+  label: Notification Appliance (Horn / Strobe)
+  ifc_class: IfcAlarmType
+  predefined: SIREN
+  category: Fire Alarm
+  discipline: fire
+  pack: fire-alarm
+  builder: box
+  tier: L200
+  material: {name: Thermoplastic, category: plastic}
+  psets:
+    MF_FireAlarm: {Standard: NFPA 72, ADACompliant: "true"}
+  types:
+    - {name: 'Wall Horn/Strobe 75cd', dims: ['0''-5"', '0''-3"', '0''-6"']}
+    - {name: 'Wall Strobe 110cd', dims: ['0''-5"', '0''-3"', '0''-6"']}
+    - {name: 'Ceiling Horn/Strobe', dims: ['0''-7"', '0''-7"', '0''-3"']}
+    - {name: 'Speaker/Strobe (Voice Evac)', dims: ['0''-6"', '0''-4"', '0''-8"']}
+
+- key: manual_pull_station
+  label: Manual Pull Station
+  ifc_class: IfcAlarmType
+  predefined: MANUALPULLBOX
+  category: Fire Alarm
+  discipline: fire
+  pack: fire-alarm
+  builder: box
+  tier: L200
+  material: {name: Thermoplastic, category: plastic}
+  psets:
+    MF_FireAlarm: {Standard: NFPA 72, MountingHeight: "48 in AFF"}
+  types:
+    - {name: 'Single-Action Addressable', dims: ['0''-4"', '0''-2"', '0''-6"']}
+    - {name: 'Dual-Action Addressable', dims: ['0''-4"', '0''-2"', '0''-6"']}
+
+- key: duct_smoke_detector
+  label: Duct Smoke Detector
+  ifc_class: IfcSensorType
+  predefined: SMOKESENSOR
+  category: Fire Alarm
+  discipline: fire
+  pack: fire-alarm
+  builder: box
+  tier: L200
+  material: {name: Thermoplastic, category: plastic}
+  psets:
+    MF_FireAlarm: {Standard: NFPA 72, Function: AHU Shutdown}
+  types:
+    - {name: 'Duct Detector with Sampling Tube', dims: ['1''-0"', '0''-5"', '0''-6"']}
+
+- key: heat_detector
+  label: Heat Detector
+  ifc_class: IfcSensorType
+  predefined: TEMPERATURESENSOR
+  category: Fire Alarm
+  discipline: fire
+  pack: fire-alarm
+  builder: revolve
+  tier: L200
+  material: {name: Thermoplastic, category: plastic}
+  psets:
+    MF_FireAlarm: {Standard: NFPA 72, Application: Where smoke detection is unsuitable}
+  types:
+    - {name: 'Fixed 135°F Rate-of-Rise', dims: ['0''-5"', '0''-5"', '0''-2"']}
+    - {name: 'Fixed 190°F High-Temp', dims: ['0''-5"', '0''-5"', '0''-2"']}
+
+- key: smoke_damper
+  label: Smoke / Combination Fire-Smoke Damper
+  ifc_class: IfcDamperType
+  predefined: SMOKEDAMPER
+  category: Fire Damper
+  discipline: fire
+  pack: fire-protection
+  builder: box
+  tier: L200
+  material: {name: Galvanized Steel, category: metal}
+  psets:
+    MF_FireProtection: {Standard: UL 555S, Actuator: Electric}
+  types:
+    - {name: '12x12 Combination Fire/Smoke', dims: ['1''-0"', '1''-0"', '0''-8"']}
+    - {name: '24x24 Combination Fire/Smoke', dims: ['2''-0"', '2''-0"', '0''-8"']}
+    - {name: '36x24 Smoke Damper', dims: ['3''-0"', '2''-0"', '0''-8"']}

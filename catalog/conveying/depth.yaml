@@ -1,0 +1,170 @@
+# Conveying depth — the shaft, not just the cab (FAMILY-COMPLETE batch 6a).
+#
+# The base conveying catalog places a cab, an escalator and a moving walk. What it cannot model is
+# the SHAFT — and the shaft is what an architect coordinates: pit depth, overhead, machine room or
+# machine-room-less, hoistway doors on every level, and the counterweight rail line that a structural
+# wall has to miss. A traction elevator with a 4'-0" pit and a hydraulic with a 4'-0" pit are the
+# same drawing; a hydraulic needs a jack hole below it and the traction needs 15'-0" of overhead.
+#
+# Also here: the vertical transport the six typologies need and the base list omits — freight and
+# service cars (hotel/hospital/industrial), and the pneumatic tube that carries hospital specimens.
+
+- key: elevator_traction
+  label: Traction Elevator (Machine-Room-Less)
+  ifc_class: IfcTransportElementType
+  predefined: ELEVATOR
+  category: Elevators
+  discipline: conveying
+  pack: conveying-elevators
+  builder: box
+  tier: L200
+  material: {name: Stainless Steel, category: metal}
+  psets:
+    MF_Conveying: {Drive: Gearless Traction, MachineRoom: None (MRL),
+                   PitDepth: "5'-0\"", Overhead: "15'-0\"", Standard: ASME A17.1}
+  types:
+    - {name: '2500 lb — 8''x8'' Hoistway', dims: ['8''-0"', '8''-0"', '10''-0"']}
+    - {name: '3500 lb — 9''x9'' Hoistway', dims: ['9''-0"', '9''-0"', '10''-0"']}
+    - {name: '4500 lb — 9''x10'' Hoistway', dims: ['9''-0"', '10''-0"', '10''-0"']}
+
+- key: elevator_hydraulic
+  label: Hydraulic Elevator
+  ifc_class: IfcTransportElementType
+  predefined: ELEVATOR
+  category: Elevators
+  discipline: conveying
+  pack: conveying-elevators
+  builder: box
+  tier: L200
+  material: {name: Stainless Steel, category: metal}
+  psets:
+    MF_Conveying: {Drive: Holed Hydraulic, MachineRoom: Adjacent required,
+                   PitDepth: "4'-0\"", Overhead: "12'-0\"", MaxTravel: "50'-0\"",
+                   Note: Needs a drilled jack hole below the pit}
+  types:
+    - {name: '2100 lb — 7''x7'' Hoistway', dims: ['7''-0"', '7''-0"', '9''-0"']}
+    - {name: '3000 lb — 8''x8'' Hoistway', dims: ['8''-0"', '8''-0"', '9''-0"']}
+
+- key: elevator_freight
+  label: Freight / Service Elevator
+  ifc_class: IfcTransportElementType
+  predefined: ELEVATOR
+  category: Elevators
+  discipline: conveying
+  pack: conveying-elevators
+  builder: box
+  tier: L200
+  material: {name: Steel, category: metal}
+  psets:
+    MF_Conveying: {Class: Class B Motor Vehicle / Class C Industrial,
+                   DoorType: Vertical Bi-Parting, Standard: ASME A17.1}
+  types:
+    - {name: '4000 lb Service — 9''x10''', dims: ['9''-0"', '10''-0"', '10''-0"']}
+    - {name: '6000 lb Freight — 10''x12''', dims: ['10''-0"', '12''-0"', '12''-0"']}
+    - {name: 'Hospital Bed Car 5000 lb — 8''x10''', dims: ['8''-0"', '10''-0"', '10''-0"']}
+
+- key: elevator_hoistway_door
+  label: Elevator Hoistway Entrance
+  ifc_class: IfcDoorType
+  predefined: DOOR
+  category: Elevators
+  discipline: conveying
+  pack: conveying-elevators
+  builder: box
+  tier: L200
+  material: {name: Stainless Steel, category: metal}
+  psets:
+    Pset_DoorCommon: {FireRating: 90 min, IsExternal: "false"}
+    MF_Conveying: {Operation: Single-Speed Centre-Opening,
+                   Note: One per served level — the count drives the elevator schedule}
+  types:
+    - {name: 'Centre-Opening 3''-6" x 7''-0"', dims: ['3''-6"', '0''-6"', '7''-0"']}
+    - {name: 'Centre-Opening 4''-0" x 7''-0"', dims: ['4''-0"', '0''-6"', '7''-0"']}
+    - {name: 'Two-Speed Side 4''-0" x 8''-0"', dims: ['4''-0"', '0''-6"', '8''-0"']}
+    - {name: 'Vertical Bi-Parting 6''-0" x 8''-0"', dims: ['6''-0"', '0''-8"', '8''-0"']}
+
+- key: elevator_machine
+  label: Elevator Machine / Controller
+  ifc_class: IfcTransportElementType
+  predefined: LIFTINGGEAR
+  category: Elevators
+  discipline: conveying
+  pack: conveying-elevators
+  builder: box
+  tier: L200
+  material: {name: Painted Steel, category: metal}
+  psets:
+    MF_Conveying: {Location: Hoistway head (MRL) or machine room,
+                   Note: Drives the machine-room ventilation and emergency power branch}
+  types:
+    - {name: 'Gearless Machine (MRL)', dims: ['3''-0"', '2''-0"', '2''-0"']}
+    - {name: 'Controller Cabinet', dims: ['2''-6"', '1''-6"', '7''-0"']}
+    - {name: 'Hydraulic Power Unit', dims: ['4''-0"', '2''-6"', '4''-0"']}
+
+- key: elevator_pit_equipment
+  label: Elevator Pit Equipment
+  ifc_class: IfcTransportElementType
+  predefined: LIFTINGGEAR
+  category: Elevators
+  discipline: conveying
+  pack: conveying-elevators
+  builder: box
+  tier: L200
+  material: {name: Steel, category: metal}
+  psets:
+    MF_Conveying: {Standard: ASME A17.1, Note: Pit ladder, buffers and sump are code items}
+  types:
+    - {name: 'Buffer (Spring)', dims: ['1''-0"', '1''-0"', '1''-6"']}
+    - {name: 'Buffer (Oil)', dims: ['1''-2"', '1''-2"', '2''-6"']}
+    - {name: 'Pit Ladder', dims: ['1''-6"', '0''-8"', '5''-0"']}
+    - {name: 'Counterweight Assembly', dims: ['3''-0"', '0''-10"', '6''-0"']}
+
+- key: pneumatic_tube_station
+  label: Pneumatic Tube Station
+  ifc_class: IfcTransportElementType
+  predefined: NOTDEFINED
+  category: Material Handling
+  discipline: conveying
+  pack: conveying-material
+  builder: box
+  tier: L200
+  material: {name: Painted Steel / Polymer, category: metal}
+  psets:
+    MF_Conveying: {Application: Hospital lab / pharmacy specimen transport,
+                   TubeSize: 4 in / 6 in}
+  types:
+    - {name: 'Send/Receive Station', dims: ['1''-6"', '1''-4"', '3''-0"']}
+    - {name: 'Blower / Transfer Unit', dims: ['3''-0"', '2''-0"', '5''-0"']}
+    - {name: 'Tube Run 6" Diameter', dims: ['0''-7"', '0''-7"', '10''-0"']}
+
+- key: vertical_reciprocating_conveyor
+  label: Vertical Reciprocating Conveyor / Material Lift
+  ifc_class: IfcTransportElementType
+  predefined: LIFTINGGEAR
+  category: Material Handling
+  discipline: conveying
+  pack: conveying-material
+  builder: box
+  tier: L200
+  material: {name: Steel, category: metal}
+  psets:
+    MF_Conveying: {Standard: ASME B20.1, Note: Freight only — not a passenger device}
+  types:
+    - {name: 'VRC 2000 lb — 6''x6'' Carriage', dims: ['6''-0"', '6''-0"', '12''-0"']}
+    - {name: 'VRC 6000 lb — 8''x10'' Carriage', dims: ['8''-0"', '10''-0"', '16''-0"']}
+
+- key: cart_lift
+  label: Cart / Dumbwaiter Lift (Service)
+  ifc_class: IfcTransportElementType
+  predefined: LIFTINGGEAR
+  category: Material Handling
+  discipline: conveying
+  pack: conveying-material
+  builder: box
+  tier: L200
+  material: {name: Stainless Steel, category: metal}
+  psets:
+    MF_Conveying: {Application: Kitchen / pharmacy / records, Standard: ASME A17.1 Part 7}
+  types:
+    - {name: 'Cart Lift 500 lb — 4''x4''', dims: ['4''-0"', '4''-0"', '6''-0"']}
+    - {name: 'Cart Lift 1000 lb — 5''x5''', dims: ['5''-0"', '5''-0"', '7''-0"']}

@@ -1,0 +1,352 @@
+# Site depth — the utilities and site elements a permit set needs (FAMILY-COMPLETE batch 6b).
+#
+# The base site catalog covers landscape and paving well and utilities barely: a catch basin, a
+# manhole and a trench drain, with no pipe between them. A civil sheet is mostly pipe — storm,
+# sanitary, domestic water and fire service — plus the appurtenances that make each run legal
+# (hydrant, valve box, cleanout, backflow vault).
+#
+# The rest is what every one of the six typologies actually needs on a site plan and none of them
+# can draw today: the transformer and generator pads that serve the building, the accessible
+# parking layout, the loading and refuse enclosures, and the site signage that carries the code.
+
+# ─────────────────────────── site utilities ───────────────────────────
+- key: pipe_storm
+  label: Storm Drainage Pipe
+  ifc_class: IfcPipeSegmentType
+  predefined: RIGIDSEGMENT
+  category: Site Utilities
+  discipline: site
+  pack: site-utilities
+  builder: profile
+  tier: L300
+  material: {name: Reinforced Concrete, category: concrete}
+  ports: {system: PIPE, names: [In, Out], flows: [SINK, SOURCE]}
+  psets:
+    MF_SiteUtilities: {Standard: ASTM C76, Class: III, Service: Storm}
+  generator: sizes
+  generator_args:
+    kind: CircleHollow
+    length: "8'-0\""
+    name: '{nominal} RCP Storm'
+    entries:
+      - {nominal: '12"', od: 15.0, wall: 1.75}
+      - {nominal: '18"', od: 22.0, wall: 2.0}
+      - {nominal: '24"', od: 29.0, wall: 2.5}
+      - {nominal: '36"', od: 43.0, wall: 3.5}
+      - {nominal: '48"', od: 57.0, wall: 4.5}
+
+- key: pipe_sanitary_site
+  label: Sanitary Sewer Pipe
+  ifc_class: IfcPipeSegmentType
+  predefined: RIGIDSEGMENT
+  category: Site Utilities
+  discipline: site
+  pack: site-utilities
+  builder: profile
+  tier: L300
+  material: {name: PVC, category: plastic}
+  ports: {system: PIPE, names: [In, Out], flows: [SINK, SOURCE]}
+  psets:
+    MF_SiteUtilities: {Standard: ASTM D3034, Class: SDR 35, Service: Sanitary}
+  generator: sizes
+  generator_args:
+    kind: CircleHollow
+    length: "13'-0\""
+    name: '{nominal} PVC SDR 35'
+    entries:
+      - {nominal: '4"', od: 4.215, wall: 0.120}
+      - {nominal: '6"', od: 6.275, wall: 0.180}
+      - {nominal: '8"', od: 8.400, wall: 0.240}
+      - {nominal: '10"', od: 10.500, wall: 0.300}
+      - {nominal: '12"', od: 12.500, wall: 0.360}
+
+- key: pipe_water_main
+  label: Water Main (Ductile Iron)
+  ifc_class: IfcPipeSegmentType
+  predefined: RIGIDSEGMENT
+  category: Site Utilities
+  discipline: site
+  pack: site-utilities
+  builder: profile
+  tier: L300
+  material: {name: Ductile Iron, category: metal}
+  ports: {system: PIPE, names: [In, Out], flows: [SINK, SOURCE]}
+  psets:
+    MF_SiteUtilities: {Standard: AWWA C151, PressureClass: "350",
+                       Service: Domestic + Fire Service}
+  generator: sizes
+  generator_args:
+    kind: CircleHollow
+    length: "18'-0\""
+    name: '{nominal} DI Water Main'
+    entries:
+      - {nominal: '4"', od: 4.80, wall: 0.25}
+      - {nominal: '6"', od: 6.90, wall: 0.25}
+      - {nominal: '8"', od: 9.05, wall: 0.25}
+      - {nominal: '12"', od: 13.20, wall: 0.28}
+
+- key: fire_hydrant
+  label: Fire Hydrant
+  ifc_class: IfcFireSuppressionTerminalType
+  predefined: FIREHYDRANT
+  category: Site Utilities
+  discipline: site
+  pack: site-utilities
+  builder: box
+  tier: L200
+  material: {name: Ductile Iron, category: metal}
+  ports: {system: PIPE, names: [Supply], flows: [SINK]}
+  psets:
+    MF_SiteUtilities: {Standard: AWWA C502, Outlets: 2 x 2-1/2" + 1 x 4-1/2",
+                       Note: Spacing and hose-lay distance are code-driven (NFPA 1 / IFC)}
+  types:
+    - {name: 'Dry-Barrel 5-1/4" Valve', dims: ['1''-6"', '1''-6"', '3''-0"']}
+    - {name: 'Wall Hydrant', dims: ['1''-0"', '0''-10"', '1''-6"']}
+
+- key: valve_box
+  label: Utility Valve Box / Vault
+  ifc_class: IfcDistributionChamberElementType
+  predefined: VALVECHAMBER
+  category: Site Utilities
+  discipline: site
+  pack: site-utilities
+  builder: box
+  tier: L200
+  material: {name: Precast Concrete, category: concrete}
+  psets:
+    MF_SiteUtilities: {Loading: HS-20}
+  types:
+    - {name: 'Valve Box (Cast Iron Lid)', dims: ['0''-10"', '0''-10"', '4''-0"']}
+    - {name: 'Meter Vault 4'' x 6''', dims: ['4''-0"', '6''-0"', '5''-0"']}
+    - {name: 'Backflow Vault 6'' x 10''', dims: ['6''-0"', '10''-0"', '6''-0"']}
+
+- key: site_cleanout
+  label: Site Cleanout
+  ifc_class: IfcDistributionChamberElementType
+  predefined: INSPECTIONCHAMBER
+  category: Site Utilities
+  discipline: site
+  pack: site-utilities
+  builder: revolve
+  tier: L200
+  material: {name: Cast Iron / PVC, category: metal}
+  types:
+    - {name: '6" Cleanout at Grade', dims: ['0''-10"', '0''-10"', '1''-6"']}
+    - {name: '8" Cleanout at Grade', dims: ['1''-0"', '1''-0"', '1''-6"']}
+
+- key: detention_structure
+  label: Detention / Infiltration Structure
+  ifc_class: IfcDistributionChamberElementType
+  predefined: NOTDEFINED
+  category: Site Utilities
+  discipline: site
+  pack: site-utilities
+  builder: box
+  tier: L200
+  material: {name: Precast Concrete, category: concrete}
+  psets:
+    MF_SiteUtilities: {Function: Stormwater quantity control,
+                       Note: Volume comes from the site drainage calculation, not the family}
+  types:
+    - {name: 'Precast Chamber 8'' x 20''', dims: ['8''-0"', '20''-0"', '6''-0"']}
+    - {name: 'Outlet Control Structure', dims: ['5''-0"', '5''-0"', '8''-0"']}
+    - {name: 'Water Quality Unit', dims: ['6''-0"', '6''-0"', '8''-0"']}
+
+- key: transformer_pad
+  label: Transformer / Generator Pad
+  ifc_class: IfcSlabType
+  predefined: BASESLAB
+  category: Site Structures
+  discipline: site
+  pack: site-structures
+  builder: box
+  tier: L200
+  material: {name: Cast-in-Place Concrete, category: concrete}
+  psets:
+    MF_SiteUtilities: {Clearances: Per utility standard,
+                       Note: Utility-company pad detail governs — confirm before it goes on a sheet}
+  types:
+    - {name: 'Pad-Mount Transformer 8'' x 8''', dims: ['8''-0"', '8''-0"', '0''-8"']}
+    - {name: 'Pad-Mount Transformer 10'' x 12''', dims: ['10''-0"', '12''-0"', '0''-8"']}
+    - {name: 'Generator Pad 12'' x 30''', dims: ['12''-0"', '30''-0"', '1''-0"']}
+    - {name: 'Chiller Pad 12'' x 30''', dims: ['12''-0"', '30''-0"', '1''-0"']}
+
+# ─────────────────────────── parking + circulation ───────────────────────────
+- key: parking_stall
+  label: Parking Stall
+  ifc_class: IfcBuildingElementProxyType
+  predefined: ELEMENT
+  category: Parking
+  discipline: site
+  pack: site-parking
+  builder: box
+  tier: L200
+  material: {name: Traffic Paint, category: paint}
+  psets:
+    MF_Site: {Note: The stall module drives the parking count that drives the pro forma}
+  types:
+    - {name: 'Standard 9'' x 18''', dims: ['9''-0"', '18''-0"', '0''-0 1/4"']}
+    - {name: 'Compact 8'' x 16''', dims: ['8''-0"', '16''-0"', '0''-0 1/4"']}
+    - {name: 'Accessible 8'' + 5'' Aisle', dims: ['13''-0"', '18''-0"', '0''-0 1/4"']}
+    - {name: 'Van Accessible 11'' + 5'' Aisle', dims: ['16''-0"', '18''-0"', '0''-0 1/4"']}
+    - {name: 'Parallel 8'' x 22''', dims: ['8''-0"', '22''-0"', '0''-0 1/4"']}
+
+- key: wheel_stop
+  label: Wheel Stop
+  ifc_class: IfcDiscreteAccessoryType
+  predefined: NOTDEFINED
+  category: Parking
+  discipline: site
+  pack: site-parking
+  builder: box
+  tier: L200
+  material: {name: Precast Concrete, category: concrete}
+  types:
+    - {name: 'Precast 6''-0"', dims: ['6''-0"', '0''-6"', '0''-6"']}
+
+- key: ev_charger
+  label: EV Charging Station
+  ifc_class: IfcElectricApplianceType
+  predefined: NOTDEFINED
+  category: Parking
+  discipline: site
+  pack: site-parking
+  builder: box
+  tier: L200
+  material: {name: Painted Steel, category: metal}
+  psets:
+    MF_Site: {Note: EV-ready stall counts are code-driven in a growing number of jurisdictions}
+  types:
+    - {name: 'Level 2 Dual-Port Pedestal', dims: ['1''-4"', '1''-0"', '4''-6"']}
+    - {name: 'DC Fast Charger', dims: ['2''-6"', '2''-0"', '6''-6"']}
+
+- key: site_sign
+  label: Site Signage
+  ifc_class: IfcDiscreteAccessoryType
+  predefined: NOTDEFINED
+  category: Site Structures
+  discipline: site
+  pack: site-structures
+  builder: box
+  tier: L200
+  material: {name: Aluminium, category: aluminium}
+  psets:
+    MF_Site: {Note: Accessible-stall and fire-lane signs are code items, not wayfinding}
+  types:
+    - {name: 'Accessible Parking Sign', dims: ['1''-0"', '0''-1"', '7''-0"']}
+    - {name: 'Fire Lane — No Parking', dims: ['1''-0"', '0''-1"', '7''-0"']}
+    - {name: 'Stop Sign', dims: ['2''-6"', '0''-1"', '7''-0"']}
+    - {name: 'Monument Sign 8'' x 4''', dims: ['8''-0"', '1''-6"', '4''-0"']}
+    - {name: 'Directional Post Sign', dims: ['3''-0"', '0''-1"', '7''-0"']}
+
+- key: guardrail_site
+  label: Site Guardrail / Barrier
+  ifc_class: IfcRailingType
+  predefined: GUARDRAIL
+  category: Site Structures
+  discipline: site
+  pack: site-structures
+  builder: box
+  tier: L200
+  material: {name: Galvanized Steel, category: metal}
+  types:
+    - {name: 'W-Beam Guardrail', dims: ['12''-6"', '0''-6"', '2''-6"']}
+    - {name: 'Pipe Bollard Rail', dims: ['10''-0"', '0''-5"', '3''-6"']}
+    - {name: 'Concrete Barrier (Jersey)', dims: ['10''-0"', '2''-0"', '2''-8"']}
+
+- key: site_stair
+  label: Site Stair
+  ifc_class: IfcStairType
+  predefined: STRAIGHT_RUN_STAIR
+  category: Site Structures
+  discipline: site
+  pack: site-structures
+  builder: box
+  tier: L200
+  material: {name: Cast-in-Place Concrete, category: concrete}
+  psets:
+    Pset_StairCommon: {RiserHeight: 0.152, TreadLength: 0.330}
+  types:
+    - {name: '4''-0" Wide, 5 Risers', dims: ['4''-0"', '5''-5"', '2''-6"']}
+    - {name: '6''-0" Wide, 8 Risers', dims: ['6''-0"', '8''-8"', '4''-0"']}
+
+# ─────────────────────────── site amenity + service ───────────────────────────
+- key: bike_rack
+  label: Bicycle Rack / Shelter
+  ifc_class: IfcDiscreteAccessoryType
+  predefined: NOTDEFINED
+  category: Site Amenity
+  discipline: site
+  pack: site-structures
+  builder: box
+  tier: L200
+  material: {name: Galvanized Steel, category: metal}
+  psets:
+    MF_Site: {Note: Short-term bike parking counts toward several green rating credits}
+  types:
+    - {name: 'Inverted-U (2 Bikes)', dims: ['2''-6"', '0''-2"', '2''-9"']}
+    - {name: 'Rack 7-Loop (14 Bikes)', dims: ['12''-0"', '2''-0"', '2''-9"']}
+    - {name: 'Covered Shelter 10'' x 20''', dims: ['10''-0"', '20''-0"', '8''-0"']}
+
+- key: trash_enclosure
+  label: Refuse / Recycling Enclosure
+  ifc_class: IfcBuildingElementProxyType
+  predefined: ELEMENT
+  category: Site Structures
+  discipline: site
+  pack: site-structures
+  builder: box
+  tier: L200
+  material: {name: CMU / Steel Gate, category: masonry}
+  psets:
+    MF_Site: {Note: Gate swing and truck approach are the real constraint, not the enclosure}
+  types:
+    - {name: 'Single 12'' x 12''', dims: ['12''-0"', '12''-0"', '7''-0"']}
+    - {name: 'Double 24'' x 12''', dims: ['24''-0"', '12''-0"', '7''-0"']}
+    - {name: 'Compactor Enclosure 30'' x 14''', dims: ['30''-0"', '14''-0"', '10''-0"']}
+
+- key: flagpole
+  label: Flagpole
+  ifc_class: IfcDiscreteAccessoryType
+  predefined: NOTDEFINED
+  category: Site Amenity
+  discipline: site
+  pack: site-structures
+  builder: revolve
+  tier: L200
+  material: {name: Anodized Aluminium, category: aluminium}
+  types:
+    - {name: '25''-0" Ground-Set', dims: ['0''-6"', '0''-6"', '25''-0"']}
+    - {name: '40''-0" Ground-Set', dims: ['0''-8"', '0''-8"', '40''-0"']}
+
+- key: site_shelter
+  label: Site Shelter / Pavilion
+  ifc_class: IfcBuildingElementProxyType
+  predefined: ELEMENT
+  category: Site Amenity
+  discipline: site
+  pack: site-structures
+  builder: box
+  tier: L200
+  material: {name: Steel / Metal Roof, category: metal}
+  types:
+    - {name: 'Bus / Transit Shelter 5'' x 12''', dims: ['12''-0"', '5''-0"', '8''-0"']}
+    - {name: 'Picnic Pavilion 20'' x 20''', dims: ['20''-0"', '20''-0"', '10''-0"']}
+    - {name: 'Smoking Shelter 8'' x 12''', dims: ['12''-0"', '8''-0"', '8''-0"']}
+
+- key: irrigation_head
+  label: Irrigation Head / Controller
+  ifc_class: IfcFlowInstrumentType
+  predefined: NOTDEFINED
+  category: Site Amenity
+  discipline: site
+  pack: site-utilities
+  builder: box
+  tier: L200
+  material: {name: Polymer, category: plastic}
+  psets:
+    MF_Site: {Note: Reclaimed / non-potable supply where available}
+  types:
+    - {name: 'Pop-Up Rotor', dims: ['0''-4"', '0''-4"', '0''-10"']}
+    - {name: 'Pop-Up Spray', dims: ['0''-3"', '0''-3"', '0''-6"']}
+    - {name: 'Controller Cabinet', dims: ['1''-6"', '0''-8"', '2''-0"']}

@@ -1,0 +1,175 @@
+# Interiors depth — furniture that carries a programme (FAMILY-COMPLETE batch 5b).
+#
+# The base interiors catalog (17 families) is a generic office/residential kit: chair, desk, table,
+# bed, sofa, workstation, casework, appliances. It furnishes an apartment and an open-plan floor
+# and nothing else. The six target typologies each fail on it for the same reason — furniture is
+# where the PROGRAMME becomes visible. A hospital plan without a patient bed, headwall and exam
+# table isn't a hospital plan; an airport without gate seating and a check-in counter isn't one.
+#
+# These are massing-grade blocks at real clearance dimensions. Their value in a model is the
+# footprint, the circulation they force, and the count that lands in an FF&E schedule — not joinery.
+
+# ─────────────────────────── workplace ───────────────────────────
+- key: reception_desk
+  label: Reception Desk
+  ifc_class: IfcFurnitureType
+  predefined: DESK
+  category: Furniture
+  discipline: interiors
+  pack: interiors-furniture
+  builder: box
+  tier: L200
+  material: {name: Solid Surface / Wood, category: composite}
+  psets:
+    MF_FFE: {ADATransactionCounter: "true"}
+  types:
+    - {name: 'Straight 8''-0"', dims: ['8''-0"', '2''-6"', '3''-6"']}
+    - {name: 'L-Shaped 10'' x 6''', dims: ['10''-0"', '6''-0"', '3''-6"']}
+    - {name: 'Curved 12''-0"', dims: ['12''-0"', '4''-0"', '3''-6"']}
+
+- key: conference_table
+  label: Conference Table
+  ifc_class: IfcFurnitureType
+  predefined: TABLE
+  category: Furniture
+  discipline: interiors
+  pack: interiors-furniture
+  builder: box
+  tier: L200
+  material: {name: Wood Veneer, category: wood}
+  psets:
+    MF_FFE: {PowerData: Integral grommet}
+  types:
+    - {name: 'Boat 8'' — 6 Seats', dims: ['8''-0"', '4''-0"', '2''-6"']}
+    - {name: 'Boat 12'' — 10 Seats', dims: ['12''-0"', '4''-6"', '2''-6"']}
+    - {name: 'Boardroom 20'' — 16 Seats', dims: ['20''-0"', '5''-0"', '2''-6"']}
+    - {name: 'Round 4''-0" — 4 Seats', dims: ['4''-0"', '4''-0"', '2''-6"']}
+
+- key: task_chair
+  label: Task / Conference Chair
+  ifc_class: IfcFurnitureType
+  predefined: CHAIR
+  category: Furniture
+  discipline: interiors
+  pack: interiors-furniture
+  builder: box
+  tier: L200
+  material: {name: Mesh / Polymer, category: plastic}
+  types:
+    - {name: 'Task Chair (Casters)', dims: ['2''-2"', '2''-2"', '3''-6"']}
+    - {name: 'Conference Chair', dims: ['2''-0"', '2''-2"', '3''-0"']}
+    - {name: 'Stool 30" Seat', dims: ['1''-6"', '1''-6"', '3''-6"']}
+
+- key: lounge_seating
+  label: Lounge Seating
+  ifc_class: IfcFurnitureType
+  predefined: CHAIR
+  category: Furniture
+  discipline: interiors
+  pack: interiors-furniture
+  builder: box
+  tier: L200
+  material: {name: Upholstery, category: textile}
+  types:
+    - {name: 'Lounge Chair', dims: ['2''-8"', '2''-10"', '2''-8"']}
+    - {name: 'Two-Seat Settee', dims: ['4''-8"', '2''-10"', '2''-8"']}
+    - {name: 'Banquette 6''-0"', dims: ['6''-0"', '2''-2"', '3''-0"']}
+    - {name: 'Ottoman 24"', dims: ['2''-0"', '2''-0"', '1''-5"']}
+
+- key: credenza
+  label: Credenza / Storage Unit
+  ifc_class: IfcFurnitureType
+  predefined: FILECABINET
+  category: Furniture
+  discipline: interiors
+  pack: interiors-furniture
+  builder: box
+  tier: L200
+  material: {name: Wood Veneer, category: wood}
+  types:
+    - {name: 'Credenza 6''-0"', dims: ['6''-0"', '2''-0"', '2''-5"']}
+    - {name: 'Bookcase 3'' x 6''', dims: ['3''-0"', '1''-2"', '6''-0"']}
+    - {name: 'Lateral File 42" 4-Drawer', dims: ['3''-6"', '1''-8"', '4''-4"']}
+
+- key: systems_panel
+  label: Systems Furniture Panel
+  ifc_class: IfcSystemFurnitureElementType
+  predefined: PANEL
+  category: Furniture
+  discipline: interiors
+  pack: interiors-furniture
+  builder: box
+  tier: L200
+  material: {name: Fabric-Wrapped Panel, category: textile}
+  psets:
+    MF_FFE: {PowerBase: "true", Application: Open-plan workstation cluster}
+  types:
+    - {name: 'Panel 4'' x 42" High', dims: ['4''-0"', '0''-3"', '3''-6"']}
+    - {name: 'Panel 4'' x 54" High', dims: ['4''-0"', '0''-3"', '4''-6"']}
+    - {name: 'Panel 6'' x 66" High', dims: ['6''-0"', '0''-3"', '5''-6"']}
+
+- key: display_monitor
+  label: Display / Monitor
+  ifc_class: IfcAudioVisualApplianceType
+  predefined: DISPLAY
+  category: AV
+  discipline: interiors
+  pack: interiors-furniture
+  builder: box
+  tier: L200
+  material: {name: Glass / Polymer, category: plastic}
+  types:
+    - {name: '55" Wall Display', dims: ['4''-1"', '0''-3"', '2''-4"']}
+    - {name: '86" Wall Display', dims: ['6''-4"', '0''-4"', '3''-8"']}
+    - {name: '98" Video Wall', dims: ['7''-2"', '0''-4"', '4''-1"']}
+
+# ─────────────────────────── healthcare ───────────────────────────
+- key: medical_cart
+  label: Medical Cart / Cabinet
+  ifc_class: IfcFurnitureType
+  predefined: FILECABINET
+  category: Medical
+  discipline: interiors
+  pack: interiors-medical
+  builder: box
+  tier: L200
+  material: {name: Polymer / Steel, category: plastic}
+  types:
+    - {name: 'Crash Cart', dims: ['2''-2"', '1''-10"', '3''-2"']}
+    - {name: 'Supply Cart', dims: ['2''-6"', '2''-0"', '5''-0"']}
+    - {name: 'Medication Dispensing Cabinet', dims: ['2''-6"', '2''-0"', '6''-0"']}
+    - {name: 'Mobile Workstation (WOW)', dims: ['2''-0"', '2''-0"', '4''-0"']}
+
+- key: fixed_seating
+  label: Fixed Auditorium Seating
+  ifc_class: IfcFurnitureType
+  predefined: CHAIR
+  category: Public Seating
+  discipline: interiors
+  pack: interiors-furniture
+  builder: box
+  tier: L200
+  material: {name: Upholstery / Steel, category: textile}
+  psets:
+    MF_FFE: {RowSpacing: "3'-0\"", Application: Auditorium / lecture / worship}
+  types:
+    - {name: 'Fixed Seat 22" Wide', dims: ['1''-10"', '2''-2"', '3''-0"']}
+    - {name: 'Fixed Seat 24" Wide (Tablet Arm)', dims: ['2''-0"', '2''-6"', '3''-0"']}
+    - {name: 'Telescopic Bleacher Row', dims: ['20''-0"', '2''-4"', '1''-6"']}
+
+# ─────────────────────────── industrial + storage ───────────────────────────
+- key: workbench
+  label: Workbench / Industrial Shelving
+  ifc_class: IfcFurnitureType
+  predefined: TABLE
+  category: Industrial
+  discipline: interiors
+  pack: interiors-industrial
+  builder: box
+  tier: L200
+  material: {name: Steel / Hardwood, category: metal}
+  types:
+    - {name: 'Workbench 6''-0"', dims: ['6''-0"', '2''-6"', '3''-0"']}
+    - {name: 'Workbench 8''-0" with Riser', dims: ['8''-0"', '2''-6"', '5''-0"']}
+    - {name: 'Wire Shelving 4'' x 18" x 6''', dims: ['4''-0"', '1''-6"', '6''-0"']}
+

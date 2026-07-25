@@ -1,0 +1,302 @@
+# Electrical depth — enough content to actually power and light a building (FAMILY-COMPLETE batch 2).
+#
+# The base electrical catalog carried 15 families / 32 types. Its ROUTING content was already
+# reasonable (EMT and RMC conduit series, ladder tray, busway), so this fills the two real gaps:
+#
+#   * Luminaires — four families / eight types cannot light a project. A lighting model needs the
+#     linear, high-bay, wall-pack, strip, track and — critically — the EGRESS families, because exit
+#     signage and emergency lighting are code-required in every one of the six target typologies.
+#   * Distribution + devices — the gear between the service and the outlet: MCCs, safety switches,
+#     transfer switches, metering, UPS, plus data outlets, floor boxes, dimmers and sensors.
+#
+# Lamp wattages and lumen outputs are LED-typical values carried as psets so a lighting-power-density
+# check has something to read; they are stated defaults, not manufacturer data.
+
+# ─────────────────────────── luminaires ───────────────────────────
+- key: linear_pendant
+  label: Linear Pendant Luminaire
+  ifc_class: IfcLightFixtureType
+  predefined: DIRECTIONSOURCE
+  category: Lighting
+  discipline: electrical
+  pack: electrical-lighting
+  builder: box
+  tier: L200
+  material: {name: Extruded Aluminum, category: aluminium}
+  psets:
+    MF_Lighting: {LampType: LED, Mounting: Suspended, Dimmable: "true"}
+  types:
+    - {name: '4ft Linear 40W 4400lm', dims: ['4''-0"', '0''-3"', '0''-3"']}
+    - {name: '8ft Linear 80W 8800lm', dims: ['8''-0"', '0''-3"', '0''-3"']}
+    - {name: '4ft Linear Direct/Indirect 50W', dims: ['4''-0"', '0''-5"', '0''-4"']}
+
+- key: wall_pack
+  label: Wall Pack / Exterior Luminaire
+  ifc_class: IfcLightFixtureType
+  predefined: DIRECTIONSOURCE
+  category: Lighting
+  discipline: electrical
+  pack: electrical-lighting
+  builder: box
+  tier: L200
+  material: {name: Die-Cast Aluminum, category: aluminium}
+  psets:
+    MF_Lighting: {LampType: LED, Mounting: Wall, Location: Exterior, DarkSkyCompliant: "true"}
+  types:
+    - {name: 'Full-Cutoff Wall Pack 40W', dims: ['1''-2"', '0''-10"', '0''-8"']}
+    - {name: 'Full-Cutoff Wall Pack 80W', dims: ['1''-6"', '1''-0"', '0''-10"']}
+
+- key: strip_light
+  label: Strip / Utility Luminaire
+  ifc_class: IfcLightFixtureType
+  predefined: DIRECTIONSOURCE
+  category: Lighting
+  discipline: electrical
+  pack: electrical-lighting
+  builder: box
+  tier: L200
+  material: {name: Steel, category: metal}
+  psets:
+    MF_Lighting: {LampType: LED, Mounting: Surface}
+  types:
+    - {name: '4ft Strip 32W', dims: ['4''-0"', '0''-4"', '0''-3"']}
+    - {name: '8ft Strip 64W', dims: ['8''-0"', '0''-4"', '0''-3"']}
+    - {name: '4ft Vaportight 36W', dims: ['4''-0"', '0''-5"', '0''-4"']}
+
+- key: exit_sign
+  label: Exit Sign
+  ifc_class: IfcLightFixtureType
+  predefined: SECURITYLIGHTING
+  category: Lighting
+  discipline: electrical
+  pack: electrical-lighting
+  builder: box
+  tier: L200
+  material: {name: Thermoplastic, category: plastic}
+  psets:
+    MF_Lighting: {LampType: LED, BatteryBackup: "true", CodeRequired: "true"}
+  types:
+    - {name: 'Edge-Lit Single Face', dims: ['1''-2"', '0''-2"', '0''-9"']}
+    - {name: 'Edge-Lit Double Face', dims: ['1''-2"', '0''-3"', '0''-9"']}
+    - {name: 'Combo Exit / Emergency', dims: ['1''-8"', '0''-4"', '0''-10"']}
+
+- key: emergency_light
+  label: Emergency Egress Luminaire
+  ifc_class: IfcLightFixtureType
+  predefined: SECURITYLIGHTING
+  category: Lighting
+  discipline: electrical
+  pack: electrical-lighting
+  builder: box
+  tier: L200
+  material: {name: Thermoplastic, category: plastic}
+  psets:
+    MF_Lighting: {LampType: LED, BatteryBackup: "true", CodeRequired: "true"}
+  types:
+    - {name: 'Twin-Head Emergency Unit', dims: ['1''-1"', '0''-5"', '0''-6"']}
+    - {name: 'Recessed Emergency Downlight', dims: ['0''-7"', '0''-7"', '0''-6"']}
+
+- key: track_light
+  label: Track Lighting
+  ifc_class: IfcLightFixtureType
+  predefined: DIRECTIONSOURCE
+  category: Lighting
+  discipline: electrical
+  pack: electrical-lighting
+  builder: box
+  tier: L200
+  material: {name: Extruded Aluminum, category: aluminium}
+  psets:
+    MF_Lighting: {LampType: LED, Mounting: Track}
+  types:
+    - {name: '4ft Track with 3 Heads', dims: ['4''-0"', '0''-2"', '0''-6"']}
+    - {name: '8ft Track with 6 Heads', dims: ['8''-0"', '0''-2"', '0''-6"']}
+
+# ─────────────────────────── distribution ───────────────────────────
+- key: motor_control_center
+  label: Motor Control Center
+  ifc_class: IfcElectricDistributionBoardType
+  predefined: MOTORCONTROLCENTRE
+  category: Distribution
+  discipline: electrical
+  pack: electrical-distribution
+  builder: box
+  tier: L200
+  material: {name: Painted Steel, category: metal}
+  psets:
+    MF_Electrical: {Voltage: 480V 3-Phase, NEMA: "1"}
+  types:
+    - {name: 'MCC 3-Section 600A', dims: ['6''-0"', '1''-8"', '7''-6"']}
+    - {name: 'MCC 5-Section 1200A', dims: ['10''-0"', '1''-8"', '7''-6"']}
+
+- key: safety_switch
+  label: Safety / Disconnect Switch
+  ifc_class: IfcSwitchingDeviceType
+  predefined: SWITCHDISCONNECTOR
+  category: Distribution
+  discipline: electrical
+  pack: electrical-distribution
+  builder: box
+  tier: L200
+  material: {name: Painted Steel, category: metal}
+  psets:
+    MF_Electrical: {Fusible: "true"}
+  types:
+    - {name: '30A NEMA 1 Fusible', dims: ['0''-8"', '0''-5"', '1''-0"']}
+    - {name: '100A NEMA 3R Fusible', dims: ['1''-0"', '0''-7"', '1''-6"']}
+    - {name: '200A NEMA 3R Non-Fusible', dims: ['1''-4"', '0''-9"', '2''-0"']}
+
+- key: transfer_switch
+  label: Automatic Transfer Switch
+  ifc_class: IfcSwitchingDeviceType
+  predefined: CONTACTOR
+  category: Distribution
+  discipline: electrical
+  pack: electrical-distribution
+  builder: box
+  tier: L200
+  material: {name: Painted Steel, category: metal}
+  psets:
+    MF_Electrical: {Type: Automatic, Poles: "3"}
+  types:
+    - {name: 'ATS 200A', dims: ['2''-0"', '1''-4"', '4''-0"']}
+    - {name: 'ATS 600A', dims: ['3''-0"', '1''-8"', '6''-0"']}
+    - {name: 'ATS 1200A', dims: ['4''-0"', '2''-0"', '7''-0"']}
+
+- key: meter_cabinet
+  label: Metering / CT Cabinet
+  ifc_class: IfcElectricDistributionBoardType
+  predefined: DISTRIBUTIONBOARD
+  category: Distribution
+  discipline: electrical
+  pack: electrical-distribution
+  builder: box
+  tier: L200
+  material: {name: Painted Steel, category: metal}
+  psets:
+    MF_Electrical: {Function: Utility Metering}
+  types:
+    - {name: 'CT Cabinet 400A', dims: ['2''-6"', '0''-10"', '3''-0"']}
+    - {name: 'Meter Stack 6-Position', dims: ['4''-0"', '0''-10"', '4''-0"']}
+
+- key: ups_unit
+  label: Uninterruptible Power Supply
+  ifc_class: IfcElectricFlowStorageDeviceType
+  predefined: UPS
+  category: Distribution
+  discipline: electrical
+  pack: electrical-distribution
+  builder: box
+  tier: L200
+  material: {name: Painted Steel, category: metal}
+  psets:
+    MF_Electrical: {Topology: Double Conversion}
+  types:
+    - {name: 'UPS 20 kVA', dims: ['2''-0"', '2''-6"', '5''-0"']}
+    - {name: 'UPS 100 kVA', dims: ['3''-4"', '2''-8"', '6''-6"']}
+
+- key: conduit_pvc
+  label: PVC Conduit (Schedule 40)
+  ifc_class: IfcCableCarrierSegmentType
+  predefined: CONDUITSEGMENT
+  category: Raceway
+  discipline: electrical
+  pack: electrical-raceway
+  builder: profile
+  tier: L300
+  material: {name: PVC, category: plastic}
+  psets:
+    MF_Electrical: {Standard: UL 651, Schedule: "40", Application: Underground / Concrete Encased}
+  generator: sizes
+  generator_args:
+    kind: CircleHollow
+    length: "10'-0\""
+    name: '{nominal} PVC Sch 40 Conduit'
+    entries:
+      - {nominal: '1/2"', od: 0.840, wall: 0.109}
+      - {nominal: '3/4"', od: 1.050, wall: 0.113}
+      - {nominal: '1"', od: 1.315, wall: 0.133}
+      - {nominal: '1-1/2"', od: 1.900, wall: 0.145}
+      - {nominal: '2"', od: 2.375, wall: 0.154}
+      - {nominal: '3"', od: 3.500, wall: 0.216}
+      - {nominal: '4"', od: 4.500, wall: 0.237}
+
+# ─────────────────────────── devices ───────────────────────────
+- key: data_outlet
+  label: Data / Communications Outlet
+  ifc_class: IfcOutletType
+  predefined: DATAOUTLET
+  category: Devices
+  discipline: electrical
+  pack: electrical-devices
+  builder: box
+  tier: L200
+  material: {name: Thermoplastic, category: plastic}
+  psets:
+    MF_Electrical: {Category: Cat6A}
+  types:
+    - {name: 'Single-Gang 2-Port', dims: ['0''-3"', '0''-2"', '0''-5"']}
+    - {name: 'Single-Gang 4-Port', dims: ['0''-3"', '0''-2"', '0''-5"']}
+
+- key: floor_box
+  label: Floor Box
+  ifc_class: IfcOutletType
+  predefined: POWEROUTLET
+  category: Devices
+  discipline: electrical
+  pack: electrical-devices
+  builder: box
+  tier: L200
+  material: {name: Cast Iron, category: metal}
+  psets:
+    MF_Electrical: {Rating: Poke-Through, FireRated: "true"}
+  types:
+    - {name: '4" Poke-Through Power/Data', dims: ['0''-6"', '0''-6"', '0''-6"']}
+    - {name: 'Rectangular Multi-Service Box', dims: ['1''-0"', '0''-8"', '0''-6"']}
+
+- key: dimmer_switch
+  label: Dimmer Switch
+  ifc_class: IfcSwitchingDeviceType
+  predefined: DIMMERSWITCH
+  category: Devices
+  discipline: electrical
+  pack: electrical-devices
+  builder: box
+  tier: L200
+  material: {name: Thermoplastic, category: plastic}
+  types:
+    - {name: 'Single-Pole 0-10V Dimmer', dims: ['0''-3"', '0''-2"', '0''-5"']}
+    - {name: 'Three-Way Dimmer', dims: ['0''-3"', '0''-2"', '0''-5"']}
+
+- key: occupancy_sensor
+  label: Occupancy / Vacancy Sensor
+  ifc_class: IfcSensorType
+  predefined: MOVEMENTSENSOR
+  category: Devices
+  discipline: electrical
+  pack: electrical-devices
+  builder: box
+  tier: L200
+  material: {name: Thermoplastic, category: plastic}
+  psets:
+    MF_Electrical: {Technology: Dual-Technology, CodeRequired: "true"}
+  types:
+    - {name: 'Ceiling 360° Dual-Tech', dims: ['0''-5"', '0''-5"', '0''-2"']}
+    - {name: 'Wall-Switch Occupancy Sensor', dims: ['0''-3"', '0''-2"', '0''-5"']}
+    - {name: 'Daylight Photosensor', dims: ['0''-3"', '0''-3"', '0''-2"']}
+
+- key: ground_bar
+  label: Ground Bar / Grounding Electrode
+  ifc_class: IfcElectricDistributionBoardType
+  predefined: DISTRIBUTIONBOARD
+  category: Distribution
+  discipline: electrical
+  pack: electrical-distribution
+  builder: box
+  tier: L200
+  material: {name: Copper, category: copper}
+  psets:
+    MF_Electrical: {Function: Grounding}
+  types:
+    - {name: 'Ground Bar 12-Hole', dims: ['1''-0"', '0''-2"', '0''-2"']}
+    - {name: 'Ground Bar 24-Hole', dims: ['2''-0"', '0''-2"', '0''-2"']}
