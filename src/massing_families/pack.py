@@ -24,6 +24,30 @@ from .generators import expand
 from .spec import FamilySpec
 
 LIBRARY_NAME = "massing-families"
+REPO_URL = "https://github.com/MassingCloud/massing-families"
+
+# The library is dual-licensed by design: the *content* is CC0 because it is fabricated from public
+# standards and carries no third-party redistribution restrictions (PLAN.md §6.2, §8g), while the
+# *toolchain* that generates it is ordinary MIT-licensed source. A consumer shelving IFC packs cares
+# about the content licence, so that is what the top-level `license` field reports.
+CODE_LICENSE = "MIT"
+
+
+def licensing(specs: list[FamilySpec]) -> dict:
+    """Licence block for the manifest, derived from the specs rather than hardcoded.
+
+    If a family ever declares something other than CC0 — vendored third-party geometry, say — the
+    manifest reports that honestly instead of overstating the freedom of the pack.
+    """
+    declared = sorted({s.license for s in specs})
+    return {
+        "content": declared[0] if len(declared) == 1 else "MIXED",
+        "content_licenses": declared,
+        "code": CODE_LICENSE,
+        "attribution": f"{LIBRARY_NAME} ({REPO_URL})",
+        "url": f"{REPO_URL}/blob/main/LICENSE-CONTENT",
+        "notice": f"{REPO_URL}/blob/main/NOTICE.md",
+    }
 
 
 def build_type(model: ifcopenshell.file, spec: FamilySpec, variant, version: str):
@@ -124,12 +148,27 @@ def _family_index(specs: list[FamilySpec]) -> list[dict]:
     return out
 
 
-def write_manifest(entries: list[dict], out_dir: Path, version: str) -> Path:
+def write_manifest(entries: list[dict], out_dir: Path, version: str,
+                   specs: list[FamilySpec] | None = None) -> Path:
     """The sidecar that makes the catalog browsable — counts, categories, licences, checksums."""
     out_dir = Path(out_dir)
+    # Every family's licence, gathered across packs, so the top-level field is never a guess.
+    declared = sorted({lic for e in entries for lic in e.get("licenses", [])}) or ["CC0-1.0"]
+    lic = licensing(specs) if specs else {
+        "content": declared[0] if len(declared) == 1 else "MIXED",
+        "content_licenses": declared,
+        "code": CODE_LICENSE,
+        "attribution": f"{LIBRARY_NAME} ({REPO_URL})",
+        "url": f"{REPO_URL}/blob/main/LICENSE-CONTENT",
+        "notice": f"{REPO_URL}/blob/main/NOTICE.md",
+    }
     manifest = {
         "library": LIBRARY_NAME,
         "version": version,
+        # SPDX id for the packs themselves — this is what a catalog shelf should display.
+        "license": lic["content"],
+        "licensing": lic,
+        "repository": REPO_URL,
         "generated_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "ifc_schema": ifc.SCHEMA,
         "units": {"authored": "US imperial nominal", "stored": "metres (exact)"},

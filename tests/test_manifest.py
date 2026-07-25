@@ -92,3 +92,38 @@ def test_build_removes_stale_packs(tmp_path, catalog_root):
     listed = {p["file"] for p in
               json.loads((tmp_path / "manifest.json").read_text(encoding="utf-8"))["packs"]}
     assert on_disk == listed, "every file on disk must be listed in the manifest"
+
+
+def test_manifest_declares_a_licence(tmp_path, catalog_root):
+    """A catalog shelf reads the top level. Without `license` there it honestly reports unlicensed,
+    even though every family and every generated IFC type carries CC0."""
+    specs = [s for s in load_catalog(catalog_root) if s.discipline == "conveying"]
+    entry = write_pack(specs, tmp_path, "conveying", "test")
+    write_manifest([entry], tmp_path, "test", specs)
+    m = json.loads((tmp_path / "manifest.json").read_text(encoding="utf-8"))
+
+    assert m["license"] == "CC0-1.0", "top-level SPDX id is what a shelf displays"
+    lic = m["licensing"]
+    assert lic["code"] == "MIT"
+    assert lic["content_licenses"] == ["CC0-1.0"]
+    assert lic["attribution"] and lic["url"] and lic["notice"]
+    assert m["repository"].startswith("https://github.com/")
+
+
+def test_manifest_licence_is_derived_not_hardcoded(tmp_path, catalog_root):
+    """If a family ever declares a different licence, the manifest must say MIXED rather than
+    overstating how free the pack is."""
+    specs = [s for s in load_catalog(catalog_root) if s.discipline == "conveying"]
+    specs[0].license = "CC-BY-4.0"
+    entry = write_pack(specs, tmp_path, "conveying", "test")
+    write_manifest([entry], tmp_path, "test", specs)
+    m = json.loads((tmp_path / "manifest.json").read_text(encoding="utf-8"))
+
+    assert m["license"] == "MIXED"
+    assert m["licensing"]["content_licenses"] == ["CC-BY-4.0", "CC0-1.0"]
+
+
+def test_licence_files_exist():
+    root = Path(__file__).resolve().parents[1]
+    for name in ("LICENSE", "LICENSE-CONTENT", "NOTICE.md"):
+        assert (root / name).exists(), f"{name} missing — the repo would read as unlicensed"

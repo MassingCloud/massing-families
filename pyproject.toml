@@ -3,6 +3,9 @@ name = "massing-families"
 version = "0.1.0"
 description = "IFC4 family/type content library for the Massing platform"
 requires-python = ">=3.10"
+# The generator is MIT; the family content it produces is CC0 (see LICENSE-CONTENT).
+license = "MIT"
+license-files = ["LICENSE", "LICENSE-CONTENT", "NOTICE.md"]
 dependencies = ["ifcopenshell>=0.8.0", "pyyaml>=6.0"]
 
 [project.optional-dependencies]

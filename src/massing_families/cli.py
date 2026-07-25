@@ -45,7 +45,7 @@ def cmd_build(args) -> int:
         entries.append(entry)
         print(f"  {entry['file']:52} {entry['families']:>3} families  {entry['types']:>4} types  "
               f"{entry['size_bytes']:>9,} B  tiers={','.join(entry['tiers'])}")
-    manifest = write_manifest(entries, args.out, args.version)
+    manifest = write_manifest(entries, args.out, args.version, specs)
     total_t = sum(e["types"] for e in entries)
     total_f = sum(e["families"] for e in entries)
     print(f"\n{len(entries)} pack(s), {total_f} families, {total_t} types -> {args.out}")
