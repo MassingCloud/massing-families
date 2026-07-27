@@ -64,6 +64,15 @@ def cmd_list(args) -> int:
     return 0
 
 
+def cmd_docs(args) -> int:
+    from . import docs
+    specs = load_catalog(CATALOG)
+    path = docs.write(specs, ROOT)
+    st = docs.stats(specs)
+    print(f"{st['families']} families, {st['types']} types -> {path}")
+    return 0
+
+
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(prog="massing-families")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -79,6 +88,9 @@ def main(argv=None) -> int:
     ls = sub.add_parser("list", help="list catalog contents")
     ls.add_argument("-d", "--discipline", default=None)
     ls.set_defaults(func=cmd_list)
+
+    dc = sub.add_parser("docs", help="regenerate docs/CATALOG.md from the catalog")
+    dc.set_defaults(func=cmd_docs)
 
     args = p.parse_args(argv)
     return args.func(args)

@@ -10,59 +10,47 @@
 
 | | |
 |---|---|
-| **Built** | 40 trade-scoped packs · **270 families** · **2,334 types** · IFC4 · 6.1 MB |
-| **Tests** | 104 passing, 2 xfailed (the upstream defects — patch now written, see `upstream/`) |
-| **IFC coverage** | **65 of 125** type classes (was 15) |
+| **Built** | 57 trade-scoped packs · **419 families** · **2,769 types** · IFC4 |
+| **Tests** | 117 passing |
+| **IFC coverage** | **72 of 125** type classes (was 15) |
 | **Builders** | all 8 — box, profile, swept_disk, revolve, boolean, taper, assembly, mesh |
-| **Geometry** | **1,797 of 2,334 types (76%) real**, across 12 distinct IFC solid/profile kinds |
-| **Routing** | `IfcDistributionPort`s on 59 families — duct, pipe, conduit, tray, sprinkler, plant |
-| **Data** | 122 verified Uniclass codes, provenance with derived `GeometryStatus`, quantities, materials, layered assemblies |
-| **Catalog index** | per-family metadata published in `manifest.json` — the data a browsable picker needs |
-| **Typologies** | all six pass: core 35/35, residential 7/7, commercial 6/6, hotel 4/4, hospital 6/6, industrial 5/5, airport 5/5 |
+| **Generators** | `aisc`, `sizes`, `rebar` |
+| **Routing** | distribution ports on 97 families |
+| **Data** | verified Uniclass on every family, provenance with derived `GeometryStatus`, quantities, materials, layered assemblies |
+| **Typologies** | all six pass their completeness checklist |
+| **Published** | public at [MassingCloud/massing-families](https://github.com/MassingCloud/massing-families); CC0 content, MIT generator |
 
-### Upstream patch — written and verified, not applied
-
-`upstream/` holds a reviewable patch for the two section 5 defects plus unit-aware type naming.
-`upstream/verify_patch.py` runs both defect scenarios against the unpatched and patched modules:
-
-```
-UNPATCHED  type_detail dims for W14X90 : None                  -> defect 1
-           RepresentationMaps 1 -> 2 [IShape, Rectangle]       -> defect 2
-PATCHED    type_detail dims for W14X90 : [0.3683, 0.3556, 3.6576]   OK
-           RepresentationMaps 1 -> 1 [Rectangle]                     OK
-           box resize still works      : [1.6, 0.8, 0.75]            OK (no regression)
-```
-
-It is deliberately **not applied** to the massing checkout — that is your call.
+Documentation lives in [README](README.md), [CONTRIBUTING](CONTRIBUTING.md),
+[docs/SPEC.md](docs/SPEC.md) and the generated [docs/CATALOG.md](docs/CATALOG.md).
+See [CHANGELOG.md](CHANGELOG.md) for release history.
 
 ### What "all six typologies pass" does and does not mean
 
 `tests/test_completeness.py` asserts at least one family exists for every system a typology cannot be
-built without — now 35 core systems (heat source, cooling source, pumps, terminal units, roof drainage
-and reinforcement were added once the content landed) plus per-typology extras.
+built without — 35 core systems plus per-typology extras (med gas and headwalls for hospital, jet
+bridges and baggage for airport, ESFR and cranes for industrial).
 
-It remains a **floor, not v1.0 depth**. The section 8e target is ~800 families / ~7,500 types; this is
-270 / 2,334. The gap is breadth-within-system, not absent systems.
+It is a **floor, not v1.0 depth**. The section 8e target is ~800 families; this is 419. The gap is
+breadth-within-system, not absent systems.
 
 ### Enforced honesty
 
-- **Classification** — a test fails the build on any code not in `data/uniclass_codes.csv`, which holds
-  only codes checked against the published Uniclass Pr/Ss tables. This has caught **seven** wrong codes
-  across four phases, including `Pr_20_29_29` for rebar (actually *Ferrules and sleeves*; correct is
-  `Pr_20_96_71`) and `Pr_20_93_71` for steel columns (actually *Retaining wall units*).
-- **PredefinedType** — schema-driven validation has caught nine invalid enums that massing's own
-  `_set_predefined` would have silently swallowed.
-- **GeometryStatus** — derived from the builder, never hand-set, so a box proxy is always labelled
-  `proxy` and can never be mistaken for detailed content.
-- **Nominal vs actual** — timber names `2x4` and builds 1 1/2" x 3 1/2"; the same discipline as the
-  imperial/metric split in section 7b.
+Guards that fail the build rather than relying on discipline:
+
+- **Classification** — codes must exist in `data/uniclass_codes.csv`, checked against the published
+  Uniclass tables. Has caught seven wrong codes.
+- **PredefinedType** — schema-driven; nine invalid enums caught that massing's own `_set_predefined`
+  would have silently swallowed.
+- **GeometryStatus** — derived from the builder, so a proxy is always labelled as one.
+- **Duplicates** — same label+class+discipline, and `(ifc_class, Name)` collisions.
+- **Docs** — generated catalog reference and README counts checked against the catalog.
+- **Pack size** — no pack over 1,000 types, since import pulls in every type in a file.
 
 ### Backlog
 
 - Steel moment/shear connection assemblies and embeds
-- Hollowcore with real voids (`voided_profile`, currently folded into `profile`)
-- Curtain wall / storefront as assemblies rather than single panels
-- Thumbnails (the one Phase 7 item still missing — the manifest index is done)
+- Hollowcore with real voids; curtain wall as assemblies rather than single panels
+- Thumbnails — the one Phase 7 item still missing; the manifest index is done
 - License-gated third-party ingest pipeline
 - More sizes per family across MEP equipment, fixtures and finishes
 
