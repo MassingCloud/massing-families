@@ -10,18 +10,16 @@ Two things massing needs, both reviewable and neither applied to your checkout:
 ## Fetching the library
 
 The library lives at **[MassingCloud/massing-families](https://github.com/MassingCloud/massing-families)**
-(private) and publishes each tagged release as ~40 IFC packs plus `manifest.json`.
+(public) and publishes each tagged release as IFC packs plus `manifest.json`.
 
 ```bash
 python scripts/fetch_families.py --list
 python scripts/fetch_families.py --packs structural-steel-w mechanical-ductwork
 ```
 
-Because the repo is private a token is required — `$GITHUB_TOKEN`, `$GH_TOKEN`, `gh auth login`, or
-`--token`. Private release assets must be fetched from the API asset URL with
-`Accept: application/octet-stream`; `browser_download_url` returns 404 without a session, which is
-easy to misread as a missing asset. Every pack is checked against the sha256 in `manifest.json`
-before it is written.
+No token is needed. If one is available the script uses it anyway — `$GITHUB_TOKEN`, `$GH_TOKEN`,
+`gh auth login` or `--token` — which raises the API rate limit and keeps working if the repo is ever
+made private again. Every pack is checked against the sha256 in `manifest.json` before it is written.
 
 Verified end to end against release v0.1.1:
 

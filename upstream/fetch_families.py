@@ -9,10 +9,11 @@ already lists it and `POST /projects/{id}/families/import` can pull types from i
     python scripts/fetch_families.py --tag v0.1.1
     python scripts/fetch_families.py --packs structural-steel-w mechanical-ductwork
 
-**Authentication.** The library repo is private, so a token is required. The script uses, in order:
-`--token`, `$GITHUB_TOKEN`, `$GH_TOKEN`, then `gh auth token` if the GitHub CLI is installed. Private
-release assets must also be fetched from the *API* asset URL with `Accept: application/octet-stream`
-— `browser_download_url` returns 404 without a session, which is easy to mistake for a missing asset.
+**Authentication.** The library repo is public, so no token is needed. If one is available the script
+still uses it — `--token`, `$GITHUB_TOKEN`, `$GH_TOKEN`, then `gh auth token` — which raises the API
+rate limit and keeps the script working if the repo is ever made private again. Assets are fetched
+from the *API* asset URL with `Accept: application/octet-stream` rather than `browser_download_url`,
+because that is the form that works in both cases.
 
 Why fetch rather than commit: massing's .gitignore treats `*.ifc` as a build artifact ("data /
 artifacts (do NOT commit models or tiles)"), and the library is ~6 MB across 40 packs that regenerate
@@ -64,10 +65,11 @@ def _get(url: str, token: str | None, octet: bool = False) -> bytes:
         with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=120) as r:
             return r.read()
     except urllib.error.HTTPError as e:
-        if e.code in (401, 403, 404) and not token:
+        if e.code in (401, 403) and not token:
             raise SystemExit(
                 f"HTTP {e.code} fetching {url}\n"
-                f"{REPO} is private — set GITHUB_TOKEN, or run `gh auth login`, or pass --token.")
+                f"Most likely the anonymous API rate limit. Set GITHUB_TOKEN, run `gh auth login`, "
+                f"or pass --token.")
         raise SystemExit(f"HTTP {e.code} fetching {url}: {e.reason}")
 
 
@@ -83,7 +85,8 @@ def main(argv=None) -> int:
     token = find_token(args.token)
     rel = json.loads(_get(f"{API}/tags/{args.tag}" if args.tag else f"{API}/latest", token))
 
-    # keep the API url (works for private repos), not browser_download_url
+    # the API asset url, not browser_download_url — this form works whether the repo is public or
+    # private, so the script keeps working if visibility ever changes
     assets = {a["name"]: a["url"] for a in rel.get("assets", [])}
     if "manifest.json" not in assets:
         raise SystemExit(f"release {rel.get('tag_name')} has no manifest.json — cannot verify packs")
