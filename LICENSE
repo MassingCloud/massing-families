@@ -3,8 +3,12 @@ MIT License
 Copyright (c) 2026 Massing.Cloud
 
 Applies to the generator: everything under src/, tools/ and tests/.
+
 The family content under catalog/ and the generated IFC packs are dedicated to the public domain
 under CC0 1.0 — see LICENSE-CONTENT. Derived reference data under data/ — see NOTICE.md.
+
+The upstream/ directory is excluded from this licence. It contains a patch for, and a patched copy
+of, a source file from https://github.com/ibuilder/massing, and carries that project's terms.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
