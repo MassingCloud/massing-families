@@ -3,6 +3,33 @@
 Versions are the tag on the GitHub release; each release attaches one `.ifc` per pack plus a
 `manifest.json` with a sha256 for every pack.
 
+## Unreleased
+
+Lessons pulled back from massing v0.3.662-v0.3.718, which implemented the platform side.
+
+- **Completeness gate tightened.** massing's own coverage gate found 413 families and **zero
+  `IfcFootingType`** — every typology unbuildable for the same reason. This library's check could not
+  have caught it: its `foundations` requirement read `ifc_class in {IfcFootingType, IfcPileType}`, and
+  a single HP pile satisfied the OR while no footings existed. An OR over two classes only proves one
+  of them exists. Split into `footings` and `piles`, and the other multi-class requirements audited
+  the same way — `outlets`/`switches` and `fire alarm notification`/`fire detection` are now separate.
+  `cooling source` stays an OR deliberately, since an air-cooled chiller needs no tower.
+  Core systems: 35 -> 38, all passing.
+- **The geometry patch is withdrawn.** `upstream/0001-family-geometry-fixes.patch` and
+  `families.patched.py` deleted. massing implemented its own fix after reproducing each defect against
+  real content, and it is strictly better: the patch covered three of four defects and *caused* the
+  fourth. `IfcRectangleHollowProfileDef` is a subtype of `IfcRectangleProfileDef`, so a resize guarded
+  by `is_a("IfcRectangleProfileDef")` matched HSS tubes, rewrote their dimensions while leaving wall
+  thickness alone, and kept the catalog name — an `HSS24X12X3/4` becoming a 500x500 tube still
+  labelled as a standard section. In IFC, `is_a("X")` is a subtype test, not an equality test; a
+  mutation path almost always wants exact-class comparison. This library's own code was audited and
+  carries no such guard.
+- `upstream/verify_patch.py` -> `verify_geometry_support.py`: checks whether the massing you have
+  handles this library's geometry, rather than comparing a patch against a baseline. Four behaviours,
+  all passing against v0.3.718.
+- `upstream/README.md` rewritten around what massing now provides — `family_shapes.py`,
+  `family_packs.py`, `POST /families/import-pack`, manifest metadata on `GET /families/library`.
+
 ## v0.1.4
 
 Licensing carried by the artifacts themselves, and public-facing documentation.

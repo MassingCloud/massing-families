@@ -28,7 +28,13 @@ CORE = {
     "floor finishes": lambda s: s.ifc_class == "IfcCoveringType" and s.predefined == "FLOORING",
     "columns": lambda s: s.ifc_class == "IfcColumnType",
     "beams": lambda s: s.ifc_class == "IfcBeamType",
-    "foundations": lambda s: s.ifc_class in {"IfcFootingType", "IfcPileType"},
+    # Split, not OR'd. These were one "foundations" check reading
+    # `ifc_class in {IfcFootingType, IfcPileType}`, and a single HP pile satisfied it while the
+    # catalog carried *zero* footings — 413 families and nothing to stand a building on. massing's
+    # own coverage gate caught it (v0.3.670); this check could not, because an OR over two classes
+    # only proves one of them exists. Any requirement naming two classes hides that hole.
+    "footings": lambda s: s.ifc_class == "IfcFootingType",
+    "piles": lambda s: s.ifc_class == "IfcPileType",
     "duct": lambda s: s.ifc_class == "IfcDuctSegmentType",
     "duct fittings": lambda s: s.ifc_class == "IfcDuctFittingType",
     "air terminals": lambda s: s.ifc_class == "IfcAirTerminalType",
@@ -41,12 +47,15 @@ CORE = {
     "raceway": lambda s: s.ifc_class == "IfcCableCarrierSegmentType",
     "electrical distribution": lambda s: s.ifc_class == "IfcElectricDistributionBoardType",
     "lighting": lambda s: s.ifc_class == "IfcLightFixtureType",
-    "electrical devices": lambda s: s.ifc_class in {"IfcOutletType", "IfcSwitchingDeviceType"},
+    "outlets": lambda s: s.ifc_class == "IfcOutletType",
+    "switches": lambda s: s.ifc_class == "IfcSwitchingDeviceType",
     "sprinklers": lambda s: s.ifc_class == "IfcFireSuppressionTerminalType",
-    "fire alarm": lambda s: s.ifc_class in {"IfcAlarmType", "IfcSensorType"},
+    "fire alarm notification": lambda s: s.ifc_class == "IfcAlarmType",
+    "fire detection": lambda s: s.ifc_class == "IfcSensorType",
     "fire dampers": lambda s: s.ifc_class == "IfcDamperType",
     "furniture": lambda s: s.ifc_class == "IfcFurnitureType",
     "heat source": lambda s: s.ifc_class == "IfcBoilerType",
+    # Genuinely an OR: an air-cooled chiller needs no tower, so requiring both would be wrong.
     "cooling source": lambda s: s.ifc_class in {"IfcChillerType", "IfcCoolingTowerType"},
     "pumps": lambda s: s.ifc_class == "IfcPumpType",
     "terminal units": lambda s: s.ifc_class == "IfcAirTerminalBoxType",
