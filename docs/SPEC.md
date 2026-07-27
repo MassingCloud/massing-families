@@ -109,7 +109,7 @@ Bar sizes and bend shapes.
 | `material` | `{name, category}` for a single material, or `{name, layers: [{material, thickness, category}]}` for a layered assembly |
 | `psets` | `{PsetName: {prop: value}}` — use standard `Pset_*` names where one fits |
 | `ports` | `{system, names?, flows?}` — `DUCT`, `PIPE`, `CABLE`, `CABLECARRIER` |
-| `license` | SPDX id, default `CC0-1.0` |
+| `license` | SPDX id, default `CC0-1.0`. Only change it if the family vendors third-party geometry — record the source in `NOTICE.md`. A non-CC0 family makes the pack's manifest report `MIXED` rather than overstating how freely it can be redistributed. |
 | `source` | provenance, default `massing-families` |
 
 Layer thicknesses are imperial too — a `4 7/8"` partition is `5/8"` gypsum + `3 5/8"` stud + `5/8"`
@@ -132,6 +132,10 @@ Every type gets these without being asked:
 `GeometryStatus` is derived from the builder — `box` → `proxy`, the parametric builders →
 `parametric`, `assembly` → `assembly`, `mesh` → `tessellated`. It is never hand-set, so it cannot
 drift out of date.
+
+The licence is stamped in three places so it survives the file being moved: `MF_Library.License` on
+every type, the pack's STEP header (`FILE_NAME` authorization and `FILE_DESCRIPTION`), and the
+top-level `license` key in `manifest.json`.
 
 ## Units
 

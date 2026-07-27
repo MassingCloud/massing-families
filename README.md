@@ -124,7 +124,7 @@ See [docs/CATALOG.md](docs/CATALOG.md) for the full inventory.
 pytest
 ```
 
-112 tests. The golden round-trip runs against a real massing checkout (`MASSING_ROOT`, default
+The golden round-trip runs against a real massing checkout (`MASSING_ROOT`, default
 `C:\Server\modelmaker`) and asserts geometry, psets, provenance, materials, classification and
 distribution ports all survive `import_types_from_ifc`. It skips cleanly without one; CI clones
 massing so every PR verifies against the real platform.
@@ -138,5 +138,11 @@ massing so every PR verifies against the real platform.
 | `data/` | derived reference data — [NOTICE.md](NOTICE.md) |
 | `upstream/` | derivative of [ibuilder/massing](https://github.com/ibuilder/massing); follows that project's terms |
 
-Every generated IFC type also carries its licence in the `MF_Library` pset, so the declaration travels
-with the object into any model that imports it.
+The declaration travels with the content, in three places, so it survives being separated from this
+repository:
+
+- every type carries `MF_Library.License`, so it follows the object into any model that imports it
+- every pack's STEP header records it — `FILE_NAME` authorization and `FILE_DESCRIPTION`
+- `manifest.json` declares it at the top level, which is what a catalog shelf reads
+
+Contributions are accepted under the same terms — see [CONTRIBUTING.md](CONTRIBUTING.md).

@@ -97,6 +97,22 @@ In order of preference:
 **Never** copy from a BIM object portal. Their terms allow use in projects, not redistribution.
 Anything that cannot honestly reach tiers 1–3 ships as a labelled L200 proxy.
 
+## Licensing of contributions
+
+By contributing you agree that:
+
+- **Family content** (`catalog/`) is dedicated to the public domain under
+  [CC0-1.0](LICENSE-CONTENT). Content is the deliverable; it has to be free of encumbrance for anyone
+  to ship it.
+- **Code** (`src/`, `tools/`, `tests/`) is contributed under the [MIT licence](LICENSE).
+- **You have the right to contribute it.** Dimensions taken from published standards are facts and
+  fine. Geometry copied from a BIM object portal, a manufacturer's Revit family, or any source whose
+  terms permit use but not redistribution is **not**, no matter how it was re-authored.
+
+If a family must carry different terms — vendored permissively-licensed geometry, say — set its
+`license:` field accordingly and record the source in `NOTICE.md`. The manifest reports `MIXED`
+rather than overstating, and the packs stay honest.
+
 ## Checklist
 
 - [ ] Classification code looked up and added to `data/uniclass_codes.csv` with its title

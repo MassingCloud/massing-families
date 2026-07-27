@@ -29,6 +29,34 @@ def new_library(name: str = "Massing Family Library") -> ifcopenshell.file:
     return model
 
 
+LIBRARY = "massing-families"
+ORGANIZATION = "Massing.Cloud"
+REPOSITORY = "https://github.com/MassingCloud/massing-families"
+
+
+def stamp_header(model: ifcopenshell.file, filename: str, version: str,
+                 license_id: str = "CC0-1.0") -> None:
+    """Write licence and attribution into the STEP header.
+
+    IfcOpenShell's default header reads `FILE_NAME('/dev/null', …, 'Nobody')` with no author or
+    organization. For a published artifact that is both unhelpful and, once the packs are downloaded
+    and separated from `manifest.json`, the point at which the licence would be lost. The header
+    travels with the file, so the declaration belongs here as well as in the manifest and in every
+    type's `MF_Library` pset.
+    """
+    header = model.header                     # the high-level wrapper; wrapped_data.header is raw SWIG
+    header.file_description.description = (
+        "ViewDefinition[DesignTransferView]",
+        f"Library: {LIBRARY} {version}",
+        f"License: {license_id}",
+        f"Source: {REPOSITORY}",
+    )
+    header.file_name.name = filename
+    header.file_name.author = (LIBRARY,)
+    header.file_name.organization = (ORGANIZATION,)
+    header.file_name.authorization = f"{license_id} - {REPOSITORY}"
+
+
 def body_context(model: ifcopenshell.file):
     """The Body/MODEL_VIEW subcontext types are represented in."""
     for c in model.by_type("IfcGeometricRepresentationSubContext"):

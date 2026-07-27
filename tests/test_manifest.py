@@ -127,3 +127,31 @@ def test_licence_files_exist():
     root = Path(__file__).resolve().parents[1]
     for name in ("LICENSE", "LICENSE-CONTENT", "NOTICE.md"):
         assert (root / name).exists(), f"{name} missing — the repo would read as unlicensed"
+
+
+def test_ifc_header_carries_licence_and_attribution(tmp_path, catalog_root):
+    """The licence must travel inside the artifact.
+
+    Packs get downloaded and moved around; once separated from manifest.json the STEP header is the
+    only place left that says who made the file and under what terms. IfcOpenShell's default header
+    is FILE_NAME('/dev/null', …, 'Nobody') with no author or organization.
+    """
+    import ifcopenshell
+
+    specs = [s for s in load_catalog(catalog_root) if s.discipline == "conveying"]
+    entry = write_pack(specs, tmp_path, "conveying", "9.9.9")
+    model = ifcopenshell.open(str(tmp_path / entry["file"]))
+
+    header = model.header
+    assert header.file_name.name == entry["file"], "filename must not be /dev/null"
+    assert "massing-families" in header.file_name.author
+    assert "Massing.Cloud" in header.file_name.organization
+    assert "CC0-1.0" in header.file_name.authorization
+    assert "github.com" in header.file_name.authorization
+
+    description = " ".join(header.file_description.description)
+    assert "License: CC0-1.0" in description
+    assert "9.9.9" in description, "header should record the library version"
+
+    project = model.by_type("IfcProject")[0]
+    assert "CC0-1.0" in project.Description, "viewers that show Description should see the licence"

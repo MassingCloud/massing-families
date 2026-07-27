@@ -35,6 +35,12 @@ Every type carries a Uniclass classification, an `MF_Library` provenance pset (k
 - [Site](#site) — 34 families, 98 types
 - [Structural](#structural) — 52 families, 1662 types
 
+## Licence
+
+All content here is **CC0-1.0** — see [LICENSE-CONTENT](../LICENSE-CONTENT). It is fabricated from public standards (AISC, ASME, ASTM, NFPA, IBC, ADA and standard trade sizes), so it carries no third-party redistribution restriction. Nothing is copied from a BIM object portal.
+
+The declaration travels with the content: each type carries `MF_Library.License`, each pack's STEP header records it in `FILE_NAME` authorization, and `manifest.json` declares it at the top level. Derived reference data has its own provenance — see [NOTICE.md](../NOTICE.md).
+
 
 ## airport
 

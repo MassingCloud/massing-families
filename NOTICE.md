@@ -1,5 +1,8 @@
 # Third-party data notice
 
+> Library content is CC0-1.0 ([LICENSE-CONTENT](LICENSE-CONTENT)); the generator is MIT
+> ([LICENSE](LICENSE)). This file covers the reference data those two do not.
+
 The library generates its own geometry (see [LICENSE-CONTENT](LICENSE-CONTENT)), but two files under
 `data/` are **derived from third-party sources**. Neither source file is redistributed here — only
 values derived from them, which is the tier-2 rule in [PLAN.md §8g](PLAN.md).

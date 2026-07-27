@@ -104,6 +104,13 @@ def write_pack(specs: list[FamilySpec], out_dir: Path, discipline: str, version:
     path = out_dir / filename
 
     model, stats = build_model(specs, version, name=f"Massing Family Library — {discipline}")
+    lic = licensing(specs)
+    ifc.stamp_header(model, filename, version, lic["content"])
+    # and on the project itself, for viewers that surface Description but not the STEP header
+    project = next(iter(model.by_type("IfcProject")), None)
+    if project is not None:
+        project.Description = (f"{discipline} pack · {stats['types']} types · "
+                               f"{lic['content']} · {REPO_URL}")
     model.write(str(path))
 
     data = path.read_bytes()

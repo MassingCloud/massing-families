@@ -74,6 +74,16 @@ def render(specs: list[FamilySpec]) -> str:
         w(f"- [{disc.title()}](#{disc}) — {len(group)} families, {n} types")
     w("")
 
+    licences = sorted({s.license for s in specs})
+    w("## Licence\n")
+    w(f"All content here is **{' / '.join(licences)}** — see "
+      "[LICENSE-CONTENT](../LICENSE-CONTENT). It is fabricated from public standards (AISC, ASME, "
+      "ASTM, NFPA, IBC, ADA and standard trade sizes), so it carries no third-party redistribution "
+      "restriction. Nothing is copied from a BIM object portal.\n")
+    w("The declaration travels with the content: each type carries `MF_Library.License`, each pack's "
+      "STEP header records it in `FILE_NAME` authorization, and `manifest.json` declares it at the "
+      "top level. Derived reference data has its own provenance — see [NOTICE.md](../NOTICE.md).\n")
+
     for disc in sorted(by_disc):
         group = sorted(by_disc[disc], key=lambda s: (s.category, s.label))
         n = sum(len(expand(s)) for s in group)
