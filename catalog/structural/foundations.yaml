@@ -148,7 +148,7 @@
   classification: {uniclass: Ss_20_05_65}           # Piling systems
   pack: structural-foundations
   builder: revolve
-  tier: L200
+  tier: L300
   material: {name: Cast-in-Place Concrete, category: concrete}
   psets:
     Pset_PileCommon: {LoadBearing: "true"}
@@ -190,7 +190,7 @@
   classification: {uniclass: Ss_20_05_90}           # Underpinning systems
   pack: structural-foundations
   builder: revolve
-  tier: L200
+  tier: L300
   material: {name: Galvanized Steel, category: metal}
   psets:
     Pset_PileCommon: {LoadBearing: "true"}

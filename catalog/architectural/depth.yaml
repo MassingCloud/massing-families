@@ -39,7 +39,7 @@
   classification: {uniclass: Pr_30_59_24}           # Doorsets
   pack: architectural-doors
   builder: revolve
-  tier: L200
+  tier: L300
   material: {name: Aluminium / Glass, category: aluminium}
   psets:
     Pset_DoorCommon: {IsExternal: "true", Application: Vestibule / high-traffic lobby}
@@ -538,7 +538,7 @@
   classification: {uniclass: Pr_40_20}              # Sanitary fittings and accessories
   pack: architectural-specialties
   builder: revolve
-  tier: L200
+  tier: L300
   material: {name: Stainless Steel, category: metal}
   psets:
     MF_Accessibility: {Standard: ICC A117.1, Load: 250 lbf}
@@ -681,7 +681,7 @@
   classification: {uniclass: Ss_35_10}              # Stair and ramp structure systems
   pack: architectural-circulation
   builder: revolve
-  tier: L200
+  tier: L300
   material: {name: Steel, category: metal}
   psets:
     Pset_StairCommon: {RequiredHeadroom: 2.03}

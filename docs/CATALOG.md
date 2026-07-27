@@ -8,7 +8,7 @@ Every type carries a Uniclass classification, an `MF_Library` provenance pset (k
 
 | | |
 |---|---|
-| Geometry tiers | **L200** 333, **L300** 84, **L350** 2 |
+| Geometry tiers | **L200** 320, **L300** 97, **L350** 2 |
 | Families with distribution ports | 97 |
 | Mapped to a massing built-in | 46 |
 | Distinct categories | 111 |
@@ -67,7 +67,7 @@ The declaration travels with the content: each type carries `MF_Library.License`
 | **Acoustical Ceiling** <br>`ceiling_act` | `IfcCoveringType` | L200 | proxy | 2 | `Ss_30_25_22` |  |
 | **Gypsum Board Ceiling** <br>`ceiling_gypsum` | `IfcCoveringType` | L200 | proxy | 2 | `Ss_30_25_10` |  |
 | **Monumental / Feature Stair** <br>`stair_monumental` | `IfcStairFlightType` | L200 | proxy | 2 | `Ss_35_10` |  |
-| **Spiral Stair** <br>`stair_spiral` | `IfcStairType` | L200 | parametric | 2 | `Ss_35_10` |  |
+| **Spiral Stair** <br>`stair_spiral` | `IfcStairType` | L300 | parametric | 2 | `Ss_35_10` |  |
 | **Curtain Wall Mullion** <br>`mullion` | `IfcMemberType` | L300 | parametric | 3 | `Pr_20_76_51` |  |
 | **Spandrel Panel** <br>`spandrel_panel` | `IfcPlateType` | L200 | proxy | 2 | `Ss_25_10_20` |  |
 | **Storefront System** <br>`storefront` | `IfcCurtainWallType` | L200 | proxy | 2 | `Ss_25_10_20` |  |
@@ -81,7 +81,7 @@ The declaration travels with the content: each type carries `MF_Library.License`
 | **Fire-Rated Door** <br>`door_fire_rated` | `IfcDoorType` | L200 | proxy | 3 | `Pr_30_59_24` |  |
 | **Hollow Metal Exterior Door** <br>`door_exterior_hm` | `IfcDoorType` | L200 | proxy | 2 | `Pr_30_59_24` |  |
 | **Overhead Coiling Door** <br>`door_overhead_coiling` | `IfcDoorType` | L200 | proxy | 3 | `Pr_30_59_24` |  |
-| **Revolving Door** <br>`door_revolving` | `IfcDoorType` | L200 | parametric | 2 | `Pr_30_59_24` |  |
+| **Revolving Door** <br>`door_revolving` | `IfcDoorType` | L300 | parametric | 2 | `Pr_30_59_24` |  |
 | **Sectional Overhead Door** <br>`door_sectional_overhead` | `IfcDoorType` | L200 | proxy | 3 | `Pr_30_59_24` |  |
 | **Single Flush Door** <br>`door_single_flush` | `IfcDoorType` | L200 | proxy | 7 | `Pr_30_59_24` |  |
 | **Sliding / Pocket Door** <br>`door_sliding_pocket` | `IfcDoorType` | L200 | proxy | 3 | `Pr_30_59_24` |  |
@@ -126,7 +126,7 @@ The declaration travels with the content: each type carries `MF_Library.License`
 | **Crash Rail / Wall Protection** <br>`crash_rail` | `IfcCoveringType` | L200 | proxy | 4 | `Pr_35_90` |  |
 | **Entrance Canopy** <br>`canopy` | `IfcBuildingElementProxyType` | L200 | proxy | 3 | `Pr_20_65` |  |
 | **Expansion Joint Cover** <br>`expansion_joint_cover` | `IfcDiscreteAccessoryType` | L200 | proxy | 3 | `Pr_35_90_27` |  |
-| **Grab Bar** <br>`grab_bar` | `IfcDiscreteAccessoryType` | L200 | parametric | 3 | `Pr_40_20` |  |
+| **Grab Bar** <br>`grab_bar` | `IfcDiscreteAccessoryType` | L300 | parametric | 3 | `Pr_40_20` |  |
 | **Locker** <br>`locker` | `IfcFurnitureType` | L200 | proxy | 3 | `Pr_40_30_87_48` |  |
 | **Marker / Tack Board** <br>`marker_board` | `IfcDiscreteAccessoryType` | L200 | proxy | 3 | `Pr_40_30` |  |
 | **Signage** <br>`signage` | `IfcBuildingElementProxyType` | L200 | proxy | 3 | `Ss_40` |  |
@@ -256,14 +256,14 @@ The declaration travels with the content: each type carries `MF_Library.License`
 | **Fire Alarm Control Panel** <br>`fire_alarm_panel` | `IfcAlarmType` | L200 | proxy | 3 | `Pr_75_80_30` |  |
 | **Fire Alarm Device** <br>`fire_alarm_device` | `IfcAlarmType` | L200 | proxy | 4 | `Pr_75_80_30` |  |
 | **Fire Detector** <br>`fire_detector` | `IfcSensorType` | L300 | parametric | 3 | `Pr_75_80_30` |  |
-| **Heat Detector** <br>`heat_detector` | `IfcSensorType` | L200 | parametric | 2 | `Pr_75_80_30` |  |
+| **Heat Detector** <br>`heat_detector` | `IfcSensorType` | L300 | parametric | 2 | `Pr_75_80_30` |  |
 | **Manual Pull Station** <br>`manual_pull_station` | `IfcAlarmType` | L200 | proxy | 2 | `Pr_75_80_30` |  |
 | **Notification Appliance (Horn / Strobe)** <br>`notification_appliance` | `IfcAlarmType` | L200 | proxy | 4 | `Pr_75_80_30` |  |
 | **Fire Damper** <br>`fire_damper` | `IfcDamperType` | L300 | parametric | 6 | `Pr_65_65_24` | ✓ |
 | **Smoke / Combination Fire-Smoke Damper** <br>`smoke_damper` | `IfcDamperType` | L200 | proxy | 3 | `Pr_65_65_24` |  |
-| **Clean Agent Suppression** <br>`clean_agent_system` | `IfcFireSuppressionTerminalType` | L200 | parametric | 2 | `Pr_70_55_33` |  |
+| **Clean Agent Suppression** <br>`clean_agent_system` | `IfcFireSuppressionTerminalType` | L300 | parametric | 2 | `Pr_70_55_33` |  |
 | **Fire Department Connection** <br>`fdc` | `IfcFireSuppressionTerminalType` | L200 | proxy | 3 | `Pr_65_54_30` | ✓ |
-| **Fire Extinguisher** <br>`fire_extinguisher` | `IfcFireSuppressionTerminalType` | L200 | parametric | 3 | `Pr_40_50_28` |  |
+| **Fire Extinguisher** <br>`fire_extinguisher` | `IfcFireSuppressionTerminalType` | L300 | parametric | 3 | `Pr_40_50_28` |  |
 | **Fire Extinguisher Cabinet** <br>`fire_extinguisher_cabinet` | `IfcFireSuppressionTerminalType` | L200 | proxy | 2 | `Pr_40_50_28` |  |
 | **Kitchen Hood Suppression System** <br>`kitchen_suppression` | `IfcFireSuppressionTerminalType` | L200 | proxy | 1 | `Pr_70_55_33` |  |
 | **Fire Pump** <br>`fire_pump` | `IfcPumpType` | L200 | proxy | 3 | `Pr_65_54_30` | ✓ |
@@ -395,7 +395,7 @@ The declaration travels with the content: each type carries `MF_Library.License`
 | **Flexible Duct** <br>`duct_flex` | `IfcDuctSegmentType` | L300 | parametric | 7 | `Pr_65_65_25` | ✓ |
 | **Rectangular Duct** <br>`duct_rect` | `IfcDuctSegmentType` | L300 | parametric | 39 | `Pr_65_65_25` | ✓ |
 | **Round Duct** <br>`duct_round` | `IfcDuctSegmentType` | L300 | parametric | 21 | `Pr_65_65_25` | ✓ |
-| **Destratification / HVLS Fan** <br>`destratification_fan` | `IfcFanType` | L200 | parametric | 2 | `Pr_65_67_29` |  |
+| **Destratification / HVLS Fan** <br>`destratification_fan` | `IfcFanType` | L300 | parametric | 2 | `Pr_65_67_29` |  |
 | **Humidifier** <br>`humidifier` | `IfcHumidifierType` | L200 | proxy | 2 | `Pr_65_67_39` | ✓ |
 | **Makeup Air Unit** <br>`makeup_air_unit` | `IfcAirToAirHeatRecoveryType` | L200 | proxy | 2 | `Pr_60_65_03` | ✓ |
 | **VRF Indoor Unit** <br>`vrf_indoor_unit` | `IfcUnitaryEquipmentType` | L200 | proxy | 3 | `Pr_70_65_03` | ✓ |
@@ -405,8 +405,8 @@ The declaration travels with the content: each type carries `MF_Library.License`
 | **Air Handling Unit** <br>`air_handling_unit` | `IfcUnitaryEquipmentType` | L200 | proxy | 3 | `Pr_70_65_03` |  |
 | **Fan Coil Unit** <br>`fan_coil_unit` | `IfcUnitaryEquipmentType` | L200 | proxy | 2 | `Pr_70_65_03_29` |  |
 | **Return Air Grille** <br>`air_grille` | `IfcAirTerminalType` | L200 | proxy | 2 | `Pr_70_65_04` |  |
-| **Air Separator / Dirt Separator** <br>`air_separator` | `IfcFilterType` | L200 | parametric | 2 | `Pr_65_55_76` | ✓ |
-| **Expansion Tank** <br>`expansion_tank` | `IfcTankType` | L200 | parametric | 3 | `Pr_60_50` | ✓ |
+| **Air Separator / Dirt Separator** <br>`air_separator` | `IfcFilterType` | L300 | parametric | 2 | `Pr_65_55_76` | ✓ |
+| **Expansion Tank** <br>`expansion_tank` | `IfcTankType` | L300 | parametric | 3 | `Pr_60_50` | ✓ |
 | **Hydronic Pipe (Schedule 40 Steel)** <br>`pipe_hydronic` | `IfcPipeSegmentType` | L300 | parametric | 10 | `Pr_65_52_63` | ✓ |
 | **Hydronic Valve** <br>`valve_hydronic` | `IfcValveType` | L200 | proxy | 5 | `Pr_65_54_95` | ✓ |
 | **Pipe Insulation** <br>`pipe_insulation` | `IfcCoveringType` | L300 | parametric | 4 | `Pr_65_52_61` |  |
@@ -483,7 +483,7 @@ The declaration travels with the content: each type carries `MF_Library.License`
 | **Shrub** <br>`shrub` | `IfcGeographicElementType` | L300 | parametric | 2 | `Pr_45_30_80` |  |
 | **Tree** <br>`tree` | `IfcGeographicElementType` | L300 | parametric | 3 | `Pr_45_30_90` |  |
 | **Bicycle Rack / Shelter** <br>`bike_rack` | `IfcDiscreteAccessoryType` | L200 | proxy | 3 | `Pr_40_30_78` |  |
-| **Flagpole** <br>`flagpole` | `IfcDiscreteAccessoryType` | L200 | parametric | 2 | `Pr_40_30` |  |
+| **Flagpole** <br>`flagpole` | `IfcDiscreteAccessoryType` | L300 | parametric | 2 | `Pr_40_30` |  |
 | **Irrigation Head / Controller** <br>`irrigation_head` | `IfcFlowInstrumentType` | L200 | proxy | 3 | `Pr_70_55_42` |  |
 | **Site Shelter / Pavilion** <br>`site_shelter` | `IfcBuildingElementProxyType` | L200 | proxy | 3 | `Pr_20_65` |  |
 | **Catch Basin** <br>`catch_basin` | `IfcDistributionChamberElementType` | L200 | proxy | 3 | `Pr_65_52_24` | ✓ |
@@ -501,7 +501,7 @@ The declaration travels with the content: each type carries `MF_Library.License`
 | **Detention / Infiltration Structure** <br>`detention_structure` | `IfcDistributionChamberElementType` | L200 | proxy | 3 | `Pr_65_52_01` |  |
 | **Fire Hydrant** <br>`fire_hydrant` | `IfcFireSuppressionTerminalType` | L200 | proxy | 2 | `Pr_65_54_30` | ✓ |
 | **Sanitary Sewer Pipe** <br>`pipe_sanitary_site` | `IfcPipeSegmentType` | L300 | parametric | 5 | `Pr_65_52_07` | ✓ |
-| **Site Cleanout** <br>`site_cleanout` | `IfcDistributionChamberElementType` | L200 | parametric | 2 | `Pr_65_52_01` |  |
+| **Site Cleanout** <br>`site_cleanout` | `IfcDistributionChamberElementType` | L300 | parametric | 2 | `Pr_65_52_01` |  |
 | **Storm Drainage Pipe** <br>`pipe_storm` | `IfcPipeSegmentType` | L300 | parametric | 5 | `Pr_65_52_07` | ✓ |
 | **Utility Valve Box / Vault** <br>`valve_box` | `IfcDistributionChamberElementType` | L200 | proxy | 3 | `Pr_65_52_01` |  |
 | **Water Main (Ductile Iron)** <br>`pipe_water_main` | `IfcPipeSegmentType` | L300 | parametric | 4 | `Pr_65_52_63` | ✓ |
@@ -532,12 +532,12 @@ The declaration travels with the content: each type carries `MF_Library.License`
 | **Wood I-Joist** <br>`lumber_ijoist` | `IfcBeamType` | L300 | parametric | 4 | `Pr_20_76_88` |  |
 | **Combined / Eccentric Footing** <br>`footing_combined` | `IfcFootingType` | L200 | proxy | 3 | `Ss_20_05_15` |  |
 | **Concrete Pier / Pedestal** <br>`pier_concrete` | `IfcColumnType` | L200 | proxy | 4 | `Ss_20_30_75` |  |
-| **Concrete Pile** <br>`pile_concrete` | `IfcPileType` | L200 | parametric | 5 | `Ss_20_05_65` |  |
+| **Concrete Pile** <br>`pile_concrete` | `IfcPileType` | L300 | parametric | 5 | `Ss_20_05_65` |  |
 | **Driven Pile** <br>`pile_driven` | `IfcPileType` | L200 | proxy | 5 | `Ss_20_05_65` |  |
 | **Foundation / Basement Wall** <br>`foundation_wall` | `IfcWallType` | L200 | proxy | 4 | `Ss_20_60` |  |
 | **Grade Beam** <br>`grade_beam` | `IfcFootingType` | L200 | proxy | 4 | `Ss_20_05_15` |  |
 | **HP Bearing Pile** <br>`steel_pile_hp` | `IfcPileType` | L300 | parametric | 22 | `Pr_20_76_51` |  |
-| **Helical / Micropile** <br>`pile_helical` | `IfcPileType` | L200 | parametric | 2 | `Ss_20_05_90` |  |
+| **Helical / Micropile** <br>`pile_helical` | `IfcPileType` | L300 | parametric | 2 | `Ss_20_05_90` |  |
 | **Mat / Raft Foundation** <br>`mat_foundation` | `IfcFootingType` | L200 | proxy | 4 | `Ss_20_05_15` |  |
 | **Pile Cap** <br>`pile_cap` | `IfcFootingType` | L200 | proxy | 5 | `Ss_20_05_15` |  |
 | **Slab on Grade** <br>`slab_on_grade` | `IfcSlabType` | L200 | proxy | 5 | `Ss_20_05_50` |  |

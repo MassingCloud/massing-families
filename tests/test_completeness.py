@@ -145,3 +145,16 @@ def test_report_typology_gaps(specs, capsys):
             gaps = _missing(specs, checks)
             print(f"    {typology:16} {len(checks) - len(gaps)}/{len(checks)}"
                   f"{'  MISSING: ' + ', '.join(gaps) if gaps else ''}")
+
+
+def test_tier_agrees_with_builder(specs):
+    """A declared tier must not contradict the geometry actually built.
+
+    `tier` is author-declared; `GeometryStatus` is derived from the builder. Thirteen families were
+    labelled L200 while using `revolve` or `swept_disk` — under-claiming rather than over-claiming, so
+    harmless to a consumer, but it made "how many families are still proxies" answerable two ways
+    (333 by tier, 320 by builder). Only the derived number is true.
+    """
+    wrong = [(s.key, s.tier, s.builder) for s in specs
+             if (s.tier == "L200") != (s.builder == "box")]
+    assert not wrong, f"tier contradicts builder: {wrong}"

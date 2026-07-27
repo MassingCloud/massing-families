@@ -164,7 +164,7 @@
   classification: {uniclass: Pr_40_50_28}           # Extinguishers and fire blankets
   pack: fire-protection
   builder: revolve
-  tier: L200
+  tier: L300
   material: {name: Steel, category: metal}
   psets:
     MF_FireProtection: {Standard: NFPA 10}
@@ -198,7 +198,7 @@
   classification: {uniclass: Pr_70_55_33}           # Gas and foam nozzles and sprinklers
   pack: fire-protection
   builder: revolve
-  tier: L200
+  tier: L300
   material: {name: Steel, category: metal}
   psets:
     MF_FireProtection: {Standard: NFPA 2001, Application: Data / Imaging / Archive}
@@ -286,7 +286,7 @@
   classification: {uniclass: Pr_75_80_30}           # Fire detection and alarm devices and control equipment
   pack: fire-alarm
   builder: revolve
-  tier: L200
+  tier: L300
   material: {name: Thermoplastic, category: plastic}
   psets:
     MF_FireAlarm: {Standard: NFPA 72, Application: Where smoke detection is unsuitable}

@@ -3,9 +3,10 @@
 Versions are the tag on the GitHub release; each release attaches one `.ifc` per pack plus a
 `manifest.json` with a sha256 for every pack.
 
-## Unreleased
+## v0.1.5
 
-Lessons pulled back from massing v0.3.662-v0.3.718, which implemented the platform side.
+Lessons pulled back from massing v0.3.662–v0.3.718, which implemented the platform side, plus
+forward-looking documentation.
 
 - **Completeness gate tightened.** massing's own coverage gate found 413 families and **zero
   `IfcFootingType`** — every typology unbuildable for the same reason. This library's check could not
@@ -29,6 +30,16 @@ Lessons pulled back from massing v0.3.662-v0.3.718, which implemented the platfo
   all passing against v0.3.718.
 - `upstream/README.md` rewritten around what massing now provides — `family_shapes.py`,
   `family_packs.py`, `POST /families/import-pack`, manifest metadata on `GET /families/library`.
+- **[ROADMAP.md](ROADMAP.md)** — where the library stands, the honest gap (320 of 419 families are
+  L200 proxies; 53 IFC4 type classes untouched), what is next and what is deliberately not planned.
+- **Tier corrected on 13 families.** They declared `tier: L200` while using `revolve` or
+  `swept_disk` builders, so "how many families are still proxies" had two answers — 333 by declared
+  tier, 320 by derived `GeometryStatus`. Only the derived number is true. Tiers fixed to L300 and a
+  guard added (`test_tier_agrees_with_builder`) so a declared tier can no longer contradict the
+  geometry actually built. Caught by the new roadmap-metrics test before it shipped.
+- **[docs/GUIDE.md](docs/GUIDE.md)** — a consumer guide. Which packs to take and why not to take them
+  all, both import routes, what every type carries, how to read `GeometryStatus` before committing to
+  a detail, and which overlapping families are real products rather than duplicates.
 
 ## v0.1.4
 

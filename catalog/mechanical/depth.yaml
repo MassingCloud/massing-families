@@ -223,7 +223,7 @@
   classification: {uniclass: Pr_60_50}              # Tank, cylinder and vessel products
   pack: mechanical-piping
   builder: revolve
-  tier: L200
+  tier: L300
   material: {name: Carbon Steel, category: metal}
   ports: {system: PIPE, names: [Connection], flows: [SINK]}
   psets:
@@ -242,7 +242,7 @@
   classification: {uniclass: Pr_65_55_76}           # Separators
   pack: mechanical-piping
   builder: revolve
-  tier: L200
+  tier: L300
   material: {name: Carbon Steel, category: metal}
   ports: {system: PIPE, names: [In, Out], flows: [SINK, SOURCE]}
   psets:
@@ -426,7 +426,7 @@
   classification: {uniclass: Pr_65_67_29}           # Fans
   pack: mechanical-equipment
   builder: revolve
-  tier: L200
+  tier: L300
   material: {name: Aluminium, category: aluminium}
   psets:
     MF_HVAC: {Application: Warehouse / hangar / concourse}

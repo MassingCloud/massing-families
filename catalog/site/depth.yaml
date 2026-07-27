@@ -134,7 +134,7 @@
   classification: {uniclass: Pr_65_52_01}           # Access and inspection chambers and gullies
   pack: site-utilities
   builder: revolve
-  tier: L200
+  tier: L300
   material: {name: Cast Iron / PVC, category: metal}
   types:
     - {name: '6" Cleanout at Grade', dims: ['0''-10"', '0''-10"', '1''-6"']}
@@ -330,7 +330,7 @@
   classification: {uniclass: Pr_40_30}              # Fittings
   pack: site-structures
   builder: revolve
-  tier: L200
+  tier: L300
   material: {name: Anodized Aluminium, category: aluminium}
   types:
     - {name: '25''-0" Ground-Set', dims: ['0''-6"', '0''-6"', '25''-0"']}

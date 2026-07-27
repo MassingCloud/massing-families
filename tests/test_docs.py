@@ -62,8 +62,9 @@ def test_documented_builders_and_generators_exist():
 
 
 def test_public_facing_docs_exist():
-    for name in ("README.md", "CONTRIBUTING.md", "NOTICE.md", "PLAN.md",
-                 "docs/SPEC.md", "docs/CATALOG.md", "upstream/README.md"):
+    for name in ("README.md", "CONTRIBUTING.md", "NOTICE.md", "PLAN.md", "ROADMAP.md",
+                 "CHANGELOG.md", "docs/SPEC.md", "docs/CATALOG.md", "docs/GUIDE.md",
+                 "upstream/README.md"):
         assert (ROOT / name).exists(), f"{name} missing"
 
 
@@ -72,3 +73,27 @@ def test_no_stale_private_repo_claims():
     for name in ("README.md", "upstream/README.md", "upstream/fetch_families.py"):
         text = (ROOT / name).read_text(encoding="utf-8").lower()
         assert "repo is private" not in text, f"{name} still describes the repo as private"
+
+
+def test_roadmap_metrics_match_the_catalog(specs):
+    """The roadmap argues from numbers — proxy count, untouched IFC classes. If those drift the
+    argument stops being true, which is worse than the doc simply being out of date."""
+    from massing_families.spec import TYPE_CLASSES
+
+    text = (ROOT / "ROADMAP.md").read_text(encoding="utf-8")
+    st = docs.stats(specs)
+    proxies = sum(1 for s in specs if s.builder == "box")
+    untouched = len(TYPE_CLASSES) - st["ifc_classes"]
+
+    assert f"**{st['families']}**" in text, "roadmap family count is stale"
+    assert f"{proxies} of {st['families']}" in text, (
+        f"roadmap should say {proxies} of {st['families']} families are L200 proxies")
+    assert f"{untouched} IFC4 type classes" in text, (
+        f"roadmap should say {untouched} type classes are untouched")
+
+
+def test_changelog_covers_the_current_release():
+    """Every tagged release needs an entry; the top entry is the one being prepared or shipped."""
+    text = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+    for version in ("v0.1.0", "v0.1.1", "v0.1.2", "v0.1.3", "v0.1.4", "v0.1.5"):
+        assert f"## {version}" in text, f"CHANGELOG missing an entry for {version}"

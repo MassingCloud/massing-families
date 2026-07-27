@@ -9,8 +9,9 @@ bar diameters, IBC and ADA dimensional requirements — so it carries no third-p
 restriction. Built for [massing](https://github.com/ibuilder/massing), but the output is plain IFC4
 and imports anywhere.
 
-[Catalog reference](docs/CATALOG.md) · [Adding a family](CONTRIBUTING.md) ·
-[Spec reference](docs/SPEC.md) · [Design notes](PLAN.md) · [Releases](../../releases)
+[Using it](docs/GUIDE.md) · [Catalog reference](docs/CATALOG.md) · [Adding a family](CONTRIBUTING.md) ·
+[Spec reference](docs/SPEC.md) · [Roadmap](ROADMAP.md) · [Changelog](CHANGELOG.md) ·
+[Design notes](PLAN.md) · [Releases](../../releases)
 
 ---
 
@@ -116,7 +117,9 @@ completeness checklist asserting at least one family exists for every system tha
 built without (`tests/test_completeness.py`). That is a floor, not a depth claim: 419 families against
 a longer-term target of ~800. The gap is breadth within systems, not absent systems.
 
-See [docs/CATALOG.md](docs/CATALOG.md) for the full inventory.
+See [docs/CATALOG.md](docs/CATALOG.md) for the full inventory, [docs/GUIDE.md](docs/GUIDE.md) for
+working with the content, and [ROADMAP.md](ROADMAP.md) for what is next — chiefly depth: 320 of 419
+families are still L200 proxies.
 
 ## Tests
 
