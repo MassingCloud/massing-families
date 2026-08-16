@@ -87,14 +87,19 @@ python scripts/fetch_families.py --list
 python scripts/fetch_families.py --packs structural-steel-w mechanical-ductwork
 ```
 
-massing's vendored copy was written when this library had **no published release and a wrong
-repository slug**, so it exits with local-build instructions rather than an obscure 404. Both are now
-resolved — releases are published at
-[MassingCloud/massing-families](https://github.com/MassingCloud/massing-families), the repo is public,
-and no token is required. The vendored copy can be refreshed from `fetch_families.py` here.
+massing's vendored copy is a leaner rewrite of this one and **works as-is** against the published
+releases — verified fetching v0.1.5. It resolves the correct slug and needs no refresh. (An earlier
+note here said it still carried a no-release fallback; that was already fixed upstream.)
 
-The packs committed under `services/data/families/external/` are **v0.1.0**; current is v0.1.5, which
-adds licence and attribution to every pack's STEP header.
+No token is required: the repo is public. Releases are at
+[MassingCloud/massing-families](https://github.com/MassingCloud/massing-families).
+
+The shelf under `services/data/families/external/` was refreshed to v0.1.5 in
+[ibuilder/massing#290](https://github.com/ibuilder/massing/pull/290). Its packs had been named
+`v0.1.0` while holding current content — the library's `__version__` sat at `0.1.0` through five
+releases and `cli build` uses it as the default, so any build not passing `--version` mislabelled
+everything it produced. Fixed here in `d1f4c79`; `tests/test_version.py` now fails if `__version__`
+falls behind the latest tag.
 
 ## Checking a massing checkout
 
