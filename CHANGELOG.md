@@ -5,6 +5,15 @@ Versions are the tag on the GitHub release; each release attaches one `.ifc` per
 
 ## v0.1.5
 
+**Fixes a version-labelling bug.** `__version__` and `pyproject.toml` sat at `0.1.0` through five
+releases, so any `cli build` that did not pass `--version` explicitly stamped `0.1.0` into every pack
+filename, the manifest, each pack's STEP header and every type's `MF_Library.Version`. CI releases
+were correct because the workflow passes the tag, which is why it went unnoticed — but a deployment
+building locally got a full current catalog labelled v0.1.0, which is worse than stale content
+because nothing says so. The version is now declared once in `massing_families.__version__`,
+`pyproject.toml` reads it dynamically, and `tests/test_version.py` checks it against the CHANGELOG
+and the latest git tag.
+
 Lessons pulled back from massing v0.3.662–v0.3.718, which implemented the platform side, plus
 forward-looking documentation.
 

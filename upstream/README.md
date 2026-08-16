@@ -93,7 +93,7 @@ resolved — releases are published at
 [MassingCloud/massing-families](https://github.com/MassingCloud/massing-families), the repo is public,
 and no token is required. The vendored copy can be refreshed from `fetch_families.py` here.
 
-The packs committed under `services/data/families/external/` are **v0.1.0**; current is v0.1.4, which
+The packs committed under `services/data/families/external/` are **v0.1.0**; current is v0.1.5, which
 adds licence and attribution to every pack's STEP header.
 
 ## Checking a massing checkout

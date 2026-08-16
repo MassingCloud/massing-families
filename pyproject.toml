@@ -1,6 +1,6 @@
 [project]
 name = "massing-families"
-version = "0.1.0"
+dynamic = ["version"]
 description = "IFC4 family/type content library for the Massing platform"
 requires-python = ">=3.10"
 # The generator is MIT; the family content it produces is CC0 (see LICENSE-CONTENT).
@@ -14,6 +14,9 @@ dev = ["pytest>=7.0"]
 [build-system]
 requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools.dynamic]
+version = {attr = "massing_families.__version__"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
