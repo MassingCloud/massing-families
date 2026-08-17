@@ -3,7 +3,12 @@
 Versions are the tag on the GitHub release; each release attaches one `.ifc` per pack plus a
 `manifest.json` with a sha256 for every pack.
 
-## v0.1.5
+## v0.1.6
+
+Everything here landed after v0.1.5 was tagged. It was originally written into the v0.1.5 section of
+this file, which described work that release did not contain — the same class of quiet untruth the
+rest of the project guards against, so `tests/test_version.py` now fails when `__version__` has not
+been bumped past the latest tag.
 
 **Fixes a version-labelling bug.** `__version__` and `pyproject.toml` sat at `0.1.0` through five
 releases, so any `cli build` that did not pass `--version` explicitly stamped `0.1.0` into every pack
@@ -13,6 +18,31 @@ building locally got a full current catalog labelled v0.1.0, which is worse than
 because nothing says so. The version is now declared once in `massing_families.__version__`,
 `pyproject.toml` reads it dynamically, and `tests/test_version.py` checks it against the CHANGELOG
 and the latest git tag.
+
+- **A browsable catalog site** at
+  [massingcloud.github.io/massing-families](https://massingcloud.github.io/massing-families/),
+  deployed from `main` by GitHub Actions. There was no Pages site before — the repository's homepage
+  URL pointed at the README, which is not the same thing. 419 families across 111 categories cannot
+  be browsed as a markdown table: `docs/CATALOG.md` answers "what is in the library" but not "show me
+  every L300 structural family with ports". The site filters by discipline, tier and geometry status
+  and searches labels, keys, IFC classes, type names and Uniclass codes. Rendered from the same specs
+  as the packs, self-contained (no CDN, no external fonts, no analytics), and guarded by
+  `tests/test_site.py`.
+- **Repository presentation.** The GitHub description still read "270 families, 2,355 types" — both
+  stale, and 2,355 was the inflated figure from the stale-packs bug, corrected in the docs at v0.1.1
+  but never here because nothing checks repository metadata. Replaced with prose carrying no numbers,
+  since a description no test can guard will rot; the counts live in the README where
+  `tests/test_docs.py` checks them. Added topics, homepage, `SECURITY.md`, `CODE_OF_CONDUCT.md`,
+  issue templates for family requests and content errors, and a PR template that front-loads the
+  classification rule. Community profile 50% -> 87%.
+- Corrected `upstream/README.md`, which claimed massing's vendored `fetch_families.py` still needed
+  refreshing. It did not — that copy resolves the correct slug and works as-is against the published
+  releases, verified fetching v0.1.5.
+- The massing shelf was refreshed to v0.1.5 in
+  [ibuilder/massing#290](https://github.com/ibuilder/massing/pull/290), which is where the
+  version-labelling bug surfaced: 57 packs of current content all named `v0.1.0`.
+
+## v0.1.5
 
 Lessons pulled back from massing v0.3.662–v0.3.718, which implemented the platform side, plus
 forward-looking documentation.
@@ -46,18 +76,7 @@ forward-looking documentation.
   tier, 320 by derived `GeometryStatus`. Only the derived number is true. Tiers fixed to L300 and a
   guard added (`test_tier_agrees_with_builder`) so a declared tier can no longer contradict the
   geometry actually built. Caught by the new roadmap-metrics test before it shipped.
-- **Repository presentation.** The GitHub description still read "270 families, 2,355 types" — both
-  stale, and 2,355 was the inflated figure from the stale-packs bug, corrected in the docs but never
-  here. Replaced with durable prose carrying no numbers, since a description no test can guard will
-  rot; the counts live in the README where `tests/test_docs.py` checks them. Added topics, homepage,
-  `SECURITY.md`, `CODE_OF_CONDUCT.md`, issue templates for family requests and content errors, and a
-  PR template that front-loads the classification rule.
-- **A browsable catalog site** at
-  [massingcloud.github.io/massing-families](https://massingcloud.github.io/massing-families/),
-  deployed from `main` by GitHub Actions. 419 families is too many to read as a markdown table;
-  the site filters by discipline, tier and geometry status and searches type names and Uniclass
-  codes. Generated from the same specs as the packs, self-contained (no CDN, no external fonts),
-  and guarded by `tests/test_site.py` so it cannot describe content a release does not contain.
+
 - **[docs/GUIDE.md](docs/GUIDE.md)** — a consumer guide. Which packs to take and why not to take them
   all, both import routes, what every type carries, how to read `GeometryStatus` before committing to
   a detail, and which overlapping families are real products rather than duplicates.

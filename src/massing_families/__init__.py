@@ -7,4 +7,4 @@ Authored in US imperial nominals, stored in exact metres. See PLAN.md.
 # stale silently mislabels content: a whole current catalog once shipped to a deployment's shelf
 # labelled v0.1.0 because this string had not moved since the first release.
 # pyproject.toml reads it dynamically; tests/test_version.py checks it against the CHANGELOG.
-__version__ = "0.1.5"
+__version__ = "0.1.6"

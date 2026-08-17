@@ -38,6 +38,24 @@ def test_changelog_documents_this_version():
         f"CHANGELOG has no entry for v{__version__} — bump one or the other")
 
 
+def test_changelog_top_section_is_this_version():
+    """New work must land under a new heading, not be appended to a released one.
+
+    Four commits were once documented under `## v0.1.5` that the v0.1.5 release did not contain —
+    the changelog described a release honestly right up until the next batch of work was written into
+    it. Requiring the newest heading to equal `__version__` means the only way to document new work
+    is to bump the version first.
+    """
+    import re
+
+    headings = re.findall(r"(?m)^## (v\d+\.\d+\.\d+)$",
+                          (ROOT / "CHANGELOG.md").read_text(encoding="utf-8"))
+    assert headings, "CHANGELOG has no version headings"
+    assert headings[0] == f"v{__version__}", (
+        f"newest CHANGELOG section is {headings[0]} but __version__ is {__version__} — bump the "
+        f"version before documenting new work, or the entry claims to be in a shipped release")
+
+
 def test_version_is_not_behind_the_latest_tag():
     """A stale __version__ is how mislabelled packs happen; catch it before the next build."""
     try:
@@ -53,3 +71,12 @@ def test_version_is_not_behind_the_latest_tag():
     assert key(__version__) >= key(latest), (
         f"__version__ is {__version__} but v{latest} is already tagged — local builds would stamp "
         f"the older number into every pack")
+
+    # And if there is unreleased work, the version must already be past the tag, so that work is
+    # documented under its own heading rather than appended to a shipped release.
+    ahead = subprocess.run(["git", "rev-list", "--count", f"v{latest}..HEAD"], cwd=ROOT,
+                           capture_output=True, text=True, timeout=15)
+    if ahead.returncode == 0 and ahead.stdout.strip().isdigit() and int(ahead.stdout.strip()) > 0:
+        assert key(__version__) > key(latest), (
+            f"{ahead.stdout.strip()} commit(s) since v{latest} but __version__ is still "
+            f"{__version__} — bump it so the work is documented under its own version")
