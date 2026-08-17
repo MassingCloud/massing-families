@@ -52,6 +52,12 @@ forward-looking documentation.
   rot; the counts live in the README where `tests/test_docs.py` checks them. Added topics, homepage,
   `SECURITY.md`, `CODE_OF_CONDUCT.md`, issue templates for family requests and content errors, and a
   PR template that front-loads the classification rule.
+- **A browsable catalog site** at
+  [massingcloud.github.io/massing-families](https://massingcloud.github.io/massing-families/),
+  deployed from `main` by GitHub Actions. 419 families is too many to read as a markdown table;
+  the site filters by discipline, tier and geometry status and searches type names and Uniclass
+  codes. Generated from the same specs as the packs, self-contained (no CDN, no external fonts),
+  and guarded by `tests/test_site.py` so it cannot describe content a release does not contain.
 - **[docs/GUIDE.md](docs/GUIDE.md)** — a consumer guide. Which packs to take and why not to take them
   all, both import routes, what every type carries, how to read `GeometryStatus` before committing to
   a detail, and which overlapping families are real products rather than duplicates.

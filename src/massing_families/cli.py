@@ -73,6 +73,14 @@ def cmd_docs(args) -> int:
     return 0
 
 
+def cmd_site(args) -> int:
+    from . import site
+    specs = load_catalog(CATALOG)
+    path = site.write(specs, ROOT, args.version)
+    print(f"{len(specs)} families -> {path} ({path.stat().st_size / 1024:.0f} KB)")
+    return 0
+
+
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(prog="massing-families")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -91,6 +99,10 @@ def main(argv=None) -> int:
 
     dc = sub.add_parser("docs", help="regenerate docs/CATALOG.md from the catalog")
     dc.set_defaults(func=cmd_docs)
+
+    st = sub.add_parser("site", help="regenerate the browsable catalog site (site/index.html)")
+    st.add_argument("--version", default=__version__)
+    st.set_defaults(func=cmd_site)
 
     args = p.parse_args(argv)
     return args.func(args)
