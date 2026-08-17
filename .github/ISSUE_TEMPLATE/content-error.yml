@@ -1,0 +1,24 @@
+name: Content error
+description: A family is wrong — dimensions, classification, material, ports
+labels: [bug, content]
+body:
+  - type: input
+    id: type
+    attributes:
+      label: Type name
+      description: The full name, which is unique across the catalog.
+      placeholder: W-Shape Column - W14X90
+    validations: {required: true}
+  - type: input
+    id: version
+    attributes:
+      label: Library version
+      description: From manifest.json, or MF_Library.Version on the type.
+      placeholder: "0.1.5"
+    validations: {required: true}
+  - type: textarea
+    id: wrong
+    attributes:
+      label: What is wrong, and what it should be
+      description: Cite the standard where you can — that is what makes it fixable.
+    validations: {required: true}

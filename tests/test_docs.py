@@ -63,8 +63,9 @@ def test_documented_builders_and_generators_exist():
 
 def test_public_facing_docs_exist():
     for name in ("README.md", "CONTRIBUTING.md", "NOTICE.md", "PLAN.md", "ROADMAP.md",
-                 "CHANGELOG.md", "docs/SPEC.md", "docs/CATALOG.md", "docs/GUIDE.md",
-                 "upstream/README.md"):
+                 "CHANGELOG.md", "SECURITY.md", "CODE_OF_CONDUCT.md",
+                 "docs/SPEC.md", "docs/CATALOG.md", "docs/GUIDE.md",
+                 "upstream/README.md", ".github/PULL_REQUEST_TEMPLATE.md"):
         assert (ROOT / name).exists(), f"{name} missing"
 
 

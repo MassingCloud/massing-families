@@ -1,0 +1,40 @@
+name: Family request
+description: Ask for content the catalog does not carry
+labels: [content]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Check [docs/CATALOG.md](../../blob/main/docs/CATALOG.md) first — 400+ families are easy to
+        miss, and some overlaps are deliberate (HSS-round vs Pipe, EMT vs RMC).
+  - type: input
+    id: what
+    attributes:
+      label: What is missing
+      placeholder: e.g. fire-rated glazing assemblies, or more sizes for VAV boxes
+    validations: {required: true}
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Missing family, or missing sizes in one that exists?
+      options: [A family that does not exist, Sizes missing from an existing family, Not sure]
+    validations: {required: true}
+  - type: input
+    id: sizes
+    attributes:
+      label: Sizes needed
+      description: US imperial nominals, as a drawing would call them out.
+      placeholder: 3'-0" x 7'-0", W14X90, 2x4, #5
+  - type: input
+    id: standard
+    attributes:
+      label: Published standard the dimensions come from
+      description: >
+        Content is fabricated from public standards — AISC, ASME, ASTM, NFPA, IBC, ADA, trade sizes.
+        Geometry from a BIM object portal or a manufacturer's Revit family cannot be used, however
+        it was re-authored.
+    validations: {required: true}
+  - type: textarea
+    id: why
+    attributes:
+      label: What can't you model without it

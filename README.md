@@ -11,7 +11,7 @@ and imports anywhere.
 
 [Using it](docs/GUIDE.md) · [Catalog reference](docs/CATALOG.md) · [Adding a family](CONTRIBUTING.md) ·
 [Spec reference](docs/SPEC.md) · [Roadmap](ROADMAP.md) · [Changelog](CHANGELOG.md) ·
-[Design notes](PLAN.md) · [Releases](../../releases)
+[Design notes](PLAN.md) · [Security](SECURITY.md) · [Releases](../../releases)
 
 ---
 

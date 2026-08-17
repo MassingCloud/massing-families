@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: How to use the library
+    url: https://github.com/MassingCloud/massing-families/blob/main/docs/GUIDE.md
+    about: Choosing packs, importing, reading GeometryStatus before you draw.
+  - name: Adding a family yourself
+    url: https://github.com/MassingCloud/massing-families/blob/main/CONTRIBUTING.md
+    about: The five rules the tests enforce, and the spec reference.
+  - name: What is planned
+    url: https://github.com/MassingCloud/massing-families/blob/main/ROADMAP.md
+    about: Depth is the current constraint; some things are deliberately not planned.

@@ -46,6 +46,12 @@ forward-looking documentation.
   tier, 320 by derived `GeometryStatus`. Only the derived number is true. Tiers fixed to L300 and a
   guard added (`test_tier_agrees_with_builder`) so a declared tier can no longer contradict the
   geometry actually built. Caught by the new roadmap-metrics test before it shipped.
+- **Repository presentation.** The GitHub description still read "270 families, 2,355 types" — both
+  stale, and 2,355 was the inflated figure from the stale-packs bug, corrected in the docs but never
+  here. Replaced with durable prose carrying no numbers, since a description no test can guard will
+  rot; the counts live in the README where `tests/test_docs.py` checks them. Added topics, homepage,
+  `SECURITY.md`, `CODE_OF_CONDUCT.md`, issue templates for family requests and content errors, and a
+  PR template that front-loads the classification rule.
 - **[docs/GUIDE.md](docs/GUIDE.md)** — a consumer guide. Which packs to take and why not to take them
   all, both import routes, what every type carries, how to read `GeometryStatus` before committing to
   a detail, and which overlapping families are real products rather than duplicates.
